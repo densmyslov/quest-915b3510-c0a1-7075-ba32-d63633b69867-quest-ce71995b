@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "questId": "sample-quest",
+  "questVersion": "v1",
+  "publishedAt": "1970-01-01T00:00:00.000Z",
+  "policies": {
+    "objectVisibility": {
+      "mode": "sliding_window",
+      "windowSize": 2,
+      "includeCompletedInWindow": true
+    },
+    "timeline": {
+      "defaultBlocking": true,
+      "defaultRepeatPolicy": "once_per_object"
+    }
+  },
+  "start": {
+    "objectId": "obj-1"
+  },
+  "end": {
+    "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7"
+  },
+  "objects": {
+    "obj-1": {
+      "title": "Sample Object",
+      "entryNodeId": "tl_obj-1__start",
+      "objectGates": {
+        "type": "none"
+      },
+      "outObjectIds": [
+        "ebd335c2-6d19-4391-bb3b-ead77291aed7"
+      ]
+    },
+    "ebd335c2-6d19-4391-bb3b-ead77291aed7": {
+      "title": "Fontana Fesa",
+      "entryNodeId": "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__start",
+      "objectGates": {
+        "type": "none"
+      },
+      "outObjectIds": []
+    }
+  },
+  "timelineNodes": {
+    "tl_obj-1__start": {
+      "objectId": "obj-1",
+      "type": "state",
+      "stateKind": "start",
+      "blocking": false,
+      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": [
+        "tl_obj-1:audio:0"
+      ]
+    },
+    "tl_obj-1__end": {
+      "objectId": "obj-1",
+      "type": "state",
+      "stateKind": "end",
+      "blocking": false,
+      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": []
+    },
+    "tl_obj-1:audio:0": {
+      "objectId": "obj-1",
+      "blocking": false,
+      "repeatPolicy": "on_each_arrival",
+      "type": "audio",
+      "payload": {
+        "audioUrl": "https://example.com/audio.mp3",
+        "audioKind": "audio",
+        "role": "normal"
+      },
+      "outNodeIds": [
+        "tl_obj-1__end"
+      ]
+    },
+    "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__start": {
+      "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7",
+      "type": "state",
+      "stateKind": "start",
+      "blocking": false,
+      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": [
+        "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__end"
+      ]
+    },
+    "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__end": {
+      "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7",
+      "type": "state",
+      "stateKind": "end",
+      "blocking": false,
+      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": []
+    }
+  }
+}

@@ -1,0 +1,744 @@
+'use client';
+
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useKnockDetector, type KnockDetectionMode, type KnockSensitivity } from '@/hooks/useKnockDetector';
+import { getQuestApiUrl } from '@/utils/apiConfig';
+import type { TimelineActionOverlayState } from './types';
+
+type TimelineActionOverlayPalette = {
+  gold: string;
+  goldLight: string;
+  parchment: string;
+};
+
+type TimelineActionOverlayProps = {
+  overlay: TimelineActionOverlayState | null;
+  onComplete: (evidence: Record<string, unknown>) => void;
+  onCancel: () => void;
+  palette: TimelineActionOverlayPalette;
+};
+
+function coerceInt(value: unknown, fallback: number): number {
+  const n = typeof value === 'number' ? value : Number(value);
+  if (!Number.isFinite(n)) return fallback;
+  return Math.floor(n);
+}
+
+function coerceFloat(value: unknown): number | null {
+  const n = typeof value === 'number' ? value : Number(value);
+  if (!Number.isFinite(n)) return null;
+  return n;
+}
+
+function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const r = 6371000.0;
+  const toRad = (deg: number) => (deg * Math.PI) / 180.0;
+  const p1 = toRad(lat1);
+  const p2 = toRad(lat2);
+  const dp = toRad(lat2 - lat1);
+  const dl = toRad(lon2 - lon1);
+  const a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return r * c;
+}
+
+function isKnockSensitivity(value: unknown): value is KnockSensitivity {
+  return value === 'low' || value === 'medium' || value === 'high';
+}
+
+function isKnockDetectionMode(value: unknown): value is KnockDetectionMode {
+  return value === 'accelerometer' || value === 'microphone' || value === 'both';
+}
+
+function normalizeMaxScore(value: unknown): number {
+  const n = coerceFloat(value);
+  if (n === null) return 0.6;
+  if (n > 2 && n <= 100) return n / 100.0;
+  return n;
+}
+
+function parseTenantFromImageKey(targetImageKey: unknown): { clientId: string; questId: string } | null {
+  if (typeof targetImageKey !== 'string') return null;
+  const trimmed = targetImageKey.trim();
+  if (!trimmed) return null;
+  const parts = trimmed.split('/').filter(Boolean);
+  const clientsIdx = parts.indexOf('clients');
+  if (clientsIdx === -1) return null;
+  const clientId = parts[clientsIdx + 1];
+  const questId = parts[clientsIdx + 2];
+  if (!clientId || !questId) return null;
+  if (!/^[a-zA-Z0-9-]+$/.test(clientId)) return null;
+  if (!/^[a-zA-Z0-9-]+$/.test(questId)) return null;
+  return { clientId, questId };
+}
+
+async function tryGetGeolocation(timeoutMs: number): Promise<{ latitude: number; longitude: number } | null> {
+  if (typeof navigator === 'undefined' || !('geolocation' in navigator)) return null;
+  const geo = navigator.geolocation;
+  return await new Promise((resolve) => {
+    let settled = false;
+    const timeout = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      resolve(null);
+    }, Math.max(0, timeoutMs));
+
+    geo.getCurrentPosition(
+      (pos) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+        resolve({ latitude: pos.coords.latitude, longitude: pos.coords.longitude });
+      },
+      () => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+        resolve(null);
+      },
+      { enableHighAccuracy: true, maximumAge: 60_000, timeout: Math.max(1000, timeoutMs) },
+    );
+  });
+}
+
+// --- Icons ---
+
+function IconChevronUp(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="m18 15-6-6-6 6" /></svg>
+  );
+}
+function IconChevronDown(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="m6 9 6 6 6-6" /></svg>
+  );
+}
+
+export default function TimelineActionOverlay({ overlay, onComplete, onCancel, palette }: TimelineActionOverlayProps) {
+  const completedRef = useRef(false);
+  const apiBaseUrl = useMemo(() => `${getQuestApiUrl()}/api/v1`, []);
+
+  useEffect(() => {
+    completedRef.current = false;
+  }, [overlay]);
+
+  const actionKind = overlay?.actionKind;
+  const params = overlay?.params ?? {};
+
+  const title = useMemo(() => {
+    const t = overlay?.title;
+    return typeof t === 'string' && t.trim().length ? t.trim() : 'Action';
+  }, [overlay?.title]);
+
+  const requiredKnocks = useMemo(() => {
+    const raw = (params as any)?.requiredKnocks ?? (params as any)?.required_knocks;
+    const n = coerceInt(raw, 3);
+    return Math.max(2, Math.min(10, n));
+  }, [params]);
+
+  const maxIntervalMs = useMemo(() => {
+    const raw = (params as any)?.maxIntervalMs ?? (params as any)?.max_interval_ms;
+    const n = coerceInt(raw, 2000);
+    return Math.max(0, n);
+  }, [params]);
+
+  const sensitivity: KnockSensitivity = useMemo(() => {
+    const raw = (params as any)?.sensitivity;
+    return isKnockSensitivity(raw) ? raw : 'medium';
+  }, [params]);
+
+  const detectionMode: KnockDetectionMode = useMemo(() => {
+    const raw = (params as any)?.detectionMode ?? (params as any)?.detection_mode;
+    return isKnockDetectionMode(raw) ? raw : 'accelerometer';
+  }, [params]);
+
+  const imageMatch = useMemo(() => {
+    const targetImageKey =
+      (params as any)?.targetImageKey ??
+      (params as any)?.target_image_key ??
+      (params as any)?.targetImagePath ??
+      (params as any)?.target_image_path ??
+      null;
+    const targetImageUrl = (params as any)?.targetImageUrl ?? (params as any)?.target_image_url ?? null;
+    const tenant = parseTenantFromImageKey(targetImageKey);
+
+    return {
+      targetImageKey: typeof targetImageKey === 'string' ? targetImageKey : null,
+      targetImageUrl: typeof targetImageUrl === 'string' ? targetImageUrl : null,
+      tenant,
+      maxDistanceMeters: coerceFloat((params as any)?.maxDistanceMeters ?? (params as any)?.max_distance_meters),
+      maxScore: normalizeMaxScore((params as any)?.maxScore), // maxScore usually consistent, but could check max_score if needed
+      targetLatitude: coerceFloat((params as any)?.targetLatitude ?? (params as any)?.target_latitude),
+      targetLongitude: coerceFloat((params as any)?.targetLongitude ?? (params as any)?.target_longitude),
+    };
+  }, [params]);
+
+  const [started, setStarted] = useState(false);
+  const [manualKnocks, setManualKnocks] = useState<number[]>([]);
+  const [stream, setStream] = useState<MediaStream | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  const [processing, setProcessing] = useState(false); // Combined capture + upload + match state
+  const [matchMetrics, setMatchMetrics] = useState<{
+    topScore: number | null;
+    maxScore: number | null;
+    distanceMeters: number | null;
+    maxDistanceMeters: number | null;
+    matchedTarget: boolean | null;
+    ok: boolean;
+  } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  // Target Image Overlay State
+  const [targetExpanded, setTargetExpanded] = useState(false);
+
+  const detector = useKnockDetector({
+    requiredKnocks,
+    maxIntervalMs,
+    sensitivity,
+    detectionMode,
+    onKnockDetected: (timestamps) => {
+      if (completedRef.current) return;
+      completedRef.current = true;
+      detector.stopListening();
+      onComplete({ knockPattern: timestamps });
+    },
+  });
+
+  useEffect(() => {
+    if (!overlay) return;
+    setStarted(false);
+    setManualKnocks([]);
+    setStream(null);
+    setCapturedImage(null);
+    setProcessing(false);
+    setMatchMetrics(null);
+    setError(null);
+    detector.reset();
+  }, [detector.reset, overlay]);
+
+  const stopCamera = useCallback(() => {
+    setStream((prev) => {
+      prev?.getTracks().forEach((t) => t.stop());
+      return null;
+    });
+    if (videoRef.current) {
+      try {
+        (videoRef.current as any).srcObject = null;
+      } catch {
+        // ignore
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      stopCamera();
+    };
+  }, [stopCamera]);
+
+  const startCamera = useCallback(async () => {
+    setError(null);
+    setMatchMetrics(null);
+    setCapturedImage(null);
+
+    // Stop existing stream first to be safe
+    stopCamera();
+
+    if (typeof navigator === 'undefined' || !navigator.mediaDevices?.getUserMedia) {
+      setError('Camera not available.');
+      return;
+    }
+
+    try {
+      // Prefer rear camera
+      const next = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: { ideal: 'environment' },
+          width: { ideal: 1920 }, // Higher res for matching
+          height: { ideal: 1080 },
+        },
+        audio: false,
+      });
+      setStream(next);
+      if (videoRef.current) {
+        (videoRef.current as any).srcObject = next;
+        try {
+          await videoRef.current.play();
+        } catch {
+          // Playback might need gesture
+        }
+      }
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      setError('Could not access camera. Please check permissions.');
+    }
+  }, [stopCamera]);
+
+  // Clean up stream binding
+  useEffect(() => {
+    if (!stream || !videoRef.current) return;
+    try {
+      if ((videoRef.current as any).srcObject !== stream) {
+        (videoRef.current as any).srcObject = stream;
+      }
+    } catch {
+      // ignore
+    }
+  }, [stream]);
+
+  // Auto-start camera for image_match
+  useEffect(() => {
+    if (actionKind === 'image_match' && !stream && !capturedImage) {
+      void startCamera();
+    }
+  }, [actionKind, startCamera, stream, capturedImage]);
+
+  const performMatch = useCallback(async (base64Data: string) => {
+    if (completedRef.current) return;
+
+    const tenant = imageMatch.tenant;
+    if (!tenant) {
+      setError('System Error: Missing target configuration.');
+      setProcessing(false);
+      return;
+    }
+
+    try {
+      const location = await tryGetGeolocation(4000); // 4s timeout for location
+
+      // 1. Upload
+      const uploadRes = await fetch(`${apiBaseUrl}/upload`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          image: base64Data.includes(',') ? base64Data.split(',')[1] : base64Data,
+          client_id: tenant.clientId,
+          quest_id: tenant.questId,
+          latitude: location?.latitude ?? null,
+          longitude: location?.longitude ?? null,
+          is_query: true,
+        }),
+      });
+      const uploadText = await uploadRes.text().catch(() => '');
+      if (!uploadRes.ok) throw new Error('Upload failed. Please try again.');
+
+      const uploadJson = JSON.parse(uploadText) as any;
+      const queryPath = typeof uploadJson?.filename === 'string' ? uploadJson.filename : typeof uploadJson?.key === 'string' ? uploadJson.key : null;
+      if (!queryPath) throw new Error('Upload invalid. Please try again.');
+
+      // 2. Match
+      const matchRes = await fetch(`${apiBaseUrl}/match`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query_image_path: queryPath }),
+      });
+      const matchText = await matchRes.text().catch(() => '');
+      if (!matchRes.ok) throw new Error('Verification service error.');
+
+      const matchJson = JSON.parse(matchText) as any;
+      const matches = Array.isArray(matchJson?.matches) ? matchJson.matches : [];
+
+      // Select best match
+      const normalized = matches
+        .map((m: any) => ({ id: m?.id, score: coerceFloat(m?.score) }))
+        .filter((m: any) => typeof m.id === 'string' && m.id.length && typeof m.score === 'number')
+        .sort((a: any, b: any) => a.score - b.score);
+
+      // Determine outcome
+      let outcomeOk = false;
+      let topScore = null;
+      let matchedTarget = false;
+
+      if (normalized.length > 0) {
+        const top = normalized[0];
+        topScore = top.score;
+        const targetKey = imageMatch.targetImageKey;
+
+        // Check ID match
+        matchedTarget = typeof targetKey === 'string' && targetKey.length
+          ? top.id === targetKey || top.id.includes(targetKey) || targetKey.includes(top.id)
+          : true;
+
+        // Check Score
+        const scoreOk = top.score < imageMatch.maxScore;
+
+        outcomeOk = matchedTarget && scoreOk;
+      }
+
+      // Check Distance if applicable
+      let distanceMeters = null;
+      if (location && typeof imageMatch.targetLatitude === 'number' && typeof imageMatch.targetLongitude === 'number') {
+        distanceMeters = haversineMeters(location.latitude, location.longitude, imageMatch.targetLatitude, imageMatch.targetLongitude);
+
+        const maxDist = imageMatch.maxDistanceMeters;
+        if (maxDist !== null && distanceMeters !== null && distanceMeters > maxDist) {
+          outcomeOk = false; // Too far
+        }
+      }
+
+      setMatchMetrics({
+        topScore,
+        maxScore: imageMatch.maxScore,
+        distanceMeters,
+        maxDistanceMeters: imageMatch.maxDistanceMeters,
+        matchedTarget: matchedTarget ? true : (normalized.length > 0 ? false : null), // null if no matches found at all
+        ok: outcomeOk
+      });
+
+      if (outcomeOk) {
+        completedRef.current = true;
+        // Small delay to show success state
+        setTimeout(() => {
+          onComplete({
+            query_image_path: queryPath,
+            targetImageKey: imageMatch.targetImageKey ?? undefined,
+            playerLatitude: location?.latitude ?? undefined,
+            playerLongitude: location?.longitude ?? undefined,
+          });
+        }, 1500);
+      } else {
+        // Allow retry - keep processing=true so we show the "No Match" UI overlay
+        // setProcessing(false); 
+      }
+
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      setError(msg);
+      setProcessing(false); // Stop generic loading, show error state
+    }
+  }, [apiBaseUrl, imageMatch, onComplete]);
+
+  const captureAndSubmit = useCallback(() => {
+    if (!videoRef.current || processing) return;
+
+    setError(null);
+    setProcessing(true); // Start "Scanning..." UI
+
+    try {
+      const video = videoRef.current;
+      const MAX_DIMENSION = 1280;
+      let width = video.videoWidth || 1280;
+      let height = video.videoHeight || 720;
+
+      // Calculate scale to fit within MAX_DIMENSION
+      if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+        const scale = Math.min(MAX_DIMENSION / width, MAX_DIMENSION / height);
+        width *= scale;
+        height *= scale;
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Canvas error');
+
+      ctx.drawImage(video, 0, 0, width, height);
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+      // Freeze frame effect
+      stopCamera();
+      setCapturedImage(dataUrl);
+
+      // Auto-submit
+      void performMatch(dataUrl);
+
+    } catch (e) {
+      setError('Failed to capture image');
+      setProcessing(false);
+    }
+  }, [processing, stopCamera, performMatch]);
+
+
+  // --- Render ---
+
+  if (!overlay) return null;
+
+  // 1. Full-Screen Camera (Image Match)
+  if (actionKind === 'image_match') {
+    return (
+      <div
+        className="fixed inset-0 z-[5000] bg-black text-white overflow-hidden flex flex-col"
+        style={{ fontFamily: "'Cinzel', serif" }}
+      >
+        {/* Camera View / Captured Image */}
+        <div className="absolute inset-0 z-0 bg-neutral-900">
+          {/* If we have a captured image, show it (frozen), otherwise show video */}
+          {capturedImage ? (
+            <img
+              src={capturedImage}
+              alt="Captured"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              playsInline
+              muted
+              autoPlay
+              className="w-full h-full object-cover"
+            />
+          )}
+
+          {/* Dark gradient overlay for text readability at top/bottom */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none" />
+        </div>
+
+        {/* Top Bar: Title & Close */}
+        <div className="relative z-10 p-4 pt-safe-top flex justify-between items-start pointer-events-none">
+          <div className="pointer-events-auto">
+            {/* Could put something here, but keeping it clean */}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              stopCamera();
+              onCancel();
+            }}
+            className="pointer-events-auto w-10 h-10 flex items-center justify-center rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white active:bg-white/20 transition-colors"
+          >
+            <span className="text-2xl leading-none">&times;</span>
+          </button>
+        </div>
+
+        {/* Target Image Overlay (Foldable) */}
+        {imageMatch.targetImageUrl && (
+          <div
+            className={`absolute left-4 top-24 z-20 transition-all duration-300 ease-spring ${targetExpanded
+              ? "w-[85vw] max-w-sm"
+              : "w-24 h-32"
+              }`}
+          >
+            <div
+              className="relative w-full h-full rounded-xl overflow-hidden border-2 border-white/30 shadow-2xl bg-black/50 backdrop-blur-sm cursor-pointer"
+              onClick={() => setTargetExpanded(!targetExpanded)}
+            >
+              <img
+                src={imageMatch.targetImageUrl}
+                alt="Target"
+                className="w-full h-full object-cover"
+              />
+
+              {/* Label Badge */}
+              <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-md px-2 py-1 flex justify-between items-center">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#d4b483]">
+                  {targetExpanded ? "Target Reference" : "Target"}
+                </span>
+                {targetExpanded ? <IconChevronUp className="w-3 h-3 text-white/70" /> : <IconChevronDown className="w-3 h-3 text-white/70" />}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Center Success/Fail/Scan Feedback Overlay */}
+        {processing && (
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 backdrop-blur-[2px]">
+            {matchMetrics ? (
+              // Result State
+              <div className="flex flex-col items-center animate-in zoom-in-95 duration-200">
+                {matchMetrics.ok ? (
+                  <>
+                    <div className="w-20 h-20 rounded-full bg-green-500/20 border-2 border-green-500 flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(34,197,94,0.4)]">
+                      <svg className="w-10 h-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path d="M5 13l4 4L19 7" /></svg>
+                    </div>
+                    <div className="text-2xl font-bold text-white drop-shadow-md">MATCH CONFIRMED</div>
+
+                    {/* Debug Metrics (Success) */}
+                    <div className="mt-4 p-3 rounded bg-black/50 border border-white/10 text-xs font-mono text-white/80 space-y-1 backdrop-blur-md">
+                      <div className="flex justify-between gap-4">
+                        <span>Score:</span>
+                        <span className={matchMetrics.topScore !== null && matchMetrics.maxScore !== null && matchMetrics.topScore < matchMetrics.maxScore ? "text-green-400" : "text-white"}>
+                          {matchMetrics.topScore?.toFixed(3) ?? "N/A"} / {matchMetrics.maxScore?.toFixed(3) ?? "N/A"}
+                        </span>
+                      </div>
+                      {matchMetrics.distanceMeters !== null && (
+                        <div className="flex justify-between gap-4">
+                          <span>Dist:</span>
+                          <span className={matchMetrics.maxDistanceMeters !== null && matchMetrics.distanceMeters <= matchMetrics.maxDistanceMeters ? "text-green-400" : "text-yellow-400"}>
+                            {Math.round(matchMetrics.distanceMeters)}m / {matchMetrics.maxDistanceMeters ? Math.round(matchMetrics.maxDistanceMeters) + "m" : "∞"}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-20 h-20 rounded-full bg-red-500/20 border-2 border-red-500 flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(239,68,68,0.4)]">
+                      <span className="text-4xl text-red-500 select-none">&times;</span>
+                    </div>
+                    <div className="text-xl font-bold text-white drop-shadow-md mb-2">NO MATCH</div>
+                    <div className="text-sm text-white/80 max-w-[240px] text-center mb-6">
+                      {matchMetrics.distanceMeters && matchMetrics.maxDistanceMeters && matchMetrics.distanceMeters > matchMetrics.maxDistanceMeters
+                        ? "Too far away from target location."
+                        : "Image doesn't match the target pattern."}
+                    </div>
+
+                    {/* Debug Metrics (Failure) */}
+                    <div className="mb-6 p-3 rounded bg-black/50 border border-white/10 text-xs font-mono text-white/80 space-y-1 backdrop-blur-md animate-in slide-in-from-bottom-2">
+                      <div className="flex justify-between gap-4">
+                        <span>Score:</span>
+                        <span className={matchMetrics.topScore !== null && matchMetrics.maxScore !== null && matchMetrics.topScore > matchMetrics.maxScore ? "text-red-400" : "text-white"}>
+                          {matchMetrics.topScore?.toFixed(3) ?? "N/A"} / {matchMetrics.maxScore?.toFixed(3) ?? "N/A"}
+                        </span>
+                      </div>
+                      {matchMetrics.distanceMeters !== null && (
+                        <div className="flex justify-between gap-4">
+                          <span>Dist:</span>
+                          <span className={matchMetrics.maxDistanceMeters !== null && matchMetrics.distanceMeters > matchMetrics.maxDistanceMeters ? "text-red-400" : "text-white"}>
+                            {Math.round(matchMetrics.distanceMeters)}m / {matchMetrics.maxDistanceMeters ? Math.round(matchMetrics.maxDistanceMeters) + "m" : "∞"}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setProcessing(false);
+                        setCapturedImage(null);
+                        void startCamera();
+                      }}
+                      className="px-6 py-3 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-neutral-200 transition-colors shadow-lg hover:scale-105 active:scale-95 transform duration-100"
+                    >
+                      Retake
+                    </button>
+                  </>
+                )}
+              </div>
+            ) : (
+              // Scanning State
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 border-4 border-white/20 border-t-white rounded-full animate-spin mb-4" />
+                <div className="text-lg font-bold tracking-widest text-white animate-pulse">VERIFYING...</div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Error Toast */}
+        {error && !processing && (
+          <div className="absolute top-24 left-1/2 -translate-x-1/2 bg-red-900/90 text-white px-4 py-3 rounded-lg border border-red-500/50 shadow-lg z-40 max-w-[90vw] text-center text-sm">
+            {error}
+            <button className="ml-3 underline font-bold" onClick={() => void startCamera()}>Retry</button>
+          </div>
+        )}
+
+        {/* Bottom Controls */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 pb-safe-bottom flex flex-col items-center pointer-events-none">
+          {/* Hint Text */}
+          {!processing && (
+            <div className="mb-6 text-center px-6">
+              <p className="text-white/90 text-shadow-sm font-medium text-lg leading-tight">{title}</p>
+              <p className="text-white/60 text-xs mt-1 uppercase tracking-wider">Tap shutter to verify</p>
+            </div>
+          )}
+
+          {/* Shutter Button */}
+          {!processing && (
+            <button
+              onClick={captureAndSubmit}
+              className="pointer-events-auto mb-10 group relative"
+              aria-label="Capture"
+            >
+              {/* Outer Ring */}
+              <div className="w-20 h-20 rounded-full border-4 border-white opacity-80 group-active:scale-95 transition-transform duration-150" />
+              {/* Inner Circle */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full group-hover:bg-[#d4b483] transition-colors duration-300 shadow-lg" />
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // 2. Legacy/Knock UI (kept as fallback or separate mode, minimal changes but matching style)
+  if (actionKind === 'knockknock') {
+
+    const handleReset = () => {
+      completedRef.current = false;
+      setManualKnocks([]);
+      detector.reset();
+      setStarted(false);
+    };
+
+    const handleStart = async () => {
+      setStarted(true);
+      await detector.startListening();
+    };
+
+    const handleCancel = () => {
+      detector.stopListening();
+      onCancel();
+    };
+
+    const recordManualKnock = () => {
+      if (completedRef.current) return;
+      const now = Date.now();
+      setManualKnocks((prev) => {
+        const next = [...prev, now].filter((t) => now - t <= maxIntervalMs).sort((a, b) => a - b);
+        if (next.length >= requiredKnocks) {
+          const first = next[0];
+          const last = next[next.length - 1];
+          if (last - first <= maxIntervalMs) {
+            completedRef.current = true;
+            onComplete({ knockPattern: next });
+          }
+        }
+        return next;
+      });
+    };
+
+    return (
+      <div className="fixed inset-0 z-[5000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div
+          className="w-full max-w-md p-6 bg-gradient-to-br from-[#1a1510] to-[#2c241c] border-2 rounded-xl shadow-2xl flex flex-col gap-6"
+          style={{ borderColor: palette.gold, color: palette.parchment }}
+        >
+          <div className="flex justify-between items-start">
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4b483] mb-1">{title}</h3>
+              <p className="text-sm opacity-80">Knock {requiredKnocks} times quickly.</p>
+            </div>
+            <button onClick={handleCancel} className="text-[#d4b483] text-2xl leading-none">&times;</button>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            {!started ? (
+              <button
+                onClick={() => void handleStart()}
+                className="w-full py-3 rounded-lg font-bold uppercase tracking-wider text-[#1b140b] bg-gradient-to-r from-[#d4b483] to-[#ebd5a0]"
+              >
+                Start Listening
+              </button>
+            ) : (
+              <div className="flex flex-col gap-4 text-center">
+                <div className="py-4 border border-white/10 rounded-lg bg-black/20 animate-pulse text-[#d4b483]">
+                  Listening...
+                </div>
+                <button
+                  onClick={handleReset}
+                  className="text-xs uppercase tracking-wider opacity-60 hover:opacity-100"
+                >
+                  Reset
+                </button>
+              </div>
+            )}
+
+            <div className="my-2 border-t border-white/10" />
+
+            <button
+              onClick={recordManualKnock}
+              className="w-full py-4 rounded-lg border border-[#d4b483] text-[#d4b483] font-bold uppercase active:bg-[#d4b483]/10"
+            >
+              Tap Manual Knock ({manualKnocks.length})
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}

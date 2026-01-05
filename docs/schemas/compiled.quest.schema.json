@@ -1,0 +1,528 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/quest/compiled.quest.schema.json",
+  "title": "Compiled Quest Definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "questId",
+    "questVersion",
+    "publishedAt",
+    "policies",
+    "start",
+    "end",
+    "objects",
+    "timelineNodes"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "minLength": 1 },
+    "questId": { "type": "string", "minLength": 1 },
+    "questVersion": { "type": "string", "minLength": 1 },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objectVisibility", "timeline"],
+      "properties": {
+        "objectVisibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "windowSize", "includeCompletedInWindow"],
+          "properties": {
+            "mode": { "type": "string", "enum": ["sliding_window"] },
+            "windowSize": { "type": "integer", "minimum": 1, "maximum": 50 },
+            "includeCompletedInWindow": { "type": "boolean" }
+          }
+        },
+        "timeline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["defaultBlocking"],
+          "properties": {
+            "defaultBlocking": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "start": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objectId"],
+      "properties": { "objectId": { "$ref": "#/$defs/objectId" } }
+    },
+    "end": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objectId"],
+      "properties": { "objectId": { "$ref": "#/$defs/objectId" } }
+    },
+    "objects": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/objectDef" }
+    },
+    "timelineNodes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/timelineNodeDef" }
+    }
+  },
+  "$defs": {
+    "objectId": { "type": "string", "pattern": "^[A-Za-z0-9_\\-:.]{1,128}$" },
+    "nodeId": { "type": "string", "pattern": "^[A-Za-z0-9_\\-:.]{1,160}$" },
+    "gateScope": { "type": "string", "enum": ["player", "current_object", "session"] },
+    "gate": {
+      "description": "A gate blocks completion/unlock until its predicate is satisfied. Engine evaluates gate against authoritative runtime state.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "scope"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "none",
+            "arrival_required",
+            "player_done",
+            "all_players_done",
+            "any_player_done",
+            "player_success",
+            "all_players_success",
+            "any_player_success",
+            "min_players_done",
+            "min_players_success"
+          ]
+        },
+        "scope": { "$ref": "#/$defs/gateScope" },
+        "minCount": { "type": "integer", "minimum": 1, "maximum": 500 },
+        "players": {
+          "description": "Optional explicit player IDs for gates targeting a subset (e.g. leader-only). If omitted, engine uses current session membership.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "requireSameAttempt": {
+          "description": "If true, success must be on the same attemptGroupId (synchronised actions).",
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "type": { "enum": ["min_players_done", "min_players_success"] } },
+            "required": ["type"]
+          },
+          "then": { "required": ["minCount"] }
+        }
+      ]
+    },
+    "objectDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "entryNodeId", "objectGates", "outObjectIds"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "entryNodeId": { "$ref": "#/$defs/nodeId" },
+        "objectGates": {
+          "description": "Object-level gate checked on ARRIVAL and/or before starting its timeline.",
+          "oneOf": [
+            { "$ref": "#/$defs/gate" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type"],
+              "properties": { "type": { "const": "none" } }
+            }
+          ]
+        },
+        "outObjectIds": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/objectId" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "timelineNodeCommon": {
+      "type": "object",
+      "required": ["objectId", "type", "blocking", "payload"],
+      "properties": {
+        "objectId": { "$ref": "#/$defs/objectId" },
+        "type": { "type": "string" },
+        "blocking": { "type": "boolean" },
+        "gates": {
+          "description": "Optional gate evaluated before the node can be considered COMPLETE and/or before unlocking outgoing edges.",
+          "oneOf": [
+            { "$ref": "#/$defs/gate" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type"],
+              "properties": { "type": { "const": "none" } }
+            }
+          ]
+        },
+        "payload": { "type": "object" }
+      }
+    },
+    "adjacencyLinear": {
+      "type": "object",
+      "required": ["outNodeIds"],
+      "properties": {
+        "outNodeIds": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nodeId" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "adjacencyBranching": {
+      "type": "object",
+      "required": ["successOutNodeIds"],
+      "properties": {
+        "successOutNodeIds": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nodeId" },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "failureOutNodeIds": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nodeId" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "timelineNodeDef": {
+      "oneOf": [
+        { "$ref": "#/$defs/stateNode" },
+        { "$ref": "#/$defs/textNode" },
+        { "$ref": "#/$defs/audioNode" },
+        { "$ref": "#/$defs/videoNode" },
+        { "$ref": "#/$defs/imageNode" },
+        { "$ref": "#/$defs/puzzleNode" },
+        { "$ref": "#/$defs/actionNode" },
+        { "$ref": "#/$defs/effectNode" }
+      ]
+    },
+    "stateNode": {
+      "description": "Default per-object nodes: start/end. Compiler should emit tl_<obj>__start and tl_<obj>__end and make entryNodeId point to __start.",
+      "allOf": [
+        { "$ref": "#/$defs/timelineNodeCommon" },
+        {
+          "type": "object",
+          "required": ["type", "stateKind"],
+          "properties": {
+            "type": { "const": "state" },
+            "stateKind": { "type": "string", "enum": ["start", "end"] },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "onEnter": {
+                  "type": "array",
+                  "items": { "type": "string", "minLength": 1 },
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        },
+        { "$ref": "#/$defs/adjacencyLinear" },
+        { "unevaluatedProperties": false }
+      ]
+    },
+    "textNode": {
+      "allOf": [
+        { "$ref": "#/$defs/timelineNodeCommon" },
+        {
+          "type": "object",
+          "required": ["type", "payload"],
+          "properties": {
+            "type": { "const": "text" },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["markdown"],
+              "properties": {
+                "title": { "type": "string" },
+                "markdown": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        },
+        { "$ref": "#/$defs/adjacencyLinear" },
+        { "unevaluatedProperties": false }
+      ]
+    },
+    "transcriptionWord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["word", "start", "end"],
+      "properties": {
+        "word": { "type": "string" },
+        "start": { "type": "number", "minimum": 0 },
+        "end": { "type": "number", "minimum": 0 }
+      }
+    },
+    "transcription": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["words"],
+      "properties": {
+        "words": { "type": "array", "items": { "$ref": "#/$defs/transcriptionWord" } },
+        "fullText": { "type": "string" }
+      }
+    },
+    "audioNode": {
+      "allOf": [
+        { "$ref": "#/$defs/timelineNodeCommon" },
+        {
+          "type": "object",
+          "required": ["type", "payload"],
+          "properties": {
+            "type": { "const": "audio" },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["audioUrl"],
+              "properties": {
+                "audioUrl": { "type": "string", "minLength": 1 },
+                "audioKind": { "type": "string", "enum": ["audio", "narration"] },
+                "role": { "type": "string", "enum": ["normal", "background"] },
+                "autoplay": { "type": "boolean" },
+                "loop": { "type": "boolean" },
+                "volume": { "type": "number", "minimum": 0, "maximum": 1 },
+                "startAtMs": { "type": "integer", "minimum": 0 },
+                "transcription": { "$ref": "#/$defs/transcription" }
+              }
+            }
+          }
+        },
+        { "$ref": "#/$defs/adjacencyLinear" },
+        { "unevaluatedProperties": false }
+      ]
+    },
+    "videoNode": {
+      "allOf": [
+        { "$ref": "#/$defs/timelineNodeCommon" },
+        {
+          "type": "object",
+          "required": ["type", "payload"],
+          "properties": {
+            "type": { "const": "video" },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["videoUrl"],
+              "properties": {
+                "videoUrl": { "type": "string", "minLength": 1 },
+                "autoplay": { "type": "boolean" },
+                "controls": { "type": "boolean" }
+              }
+            }
+          }
+        },
+        { "$ref": "#/$defs/adjacencyLinear" },
+        { "unevaluatedProperties": false }
+      ]
+    },
+    "imageNode": {
+      "allOf": [
+        { "$ref": "#/$defs/timelineNodeCommon" },
+        {
+          "type": "object",
+          "required": ["type", "payload"],
+          "properties": {
+            "type": { "const": "image" },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["imageUrl"],
+              "properties": {
+                "imageUrl": { "type": "string", "minLength": 1 },
+                "alt": { "type": "string" },
+                "caption": { "type": "string" },
+                "fit": { "type": "string", "enum": ["contain", "cover", "fill"] },
+                "allowZoom": { "type": "boolean" },
+                "completeOn": { "type": "string", "enum": ["render", "close", "timer"] },
+                "durationMs": { "type": "integer", "minimum": 250 }
+              },
+              "allOf": [
+                {
+                  "if": { "properties": { "completeOn": { "const": "timer" } }, "required": ["completeOn"] },
+                  "then": { "required": ["durationMs"] }
+                }
+              ]
+            }
+          }
+        },
+        { "$ref": "#/$defs/adjacencyLinear" },
+        { "unevaluatedProperties": false }
+      ]
+    },
+    "puzzleNode": {
+      "allOf": [
+        { "$ref": "#/$defs/timelineNodeCommon" },
+        {
+          "type": "object",
+          "required": ["type", "payload"],
+          "properties": {
+            "type": { "const": "puzzle" },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["puzzleId"],
+              "properties": {
+                "puzzleId": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        },
+        { "$ref": "#/$defs/adjacencyBranching" },
+        { "unevaluatedProperties": false }
+      ]
+    },
+    "actionParamsImageMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baselineImageId", "minSimilarity"],
+      "properties": {
+        "baselineImageId": { "type": "string", "minLength": 1 },
+        "minSimilarity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "maxDistance": { "type": "number", "minimum": 0 },
+        "capture": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "camera": { "type": "string", "enum": ["back", "front", "any"] },
+            "aspect": { "type": "string", "enum": ["1:1", "4:3", "16:9", "any"] },
+            "maxSizePx": { "type": "integer", "minimum": 256, "maximum": 8192 }
+          }
+        },
+        "geoFence": {
+          "description": "Optional proximity requirement to allow attempting the action.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["centre", "radiusM"],
+          "properties": {
+            "centre": {
+              "type": "array",
+              "items": { "type": "number" },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "radiusM": { "type": "number", "minimum": 1, "maximum": 5000 }
+          }
+        }
+      }
+    },
+    "actionParamsKnockKnock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pattern", "maxDurationMs"],
+      "properties": {
+        "pattern": {
+          "description": "Example: 'S-S-L' (short-short-long) or '1-1-2' (relative beat units).",
+          "type": "string",
+          "minLength": 1
+        },
+        "maxDurationMs": { "type": "integer", "minimum": 500, "maximum": 30000 },
+        "toleranceMs": { "type": "integer", "minimum": 0, "maximum": 2000 },
+        "minProximityM": {
+          "description": "Optional proximity requirement; engine should verify distance on submit.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5000
+        },
+        "sensor": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "sampleRateHz": { "type": "integer", "minimum": 10, "maximum": 400 },
+            "axis": { "type": "string", "enum": ["x", "y", "z", "magnitude"] },
+            "minPeak": { "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "actionNode": {
+      "allOf": [
+        { "$ref": "#/$defs/timelineNodeCommon" },
+        {
+          "type": "object",
+          "required": ["type", "payload"],
+          "properties": {
+            "type": { "const": "action" },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["actionKind", "params"],
+              "properties": {
+                "actionKind": { "type": "string", "enum": ["image_match", "knockknock"] },
+                "params": { "type": "object" }
+              },
+              "allOf": [
+                {
+                  "if": { "properties": { "actionKind": { "const": "image_match" } }, "required": ["actionKind"] },
+                  "then": { "properties": { "params": { "$ref": "#/$defs/actionParamsImageMatch" } } }
+                },
+                {
+                  "if": { "properties": { "actionKind": { "const": "knockknock" } }, "required": ["actionKind"] },
+                  "then": { "properties": { "params": { "$ref": "#/$defs/actionParamsKnockKnock" } } }
+                }
+              ]
+            },
+            "attemptPolicy": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "maxAttemptsPerPlayer": { "type": "integer", "minimum": 1, "maximum": 100 },
+                "cooldownMs": { "type": "integer", "minimum": 0, "maximum": 3600000 }
+              }
+            }
+          }
+        },
+        { "$ref": "#/$defs/adjacencyBranching" },
+        { "unevaluatedProperties": false }
+      ]
+    },
+    "effectNode": {
+      "allOf": [
+        { "$ref": "#/$defs/timelineNodeCommon" },
+        {
+          "type": "object",
+          "required": ["type", "payload"],
+          "properties": {
+            "type": { "const": "effect" },
+            "payload": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["effect"],
+              "properties": {
+                "effect": {
+                  "type": "string",
+                  "enum": [
+                    "pulsating_circles",
+                    "unlock_next_object",
+                    "complete_object_and_advance",
+                    "emit_event",
+                    "show_hint"
+                  ]
+                },
+                "params": { "type": "object" }
+              }
+            }
+          }
+        },
+        { "$ref": "#/$defs/adjacencyLinear" },
+        { "unevaluatedProperties": false }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "description": "Adjacency rule consistency is enforced by per-node type definitions (linear vs branching)."
+    }
+  ]
+}
