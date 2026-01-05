@@ -1,0 +1,31 @@
+name: Map & Navigation Tests
+on:
+  push:
+    branches: [ main, dev ]
+    paths:
+      - 'src/components/QuestMap.tsx'
+      - 'src/components/MapControls.tsx'
+      - 'e2e/map.spec.ts'
+  pull_request:
+    branches: [ main, dev ]
+    paths:
+      - 'src/components/QuestMap.tsx'
+      - 'src/components/MapControls.tsx'
+      - 'e2e/map.spec.ts'
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test e2e/map.spec.ts

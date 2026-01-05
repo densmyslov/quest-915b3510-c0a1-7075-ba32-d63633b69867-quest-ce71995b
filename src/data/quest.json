@@ -1,0 +1,245 @@
+{
+  "schemaVersion": "1.0.0",
+  "questId": "quest-74b36181",
+  "questVersion": "v1",
+  "publishedAt": "1970-01-01T00:00:00.000Z",
+  "metadata": {
+    "id": "quest-74b36181",
+    "name": "Sample Quest",
+    "description": "This is a sample quest for the template.",
+    "audioUrl": null
+  },
+  "map": {
+    "center": {
+      "lat": 51.505,
+      "lng": -0.09
+    },
+    "zoom": 13,
+    "style": "mapbox://styles/mapbox/streets-v11"
+  },
+  "puzzles": {
+    "fontana_fesa_puzzle": {
+      "id": "fontana_fesa_puzzle",
+      "quest_id": "sample-quest",
+      "name": "Fontana Fesa Mosaic",
+      "photo_url": "/puzzle/board.jpg",
+      "boardImage": "/puzzle/board.jpg",
+      "status": "active",
+      "createdAt": "2023-01-01T00:00:00Z",
+      "pieces": [
+        {
+          "id": "piece_1",
+          "image": "/puzzle/piece_1.png",
+          "targetX": 100,
+          "targetY": 100,
+          "unlocked": true
+        },
+        {
+          "id": "piece_2",
+          "image": "/puzzle/piece_2.png",
+          "targetX": 300,
+          "targetY": 100,
+          "unlocked": false
+        },
+        {
+          "id": "piece_3",
+          "image": "/puzzle/piece_3.png",
+          "targetX": 100,
+          "targetY": 300,
+          "unlocked": false
+        }
+      ],
+      "locationTriggers": [
+        {
+          "locationId": "loc_piece_2",
+          "pieceId": "piece_2",
+          "lat": 51.505,
+          "lng": -0.091,
+          "unlockMessage": "You found a piece near the center!"
+        },
+        {
+          "locationId": "loc_piece_3",
+          "pieceId": "piece_3",
+          "lat": 51.505,
+          "lng": -0.089,
+          "unlockMessage": "Another piece unlocked!"
+        }
+      ]
+    },
+    "witch_knot_demo": {
+      "id": "witch_knot_demo",
+      "quest_id": "sample-quest",
+      "name": "Witch Knot Demo",
+      "type": "witch_knot",
+      "status": "active",
+      "createdAt": "2023-01-01T00:00:00Z",
+      "data": {
+        "doorImageUrl": "/puzzle/board.jpg",
+        "studs": [
+          {
+            "x": 0.5,
+            "y": 0.2
+          },
+          {
+            "x": 0.8,
+            "y": 0.8
+          },
+          {
+            "x": 0.2,
+            "y": 0.8
+          }
+        ],
+        "patterns": [
+          {
+            "name": "Triangle",
+            "color": "#ff0000",
+            "points": [
+              0,
+              1,
+              2,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "witch_knot_simple_demo": {
+      "id": "witch_knot_simple_demo",
+      "quest_id": "sample-quest",
+      "name": "Witch Knot Simple Demo",
+      "type": "witch_knot_simple",
+      "status": "active",
+      "createdAt": "2023-01-01T00:00:00Z",
+      "data": {
+        "originalImageUrl": "/puzzle/board.jpg",
+        "studs": [
+          {
+            "x": 100,
+            "y": 100
+          },
+          {
+            "x": 300,
+            "y": 100
+          },
+          {
+            "x": 200,
+            "y": 300
+          }
+        ],
+        "patterns": [
+          {
+            "name": "Simple Triangle",
+            "color": "#00ff00",
+            "points": [
+              0,
+              1,
+              2,
+              0
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "policies": {
+    "objectVisibility": {
+      "mode": "sliding_window",
+      "windowSize": 2,
+      "includeCompletedInWindow": true
+    },
+    "timeline": {
+      "defaultBlocking": true,
+      "defaultRepeatPolicy": "once_per_object"
+    }
+  },
+  "start": {
+    "objectId": "obj-1"
+  },
+  "end": {
+    "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7"
+  },
+  "objects": {
+    "obj-1": {
+      "title": "Sample Object",
+      "entryNodeId": "tl_obj-1__start",
+      "objectGates": {
+        "type": "none"
+      },
+      "outObjectIds": [
+        "ebd335c2-6d19-4391-bb3b-ead77291aed7"
+      ],
+      "coordinates": {
+        "lat": 51.505,
+        "lng": -0.09
+      }
+    },
+    "ebd335c2-6d19-4391-bb3b-ead77291aed7": {
+      "title": "Fontana Fesa",
+      "entryNodeId": "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__start",
+      "objectGates": {
+        "type": "none"
+      },
+      "outObjectIds": [],
+      "coordinates": {
+        "lat": 51.505,
+        "lng": -0.092
+      }
+    }
+  },
+  "timelineNodes": {
+    "tl_obj-1__start": {
+      "objectId": "obj-1",
+      "type": "state",
+      "stateKind": "start",
+      "blocking": false,
+      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": [
+        "tl_obj-1:audio:0"
+      ]
+    },
+    "tl_obj-1__end": {
+      "objectId": "obj-1",
+      "type": "state",
+      "stateKind": "end",
+      "blocking": false,
+      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": []
+    },
+    "tl_obj-1:audio:0": {
+      "objectId": "obj-1",
+      "blocking": false,
+      "repeatPolicy": "on_each_arrival",
+      "type": "audio",
+      "payload": {
+        "audioUrl": "https://example.com/audio.mp3",
+        "audioKind": "audio",
+        "role": "normal"
+      },
+      "outNodeIds": [
+        "tl_obj-1__end"
+      ]
+    },
+    "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__start": {
+      "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7",
+      "type": "state",
+      "stateKind": "start",
+      "blocking": false,
+      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": [
+        "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__end"
+      ]
+    },
+    "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__end": {
+      "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7",
+      "type": "state",
+      "stateKind": "end",
+      "blocking": false,
+      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": []
+    }
+  }
+}

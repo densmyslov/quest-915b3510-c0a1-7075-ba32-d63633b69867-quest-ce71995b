@@ -1,0 +1,43 @@
+{
+  "name": "quest-app-template",
+  "version": "0.1.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "if [ \"$CF_PAGES\" = \"1\" ] && [ -z \"$NEXT_ON_PAGES\" ]; then npm run pages:build; else next build; fi",
+    "start": "next start",
+    "lint": "eslint",
+    "compile:compiled": "node --import tsx scripts/compile-compiled-quest.ts",
+    "test": "node --import tsx src/utils/validateQuestData.test.ts && node --import tsx src/utils/puzzleDistribution.test.ts && node --import tsx src/utils/coordinates.test.ts && node --import tsx src/lib/quest-state.test.ts",
+    "test:e2e": "playwright test",
+    "prebuild": "npm test",
+    "pages:build": "NEXT_ON_PAGES=1 NPM_CONFIG_LEGACY_PEER_DEPS=true npx @cloudflare/next-on-pages",
+    "pages:deploy": "npx wrangler pages deploy .vercel/output/static --project-name=quest-app-template-dev --branch=dev"
+  },
+  "dependencies": {
+    "@types/leaflet": "^1.9.21",
+    "aws4fetch": "^1.0.20",
+    "fabric": "^6.9.0",
+    "gsap": "^3.14.2",
+    "itty-router": "^5.0.22",
+    "leaflet": "^2.0.0-alpha.1",
+    "next": "^16.0.8",
+    "pixi.js": "^8.14.3",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
+    "@playwright/test": "^1.57.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.6",
+    "tailwindcss": "^4",
+    "tsx": "^4.21.0",
+    "typescript": "^5",
+    "wrangler": "^4.54.0"
+  }
+}

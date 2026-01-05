@@ -1,0 +1,417 @@
+/* ============================================
+   GAME STATUS PANEL - VINTAGE 1926 ITALIAN
+   Mobile-first design
+   ============================================ */
+
+.panel {
+  width: 100%;
+  max-width: 280px;
+  background: linear-gradient(180deg, #e8d5a3 0%, #d4c089 50%, #c4a86c 100%);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #e8d5a3 0%, #d4c089 50%, #c4a86c 100%);
+  border: 3px solid #4a3728;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(44, 36, 22, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  padding: 14px 16px;
+  font-family: 'Spectral', Georgia, serif;
+  color: #2c2416;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.panel::before,
+.panel::after {
+  content: '❧';
+  position: absolute;
+  font-size: 14px;
+  color: #c9a227;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.panel::before {
+  top: 6px;
+  left: 8px;
+}
+
+.panel::after {
+  bottom: 6px;
+  right: 8px;
+  transform: rotate(180deg);
+}
+
+.votingSection {
+  margin-bottom: 12px;
+}
+
+.votingTitle {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 3px;
+  color: #2c2416;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.votingBar {
+  display: flex;
+  height: 22px;
+  background: #f4e4c1;
+  border: 2px solid #4a3728;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.votesFor {
+  background: linear-gradient(180deg, #3d7a52 0%, #2d5a3d 50%, #1e4030 100%);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  min-width: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.votesAgainst {
+  background: linear-gradient(180deg, #a33d3d 0%, #8b2d2d 50%, #6b1f1f 100%);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  min-width: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.voteStats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.statFor,
+.statAgainst {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 60px;
+}
+
+.statFor .statValue {
+  color: #2d5a3d;
+}
+
+.statAgainst .statValue {
+  color: #8b2d2d;
+}
+
+.statValue {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.statLabel {
+  font-family: 'Spectral', serif;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b5a4a;
+}
+
+.statTotal {
+  font-family: 'Spectral', serif;
+  font-size: 11px;
+  font-style: italic;
+  color: #6b5a4a;
+  text-align: center;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #9a7b1c 50%, transparent 100%);
+}
+
+.dividerOrnament {
+  color: #c9a227;
+  font-size: 12px;
+  padding: 0 10px;
+  opacity: 0.7;
+}
+
+.timerSection {
+  text-align: center;
+  padding: 8px 0 4px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.timerTitle {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #6b5a4a;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.timerDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.timeBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+}
+
+.timeValue {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  color: #2c2416;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5), -1px -1px 0 rgba(0, 0, 0, 0.1);
+  transition: color 0.3s ease;
+}
+
+.timeUnit {
+  font-family: 'Spectral', serif;
+  font-size: 9px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b5a4a;
+  margin-top: 2px;
+}
+
+.timeSeparator {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #4a3728;
+  margin: 0 2px;
+  padding-bottom: 16px;
+  animation: gameStatusBlink 1s step-end infinite;
+}
+
+@keyframes gameStatusBlink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.urgent {
+  background: rgba(212, 160, 23, 0.15);
+}
+
+.urgent .timeValue {
+  color: #b8860b;
+}
+
+.urgent .timerTitle {
+  color: #b8860b;
+}
+
+.urgent::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  box-shadow: inset 0 0 20px rgba(212, 160, 23, 0.3);
+  pointer-events: none;
+  animation: gameStatusPulseAmber 2s ease-in-out infinite;
+}
+
+@keyframes gameStatusPulseAmber {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.critical {
+  background: rgba(165, 42, 42, 0.15);
+}
+
+.critical .timeValue {
+  color: #a52a2a;
+  animation: gameStatusShake 0.5s ease-in-out infinite;
+}
+
+.critical .timerTitle {
+  color: #a52a2a;
+}
+
+.critical .timeSeparator {
+  color: #a52a2a;
+  animation: gameStatusBlink 0.5s step-end infinite;
+}
+
+.critical::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  box-shadow: inset 0 0 24px rgba(165, 42, 42, 0.4);
+  pointer-events: none;
+  animation: gameStatusPulseRed 1s ease-in-out infinite;
+}
+
+@keyframes gameStatusPulseRed {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes gameStatusShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+
+@media (min-width: 400px) {
+  .panel {
+    max-width: 320px;
+    padding: 16px 20px;
+  }
+
+  .votingTitle {
+    font-size: 14px;
+    letter-spacing: 4px;
+  }
+
+  .votingBar {
+    height: 26px;
+  }
+
+  .statValue {
+    font-size: 26px;
+  }
+
+  .timeValue {
+    font-size: 36px;
+  }
+
+  .timeBlock {
+    min-width: 56px;
+  }
+}
+
+@media (min-width: 768px) {
+  .panel {
+    max-width: 360px;
+    padding: 20px 24px;
+    border-width: 4px;
+  }
+
+  .votingTitle {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .votingBar {
+    height: 30px;
+    border-radius: 5px;
+  }
+
+  .statValue {
+    font-size: 30px;
+  }
+
+  .statLabel {
+    font-size: 12px;
+  }
+
+  .timeValue {
+    font-size: 42px;
+  }
+
+  .timeUnit {
+    font-size: 10px;
+  }
+
+  .timeSeparator {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 359px) {
+  .panel {
+    max-width: 240px;
+    padding: 12px 14px;
+  }
+
+  .votingTitle {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .votingBar {
+    height: 18px;
+  }
+
+  .statValue {
+    font-size: 18px;
+  }
+
+  .statLabel {
+    font-size: 9px;
+  }
+
+  .timeValue {
+    font-size: 26px;
+  }
+
+  .timeBlock {
+    min-width: 40px;
+  }
+
+  .timeSeparator {
+    font-size: 22px;
+    padding-bottom: 12px;
+  }
+}
+
