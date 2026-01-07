@@ -6,23 +6,117 @@
     "deployUrl": "https://quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b.pages.dev",
     "repoUrl": "https://github.com/densmyslov/quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b",
     "projectName": "quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b",
-    "contentHash": "99bfed99c9e53a7d6cf6dc17b8e58ae2",
+    "contentHash": "dab23a6b83566c54bf04ad07d7f4c348",
     "createdAt": "2025-12-07",
-    "deploymentId": "d644e450-f314-4f3d-bd95-2df703c98780",
-    "lastDeployed": "2026-01-07T05:29:40.984119",
+    "deploymentId": "3e3c3827-2eed-49e1-8da0-481ab1b78966",
+    "lastDeployed": "2026-01-07T07:00:07.826803",
     "description": "",
     "userId": "915b3510-c0a1-7075-ba32-d63633b69867",
     "questApiUrl": "https://esino-quest-api.denslov.workers.dev"
   },
   "map": {
     "center": {
-      "lat": 45.9964013,
-      "lng": 9.3347776
+      "lat": 45.997015,
+      "lng": 9.334141
     },
     "zoom": 13,
     "style": "mapbox://styles/mapbox/streets-v11"
   },
   "objects": [
+    {
+      "id": "0420ff18-8c69-4110-a3ad-15b535615f7d",
+      "name": "Model-T ball facade",
+      "status": "active",
+      "number": 9,
+      "points": 100,
+      "coordinates": "45.997015, 9.334141",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "isMain": false,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 9,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
+          "audioUrls": [
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-141509-1839bbd8.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=GlglxXpjJF2JyNxd2TBVWktfYHM%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1488cb04-d929-4211-994f-0394820a40af",
+      "name": "Latrino",
+      "status": "active",
+      "number": 4,
+      "points": 100,
+      "coordinates": "45.996186, 9.335158",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-141145-1655b8fb/20251208-141145-1655b8fb.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "isMain": false,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 4,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-141145-1655b8fb/20251208-141145-1655b8fb.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-141145-1655b8fb/20251208-141145-1655b8fb.webp/public",
+          "audioUrls": []
+        }
+      ]
+    },
+    {
+      "id": "34bc1725-b682-4dac-88ec-0a16990f5ecb",
+      "name": "Fontana Maria Fina",
+      "status": "active",
+      "number": 8,
+      "points": 100,
+      "coordinates": "45.997487, 9.334272",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "isMain": true,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 8,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
+          "audioUrls": [
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135937-a1453844.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=yU7gAoeFLNrno06ymNzz7KfVc70%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
+          ]
+        }
+      ]
+    },
     {
       "id": "3f87a0c6-ee4e-4e34-8367-b35fed775a32",
       "name": "Pierre Carlo & Papa's Door",
@@ -50,7 +144,197 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=ZU0UhVes6ZsYGY9jGR3VZFKkooQ%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=sb3FZBga27zHghsC%2FZ%2FR0ax9y%2B8%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "403a6dbd-30a6-40dd-ab1d-92550d605c38",
+      "name": "Fontana della Fesa",
+      "status": "active",
+      "number": 5,
+      "points": 100,
+      "coordinates": "45.996395, 9.334758",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251208-142356-aa143d28/20251208-142356-aa143d28.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "mediaTimeline": {
+        "version": 1,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "id": "dd6f8af6-739b-49ac-9918-c567ac139c6c",
+            "type": "puzzle",
+            "puzzleId": "puz-d655b1d0",
+            "enabled": true,
+            "order": 1.0
+          }
+        ]
+      },
+      "isMain": true,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 5,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251208-142356-aa143d28/20251208-142356-aa143d28.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251208-142356-aa143d28/20251208-142356-aa143d28.webp/public",
+          "audioUrls": []
+        }
+      ]
+    },
+    {
+      "id": "604f8448-7ce1-4de4-9b63-3a79aa19a06d",
+      "name": "Knot Door",
+      "status": "active",
+      "number": 2,
+      "points": 100,
+      "coordinates": "45.995929, 9.334954",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "mediaTimeline": {
+        "version": 13111122111112,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "repeatPolicy": "on_each_arrival",
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20251228-174933-f1ccce42",
+            "id": "d93931b2-6400-4f7e-8b06-752b1b3e1106",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-174933-f1ccce42.mp3",
+            "enabled": true,
+            "order": 1.0
+          },
+          {
+            "delayMs": 0.0,
+            "repeatPolicy": "on_each_arrival",
+            "blocking": true,
+            "image_media_ids": [
+              "20260105-143604-dd800545"
+            ],
+            "image_urls": [
+              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143604-dd800545.jpg/public"
+            ],
+            "id": "f91fa7c6-b333-402e-b84e-1d6547192600",
+            "text": "Trova una vecchia porta, punta le tue strane macchine verso di essa e scatta una foto. Una strega ha intrecciato un nodo magico con il filo su questa porta. Cerca di rompere l'incantesimo.",
+            "type": "text",
+            "enabled": true,
+            "displayMode": "until_close",
+            "order": 2.0
+          },
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "actionKind": "image_match",
+            "id": "d50ffb2b-23ab-4921-a698-64755c4ed88d",
+            "type": "action",
+            "params": {
+              "successDurationMs": 3000.0,
+              "maxDistanceMeters": 10.0,
+              "targetLongitude": 9.3349542,
+              "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp",
+              "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
+              "targetLatitude": 45.9958502,
+              "maxScore": 0.6,
+              "successMessage": "you found it"
+            },
+            "enabled": true,
+            "order": 3.0
+          },
+          {
+            "delayMs": 0.0,
+            "repeatPolicy": "once",
+            "blocking": true,
+            "id": "85a8070e-f093-4874-8a9c-6b63a9fa0825",
+            "type": "puzzle",
+            "puzzleId": "puz-6a23902b",
+            "enabled": true,
+            "order": 4.0
+          },
+          {
+            "delayMs": 0.0,
+            "repeatPolicy": "on_each_arrival",
+            "blocking": true,
+            "media_id": "20260102-104636-e3186d51",
+            "id": "1653f739-4435-483a-b9fb-e3f8c87c8bcb",
+            "type": "video",
+            "media_url": "https://videodelivery.net/ed523c0a6a7f81d405caf4a418653a79/manifest/video.m3u8",
+            "enabled": true,
+            "order": 5.0
+          },
+          {
+            "delayMs": 200.0,
+            "repeatPolicy": "once",
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20251228-194115-69fc01d9",
+            "id": "38c63a3c-c3e6-430d-b7dd-4dda73af86eb",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-194115-69fc01d9.mp3",
+            "enabled": true,
+            "order": 6.0
+          },
+          {
+            "delayMs": 100.0,
+            "repeatPolicy": "once",
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20251228-175013-00fa7c5e",
+            "id": "525cad76-19cf-41f7-b3d3-4a2d7c1b60f0",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-175013-00fa7c5e.wav",
+            "enabled": true,
+            "order": 7.0
+          },
+          {
+            "delayMs": 100.0,
+            "repeatPolicy": "once",
+            "blocking": true,
+            "image_media_ids": [
+              "20260105-143613-9ef86085"
+            ],
+            "image_urls": [
+              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143613-9ef86085.jpg/public"
+            ],
+            "id": "7357c22b-dafd-4745-8bda-9b66184a0ce9",
+            "text": "Amici, trovate velocemente la casa della strega e bussate forte alla porta 3 volte.",
+            "type": "text",
+            "enabled": true,
+            "order": 8.0
+          }
+        ]
+      },
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "isEnd": false,
+      "isMain": false,
+      "isStart": false,
+      "isVisible": false,
+      "itineraryNumber": 2,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
+          "audioUrls": [
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133315-64456715.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=SgtC5srZ%2FM3IiG1wzqDAImiEnI8%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
           ]
         }
       ]
@@ -2605,521 +2889,6 @@
       ]
     },
     {
-      "id": "604f8448-7ce1-4de4-9b63-3a79aa19a06d",
-      "name": "Knot Door",
-      "status": "active",
-      "number": 2,
-      "points": 100,
-      "coordinates": "45.995929, 9.334954",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "mediaTimeline": {
-        "version": 1311112211111,
-        "items": [
-          {
-            "delayMs": 0.0,
-            "repeatPolicy": "on_each_arrival",
-            "role": "normal",
-            "blocking": true,
-            "media_id": "20251228-174933-f1ccce42",
-            "id": "d93931b2-6400-4f7e-8b06-752b1b3e1106",
-            "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-174933-f1ccce42.mp3",
-            "enabled": true,
-            "order": 1.0
-          },
-          {
-            "delayMs": 0.0,
-            "repeatPolicy": "on_each_arrival",
-            "blocking": true,
-            "image_media_ids": [
-              "20260105-143604-dd800545"
-            ],
-            "image_urls": [
-              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143604-dd800545.jpg/public"
-            ],
-            "id": "f91fa7c6-b333-402e-b84e-1d6547192600",
-            "text": "Trova una vecchia porta, punta le tue strane macchine verso di essa e scatta una foto. Una strega ha intrecciato un nodo magico con il filo su questa porta. Cerca di rompere l'incantesimo.",
-            "type": "text",
-            "enabled": true,
-            "displayMode": "until_close",
-            "order": 2.0
-          },
-          {
-            "delayMs": 0.0,
-            "repeatPolicy": "once",
-            "blocking": true,
-            "id": "85a8070e-f093-4874-8a9c-6b63a9fa0825",
-            "type": "puzzle",
-            "puzzleId": "puz-6a23902b",
-            "enabled": true,
-            "order": 3.0
-          },
-          {
-            "delayMs": 0.0,
-            "repeatPolicy": "on_each_arrival",
-            "blocking": true,
-            "media_id": "20260102-104636-e3186d51",
-            "id": "1653f739-4435-483a-b9fb-e3f8c87c8bcb",
-            "type": "video",
-            "media_url": "https://videodelivery.net/ed523c0a6a7f81d405caf4a418653a79/manifest/video.m3u8",
-            "enabled": true,
-            "order": 4.0
-          },
-          {
-            "delayMs": 200.0,
-            "repeatPolicy": "once",
-            "role": "normal",
-            "blocking": true,
-            "media_id": "20251228-194115-69fc01d9",
-            "id": "38c63a3c-c3e6-430d-b7dd-4dda73af86eb",
-            "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-194115-69fc01d9.mp3",
-            "enabled": true,
-            "order": 5.0
-          },
-          {
-            "delayMs": 100.0,
-            "repeatPolicy": "once",
-            "role": "normal",
-            "blocking": true,
-            "media_id": "20251228-175013-00fa7c5e",
-            "id": "525cad76-19cf-41f7-b3d3-4a2d7c1b60f0",
-            "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-175013-00fa7c5e.wav",
-            "enabled": true,
-            "order": 6.0
-          },
-          {
-            "delayMs": 100.0,
-            "repeatPolicy": "once",
-            "blocking": true,
-            "image_media_ids": [
-              "20260105-143613-9ef86085"
-            ],
-            "image_urls": [
-              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143613-9ef86085.jpg/public"
-            ],
-            "id": "7357c22b-dafd-4745-8bda-9b66184a0ce9",
-            "text": "Amici, trovate velocemente la casa della strega e bussate forte alla porta 3 volte.",
-            "type": "text",
-            "enabled": true,
-            "order": 7.0
-          }
-        ]
-      },
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 2,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133315-64456715.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=Zmr0smSCeWbKddTzz%2BYMz3BpMyg%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "ee0a94a6-0067-44b9-8a4b-1948080c53e6",
-      "name": "Fontana Inferna",
-      "status": "active",
-      "number": 10,
-      "points": 0,
-      "coordinates": "45.996935, 9.334090",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isMain": true,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 10,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-140903-933836eb.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=S%2FkqTtDVrqU%2Bzc8n2tT1ckbCoTs%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "1488cb04-d929-4211-994f-0394820a40af",
-      "name": "Latrino",
-      "status": "active",
-      "number": 4,
-      "points": 100,
-      "coordinates": "45.996186, 9.335158",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-141145-1655b8fb/20251208-141145-1655b8fb.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 4,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-141145-1655b8fb/20251208-141145-1655b8fb.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-141145-1655b8fb/20251208-141145-1655b8fb.webp/public",
-          "audioUrls": []
-        }
-      ]
-    },
-    {
-      "id": "a94efd34-5cf1-4846-8ddf-1b2e6838dd91",
-      "name": "San Antonio",
-      "status": "active",
-      "number": 6,
-      "points": 100,
-      "coordinates": "45.996589, 9.334557",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "mediaTimeline": {
-        "version": 1,
-        "items": [
-          {
-            "delayMs": 0.0,
-            "blocking": true,
-            "id": "4c07c755-93e1-4d02-8b2c-edc9dfe980c4",
-            "type": "puzzle",
-            "puzzleId": "puz-1cd67f1b",
-            "enabled": true,
-            "order": 1.0
-          }
-        ]
-      },
-      "isMain": true,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 6,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134232-69496af8.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=V5hAj2YukXoklW6G4CWo4ZthY40%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "e0e1e118-f9ea-4d93-971b-245248ab4d72",
-      "name": "Museo delle Grigne",
-      "status": "active",
-      "number": 13,
-      "points": 0,
-      "coordinates": "45.995865, 9.331936",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isMain": true,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": true,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 13,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-144859-62241687.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=TIyMw6yOkT283pORy63CCe%2BodBw%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "34bc1725-b682-4dac-88ec-0a16990f5ecb",
-      "name": "Fontana Maria Fina",
-      "status": "active",
-      "number": 8,
-      "points": 100,
-      "coordinates": "45.997487, 9.334272",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isMain": true,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 8,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135937-a1453844.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=Hz3e%2FuhackoFjcCtQUrg5%2FBITmo%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "403a6dbd-30a6-40dd-ab1d-92550d605c38",
-      "name": "Fontana della Fesa",
-      "status": "active",
-      "number": 5,
-      "points": 100,
-      "coordinates": "45.996395, 9.334758",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251208-142356-aa143d28/20251208-142356-aa143d28.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "mediaTimeline": {
-        "version": 1,
-        "items": [
-          {
-            "delayMs": 0.0,
-            "blocking": true,
-            "id": "dd6f8af6-739b-49ac-9918-c567ac139c6c",
-            "type": "puzzle",
-            "puzzleId": "puz-d655b1d0",
-            "enabled": true,
-            "order": 1.0
-          }
-        ]
-      },
-      "isMain": true,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 5,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251208-142356-aa143d28/20251208-142356-aa143d28.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251208-142356-aa143d28/20251208-142356-aa143d28.webp/public",
-          "audioUrls": []
-        }
-      ]
-    },
-    {
-      "id": "0420ff18-8c69-4110-a3ad-15b535615f7d",
-      "name": "Model-T ball facade",
-      "status": "active",
-      "number": 9,
-      "points": 100,
-      "coordinates": "45.997015, 9.334141",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 9,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-141509-1839bbd8.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=Zv1xBti1Pl4ksdlAG4RUhuqZXUY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "a84d2948-4801-4dd0-8ef0-9a8d5d795c97",
-      "name": "Funny Door to Campanilla",
-      "status": "active",
-      "number": 7,
-      "points": 100,
-      "coordinates": "45.996721, 9.334828",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 7,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134808-9333a9f4.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=uixhwhiRjnoiT04bdgqo9G6lbfE%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "e7e39724-62f4-4a2b-addf-63da8b80387b",
-      "name": "Roman Tower",
-      "status": "active",
-      "number": 0,
-      "points": 0,
-      "coordinates": "45.9960095, 9.3318251",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-18",
-      "isCurrent": false,
-      "itineraryNumber": 0,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp/public",
-          "audioUrls": []
-        }
-      ]
-    },
-    {
-      "id": "df784f1b-e7d4-4d24-ab0e-5f9f882ab12b",
-      "name": "Grigne",
-      "status": "active",
-      "number": 0,
-      "points": 0,
-      "coordinates": "45.9957697, 9.333699",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-18",
-      "isCurrent": false,
-      "itineraryNumber": 0,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp/public",
-          "audioUrls": []
-        }
-      ]
-    },
-    {
-      "id": "f912e558-f3bb-48b9-8def-fe507c7937a6",
-      "name": "Piazza Italia - Quest Start",
-      "status": "active",
-      "number": 0,
-      "points": 0,
-      "coordinates": "45.995550, 9.334559",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "mediaTimeline": {
-        "version": 11,
-        "items": [
-          {
-            "delayMs": 0.0,
-            "role": "normal",
-            "blocking": true,
-            "media_id": "20251220-182148-c54e5506",
-            "id": "a786d69b-d138-46aa-bcd2-e56237a19c6b",
-            "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251220-182148-c54e5506.mp3",
-            "enabled": true,
-            "order": 1.0
-          }
-        ]
-      },
-      "isMain": true,
-      "isStart": true,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 0,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133122-acd205c9.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=jwWg5r1AfzYgEnVloeeUt%2Br0Vv0%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
-          ]
-        }
-      ]
-    },
-    {
       "id": "a2acf6ec-6d4c-4f75-ab47-c7e050f7e915",
       "name": "Casa della Stria",
       "status": "active",
@@ -3166,7 +2935,257 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133402-2f84d641/20251209-133402-2f84d641.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133402-2f84d641/20251209-133402-2f84d641.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133442-e3b3dd95.webm?AWSAccessKeyId=ASIAQZSZZFTKEYO5X6BP&Signature=ShpeLOz0bj2BTpgxurfkE6jUyGs%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDQGkCj0Yg9i3F6kC6L83WlywbR49Mp%2FSVkxbD4T%2FBJCAIgRW3kK3oq2SexW1O8FUexGdsFOLJ6lCy32zngdw6HIWIqrwMIbxABGgwwNTQ5NDkxMjk0MjgiDGOFq6PQIj%2B%2BjNzBJyqMA3Xr2W73b6UZLwldaZWHlBggrVIgMC%2ByGwGZVErmS0ffGjL%2BhQ5XAM62TppYam3rXky0yWKocJWE%2BXeCoLTXhD%2FWoxPLyE0vzJL6SRq8hmp1%2FESizIp3dPBZoAfzQAHWIy5t3icMdYGkTgIdhjoneRKgwfV2aZzBqyQaqiNhuQ7C8tHI0x5r%2BP8kuIAfbZe1GiAGpbDJ%2BcThSjZjnf4Wk2L50r183h4fZg%2Ft7Xos8t8ugo8RrRaVn1I3xNu%2B38MFTd8ONkYeZ9kbZEvbElGf2zS0ARTtvdyEaZ3IMeykRIOagjoQ7o4juCoDWObBngD163pURVstx1smrEPiWuwt%2FPPY9YQbvD1XbG5NbMZ8dSIJtHZvm%2B1LCgG%2FSPS4kAbinNbQlNKPzaopemWqCeuV68GPxxMckdDJoH6K26EqgifR%2Bq%2FzOrY22%2BmNQF%2FZyfN338ybyve2VAkFwpQ%2F%2F78nW2XHsc6ht8jhiVwv7GOxwNZTqLxwI68GAyMvsgWvUgE9njE3n6nfF%2BQrl%2Bp5RTDG3vfKBjqdATg6Uiy5dQb7CZpHA5pgqSzGN9au4pYsJe5p%2BOYnv3VXbHtiURv19mUETfuEm3%2B9clj4l24IeGdGY0NuUEw8AGrGdMdogwnneH9YdW%2FgC2PdybWUIszV5tPabaUaki%2Fskc0X%2FuoUXUI1HPHYEPNKavMG7wQLRZo1EISW1Ezhye%2FxrmWNkdH5fM4kn1HNvF9Aa%2Fp54mcqdtEKijj59Ek%3D&Expires=1768368585"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133442-e3b3dd95.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=T1A6y2fshlai6KJ8%2FSgKBeocuWY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a84d2948-4801-4dd0-8ef0-9a8d5d795c97",
+      "name": "Funny Door to Campanilla",
+      "status": "active",
+      "number": 7,
+      "points": 100,
+      "coordinates": "45.996721, 9.334828",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "isMain": false,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 7,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
+          "audioUrls": [
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134808-9333a9f4.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=lLVvqXf8hV3zipLFc%2Bsi%2Fu5QKuU%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a94efd34-5cf1-4846-8ddf-1b2e6838dd91",
+      "name": "San Antonio",
+      "status": "active",
+      "number": 6,
+      "points": 100,
+      "coordinates": "45.996589, 9.334557",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "mediaTimeline": {
+        "version": 1,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "id": "4c07c755-93e1-4d02-8b2c-edc9dfe980c4",
+            "type": "puzzle",
+            "puzzleId": "puz-1cd67f1b",
+            "enabled": true,
+            "order": 1.0
+          }
+        ]
+      },
+      "isMain": true,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 6,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
+          "audioUrls": [
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134232-69496af8.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=Bzl%2BofTs2u%2BHbtXQ2hlqPg%2Fuiqo%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "df784f1b-e7d4-4d24-ab0e-5f9f882ab12b",
+      "name": "Grigne",
+      "status": "active",
+      "number": 0,
+      "points": 0,
+      "coordinates": "45.9957697, 9.333699",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "isMain": false,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-18",
+      "isCurrent": false,
+      "itineraryNumber": 0,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp/public",
+          "audioUrls": []
+        }
+      ]
+    },
+    {
+      "id": "e0e1e118-f9ea-4d93-971b-245248ab4d72",
+      "name": "Museo delle Grigne",
+      "status": "active",
+      "number": 13,
+      "points": 0,
+      "coordinates": "45.995865, 9.331936",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "isMain": true,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": true,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 13,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
+          "audioUrls": [
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-144859-62241687.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=4zoT51V0X%2ByN3eV8ZNeYlz67e%2BY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e7e39724-62f4-4a2b-addf-63da8b80387b",
+      "name": "Roman Tower",
+      "status": "active",
+      "number": 0,
+      "points": 0,
+      "coordinates": "45.9960095, 9.3318251",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "isMain": false,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-18",
+      "isCurrent": false,
+      "itineraryNumber": 0,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp/public",
+          "audioUrls": []
+        }
+      ]
+    },
+    {
+      "id": "ee0a94a6-0067-44b9-8a4b-1948080c53e6",
+      "name": "Fontana Inferna",
+      "status": "active",
+      "number": 10,
+      "points": 0,
+      "coordinates": "45.996935, 9.334090",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "isMain": true,
+      "isStart": false,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 10,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
+          "audioUrls": [
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-140903-933836eb.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=J8%2FiOtAfbQz5P8x85Wymf22dEOo%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f912e558-f3bb-48b9-8def-fe507c7937a6",
+      "name": "Piazza Italia - Quest Start",
+      "status": "active",
+      "number": 0,
+      "points": 0,
+      "coordinates": "45.995550, 9.334559",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp"
+      ],
+      "description": "",
+      "triggerRadius": 20.0,
+      "quest_ids": [
+        "quest-8371e45f"
+      ],
+      "mediaTimeline": {
+        "version": 11,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20251220-182148-c54e5506",
+            "id": "a786d69b-d138-46aa-bcd2-e56237a19c6b",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251220-182148-c54e5506.mp3",
+            "enabled": true,
+            "order": 1.0
+          }
+        ]
+      },
+      "isMain": true,
+      "isStart": true,
+      "isVisible": false,
+      "isEnd": false,
+      "createdAt": "2025-12-14",
+      "isCurrent": false,
+      "itineraryNumber": 0,
+      "images": [
+        {
+          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
+          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
+          "audioUrls": [
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133122-acd205c9.webm?AWSAccessKeyId=ASIAQZSZZFTKB2GC7JEQ&Signature=mc4nlwy6xhVSrpbcXsyugIAqkE0%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEKf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIDDfrhQqZ08nPqQIzjMImxOK4afWZ54uvOLecaZ6eCpsAiEA%2F5cja6PCw%2FNovloKNGq13G%2FW9sfkgxialYPSCrvaozsqrwMIcBABGgwwNTQ5NDkxMjk0MjgiDAHLuW4aIwZlELbSbCqMAzvm8XmIHSRJC9ZE7lSwJc5TyEg7Roj9%2F1FglVZV8fiRKSnKNNr%2BObVEqi7b4Z2QYtiCtHqok6qqbdkOoT489gzccEdyw0CeVpw%2FqQefugsplOt%2F%2BO5Nd4vjBc5AP%2FcdOFGOpMFPGB3Di3OOMh13YCIeVzYP5LSohmRn1Uz3%2FYVEPzO0CWWJEahhLQhwVUS6QI5sRFvKCcTLA%2BQNDD%2B5q%2B5Dpvg12AsPHZ%2F7D7IwuAOIolWLI%2FJ3pVWfjiojMk25hSEhKdjn4rnSNuoRr5DsnQn1yjfYPksWWr50NrFwt5lNbbACMBTZV4xZften01FfIZ2gh6WgLKAMpLttZ9VRvyjSWoBG7Mat%2BsE68UsUFKPhftIo1XwUjlD7dNRubB%2BYaGUs13CtGgCvqaHFvD1JD5sdzN2pKppQAQc3atmo9mMwKyS%2BN8Cu60iIK6Gv1FjfObBgXsHsuA6pa2Wo9k0LkG0zF3t4TilbIClwuNLpsL3a9MbrrxUFUvlhiB%2F31RRniBozAvqboXr%2FsT1k1zD5iPjKBjqdATlmsUOvyDec7AaCZIv%2F8OkqZi20uYcmre%2FFOBqeH5vGBJ4sgtmfOYjba6Bvh0V%2B0b4Vc3wO0S7Y%2FazIIGpCsft6wAIn2%2B8BiQoODpEMb%2B%2F4xhqWW7ZhpkLhMBnHAxjbkyX7bgPtOWM6eHpJoAFeR1PPLT%2BNgct2xVnJkwvZn4GMOqw73xPB87MBdUi3Mdm6SlgR05f7ioeHSTDUtKE%3D&Expires=1768374012"
           ]
         }
       ]
