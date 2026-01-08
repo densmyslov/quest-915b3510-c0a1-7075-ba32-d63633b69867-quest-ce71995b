@@ -12,6 +12,9 @@ import RegistrationView from '../components/RegistrationView';
 // Configuration
 const VIDEO_ID = '5927e58c7d91e46b39f8b3a80fbaa363';
 const VIDEO_2_ID = '5cfadee7a3c914547ac08a0d73677ec6';
+const STREAMING_AUDIO_URL =
+  'https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260107-144449-cb354a4c.mp3';
+const SILENT_AUDIO_URL = '/audio/silence.mp3'; // Hosted silence file for Safari unlock
 const CUSTOMER_CODE = 'customer-yshabc4ttf2nlnnu';
 
 const STREAM_SDK_SRC = 'https://embed.cloudflarestream.com/embed/sdk.latest.js';
@@ -70,7 +73,7 @@ export default function LandingPage() {
   const router = useRouter();
   const { createSession, createTeam, joinTeam } = useQuestSession();
   const teamSync = useTeamSync();
-  const { unlockBackgroundAudio } = useQuestAudio();
+  const { unlockBackgroundAudio, playBackgroundAudio, stopBackgroundAudio } = useQuestAudio();
 
   const [state, setState] = useState<PageState>('INITIAL_IMAGE');
   const [playerName, setPlayerName] = useState('');
@@ -232,7 +235,7 @@ export default function LandingPage() {
     if (state === 'VIDEO') {
       const timer = setTimeout(() => {
         handleVideoEnded();
-      }, 180000); // 3 minutes fallback
+      }, 45000); // Reduce to 45s fallback (was 3m)
       return () => clearTimeout(timer);
     }
   }, [state]);
@@ -242,7 +245,7 @@ export default function LandingPage() {
     if (state === 'TRANSITION_VIDEO') {
       const timer = setTimeout(() => {
         handleVideo2Ended();
-      }, 180000); // 3 minutes fallback
+      }, 15000); // Reduce to 15s fallback (was 3m)
       return () => clearTimeout(timer);
     }
   }, [state]);
@@ -259,12 +262,38 @@ export default function LandingPage() {
       try {
         const player = window.Stream(iframeRef.current);
         videoPlayerRef.current = player;
-        player.addEventListener('ended', () => {
+
+        const onEnded = () => {
           handleVideoEnded();
+        };
+
+        const onError = (e?: any) => {
+          console.error('[page.tsx] Video playback error:', e);
+          // Fallback to end video so we don't hang
+          handleVideoEnded();
+        };
+
+        player.addEventListener('ended', onEnded);
+        player.addEventListener('error', onError);
+
+        player.play().catch(e => {
+          console.warn('[page.tsx] Auto-play failed:', e);
+          // If we can't play, we might want to show "enable sound" or just wait.
+          // But if it's a critical error (like Access Denied), the 'error' event might fire?
+          // Actually, play() promise rejection is usually for autoplay policy.
+          // 'error' event is for media loading failures.
         });
-        void player.play();
+
+        return () => {
+          try {
+            player.removeEventListener?.('ended', onEnded);
+            player.removeEventListener?.('error', onError);
+          } catch { }
+        };
       } catch (e) {
-        // Ignore
+        console.error('[page.tsx] Stream SDK init failed', e);
+        // Force advance if SDK crashes
+        handleVideoEnded();
       }
     }
   }, [state, isSdkLoaded]);
@@ -275,12 +304,33 @@ export default function LandingPage() {
       try {
         const player = window.Stream(video2IframeRef.current);
         transitionVideoPlayerRef.current = player;
-        player.addEventListener('ended', () => {
+
+        const onEnded = () => {
           handleVideo2Ended();
+        };
+
+        const onError = (e?: any) => {
+          console.error('[page.tsx] Transition video error:', e);
+          // Fallback to Intro so we don't hang
+          handleVideo2Ended();
+        };
+
+        player.addEventListener('ended', onEnded);
+        player.addEventListener('error', onError);
+
+        player.play().catch(e => {
+          console.warn('[page.tsx] Transition auto-play failed:', e);
         });
-        void player.play();
+
+        return () => {
+          try {
+            player.removeEventListener?.('ended', onEnded);
+            player.removeEventListener?.('error', onError);
+          } catch { }
+        };
       } catch (e) {
-        // Ignore
+        console.error('[page.tsx] Stream SDK init failed for transition', e);
+        handleVideo2Ended();
       }
     }
   }, [state, isVideo2SdkReady]);
@@ -298,7 +348,7 @@ export default function LandingPage() {
     { name: 'Carissimo', year: '1750', country: 'Europa', occupation: 'dominazione austriaca' }, // Fallback/Extra
   ];
 
-  /* 
+  /*
    * Determines the ancestor based on the player's position in the team (join order).
    * - Creator (first member) -> Index 0 -> Nasazzi
    * - Joiner 1 -> Index 1 -> Pensa
@@ -366,6 +416,35 @@ export default function LandingPage() {
     setIsTyping(true);
   };
 
+  // Hook to handle INTRO state and ensure audio is playing
+  const { isBackgroundPlaying, isBackgroundLocked } = useQuestAudio();
+  useEffect(() => {
+    if (state === 'INTRO') {
+      console.log('[page.tsx] INTRO state - ramping up audio to volume 50');
+
+      // Ensure audio is playing if it stopped or was missed
+      if (!isBackgroundPlaying && !isBackgroundLocked) {
+        console.log('[page.tsx] Intro check: Audio not playing, forcing play');
+        void playBackgroundAudio({
+          url: STREAMING_AUDIO_URL,
+          loop: true,
+          volume: 50,
+          continueIfAlreadyPlaying: true,
+        }).catch(e => console.warn('[page.tsx] Intro audio force play failed', e));
+      } else {
+        void playBackgroundAudio({
+          url: STREAMING_AUDIO_URL,
+          loop: true,
+          volume: 50,
+          continueIfAlreadyPlaying: true,
+        });
+      }
+    } else if (state === 'MISSION_BRIEF') {
+      console.log('[page.tsx] MISSION_BRIEF state - stopping background audio');
+      stopBackgroundAudio();
+    }
+  }, [state, playBackgroundAudio, stopBackgroundAudio, isBackgroundPlaying, isBackgroundLocked]);
+
   const handleStartAdventure = (nameOverride?: string) => {
     const finalName = nameOverride || playerName;
     if (!finalName.trim()) return;
@@ -429,10 +508,68 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
   }, [state, teamSync.session, teamSync.team]);
 
   const handleRegistrationComplete = async (name: string, mode: 'solo' | 'team', code?: string, action?: 'create' | 'join') => {
+    console.log('[page.tsx] handleRegistrationComplete - attempting audio unlock on user gesture');
+
+    // --- FIX: Await Unlock First ---
+    // We must ensure the context is unlocked BEFORE calling playBackgroundAudio.
+    // Otherwise playBackgroundAudio just queues it if locked.
+    try {
+      await unlockBackgroundAudio();
+      console.log('[page.tsx] Audio Context explicitly unlocked');
+    } catch (e) {
+      console.warn('[page.tsx] Explicit unlock failed (continuing anyway)', e);
+    }
+
+    // Detect Safari (iOS or macOS)
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    console.log('[page.tsx] Browser detection:', { isSafari, userAgent: navigator.userAgent });
+
+    // Safari-specific unlock strategy: Use hosted silence file
+    if (isSafari) {
+      try {
+        console.log('[page.tsx] Safari detected - unlocking with hosted silence file');
+        await playBackgroundAudio({
+          url: SILENT_AUDIO_URL,
+          loop: false,
+          volume: 50, // Audible volume to ensure Safari loads it
+          continueIfAlreadyPlaying: false,
+        });
+        console.log('[page.tsx] Silent audio unlock successful');
+
+        // Small delay to allow silence to complete (Safari needs this)
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // Now switch to the actual background music at audible volume
+        console.log('[page.tsx] Switching to background music at volume 10');
+        await playBackgroundAudio({
+          url: STREAMING_AUDIO_URL,
+          loop: true,
+          volume: 10, // Higher initial volume forces Safari to load metadata
+          continueIfAlreadyPlaying: false,
+        });
+        console.log('[page.tsx] Background music started');
+      } catch (e) {
+        console.warn('[page.tsx] Safari audio unlock/prime failed', e);
+      }
+    } else {
+      // Non-Safari: Direct playback at audible volume
+      try {
+        console.log('[page.tsx] Non-Safari - starting background music directly at volume 10');
+        await playBackgroundAudio({
+          url: STREAMING_AUDIO_URL,
+          loop: true,
+          volume: 10, // Higher initial volume ensures proper loading
+          continueIfAlreadyPlaying: false,
+        });
+        console.log('[page.tsx] Background music started');
+      } catch (e) {
+        console.warn('[page.tsx] Audio prime failed', e);
+      }
+    }
     console.log('[page.tsx] handleRegistrationComplete START', { name, mode, code, action });
     setPlayerName(name);
     setIsTeam(mode === 'team');
-    setIsTeam(mode === 'team');
+    // setIsTeam(mode === 'team'); // Duplicate removed
     if (code) setAccessCode(code);
 
     try {
@@ -507,7 +644,10 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
             {!isTyping && (
               <div className="pt-8 flex justify-center animate-fade-in">
                 <button
-                  onClick={() => setState('MISSION_BRIEF')}
+                  onClick={() => {
+                    unlockBackgroundAudio().catch(() => { });
+                    setState('MISSION_BRIEF');
+                  }}
                   className="rounded-full bg-white text-black px-8 py-3 font-bold hover:bg-gray-200 transition-colors"
                 >
                   Accetta di aprire il portale temporale
@@ -517,7 +657,11 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
           </div>
         </div>
         {isTyping && (
-          <button onClick={() => { setIsTyping(false); setDisplayedText(introText); }} className="absolute bottom-8 right-8 z-[70] text-gray-500 hover:text-white text-sm bg-black/50 px-3 py-1 rounded">Skip Animation</button>
+          <button onClick={() => {
+            unlockBackgroundAudio().catch(() => { });
+            setIsTyping(false);
+            setDisplayedText(introText);
+          }} className="absolute bottom-8 right-8 z-[70] text-gray-500 hover:text-white text-sm bg-black/50 px-3 py-1 rounded">Skip Animation</button>
         )}
       </div>
     );
@@ -634,7 +778,7 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
               }}>
                 Il nostro sistema ha rilevato potenti oscillazioni energetiche nella zona di
                 <span style={{ color: '#9d8cff', fontStyle: 'italic' }}> Esino Lario</span>,
-                che a quanto pare hanno causato l'apertura del portale.
+                che a quanto pare hanno causato l&apos;apertura del portale.
               </p>
 
               <p style={{
@@ -650,7 +794,7 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
                   fontStyle: 'italic',
                   borderBottom: '1px dotted rgba(255, 215, 0, 0.5)'
                 }}>Porta di Prada</span> —
-                «la porta verso l'aldilà» (un arco carsico), e forse il sistema
+                «la porta verso l&apos;aldilà» (un arco carsico), e forse il sistema
                 vi aiuterà a entrare in contatto con lui.
               </p>
             </div>
@@ -684,7 +828,10 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
             {/* Button */}
             <div className="mt-8">
               <button
-                onClick={() => router.push('/map')}
+                onClick={() => {
+                  unlockBackgroundAudio().catch(() => { });
+                  router.push('/map');
+                }}
                 className="text-white bg-purple-900/50 hover:bg-purple-800/80 px-8 py-3 rounded-full text-lg border border-purple-500/50 transition-all shadow-[0_0_15px_rgba(138,43,226,0.5)] hover:shadow-[0_0_25px_rgba(138,43,226,0.8)]"
               >
                 Cerca il punto di concentrazione energetica
@@ -696,7 +843,7 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
         {/* CSS Animations */}
         <style>{`
 	          @import url('${FONT_CORMORANT_GARAMOND_IMPORT_SRC}');
-	          
+
 	          @keyframes pulse {
 	            0%, 100% { opacity: 0.3; }
 	            50% { opacity: 0.6; }
@@ -750,7 +897,10 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
           {!isIntroImageFading && (
             <button
               type="button"
-              onClick={startIntroImageExit}
+              onClick={() => {
+                unlockBackgroundAudio().catch(() => { });
+                startIntroImageExit();
+              }}
               className="absolute bottom-10 right-6 z-[110] bg-white/10 hover:bg-white/20 backdrop-blur-md text-white/90 px-5 py-2.5 rounded-full text-sm font-medium transition-all border border-white/10 hover:scale-[1.03] active:scale-[0.98] shadow-lg"
             >
               Next →
