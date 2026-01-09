@@ -194,4 +194,3 @@ export function assertValidCompiledQuestDefinition(def: unknown): asserts def is
   const formatted = errors.map((e) => (e.path ? `${e.path}: ${e.message}` : e.message)).join('\n');
   throw new Error(`Invalid compiled quest definition:\n${formatted}`);
 }
-
