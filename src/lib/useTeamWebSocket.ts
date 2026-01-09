@@ -591,6 +591,7 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
 
   useEffect(() => {
     if (!teamCode || !session) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTeam(null);
       setLatency(null);
       closeSocket();
