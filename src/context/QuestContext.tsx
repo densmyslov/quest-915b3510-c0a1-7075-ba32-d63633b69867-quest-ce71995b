@@ -58,7 +58,7 @@ export function QuestProvider({ data, children }: QuestProviderProps) {
         questVersion: normalizedData.questVersion ?? 'v1',
         playerId: currentSessionId,
         teamCode: teamSync.teamCode,
-        autoStart: true,
+        autoStart: false,
         pollIntervalMs: teamSync.connectionStatus === 'connected' ? 0 : 10_000
     });
 
