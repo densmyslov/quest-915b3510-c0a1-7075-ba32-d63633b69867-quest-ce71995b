@@ -88,7 +88,7 @@ export function useArrivalSimulation(options: ArrivalSimulationOptions) {
         } catch (err) {
             console.warn('[ArrivalSimulation] onArrived callback failed:', err);
         }
-    }, [sessionId, completedObjects, visibleObjects, getItineraryNumber, showNotification, playEffectAudio, onArrived]);
+    }, [completedObjects, visibleObjects, getItineraryNumber, showNotification, playEffectAudio, onArrived]);
 
     const simulateArrivalWithPosition = useCallback(async (
         obj: QuestObject
