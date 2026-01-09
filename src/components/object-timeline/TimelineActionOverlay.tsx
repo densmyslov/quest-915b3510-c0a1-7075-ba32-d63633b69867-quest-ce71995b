@@ -655,18 +655,31 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
 
         {/* Confirmation Dialog for Close */}
         {showCloseConfirmation && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="w-4/5 max-w-sm bg-[#1a1510] border border-white/20 rounded-xl p-6 text-center shadow-2xl scale-100 animate-in zoom-in-95 duration-200">
-              <h3 className="text-xl font-bold text-white mb-2 font-serif">Close Action?</h3>
-              <p className="text-white/70 text-sm mb-6">
-                This will complete this step without verifying the image. Are you sure?
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
+            <div
+              style={{
+                background: `linear-gradient(135deg, ${palette.parchment} 0%, #e3dcd2 100%)`,
+                borderColor: palette.gold,
+                color: '#2c241c'
+              }}
+              className="w-[90%] max-w-[320px] border-2 rounded-sm p-6 text-center shadow-[0_10px_40px_rgba(0,0,0,0.8)] animate-in zoom-in-95 duration-200"
+            >
+              <h3
+                style={{ color: '#5c4033' }}
+                className="text-lg font-bold mb-4 font-serif uppercase tracking-wider"
+              >
+                Chiudere l&apos;azione?
+              </h3>
+              <p className="text-base mb-6 font-serif leading-relaxed">
+                Se confermi, l&apos;azione verrà segnata come completata e potrai proseguire.
               </p>
               <div className="flex gap-3 justify-center">
                 <button
                   onClick={() => setShowCloseConfirmation(false)}
-                  className="px-4 py-2 rounded-lg bg-white/10 text-white font-bold hover:bg-white/20 transition-colors"
+                  style={{ borderColor: '#5c4033', color: '#5c4033' }}
+                  className="px-5 py-2 rounded-none border bg-transparent font-bold font-serif hover:bg-[#5c4033]/10 transition-colors uppercase tracking-widest text-xs"
                 >
-                  Cancel
+                  Annulla
                 </button>
                 <button
                   onClick={() => {
@@ -675,9 +688,13 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
                     // Completing with bypass: true signals the runtime to mark as done/skipped
                     onComplete({ bypass: true });
                   }}
-                  className="px-4 py-2 rounded-lg bg-[#d4b483] text-black font-bold hover:bg-[#c4a473] transition-colors"
+                  style={{
+                    background: `linear-gradient(135deg, ${palette.gold} 0%, #b8860b 100%)`,
+                    boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+                  }}
+                  className="px-5 py-2 border-none text-white font-bold font-serif hover:brightness-110 transition-all uppercase tracking-widest text-xs"
                 >
-                  Confirm
+                  Conferma
                 </button>
               </div>
             </div>
@@ -736,7 +753,7 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
               <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4b483] mb-1">{title}</h3>
               <p className="text-sm opacity-80">Knock {requiredKnocks} times quickly.</p>
             </div>
-            <button onClick={handleCancel} className="text-[#d4b483] text-2xl leading-none">&times;</button>
+            <button onClick={() => setShowCloseConfirmation(true)} className="text-[#d4b483] text-2xl leading-none">&times;</button>
           </div>
 
           <div className="flex flex-col gap-3">
@@ -771,7 +788,59 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
             </button>
           </div>
         </div>
-      </div>
+
+
+        {/* Confirmation Dialog for Close */}
+        {/* Confirmation Dialog for Close */}
+        {
+          showCloseConfirmation && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
+              <div
+                style={{
+                  background: `linear-gradient(135deg, ${palette.parchment} 0%, #e3dcd2 100%)`, // Approximate parchment gradient
+                  borderColor: palette.gold,
+                  color: '#2c241c' // Low contrast ink color
+                }}
+                className="w-[90%] max-w-[320px] border-2 rounded-sm p-6 text-center shadow-[0_10px_40px_rgba(0,0,0,0.8)] animate-in zoom-in-95 duration-200"
+              >
+                <h3
+                  style={{ color: '#5c4033' }}
+                  className="text-lg font-bold mb-4 font-serif uppercase tracking-wider"
+                >
+                  Chiudere l&apos;azione?
+                </h3>
+                <p className="text-base mb-6 font-serif leading-relaxed">
+                  Se confermi, l&apos;azione verrà segnata come completata e potrai proseguire.
+                </p>
+                <div className="flex gap-3 justify-center">
+                  <button
+                    onClick={() => setShowCloseConfirmation(false)}
+                    style={{ borderColor: '#5c4033', color: '#5c4033' }}
+                    className="px-5 py-2 rounded-none border bg-transparent font-bold font-serif hover:bg-[#5c4033]/10 transition-colors uppercase tracking-widest text-xs"
+                  >
+                    Annulla
+                  </button>
+                  <button
+                    onClick={() => {
+                      detector.stopListening();
+                      setShowCloseConfirmation(false);
+                      // Completing with bypass: true signals the runtime to mark as done/skipped
+                      onComplete({ bypass: true });
+                    }}
+                    style={{
+                      background: `linear-gradient(135deg, ${palette.gold} 0%, #b8860b 100%)`,
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+                    }}
+                    className="px-5 py-2 border-none text-white font-bold font-serif hover:brightness-110 transition-all uppercase tracking-widest text-xs"
+                  >
+                    Conferma
+                  </button>
+                </div>
+              </div>
+            </div>
+          )
+        }
+      </div >
     );
   }
 
