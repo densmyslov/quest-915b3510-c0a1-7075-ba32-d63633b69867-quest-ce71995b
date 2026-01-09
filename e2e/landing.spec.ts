@@ -29,7 +29,7 @@ test.describe('Landing Page Video Transition', () => {
         // This version has logic: `player.addEventListener('ended', handleVideoEnded);`
         // But it relies on `window.Stream` which is loaded async.
 
-        // Let's try to simulate the button click first as a baseline, 
+        // Let's try to simulate the button click first as a baseline,
         // effectively triggering `handleVideoEnded`.
         const skipButton = page.getByRole('button', { name: 'Skip Video' });
         await expect(skipButton).toBeVisible();
