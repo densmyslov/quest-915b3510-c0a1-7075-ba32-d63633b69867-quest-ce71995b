@@ -134,6 +134,7 @@ export default function QuestMap() {
     const [mapMode, setMapMode] = useState<'play' | 'steps' | null>(null);
     const [modeConfirmed, setModeConfirmed] = useState(false);
     const [currentItineraryStep, setCurrentItineraryStep] = useState(0);
+    const [puzzleCloseConfirmation, setPuzzleCloseConfirmation] = useState(false);
     const stepsMode = mapMode === 'steps';
     const isPlayMode = mapMode === 'play';
 
@@ -459,7 +460,8 @@ export default function QuestMap() {
         timelineChatOverlay,
         closeTimelineChat,
         timelinePuzzleOverlay,
-        closeTimelinePuzzle
+        closeTimelinePuzzle,
+        completeTimelinePuzzle
     } = useObjectTimeline({
         currentSessionId,
         stepsMode,
@@ -1657,7 +1659,13 @@ export default function QuestMap() {
                     >
                         <button
                             type="button"
-                            onClick={closeTimelinePuzzle}
+                            onClick={() => {
+                                if (stepsMode) {
+                                    setPuzzleCloseConfirmation(true);
+                                } else {
+                                    closeTimelinePuzzle();
+                                }
+                            }}
                             aria-label="Close puzzle"
                             style={{
                                 position: 'absolute',
@@ -1683,6 +1691,80 @@ export default function QuestMap() {
                             objectId={timelinePuzzleOverlay.objectId}
                             onClose={closeTimelinePuzzle}
                         />
+
+                        {puzzleCloseConfirmation && (
+                            <div style={{
+                                position: 'absolute',
+                                inset: 0,
+                                zIndex: 9500,
+                                background: 'rgba(0,0,0,0.85)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <div style={{
+                                    width: '90%',
+                                    maxWidth: '320px',
+                                    padding: '24px',
+                                    background: `linear-gradient(135deg, ${COLORS.parchment} 0%, ${COLORS.parchmentDark} 100%)`,
+                                    border: `2px solid ${COLORS.gold}`,
+                                    borderRadius: '2px',
+                                    boxShadow: '0 10px 40px rgba(0,0,0,0.8)',
+                                    textAlign: 'center',
+                                    color: COLORS.ink
+                                }}>
+                                    <h3 style={{
+                                        fontFamily: "'Cinzel', serif",
+                                        color: COLORS.sepia,
+                                        fontSize: '18px',
+                                        marginBottom: '16px',
+                                        fontWeight: 700
+                                    }}>Saltare il Puzzle?</h3>
+                                    <p style={{
+                                        fontFamily: "'Crimson Text', serif",
+                                        fontSize: '16px',
+                                        marginBottom: '24px',
+                                        lineHeight: '1.4'
+                                    }}>
+                                        Se confermi, il puzzle verrà segnato come completato e potrai proseguire.
+                                    </p>
+                                    <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+                                        <button
+                                            onClick={() => setPuzzleCloseConfirmation(false)}
+                                            style={{
+                                                padding: '10px 20px',
+                                                background: 'transparent',
+                                                border: `1px solid ${COLORS.sepia}`,
+                                                color: COLORS.sepia,
+                                                fontFamily: "'Cinzel', serif",
+                                                fontWeight: 600,
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            Annulla
+                                        </button>
+                                        <button
+                                            onClick={async () => {
+                                                setPuzzleCloseConfirmation(false);
+                                                await completeTimelinePuzzle();
+                                            }}
+                                            style={{
+                                                padding: '10px 20px',
+                                                background: `linear-gradient(135deg, ${COLORS.gold} 0%, #b8860b 100%)`,
+                                                border: 'none',
+                                                color: '#fff',
+                                                fontFamily: "'Cinzel', serif",
+                                                fontWeight: 600,
+                                                cursor: 'pointer',
+                                                boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
+                                            }}
+                                        >
+                                            Conferma
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 ) : null}
 
