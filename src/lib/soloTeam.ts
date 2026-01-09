@@ -12,4 +12,3 @@ export function getSoloTeamStartedAt(): string | null {
   if (typeof window === 'undefined') return null;
   return sessionStorage.getItem(SOLO_TEAM_STORAGE_KEYS.startedAt);
 }
-
