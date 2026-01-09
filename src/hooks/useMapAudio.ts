@@ -162,11 +162,19 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
                     'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='
                 ];
 
-                const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
+                    /req_safari_ui_webview/i.test(navigator.userAgent); // Add support for specific webviews if needed
+
+                console.log('[useMapAudio] UserAgent:', navigator.userAgent, 'isSafari:', isSafari);
+
+                // Always include hosted silence file as a robust fallback (or primary for Safari)
                 if (isSafari) {
-                    // Safari typically hates data URIs for first interaction
-                    console.log('[useMapAudio] Safari detected, using hosted silence file');
-                    silentFormats = ['/audio/silence.mp3'];
+                    console.log('[useMapAudio] Safari detected, prioritizing hosted silence file');
+                    // Put hosted file first for Safari
+                    silentFormats = ['/audio/silence.mp3', ...silentFormats];
+                } else {
+                    // For others, try data URIs first (faster), but fallback to hosted
+                    silentFormats = [...silentFormats, '/audio/silence.mp3'];
                 }
 
                 let unlocked = false;
@@ -254,7 +262,7 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
 
                 audioUnlockedRef.current = true;
                 return true;
-            } catch (e) {
+            } catch {
                 audioUnlockedRef.current = false;
                 return false;
             } finally {
@@ -290,7 +298,7 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
         setAudioDuration(event.currentTarget.duration || 0);
     }, []);
 
-    const handleAudioError = useCallback((event: SyntheticEvent<HTMLAudioElement>) => {
+    const handleAudioError = useCallback(() => {
         resolveBlockingAudio();
         resolveAudioPanelClose();
     }, [resolveAudioPanelClose, resolveBlockingAudio]);
@@ -468,7 +476,7 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
                     handleDone();
                 });
             }
-        } catch (err: any) {
+        } catch {
             cleanup();
             handleDone();
         }
@@ -569,7 +577,8 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
                 audioRef.current.currentTime = 0;
                 audioRef.current.removeAttribute('src');
                 audioRef.current.load();
-            } catch (e) {
+            } catch {
+                // ignore
             }
         }
         resolveBlockingAudio();
@@ -689,7 +698,8 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
             playEffectAudioBlocking,
             stopEffectAudio,
             waitForAudioPanelClose,
-            flushPendingAudio
+            flushPendingAudio,
+            audioCurrentTime
         },
         refs: {
             audioRef,
