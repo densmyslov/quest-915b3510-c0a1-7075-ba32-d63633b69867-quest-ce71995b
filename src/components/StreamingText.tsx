@@ -1,14 +1,19 @@
 'use client';
 
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import styles from './StreamingText.module.css';
 import type { Transcription } from '@/types/transcription';
+import { normalizeTime } from '@/lib/transcriptionUtils';
+import { useDebugLog } from '@/context/DebugLogContext';
+import { isQuestDebugEnabled } from '@/lib/debugFlags';
 
 interface StreamingTextProps {
     transcription: Transcription | null;
     currentTime: number;
+    audioDuration?: number;
     isPlaying: boolean;
     className?: string;
+    showFutureWords?: boolean;
 }
 
 /**
@@ -24,57 +29,129 @@ interface StreamingTextProps {
  * - Auto-scroll: Keeps current word centered when content > 50% height
  * - User scroll detection: Pauses auto-scroll when user manually scrolls
  */
+function upperBound(arr: number[], x: number): number {
+    let lo = 0;
+    let hi = arr.length;
+    while (lo < hi) {
+        const mid = (lo + hi) >> 1;
+        if (arr[mid] <= x) lo = mid + 1;
+        else hi = mid;
+    }
+    return lo;
+}
+
 export function StreamingText({
     transcription,
     currentTime,
+    audioDuration,
     isPlaying,
-    className = ''
+    className = '',
+    showFutureWords = false
 }: StreamingTextProps) {
+    const { addLog } = useDebugLog();
     const containerRef = useRef<HTMLDivElement>(null);
     const currentWordRef = useRef<HTMLSpanElement>(null);
     const isUserScrollingRef = useRef(false);
     const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+    const lastDebugRef = useRef<{ key: string; idx: number; lastMs: number; lastVisible: number; hasWords: boolean } | null>(null);
+    const debugEnabled = useMemo(() => isQuestDebugEnabled(), []);
 
-    // Find current word index based on timestamp
-    const currentWordIndex = useMemo(() => {
-        if (!transcription?.words || transcription.words.length === 0) {
-            return -1;
+    const hasWordLevel = !!transcription?.words && transcription.words.length > 0;
+
+    const timing = useMemo(() => {
+        if (!transcription?.words || transcription.words.length === 0) return null;
+
+        const rawStarts = transcription.words.map((w) => normalizeTime(w.start));
+        const rawEnds = transcription.words.map((w) => normalizeTime(w.end));
+
+        // Validation: Check if we have valid timestamps.
+        // If max end time is 0 (or very close to 0), and we have a valid audioDuration,
+        // we should fallback to interpolation.
+        const maxEnd = Math.max(...rawEnds);
+        const hasValidTimestamps = maxEnd > 0.1; // Threshold: at least 100ms
+
+        if (!hasValidTimestamps && audioDuration && audioDuration > 0) {
+            // Interpolate!
+            const wordCount = transcription.words.length;
+            const durationPerWord = audioDuration / wordCount;
+            return {
+                starts: transcription.words.map((_, i) => i * durationPerWord),
+                ends: transcription.words.map((_, i) => (i + 1) * durationPerWord)
+            };
         }
 
-        // Convert Decimal to number if needed (DynamoDB compatibility)
-        const normalizeTime = (time: number | { toNumber?: () => number }): number => {
-            if (typeof time === 'object' && time !== null && 'toNumber' in time) {
-                return (time as { toNumber: () => number }).toNumber();
-            }
-            return Number(time);
+        return {
+            starts: rawStarts,
+            ends: rawEnds
         };
+    }, [transcription, audioDuration]);
 
-        return transcription.words.findIndex((word) => {
-            const start = normalizeTime(word.start);
-            const end = normalizeTime(word.end);
-            return currentTime >= start && currentTime < end;
-        });
-    }, [transcription, currentTime]);
+    // Find current word index (highlight only when inside [start, end)).
+    const currentWordIndex = useMemo(() => {
+        if (!timing) return -1;
+        const idx = upperBound(timing.starts, currentTime) - 1;
+        if (idx < 0) return -1;
+        if (currentTime < timing.ends[idx]) return idx;
+        return -1;
+    }, [currentTime, timing]);
 
     // Calculate how many words to display (cumulative display)
     const visibleWordCount = useMemo(() => {
-        if (!transcription?.words || transcription.words.length === 0) {
-            return 0;
-        }
+        if (!timing) return 0;
+        if (currentTime <= 0) return 0;
+        // Show all words whose start time has been reached (handles gaps between words).
+        return Math.max(0, Math.min(timing.starts.length, upperBound(timing.starts, currentTime)));
+    }, [currentTime, timing]);
 
-        // If audio hasn't started or no current word, show no words yet
-        if (currentWordIndex === -1 && currentTime === 0) {
-            return 0;
+    useEffect(() => {
+        if (!debugEnabled) return;
+        const wordsLen = transcription?.words?.length ?? 0;
+        const key = `${wordsLen}:${transcription?.fullText ? 'ft' : ''}`;
+        const prev = lastDebugRef.current;
+        if (!prev || prev.key !== key || prev.hasWords !== hasWordLevel) {
+            lastDebugRef.current = {
+                key,
+                idx: prev?.idx ?? -999,
+                lastMs: 0,
+                lastVisible: prev?.lastVisible ?? -1,
+                hasWords: hasWordLevel
+            };
+            addLog('info', '[StreamingText] inputs', {
+                isPlaying,
+                currentTime,
+                hasWordLevel,
+                wordsLen,
+                hasFullText: !!transcription?.fullText
+            });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debugEnabled, hasWordLevel, transcription, isPlaying]);
 
-        // If we're past all words, show all words
-        if (currentWordIndex === -1 && currentTime > 0) {
-            return transcription.words.length;
+    useEffect(() => {
+        if (!debugEnabled) return;
+        if (!hasWordLevel) return;
+        const now = typeof window !== 'undefined' ? window.performance.now() : Date.now();
+        const prev = lastDebugRef.current;
+        if (!prev) {
+            lastDebugRef.current = { key: '', idx: currentWordIndex, lastMs: now, lastVisible: visibleWordCount, hasWords: hasWordLevel };
+            return;
         }
-
-        // Show all words up to and including current word
-        return currentWordIndex + 1;
-    }, [transcription, currentWordIndex, currentTime]);
+        const shouldLog =
+            currentWordIndex !== prev.idx ||
+            visibleWordCount !== prev.lastVisible;
+        if (!shouldLog) return;
+        if (now - prev.lastMs < 750) return;
+        prev.idx = currentWordIndex;
+        prev.lastVisible = visibleWordCount;
+        prev.lastMs = now;
+        addLog('debug', '[StreamingText] progress', {
+            isPlaying,
+            currentTime,
+            currentWordIndex,
+            visibleWordCount
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debugEnabled, hasWordLevel, currentWordIndex, visibleWordCount, isPlaying, currentTime]);
 
     // Auto-scroll to current word
     useEffect(() => {
@@ -145,21 +222,37 @@ export function StreamingText({
         );
     }
 
+    // Determine which words to render
+    const wordsToRender = isPlaying || showFutureWords
+        ? (showFutureWords ? transcription.words : transcription.words.slice(0, visibleWordCount))
+        : [];
+
+    // If showing future words, we render everything.
+    // If NOT showing future words, we slice.
+    // Actually, simpler logic:
+    const renderedWords = showFutureWords ? transcription.words : transcription.words.slice(0, visibleWordCount);
+
     return (
         <div className={`${styles.container} ${className}`} ref={containerRef}>
             <div className={styles.wordsContainer}>
-                {transcription.words.slice(0, visibleWordCount).map((wordData, index) => {
+                {renderedWords.map((wordData, index) => {
                     const isCurrent = index === currentWordIndex;
                     const isPast = index < currentWordIndex;
+                    const isFuture = index > currentWordIndex;
+
+                    // Only anchor scroll if we are not showing future words (streaming view)
+                    // OR if we are showing future words, still scroll to current.
+                    const shouldAnchorScroll = isCurrent || (currentWordIndex === -1 && index === 0);
 
                     return (
                         <span
                             key={`${index}-${wordData.word}`}
-                            ref={isCurrent ? currentWordRef : null}
+                            ref={shouldAnchorScroll ? currentWordRef : null}
                             className={`
                                 ${styles.word}
                                 ${isCurrent ? styles.currentWord : ''}
                                 ${isPast ? styles.pastWord : ''}
+                                ${isFuture ? (showFutureWords ? styles.futureWord : '') : ''}
                             `}
                         >
                             {wordData.word}{' '}
