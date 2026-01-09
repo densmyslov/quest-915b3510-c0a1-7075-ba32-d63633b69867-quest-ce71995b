@@ -24,10 +24,47 @@ export function normalizeTime(time: number | { toNumber?: () => number }): numbe
  * Normalize a single transcription word
  */
 export function normalizeWord(word: TranscriptionWordRaw): TranscriptionWord {
+    const raw: any = word as any;
+
+    // Support common alternate shapes from different transcription providers.
+    // Examples:
+    // - { word, start_time, end_time }
+    // - { text, startTime, endTime }
+    // - [start, end, word]
+    const fallbackFromArray = Array.isArray(raw)
+        ? { start: raw[0], end: raw[1], word: raw[2] }
+        : null;
+    const source = fallbackFromArray ?? raw;
+
+    const rawWord =
+        source?.word ??
+        source?.text ??
+        source?.token ??
+        source?.value ??
+        '';
+
+    const rawStart =
+        source?.start ??
+        source?.start_time ??
+        source?.startTime ??
+        source?.start_ms ??
+        source?.startMs ??
+        source?.begin ??
+        source?.begin_time;
+
+    const rawEnd =
+        source?.end ??
+        source?.end_time ??
+        source?.endTime ??
+        source?.end_ms ??
+        source?.endMs ??
+        source?.finish ??
+        source?.finish_time;
+
     return {
-        word: String(word.word || ''),
-        start: normalizeTime(word.start),
-        end: normalizeTime(word.end)
+        word: String(rawWord || ''),
+        start: normalizeTime(rawStart),
+        end: normalizeTime(rawEnd)
     };
 }
 
@@ -50,7 +87,42 @@ export function normalizeTranscription(raw: TranscriptionRaw | null | undefined)
         };
     }
 
-    const words: TranscriptionWord[] = raw.words.map(normalizeWord);
+    let words: TranscriptionWord[] = raw.words
+        .map((w) => {
+            try {
+                return normalizeWord(w);
+            } catch {
+                return { word: '', start: NaN, end: NaN };
+            }
+        })
+        .filter((w) => w.word.trim().length > 0 && Number.isFinite(w.start) && Number.isFinite(w.end))
+        .map((w) => {
+            const start = w.start;
+            const end = w.end;
+            if (end >= start) return w;
+            return { ...w, start: end, end: start };
+        });
+
+    // Heuristic: detect millisecond-based timestamps and convert to seconds.
+    // Many transcription sources use ms (e.g. 250 instead of 0.25).
+    if (words.length > 0) {
+        const maxEnd = Math.max(...words.map((w) => w.end));
+        const durations = words
+            .map((w) => Math.max(0, w.end - w.start))
+            .filter((d) => Number.isFinite(d) && d > 0)
+            .sort((a, b) => a - b);
+        const medianDuration = durations.length ? durations[Math.floor(durations.length / 2)] : 0;
+        const looksLikeMs = maxEnd > 10_000 || medianDuration > 10;
+        if (looksLikeMs) {
+            words = words.map((w) => ({ ...w, start: w.start / 1000, end: w.end / 1000 }));
+        }
+    }
+
+    // Ensure deterministic ordering for binary-search consumers.
+    words = words
+        .map((w, idx) => ({ w, idx }))
+        .sort((a, b) => (a.w.start - b.w.start) || (a.w.end - b.w.end) || (a.idx - b.idx))
+        .map(({ w }) => w);
 
     return {
         words,
