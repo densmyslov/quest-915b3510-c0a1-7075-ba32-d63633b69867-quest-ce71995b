@@ -107,7 +107,7 @@ export function useObjectTimeline({
   // const router = useRouter();
   const timelineRunRef = useRef<{ cancel: boolean; objectId: string; version: number; status: 'running' | 'idle' } | null>(null);
   const [timelineUi, setTimelineUi] = useState<TimelineUiState | null>(null);
-  const [timelinePuzzleOverlay, setTimelinePuzzleOverlay] = useState<{ puzzleId: string; objectId: string } | null>(null);
+  const [timelinePuzzleOverlay, setTimelinePuzzleOverlay] = useState<{ puzzleId: string; objectId: string; itemKey?: string } | null>(null);
   const [timelineTextOverlay, _setTimelineTextOverlay] = useState<TimelineTextOverlayState | null>(null);
   const timelineTextOverlayRef = useRef<TimelineTextOverlayState | null>(null);
   const setTimelineTextOverlay = useCallback((overlay: TimelineTextOverlayState | null) => {
@@ -461,12 +461,12 @@ export function useObjectTimeline({
   );
 
   const navigateToPuzzle = useCallback(
-    (puzzleId: string, objectId: string) => {
+    (puzzleId: string, objectId: string, itemKey?: string) => {
       // Overlay Mode: Set state to show overlay instead of navigating
       if (debugEnabled) {
-        addLog('info', '[useObjectTimeline] navigateToPuzzle', { puzzleId, objectId, stepsMode });
+        addLog('info', '[useObjectTimeline] navigateToPuzzle', { puzzleId, objectId, itemKey, stepsMode });
       }
-      setTimelinePuzzleOverlay({ puzzleId, objectId });
+      setTimelinePuzzleOverlay({ puzzleId, objectId, itemKey });
     },
     [addLog, debugEnabled, stepsMode]
   );
@@ -477,6 +477,29 @@ export function useObjectTimeline({
     // The timeline runner (useEffect) should detect puzzle completion via snapshot
     // and resume automatically if needed
   }, []);
+
+  const completeTimelinePuzzle = useCallback(async () => {
+    if (!timelinePuzzleOverlay) return;
+    const { puzzleId, objectId, itemKey } = timelinePuzzleOverlay;
+
+    const points = getPuzzlePoints(puzzleId);
+    try {
+      await questRuntimeRef.current.submitPuzzleSuccess({ puzzleId, objectId, points });
+    } catch (err) {
+      console.warn('[useObjectTimeline] Failed to submit puzzle success:', err);
+    }
+
+    if (itemKey) {
+      const nodeId = makeTimelineItemNodeId(objectId, itemKey);
+      try {
+        await questRuntimeRef.current.completeNode(nodeId);
+      } catch (err) {
+        console.warn('[useObjectTimeline] Failed to complete puzzle node:', err);
+      }
+    }
+
+    setTimelinePuzzleOverlay(null);
+  }, [timelinePuzzleOverlay, getPuzzlePoints]);
 
   const runObjectTimeline = useCallback(
     async (obj: QuestObject, options?: { reset?: boolean }) => {
@@ -530,7 +553,7 @@ export function useObjectTimeline({
         const rawPoster = item?.posterUrl ?? item?.poster_url ?? item?.poster;
         return {
           autoPlay: typeof rawAutoPlay === 'boolean' ? rawAutoPlay : true,
-          muted: typeof rawMuted === 'boolean' ? rawMuted : stepsMode,
+          muted: typeof rawMuted === 'boolean' ? rawMuted : false,
           loop: typeof rawLoop === 'boolean' ? rawLoop : false,
           posterUrl: typeof rawPoster === 'string' ? rawPoster : undefined
         };
@@ -1024,7 +1047,7 @@ export function useObjectTimeline({
               break; // Wait for user to open/skip the puzzle in Steps mode.
             }
 
-            navigateToPuzzle(puzzleId, obj.id);
+            navigateToPuzzle(puzzleId, obj.id, item.key);
             break;
           }
         }
@@ -1120,7 +1143,7 @@ export function useObjectTimeline({
           objectId: timelineUi.objectId
         });
       }
-      navigateToPuzzle(puzzleId, timelineUi.objectId);
+      navigateToPuzzle(puzzleId, timelineUi.objectId, itemKey);
     },
     [addLog, debugEnabled, navigateToPuzzle, timelineUi]
   );
@@ -1358,6 +1381,7 @@ export function useObjectTimeline({
     timelineChatOverlay,
     closeTimelineChat,
     timelinePuzzleOverlay,
-    closeTimelinePuzzle
+    closeTimelinePuzzle,
+    completeTimelinePuzzle
   };
 }
