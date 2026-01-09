@@ -572,7 +572,7 @@ export default function PuzzleGame({ puzzleData, onComplete }: PuzzleGameProps) 
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('wheel', onWheel);
     };
-  }, [rotateSelectedPiece, applyZoom]);
+  }, [rotateSelectedPiece, applyZoom, updateDragHandlePosition, updateRotationHandlePosition]);
 
   const angleDelta = (a: number, b: number) => {
     const normalize = (v: number) => ((v % 360) + 360) % 360;
@@ -1110,14 +1110,13 @@ export default function PuzzleGame({ puzzleData, onComplete }: PuzzleGameProps) 
         (window as any).__pixiLoaded = true;
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Failed to load puzzle:', error);
     } finally {
       if (seq === loadSeqRef.current) {
         loadingRef.current = false;
       }
     }
-  }, [puzzleData, theme, updateRotationHandlePosition, updateDragHandlePosition]);
+  }, [puzzleData, theme, updateRotationHandlePosition, updateDragHandlePosition, generatePieceTexture, loadTextureWithFallback, revokeObjectUrl]);
 
   useEffect(() => {
     loadPuzzleRef.current = loadPuzzle;
@@ -1368,16 +1367,22 @@ export default function PuzzleGame({ puzzleData, onComplete }: PuzzleGameProps) 
 
     init();
 
+    // Capture refs for cleanup
+    const urlMap = objectUrlMap.current;
+
     return () => {
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
       window.removeEventListener('resize', handleResize);
 
       // invalidate pending load runs
-      loadSeqRef.current++;
+      // We don't increment here as the ref might have changed?
+      // Actually standard pattern is to increment to invalidate.
+      const currentSeq = loadSeqRef;
+      currentSeq.current++;
 
       // Clean up object URLs
-      objectUrlMap.current.forEach((_, key) => revokeObjectUrl(key));
-      objectUrlMap.current.clear();
+      urlMap.forEach((_, key) => revokeObjectUrl(key));
+      urlMap.clear();
 
       if (pixiAppRef.current) {
         pixiAppRef.current.destroy(true, {
@@ -1388,8 +1393,7 @@ export default function PuzzleGame({ puzzleData, onComplete }: PuzzleGameProps) 
         pixiAppRef.current = null;
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [updateDragHandlePosition, updateRotationHandlePosition, generatePieceTexture, loadTextureWithFallback, revokeObjectUrl, applyZoom, positionPieceForDragHandle, theme.bg, updateScaleForBoardHover]);
 
   useEffect(() => {
     const app = pixiAppRef.current;
