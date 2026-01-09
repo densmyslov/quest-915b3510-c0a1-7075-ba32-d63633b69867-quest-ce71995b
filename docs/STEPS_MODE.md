@@ -21,9 +21,11 @@ Steps mode is a manual quest progression tool that simulates GPS-based gameplay 
 
 Steps mode can be toggled on/off via the "Steps mode" button in the quest map overlay.
 
+> **Note:** The "Steps mode" button is hidden by default in production. To enable it, set the environment variable `NEXT_PUBLIC_ENABLE_STEPS_MODE=true`.
+
 **Button States:**
 - **Off (Default)**: Normal GPS-based play mode
-- **On**: Manual progression with next/prev controls
+- **On**: Manual progression with next/prev controls. **Note:** Activating Steps mode triggers a **session reset**, clearing current progress and score to ensure a clean testing state.
 
 ### User Interface
 
@@ -88,6 +90,7 @@ Steps mode uses a **different visibility model** than play mode:
 - **Progressive Reveal**: Shows all objects up to current step
 - **Static**: Based on itinerary number, not completion
 - **Full Preview**: Can see all objects you've stepped through
+- **Timeline Sync**: Side panel automatically updates to show the content (tasks/media) for the currently selected step
 
 **Formula:** `visible if (object.itineraryNumber <= currentStep)`
 
