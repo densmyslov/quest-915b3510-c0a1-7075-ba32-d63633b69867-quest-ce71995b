@@ -38,12 +38,15 @@ const parseChatText = (text: string | null): string => {
   return text;
 };
 
-function readChatResponseText(raw: unknown): string | null {
+function readChatResponseText(raw: unknown): { text: string | null; goalAchieved: boolean } {
   try {
-    const text = (raw as any)?.[0]?.output?.[0]?.content?.[0]?.text;
-    return typeof text === 'string' && text.trim().length ? parseChatText(text) : null;
+    const output = (raw as any)?.[0]?.output?.[0];
+    const textRaw = output?.content?.[0]?.text;
+    const text = typeof textRaw === 'string' && textRaw.trim().length ? parseChatText(textRaw) : null;
+    const goalAchieved = output?.goal_achieved === true || (raw as any)?.goal_achieved === true;
+    return { text, goalAchieved };
   } catch {
-    return null;
+    return { text: null, goalAchieved: false };
   }
 }
 
@@ -106,7 +109,8 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
         body: JSON.stringify({
           message,
           sessionId: overlay.sessionId ?? undefined,
-          playerId: overlay.playerId ?? undefined
+          playerId: overlay.playerId ?? undefined,
+          goal: overlay.goal
         }),
       });
       if (!res.ok) {
@@ -114,11 +118,19 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
         throw new Error(text || `HTTP ${res.status} ${res.statusText}`.trim());
       }
       const json = (await res.json()) as unknown;
-      const reply = readChatResponseText(json);
-      if (!reply) {
+      const { text: reply, goalAchieved } = readChatResponseText(json);
+
+      if (reply) {
+        setMessages((prev) => [...prev, { role: 'assistant', text: reply }]);
+      }
+
+      if (goalAchieved) {
+        setTimeout(() => {
+          onClose();
+        }, 4000);
+      } else if (!reply) {
         throw new Error('Unexpected response shape from chat API');
       }
-      setMessages((prev) => [...prev, { role: 'assistant', text: reply }]);
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       setError(msg);
@@ -126,7 +138,7 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
     } finally {
       setSending(false);
     }
-  }, [apiBaseUrl, draft, overlay, sending]);
+  }, [apiBaseUrl, draft, overlay, sending, onClose]);
 
   if (!overlay) return null;
 
@@ -287,61 +299,61 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
         </div>
 
         <div style={{ padding: '12px 14px' }}>
-        {error && (
-          <div style={{ marginBottom: 8, fontSize: 12, color: 'rgba(255, 180, 180, 0.95)' }}>
-            {error}
-          </div>
-        )}
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <input
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
+          {error && (
+            <div style={{ marginBottom: 8, fontSize: 12, color: 'rgba(255, 180, 180, 0.95)' }}>
+              {error}
+            </div>
+          )}
+          <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            <input
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  void send();
+                }
+              }}
+              placeholder={sending ? 'Waiting for reply…' : 'Type a message…'}
+              disabled={sending}
+              style={{
+                flex: 1,
+                padding: '10px 12px',
+                borderRadius: 10,
+                border: `1px solid rgba(201, 169, 97, 0.35)`,
+                background: 'rgba(0,0,0,0.25)',
+                color: palette.parchment,
+                fontFamily: "'Crimson Text', Georgia, serif",
+                fontSize: 14,
+                outline: 'none',
+              }}
+            />
+            <button
+              type="button"
+              disabled={sending || !draft.trim().length}
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
                 void send();
-              }
-            }}
-            placeholder={sending ? 'Waiting for reply…' : 'Type a message…'}
-            disabled={sending}
-            style={{
-              flex: 1,
-              padding: '10px 12px',
-              borderRadius: 10,
-              border: `1px solid rgba(201, 169, 97, 0.35)`,
-              background: 'rgba(0,0,0,0.25)',
-              color: palette.parchment,
-              fontFamily: "'Crimson Text', Georgia, serif",
-              fontSize: 14,
-              outline: 'none',
-            }}
-          />
-          <button
-            type="button"
-            disabled={sending || !draft.trim().length}
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              void send();
-            }}
-            onTouchStart={(event) => event.stopPropagation()}
-            style={{
-              padding: '10px 14px',
-              borderRadius: 10,
-              border: `1px solid ${palette.gold}`,
-              background: sending ? 'rgba(201, 169, 97, 0.15)' : 'rgba(201, 169, 97, 0.24)',
-              color: palette.gold,
-              cursor: sending ? 'not-allowed' : 'pointer',
-              fontFamily: "'Cinzel', serif",
-              fontSize: 12,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              opacity: sending || !draft.trim().length ? 0.6 : 1,
-            }}
-          >
-            Send
-          </button>
-        </div>
+              }}
+              onTouchStart={(event) => event.stopPropagation()}
+              style={{
+                padding: '10px 14px',
+                borderRadius: 10,
+                border: `1px solid ${palette.gold}`,
+                background: sending ? 'rgba(201, 169, 97, 0.15)' : 'rgba(201, 169, 97, 0.24)',
+                color: palette.gold,
+                cursor: sending ? 'not-allowed' : 'pointer',
+                fontFamily: "'Cinzel', serif",
+                fontSize: 12,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                opacity: sending || !draft.trim().length ? 0.6 : 1,
+              }}
+            >
+              Send
+            </button>
+          </div>
         </div>
       </div>
 
