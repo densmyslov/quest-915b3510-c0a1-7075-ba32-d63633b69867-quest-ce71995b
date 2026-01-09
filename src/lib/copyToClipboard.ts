@@ -28,4 +28,3 @@ export async function copyToClipboard(text: string): Promise<void> {
 
   if (!ok) throw new Error('Copy failed');
 }
-
