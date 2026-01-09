@@ -136,7 +136,7 @@ Authoritative runtime state is held per **session** in DynamoDB:
 #### Authoritative Endpoints (AWS Lambda)
 
 ```
-POST /runtime/session/start      - Start or join session
+POST /runtime/session/start      - Start or join session (optional `reset: true` to force new session)
 POST /runtime/session/join       - Join existing session
 POST /runtime/object/arrive      - Record object arrival
 POST /runtime/node/complete      - Complete timeline node
