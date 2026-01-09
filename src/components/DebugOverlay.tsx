@@ -1,11 +1,29 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDebugLog } from '@/context/DebugLogContext';
+import { isQuestDebugEnabled } from '@/lib/debugFlags';
 
 export function DebugOverlay() {
     const { logs, clearLogs, isVisible, setIsVisible } = useDebugLog();
     const [minimized, setMinimized] = useState(false);
+
+    useEffect(() => {
+        if (!isQuestDebugEnabled()) return;
+        setIsVisible(true);
+    }, [setIsVisible]);
+
+    useEffect(() => {
+        const onKeyDown = (e: KeyboardEvent) => {
+            // Ctrl/Cmd + Shift + D toggles the overlay.
+            const isToggle = (e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'D' || e.key === 'd');
+            if (!isToggle) return;
+            e.preventDefault();
+            setIsVisible(!isVisible);
+        };
+        window.addEventListener('keydown', onKeyDown);
+        return () => window.removeEventListener('keydown', onKeyDown);
+    }, [isVisible, setIsVisible]);
 
     if (!isVisible) {
         return null;
