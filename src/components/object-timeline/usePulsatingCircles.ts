@@ -1,7 +1,7 @@
 'use client';
 
 import { Circle, type Map as LeafletMap } from 'leaflet';
-import { useCallback, useRef, type MutableRefObject } from 'react';
+import { useCallback, useEffect, useRef, type MutableRefObject } from 'react';
 import type { QuestObject } from '@/types/quest';
 import type { PulsatingCircleEffect, PulsatingCircleSource } from './types';
 
@@ -37,6 +37,8 @@ export function usePulsatingCircles({
   const pulsatingCirclesRef = useRef<Map<string, CircleData>>(new Map());
   const animationIntervalRef = useRef<number | null>(null);
   const animationIntervalMsRef = useRef<number | null>(null);
+
+  const restartTickRef = useRef<() => void>(() => { });
 
   const restartPulsatingInterval = useCallback(() => {
     const circles = pulsatingCirclesRef.current;
@@ -125,10 +127,14 @@ export function usePulsatingCircles({
             pulsatingCirclesRef.current.delete(objId);
           }
         });
-        restartPulsatingInterval();
+        restartTickRef.current();
       }
     }, nextMs);
-  }, [calculateDistance]);
+  }, [calculateDistance, userLocationRef]);
+
+  useEffect(() => {
+    restartTickRef.current = restartPulsatingInterval;
+  }, [restartPulsatingInterval]);
 
   const addOrUpdatePulsatingCircle = useCallback(
     (params: AddOrUpdateParams) => {
