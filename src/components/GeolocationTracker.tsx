@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 
 export function GeolocationTracker() {
     const { data, unlockPiece, progress } = useQuest();
-    const [watchId, setWatchId] = useState<number | null>(null);
 
     // Haversine formula
     const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
@@ -82,12 +81,8 @@ export function GeolocationTracker() {
             }
         );
 
-        setWatchId(id);
-
         return () => {
-            if (id !== null) {
-                navigator.geolocation.clearWatch(id);
-            }
+            navigator.geolocation.clearWatch(id);
         };
     }, [data, unlockPiece, progress.collectedPieces]);
 
