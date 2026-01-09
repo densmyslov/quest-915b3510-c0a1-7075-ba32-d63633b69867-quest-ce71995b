@@ -29,4 +29,3 @@ import { formatLatLng, parseLatLng } from "./coordinates";
 }
 
 console.log("PASS: coordinates");
-
