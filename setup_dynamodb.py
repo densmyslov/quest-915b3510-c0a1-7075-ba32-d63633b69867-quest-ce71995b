@@ -12,7 +12,7 @@ def create_table(dynamodb, table_name, key_schema, attribute_definitions, region
         print(f"Creating table {table_name}...")
         table.wait_until_exists()
         print(f"Table {table_name} created successfully.")
-        
+
         # Wait a bit to ensure table is active for TTL
         time.sleep(5)
 
@@ -56,7 +56,7 @@ def main():
 
     region = args.region
     suffix = args.env
-    
+
     print(f"Connecting to DynamoDB in region: {region}")
     dynamodb = boto3.resource('dynamodb', region_name=region)
 
