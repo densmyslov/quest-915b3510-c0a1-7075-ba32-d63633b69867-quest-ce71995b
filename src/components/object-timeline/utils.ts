@@ -37,18 +37,29 @@ export const getTimelineAudioTranscription = (item: any): Transcription | null =
 
   const words =
     item.transcription_words ??
+    item.transcriptionWords ??
     item.transcription?.words ??
-    item.transcription_data?.words;
+    item.transcription_data?.words ??
+    item.transcriptionData?.words;
 
   const rawText =
     item.transcription_text ??
+    item.transcriptionText ??
+    (typeof item.transcription === 'string' ? item.transcription : undefined) ??
     (typeof item.transcription === 'object' && item.transcription !== null && 'text' in item.transcription
       ? item.transcription.text
       : undefined) ??
     (typeof item.transcription === 'object' && item.transcription !== null && 'fullText' in item.transcription
       ? item.transcription.fullText
       : undefined) ??
-    item.transcription_data?.text;
+    (typeof item.transcription_data === 'object' && item.transcription_data !== null && 'fullText' in item.transcription_data
+      ? (item.transcription_data as any).fullText
+      : undefined) ??
+    item.transcription_data?.text ??
+    (typeof item.transcriptionData === 'object' && item.transcriptionData !== null && 'fullText' in item.transcriptionData
+      ? (item.transcriptionData as any).fullText
+      : undefined) ??
+    item.transcriptionData?.text;
 
   if (!words && !rawText) return null;
 
