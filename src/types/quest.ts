@@ -108,6 +108,14 @@ export interface MediaTimelineChatItem extends MediaTimelineItemBase {
   first_message?: string;
   image_urls?: string[];
   imageUrls?: string[];
+  goal_injection?: {
+    goal: string;
+    success_criteria?: string[];
+    constraints?: string[];
+    tone?: string[];
+    cta?: any;
+    failsafe_if_player_refuses?: string;
+  };
 }
 
 export interface MediaTimelineActionItem extends MediaTimelineItemBase {
