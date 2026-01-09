@@ -104,7 +104,7 @@ export const createMarkerSVG = (type: 'location' | 'locationSecondary' | 'player
                     <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="${c.glow}" flood-opacity="0.8"/>
                 </filter>
             </defs>
-            <path d="M18 0 C8 0 0 8 0 18 C0 28 18 48 18 48 C18 48 36 28 36 18 C36 8 28 0 18 0" 
+            <path d="M18 0 C8 0 0 8 0 18 C0 28 18 48 18 48 C18 48 36 28 36 18 C36 8 28 0 18 0"
                   fill="url(#pin-${type})" stroke="${c.border}" stroke-width="2.5" filter="url(#shadow-${type})"/>
             <circle cx="18" cy="16" r="10" fill="${c.inner}" stroke="${c.border}" stroke-width="1.5"/>
             <line x1="18" y1="8" x2="18" y2="12" stroke="${c.border}" stroke-width="1.5"/>
