@@ -35,9 +35,7 @@ export default function GpsMetricsPanel({
   const [gpsPanelCollapsed, setGpsPanelCollapsed] = useState(false);
   const touchStartRef = useRef<{ y: number; x: number } | null>(null);
 
-  useEffect(() => {
-    if (!gpsEnabled) setGpsPanelCollapsed(false);
-  }, [gpsEnabled]);
+
 
   if (!gpsEnabled || !userLocation) return null;
 
@@ -180,9 +178,8 @@ export default function GpsMetricsPanel({
               height: '10px',
               background: gpsAccuracy && gpsAccuracy < 15 ? COLORS.success : COLORS.sepia,
               borderRadius: '50%',
-              boxShadow: `0 0 8px ${
-                gpsAccuracy && gpsAccuracy < 15 ? 'rgba(45,90,61,0.6)' : 'rgba(139,69,19,0.4)'
-              }`
+              boxShadow: `0 0 8px ${gpsAccuracy && gpsAccuracy < 15 ? 'rgba(45,90,61,0.6)' : 'rgba(139,69,19,0.4)'
+                }`
             }}
           />
           <span
@@ -275,4 +272,3 @@ export default function GpsMetricsPanel({
     </div>
   );
 }
-
