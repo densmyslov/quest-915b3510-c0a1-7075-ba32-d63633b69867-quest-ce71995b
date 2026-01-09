@@ -32,12 +32,12 @@ export const CompassControl = ({ gpsEnabled, onToggle, heading }: CompassControl
 
     useEffect(() => {
         if (!gpsEnabled) {
-            setGpsToggleCollapsed(false);
+            setTimeout(() => setGpsToggleCollapsed(false), 0);
             clearGpsToggleCollapseTimeout();
             return;
         }
 
-        setGpsToggleCollapsed(false);
+        setTimeout(() => setGpsToggleCollapsed(false), 0);
         scheduleGpsToggleAutoCollapse();
 
         return () => {
