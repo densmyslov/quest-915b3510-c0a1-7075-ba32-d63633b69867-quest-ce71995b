@@ -18,6 +18,7 @@ export type TimelineUiState = {
 export type TimelineTextOverlayState = {
   title: string;
   text: string;
+  transcription?: { words: Array<{ word: string; start: number; end: number }> };
   imageUrls?: string[];
   mode: 'seconds' | 'until_close';
   seconds: number;
@@ -40,6 +41,7 @@ export type TimelineChatOverlayState = {
   playerId?: string | null;
   firstMessage?: string;
   imageUrls?: string[];
+  goal?: Record<string, any>;
 };
 
 export type TimelineActionOverlayState = {
