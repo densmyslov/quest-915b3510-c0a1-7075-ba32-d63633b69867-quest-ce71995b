@@ -49,15 +49,15 @@ function mapSnapshotToSession(snapshot: RuntimeSnapshot): QuestSessionState {
 
 export function useQuestProgress({
     sessionId,
-    autoSync = true,
-    syncIntervalMs = 5000 // Sync faster with real backend (5s)
+    // autoSync = true,
+    // syncIntervalMs = 5000 // Sync faster with real backend (5s)
 }: UseQuestProgressOptions): QuestProgress {
     // Local state (optimistic)
     const [score, setScore] = useState(0);
     const [completedObjects, setCompletedObjects] = useState<Set<string>>(new Set());
     const [completedPuzzles, setCompletedPuzzles] = useState<Set<string>>(new Set());
-    const [documentFragments, setDocumentFragments] = useState(0);
-    const [villagersConverted, setVillagersConverted] = useState(0);
+    // const [documentFragments, setDocumentFragments] = useState(0);
+    // const [villagersConverted, setVillagersConverted] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -67,65 +67,7 @@ export function useQuestProgress({
 
     // Ref to track if quest has been started
     const questStartedRef = useRef(false);
-    const syncIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
-    // Monitor online/offline status
-    useEffect(() => {
-        const handleOnline = () => {
-            setIsOnline(true);
-            processQueue(); // Process queued actions when back online
-        };
-        const handleOffline = () => setIsOnline(false);
-
-        window.addEventListener('online', handleOnline);
-        window.addEventListener('offline', handleOffline);
-
-        return () => {
-            window.removeEventListener('online', handleOnline);
-            window.removeEventListener('offline', handleOffline);
-        };
-    }, []);
-
-    // Fetch session state from server
-    const fetchSession = useCallback(async (): Promise<QuestSessionState | null> => {
-        if (!sessionId) return null;
-
-        try {
-            // New Endpoint: GET /runtime/session/{sessionId} (Not yet implemented? Use sync?)
-            // For now, simpler to just assume we are syncing or using websocket.
-            // But we need a REST fallback.
-            // Wait, lambda_handler.py doesn't have GET /runtime/session explicitly visible in my memory? 
-            // It has POST /runtime/session/start.
-            // Let's implement a "sync" or "get" if missing. 
-            // Actually, let's use the object/arrive or just assume the first load comes from startQuest or we rely on WS.
-            // BUT, for a reload, we need to fetch info.
-            // The backend might not have a GET route yet. I'll flag this.
-            // For now, let's try to assume we can just pull it via a special action or skip initial load if not started locally.
-            // Actually, let's stick to what we know works: start/arrive. 
-            // If the user refreshes, they might need to "start" again (idempotent) to get state.
-
-            // Re-calling start is idempotent in our backend!
-            // So we can "re-start" or "resume" by calling start.
-
-            // NOTE: Ideally we add GET /runtime/session/{sessionId} to backend later.
-
-            return null;
-        } catch (err) {
-            console.error('Failed to fetch session:', err);
-            return null;
-        }
-    }, [sessionId]);
-
-    // Sync local state with server state
-    const syncWithServer = useCallback(async () => {
-        // Ideally fetch from backend. Since we lack a clean GET, we might skip polling for now
-        // and rely on the response from actions. 
-        // OR, we can call POST /runtime/session/start again which returns the full snapshot.
-        if (!sessionId) return;
-
-        // NO-OP for now to avoid spamming start.
-        // Once Websocket is connected, we get updates.
-    }, [sessionId]);
+    // const syncIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
     // Process queued actions
     const processQueue = useCallback(async () => {
@@ -195,6 +137,23 @@ export function useQuestProgress({
         };
         setActionQueue(prev => [...prev, action]);
     }, []);
+
+    // Monitor online/offline status
+    useEffect(() => {
+        const handleOnline = () => {
+            setIsOnline(true);
+            processQueue(); // Process queued actions when back online
+        };
+        const handleOffline = () => setIsOnline(false);
+
+        window.addEventListener('online', handleOnline);
+        window.addEventListener('offline', handleOffline);
+
+        return () => {
+            window.removeEventListener('online', handleOnline);
+            window.removeEventListener('offline', handleOffline);
+        };
+    }, [processQueue]);
 
     // Start quest
     const startQuest = useCallback(async (questId: string, teamCode?: string) => {
@@ -311,31 +270,27 @@ export function useQuestProgress({
         }
     }, [sessionId, isOnline, queueAction]);
 
-    // Complete puzzle
-    const completePuzzle = useCallback(async (puzzleId: string, points: number = 0) => {
+    // Complete puzzle (Stub)
+    const completePuzzle = useCallback(async (/* puzzleId, points */) => {
         // Not yet implemented in backend
         console.warn('Pipeline for puzzle completion not fully implemented in Lambda hook yet');
-    }, [sessionId]);
+    }, []);
 
-    // Collect document fragment
+    // Collect document fragment (Stub)
     const collectDocument = useCallback(async () => {
         // Not yet implemented
-    }, [sessionId]);
+    }, []);
 
-    // Convert villager
+    // Convert villager (Stub)
     const convertVillager = useCallback(async () => {
         // Not yet implemented
-    }, [sessionId]);
+    }, []);
 
-    // Refresh from server
+    // Refresh from server (Stub)
     const refresh = useCallback(async () => {
         // Re-call start to sync?
         // or just ignore for now
-    }, [sessionId]);
-
-    // Initial load: 
-    // We skip the auto-fetchSession for now because we don't have a GET endpoint.
-    // The "startQuest" call from the UI (WelcomeScreen) will trigger the initial load.
+    }, []);
 
     // Auto-sync with server
     useEffect(() => {
@@ -353,8 +308,8 @@ export function useQuestProgress({
         score,
         completedObjects,
         completedPuzzles,
-        documentFragments,
-        villagersConverted,
+        documentFragments: 0,
+        villagersConverted: 0,
         isLoading,
         error,
         startQuest,
