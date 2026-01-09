@@ -74,26 +74,26 @@ export function usePuzzleGame({
                     const newScale = Math.max(0.8, Math.min(3, prevScale * scaleChange));
 
                     // 3. Adjust pan to keep zoom centered on pinch point
-                    // We need to access the LATEST translate state. 
+                    // We need to access the LATEST translate state.
                     // Since we can't easily get it inside setScale, we rely on the effect dependency.
                     // Ideally we'd calculate everything in one state update or use refs for all mutable state during drag.
                     // For now, let's just update scale and let the next frame handle pan or use refs for translate too?
                     // Actually, let's keep it simple: just update logic.
-                    // BUT: 'scale' and 'translate' in this closure ARE stale if we don't re-bind. 
+                    // BUT: 'scale' and 'translate' in this closure ARE stale if we don't re-bind.
                     // The best way for high-perf gestures is refs for EVERYTHING mutable.
                     return newScale;
                 });
 
-                // RE-READING: To implement centered zoom correctly without stale closures, 
+                // RE-READING: To implement centered zoom correctly without stale closures,
                 // we need access to the current 'scale' and 'translate' INSIDE this event handler.
                 // The easiest fix is to use refs for 'scale' and 'translate' too, OR keep re-binding.
                 // Re-binding is okay if logic is fast. The issue was likely state async updates.
                 // Let's stick to the previous logic but use refs for the "last" values.
 
-                // Actually, let's rely on the dependency array re-binding the listener. 
+                // Actually, let's rely on the dependency array re-binding the listener.
                 // The critical fix was likely `lastTouchDistance` being a ref so it updates immediately.
 
-                // Wait, if we re-bind, we have fresh state. 
+                // Wait, if we re-bind, we have fresh state.
                 // Let's implement the FULL logic here assuming 'scale' and 'translate' are fresh from dependency.
 
                 const newScale = Math.max(0.8, Math.min(3, scale * scaleChange));
@@ -229,15 +229,18 @@ export function usePuzzleGame({
         // Only update if we have new data structure, to avoid resetting placement state
         // In a real app we might want deeper comparison or specific update logic
         // For now, we assume initialPieces drives the collected/unlocked state
-        setPieces(current => {
-            return initialPieces.map(initial => {
-                const existing = current.find(c => c.id === initial.id);
-                if (existing) {
-                    return { ...initial, ...existing, unlocked: initial.unlocked };
-                }
-                return initial;
+        const timer = setTimeout(() => {
+            setPieces(current => {
+                return initialPieces.map(initial => {
+                    const existing = current.find(c => c.id === initial.id);
+                    if (existing) {
+                        return { ...initial, ...existing, unlocked: initial.unlocked };
+                    }
+                    return initial;
+                });
             });
-        });
+        }, 0);
+        return () => clearTimeout(timer);
     }, [initialPieces]);
 
     return {
