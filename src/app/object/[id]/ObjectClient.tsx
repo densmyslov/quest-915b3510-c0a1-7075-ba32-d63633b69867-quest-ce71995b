@@ -3,7 +3,7 @@
 import { useQuest } from '@/context/QuestContext';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PulsatingEffect } from '@/types/quest';
 
 interface ObjectClientProps {
@@ -16,19 +16,33 @@ export default function ObjectClient({ objectId }: ObjectClientProps) {
     const [saving, setSaving] = useState(false);
     const [showEffectsPanel, setShowEffectsPanel] = useState(false);
 
-    if (!data) return null;
+    const object = data?.objects.find(o => o.id === objectId);
 
-    const object = data.objects.find(o => o.id === objectId);
-
-    // Initialize effect configuration from object or defaults
+    // Initialize effect configuration with defaults
     const [effectConfig, setEffectConfig] = useState<PulsatingEffect>({
-        enabled: object?.pulsating_effect?.enabled || false,
-        effectType: object?.pulsating_effect?.effectType || 'pulsating_circles',
-        color: object?.pulsating_effect?.color || '#ff0000',
-        effectRadius: object?.pulsating_effect?.effectRadius || 50,
-        startEffectDistance: object?.pulsating_effect?.startEffectDistance || 100,
-        speed: object?.pulsating_effect?.speed || 100,
+        enabled: false,
+        effectType: 'pulsating_circles',
+        color: '#ff0000',
+        effectRadius: 50,
+        startEffectDistance: 100,
+        speed: 100,
     });
+
+    // Sync state with object data when available
+    useEffect(() => {
+        if (object?.pulsating_effect) {
+            setEffectConfig({
+                enabled: object.pulsating_effect.enabled || false,
+                effectType: object.pulsating_effect.effectType || 'pulsating_circles',
+                color: object.pulsating_effect.color || '#ff0000',
+                effectRadius: object.pulsating_effect.effectRadius || 50,
+                startEffectDistance: object.pulsating_effect.startEffectDistance || 100,
+                speed: object.pulsating_effect.speed || 100,
+            });
+        }
+    }, [object]);
+
+    if (!data) return null;
 
     const handleSaveEffect = async () => {
         setSaving(true);
@@ -97,10 +111,10 @@ export default function ObjectClient({ objectId }: ObjectClientProps) {
 
                 {objectImages.length > 0 && (
                     <div className="grid grid-cols-1 gap-4 mb-6">
-                {objectImages.map((img, idx) => (
-                    <div key={idx} className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden">
-                        <Image
-                            src={img}
+                        {objectImages.map((img, idx) => (
+                            <div key={idx} className="relative w-full h-64 md:h-96 rounded-lg overflow-hidden">
+                                <Image
+                                    src={img}
                                     alt={`${object.name} ${idx + 1}`}
                                     fill
                                     className="object-cover"
