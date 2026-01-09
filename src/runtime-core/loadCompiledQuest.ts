@@ -65,4 +65,3 @@ export async function loadCompiledQuestDefinition(params: {
 export function clearCompiledQuestDefinitionCache() {
   compiledCache.clear();
 }
-
