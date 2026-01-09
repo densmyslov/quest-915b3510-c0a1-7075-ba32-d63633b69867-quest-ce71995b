@@ -1,4 +1,5 @@
 import { normalizeMediaTimeline } from '@/lib/mediaTimeline';
+import { normalizeTranscription } from '@/lib/transcriptionUtils';
 import type { QuestObject } from '@/types/quest';
 import type { Transcription } from '@/types/transcription';
 import type {
@@ -94,32 +95,36 @@ function getTimelineVideoUrl(item: any): string | null {
 
 function getTimelineAudioTranscription(item: any): Transcription | null {
   if (!item || typeof item !== 'object') return null;
-  const words = item.transcription_words ?? item.transcription?.words ?? item.transcription_data?.words;
+  const words =
+    item.transcription_words ??
+    item.transcriptionWords ??
+    item.transcription?.words ??
+    item.transcription_data?.words ??
+    item.transcriptionData?.words;
   const rawText =
     item.transcription_text ??
+    item.transcriptionText ??
+    (typeof item.transcription === 'string' ? item.transcription : undefined) ??
     (typeof item.transcription === 'object' && item.transcription !== null && 'text' in item.transcription
       ? (item.transcription as any).text
       : undefined) ??
     (typeof item.transcription === 'object' && item.transcription !== null && 'fullText' in item.transcription
       ? (item.transcription as any).fullText
       : undefined) ??
-    item.transcription_data?.text;
+    (typeof item.transcription_data === 'object' && item.transcription_data !== null && 'fullText' in item.transcription_data
+      ? (item.transcription_data as any).fullText
+      : undefined) ??
+    item.transcription_data?.text ??
+    (typeof item.transcriptionData === 'object' && item.transcriptionData !== null && 'fullText' in item.transcriptionData
+      ? (item.transcriptionData as any).fullText
+      : undefined) ??
+    item.transcriptionData?.text;
 
   if (!words && !rawText) return null;
-
-  const normalizedWords = Array.isArray(words)
-    ? words
-      .map((w: any) => {
-        const word = typeof w?.word === 'string' ? w.word : '';
-        const start = typeof w?.start === 'number' ? w.start : Number(w?.start?.toNumber?.());
-        const end = typeof w?.end === 'number' ? w.end : Number(w?.end?.toNumber?.());
-        if (!word.trim() || !Number.isFinite(start) || !Number.isFinite(end)) return null;
-        return { word, start, end };
-      })
-      .filter((v): v is Transcription['words'][number] => !!v)
-    : [];
-
-  return { words: normalizedWords, fullText: typeof rawText === 'string' ? rawText : undefined };
+  return normalizeTranscription({
+    words: Array.isArray(words) ? words : undefined,
+    fullText: typeof rawText === 'string' ? rawText : '',
+  });
 }
 
 function readPuzzleId(item: any): string | null {
