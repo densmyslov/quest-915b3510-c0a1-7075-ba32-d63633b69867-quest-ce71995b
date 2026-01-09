@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  # Frontend Linting (Local Hook)
+  # Uses the project's local ESLint installation to avoid version mismatches
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: npm run lint
+        language: system
+        files: \.(js|jsx|ts|tsx)$
+        pass_filenames: false
+
+      - id: test
+        name: unit-tests
+        entry: npm test
+        language: system
+        files: \.(js|jsx|ts|tsx|json)$
+        pass_filenames: false
