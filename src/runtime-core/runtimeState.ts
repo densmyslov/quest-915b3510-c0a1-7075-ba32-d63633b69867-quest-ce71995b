@@ -81,4 +81,3 @@ export type RuntimeSnapshot = {
   objects: Record<ObjectId, { lifecycle: RuntimeObjectLifecycle; arrivedAt: string | null; completedAt: string | null }>;
   nodes: Record<NodeId, RuntimeNodeState>;
 };
-
