@@ -2,9 +2,11 @@
 // force-rebuild-1
 
 import { useCallback, useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
-import { useRouter } from 'next/navigation';
+
 import { normalizeMediaTimeline, type NormalizedMediaTimelineItem } from '@/lib/mediaTimeline';
+import { isQuestDebugEnabled } from '@/lib/debugFlags';
 import { makeTimelineItemNodeId, sanitizeIdPart } from '@/runtime-core/compileQuest';
+import { useDebugLog } from '@/context/DebugLogContext';
 import type { QuestRuntimeClient } from '@/hooks/useQuestRuntime';
 import type { QuestObject } from '@/types/quest';
 import type { Transcription } from '@/types/transcription';
@@ -55,6 +57,7 @@ type UseObjectTimelineParams = {
   questRuntime: QuestRuntimeClient;
   objectsById: Map<string, QuestObject>;
   hasPuzzle: (puzzleId: string) => boolean;
+  canRunTimeline?: () => boolean;
   playAudio: (payload: TimelineAudioPayload) => void;
   playAudioBlocking: (payload: TimelineAudioPayload) => Promise<void>;
   playEffectAudio: (payload: TimelineEffectAudioPayload) => void;
@@ -83,6 +86,7 @@ export function useObjectTimeline({
   questRuntime,
   objectsById,
   hasPuzzle,
+  canRunTimeline,
   playAudio,
   playAudioBlocking,
   playEffectAudio,
@@ -98,7 +102,9 @@ export function useObjectTimeline({
   normalizeEffect,
   getPuzzlePoints
 }: UseObjectTimelineParams) {
-  const router = useRouter();
+  const { addLog } = useDebugLog();
+  const debugEnabled = useMemo(() => isQuestDebugEnabled(), []);
+  // const router = useRouter();
   const timelineRunRef = useRef<{ cancel: boolean; objectId: string; version: number; status: 'running' | 'idle' } | null>(null);
   const [timelineUi, setTimelineUi] = useState<TimelineUiState | null>(null);
   const [timelinePuzzleOverlay, setTimelinePuzzleOverlay] = useState<{ puzzleId: string; objectId: string } | null>(null);
@@ -143,7 +149,7 @@ export function useObjectTimeline({
   }, [questRuntime.completedPuzzles]);
 
   const computeRuntimeTimelineProgress = useCallback(
-    (objectId: string, items: NormalizedMediaTimelineItem[], reset: boolean, currentIndex?: number): TimelineProgressState => {
+    (objectId: string, items: NormalizedMediaTimelineItem[], reset: boolean): TimelineProgressState => {
       if (reset) return { nextIndex: 0, completedKeys: {}, blockedByPuzzleId: null };
 
       const completedKeys: Record<string, true> = {};
@@ -249,6 +255,7 @@ export function useObjectTimeline({
     async (params: {
       title?: string;
       text: string;
+      transcription?: { words: Array<{ word: string; start: number; end: number }> };
       imageUrls?: string[];
       mode: 'seconds' | 'until_close';
       seconds: number;
@@ -264,6 +271,7 @@ export function useObjectTimeline({
       setTimelineTextOverlay({
         title,
         text: params.text,
+        transcription: params.transcription,
         imageUrls: params.imageUrls,
         mode: params.mode,
         seconds,
@@ -420,7 +428,7 @@ export function useObjectTimeline({
   );
 
   const showTimelineChat = useCallback(
-    async (params: { title?: string; blocking: boolean; sessionId?: string | null; playerId?: string | null; firstMessage?: string; imageUrls?: string[] }) => {
+    async (params: { title?: string; blocking: boolean; sessionId?: string | null; playerId?: string | null; firstMessage?: string; imageUrls?: string[]; goal?: any }) => {
       closeTimelineChat();
 
       const title = params.title ?? 'Chat';
@@ -431,7 +439,8 @@ export function useObjectTimeline({
           sessionId: params.sessionId,
           playerId: params.playerId,
           firstMessage: params.firstMessage,
-          imageUrls: params.imageUrls
+          imageUrls: params.imageUrls,
+          goal: params.goal
         });
         return;
       }
@@ -443,7 +452,8 @@ export function useObjectTimeline({
           sessionId: params.sessionId,
           playerId: params.playerId,
           firstMessage: params.firstMessage,
-          imageUrls: params.imageUrls
+          imageUrls: params.imageUrls,
+          goal: params.goal
         });
       });
     },
@@ -453,9 +463,12 @@ export function useObjectTimeline({
   const navigateToPuzzle = useCallback(
     (puzzleId: string, objectId: string) => {
       // Overlay Mode: Set state to show overlay instead of navigating
+      if (debugEnabled) {
+        addLog('info', '[useObjectTimeline] navigateToPuzzle', { puzzleId, objectId, stepsMode });
+      }
       setTimelinePuzzleOverlay({ puzzleId, objectId });
     },
-    []
+    [addLog, debugEnabled, stepsMode]
   );
 
   const closeTimelinePuzzle = useCallback(() => {
@@ -467,6 +480,13 @@ export function useObjectTimeline({
 
   const runObjectTimeline = useCallback(
     async (obj: QuestObject, options?: { reset?: boolean }) => {
+      if (canRunTimeline && !canRunTimeline()) {
+        console.log('[useObjectTimeline] runObjectTimeline blocked (waiting for user interaction)', {
+          objectId: obj.id,
+          options,
+        });
+        return;
+      }
       console.log('[useObjectTimeline] runObjectTimeline START', { objectId: obj.id, options });
 
       const timeline = normalizeMediaTimeline(obj);
@@ -654,7 +674,7 @@ export function useObjectTimeline({
             // Node completion is handled in closeTimelineText when close button is clicked
             // or when timer expires (which also calls closeTimelineText)
             // Re-compute progress using updated snapshot to detect newly unlocked nodes
-            progress = computeRuntimeTimelineProgress(obj.id, timeline.items, false, idx + 1);
+            progress = computeRuntimeTimelineProgress(obj.id, timeline.items, false);
             setTimelineProgress(obj.id, timeline.version, progress);
             continue;
           }
@@ -664,6 +684,31 @@ export function useObjectTimeline({
             const ok = await completeRuntimeNode(obj.id, item.key);
             if (!ok) break;
             // Re-compute progress using updated snapshot to detect newly unlocked nodes
+            progress = computeRuntimeTimelineProgress(obj.id, timeline.items, false);
+            setTimelineProgress(obj.id, timeline.version, progress);
+            continue;
+          }
+
+          if (item.type === 'chat') {
+            console.log('[useObjectTimeline] Starting chat', { key: item.key, item }); // Added item logging
+            const payload = (item as any).payload ?? (item as any).params ?? {};
+            console.log('[useObjectTimeline] Chat Goal Debug:', {
+              itemGoal: (item as any).goal_injection,
+              payloadGoal: payload.goal_injection,
+              legacyGoal: payload.goal,
+              finalGoal: (item as any).goal_injection ?? payload.goal_injection ?? payload.goal
+            });
+            await showTimelineChat({
+              title: item.title ?? obj.name,
+              blocking: item.blocking !== false,
+              sessionId: currentSessionId,
+              playerId: questRuntime.snapshot?.me?.playerId,
+              firstMessage: (item as any).firstMessage ?? (item as any).first_message,
+              imageUrls: getItemImageUrls(item),
+              goal: (item as any).goal_injection ?? payload.goal_injection ?? payload.goal
+            });
+            const ok = await completeRuntimeNode(obj.id, item.key);
+            if (!ok) break;
             progress = computeRuntimeTimelineProgress(obj.id, timeline.items, false);
             setTimelineProgress(obj.id, timeline.version, progress);
             continue;
@@ -739,35 +784,56 @@ export function useObjectTimeline({
                       )
                     ]);
                     console.log('[useObjectTimeline] Blocking effect audio completed', { key: item.key });
-                  } catch (err) {
-                    console.warn('[useObjectTimeline] Blocking effect audio failed or timed out, completing anyway', { key: item.key, err });
+                  } catch (err: any) {
+                    // Detailed error logging for the blocking audio failure
+                    console.warn('[useObjectTimeline] Blocking effect audio failed or timed out, completing anyway', {
+                      key: item.key,
+                      err,
+                      message: err?.message,
+                      name: err?.name,
+                      url,
+                      timestamp: new Date().toISOString()
+                    });
                   }
                 } else {
                   const { mode, seconds } = getTextDisplayConfig(item);
-                  console.log('[useObjectTimeline] Playing blocking streaming audio', { url, mode, seconds });
-                  await playAudioBlocking({
-                    url,
-                    objectName: obj.name,
-                    objectId: obj.id,
-                    transcription: getTimelineAudioTranscription(item),
-                    volume: (item as any).volume,
-                    panelAutoCloseAfterEndedMs:
-                      mode === 'seconds' ? Math.max(0, Math.round(seconds * 1000)) : null
-                  });
-                  console.log('[useObjectTimeline] playAudioBlocking returned, waiting for mode completion', { mode, seconds });
-                  if (mode === 'until_close') {
-                    console.log('[useObjectTimeline] Waiting for audio panel close');
-                    await waitForAudioPanelClose();
-                    console.log('[useObjectTimeline] Audio panel closed');
-                  } else if (mode === 'seconds') {
-                    console.log('[useObjectTimeline] Waiting for timer', { seconds });
-                    await new Promise<void>((resolve) =>
-                      window.setTimeout(resolve, Math.max(0, Math.round(seconds * 1000)))
-                    );
-                    stopAudioRef.current();
-                    console.log('[useObjectTimeline] Timer completed');
+                  const transcription = getTimelineAudioTranscription(item);
+                  if (debugEnabled) {
+                    const wordCount = transcription?.words?.length ?? 0;
+                    addLog('info', '[useObjectTimeline] streaming_text_audio payload', {
+                      objectId: obj.id,
+                      key: item.key,
+                      url,
+                      mode,
+                      hasTranscription: !!transcription,
+                      wordCount
+                    });
+                  }
+
+                  // Use the generic audio player immediately.
+                  // Do NOT call showTimelineText as it might block if the overlay is hidden/removed.
+
+                  console.log('[useObjectTimeline] Playing blocking streaming_text_audio', { url });
+
+                  try {
+                    await playAudioBlocking({
+                      url,
+                      objectName: obj.name,
+                      objectId: obj.id,
+                      transcription: transcription ?? null,
+                      loop: false,
+                      volume: (item as any).volume,
+                      panelAutoCloseAfterEndedMs: mode === 'seconds' ? (seconds * 1000) : null
+                    });
+                    console.log('[useObjectTimeline] Blocking streaming_text_audio completed', { key: item.key });
+                  } catch (err: any) {
+                    console.warn('[useObjectTimeline] Blocking streaming_text_audio failed or timed out, completing anyway', {
+                      key: item.key,
+                      err
+                    });
                   }
                 }
+
                 console.log('[useObjectTimeline] Completing audio node', { key: item.key });
                 {
                   const ok = await completeRuntimeNode(obj.id, item.key);
@@ -891,24 +957,7 @@ export function useObjectTimeline({
             continue;
           }
 
-          if (item.type === 'chat') {
-            const firstMessage = (item as any).firstMessage ?? (item as any).first_message;
-            await showTimelineChat({
-              title: item.title ?? obj.name,
-              blocking: item.blocking,
-              sessionId: questRuntimeRef.current.sessionId,
-              playerId: currentSessionId,
-              firstMessage,
-              imageUrls: getItemImageUrls(item)
-            });
-            {
-              const ok = await completeRuntimeNode(obj.id, item.key);
-              if (!ok) break;
-            }
-            progress = computeRuntimeTimelineProgress(obj.id, timeline.items, false);
-            setTimelineProgress(obj.id, timeline.version, progress);
-            continue;
-          }
+
 
           if (item.type === 'puzzle') {
             const puzzleId = (item as any).puzzleId ?? (item as any).puzzle_id;
@@ -930,6 +979,13 @@ export function useObjectTimeline({
                 puzzleId,
                 exists: hasPuzzle(puzzleId)
               });
+              if (debugEnabled) {
+                addLog('warn', '[useObjectTimeline] timeline puzzle missing, skipping', {
+                  objectId: obj.id,
+                  puzzleId,
+                  key: item.key
+                });
+              }
               progress = {
                 ...progress,
                 completedKeys: { ...progress.completedKeys, [item.key]: true },
@@ -955,6 +1011,14 @@ export function useObjectTimeline({
 
             progress = { ...progress, blockedByPuzzleId: puzzleId };
             setTimelineProgress(obj.id, timeline.version, progress);
+            if (debugEnabled) {
+              addLog('info', '[useObjectTimeline] blocked by puzzle', {
+                objectId: obj.id,
+                puzzleId,
+                key: item.key,
+                stepsMode
+              });
+            }
 
             if (stepsMode) {
               break; // Wait for user to open/skip the puzzle in Steps mode.
@@ -1000,14 +1064,20 @@ export function useObjectTimeline({
       }
     },
     [
+      addLog,
       addOrUpdatePulsatingCircle,
+      canRunTimeline,
       completeRuntimeNode,
       computeRuntimeTimelineProgress,
+      debugEnabled,
       navigateToPuzzle,
       playAudio,
       playAudioBlocking,
       questAudio,
       showTimelineText,
+      currentSessionId,
+      playEffectAudio,
+      playEffectAudioBlocking,
       showTimelineAction,
       showTimelineVideo,
       showTimelineChat,
@@ -1043,9 +1113,16 @@ export function useObjectTimeline({
       if (!item || item.type !== 'puzzle') return;
       const puzzleId = (item as any).puzzleId ?? (item as any).puzzle_id;
       if (typeof puzzleId !== 'string' || !puzzleId.length) return;
+      if (debugEnabled) {
+        addLog('info', '[useObjectTimeline] openTimelinePuzzle (Steps UI)', {
+          itemKey,
+          puzzleId,
+          objectId: timelineUi.objectId
+        });
+      }
       navigateToPuzzle(puzzleId, timelineUi.objectId);
     },
-    [navigateToPuzzle, timelineUi]
+    [addLog, debugEnabled, navigateToPuzzle, timelineUi]
   );
 
   const skipTimelineItem = useCallback(
