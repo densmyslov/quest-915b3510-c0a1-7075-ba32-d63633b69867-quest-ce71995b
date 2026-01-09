@@ -101,7 +101,7 @@ export default function SpotDifferenceGame({
     const debugEnabled =
         typeof window !== 'undefined'
         && (
-            (window as any).__spotDiffDebug === true // eslint-disable-line @typescript-eslint/no-explicit-any
+            (window as any).__spotDiffDebug === true
             || new URLSearchParams(window.location.search).has('spotDiffDebug')
         );
 
@@ -244,11 +244,8 @@ export default function SpotDifferenceGame({
                 // Expose internal state to window for Playwright tests
                 if (process.env.NODE_ENV === 'test' || process.env.NEXT_PUBLIC_E2E_TESTING === 'true' || new URLSearchParams(window.location.search).has('e2e')) {
                     console.log('SpotDifference: Exposing hooks to window');
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (window as any).__spotDiffApp = app;
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (window as any).__spotDiffLoaded = true;
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (window as any).__spotDiffState = {
                         get foundRegions() { return Array.from(foundRegionsRef.current); },
                         get totalRegions() { return totalDifferences; },
@@ -260,21 +257,19 @@ export default function SpotDifferenceGame({
             }
         });
 
+        const urlMap = objectUrlMapRef.current;
         return () => {
             if (appRef.current) {
                 appRef.current.destroy(true);
                 appRef.current = null;
             }
-            objectUrlMapRef.current.forEach((url) => URL.revokeObjectURL(url));
-            objectUrlMapRef.current.clear();
+            urlMap.forEach((url) => URL.revokeObjectURL(url));
+            urlMap.clear();
 
             // Cleanup hooks
             if (process.env.NODE_ENV === 'test' || process.env.NEXT_PUBLIC_E2E_TESTING === 'true') {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 delete (window as any).__spotDiffApp;
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 delete (window as any).__spotDiffLoaded;
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 delete (window as any).__spotDiffState;
             }
         };
