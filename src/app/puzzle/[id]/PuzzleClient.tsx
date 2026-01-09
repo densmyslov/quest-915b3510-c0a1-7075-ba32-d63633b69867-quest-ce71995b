@@ -144,52 +144,40 @@ export default function PuzzleClient(props: PuzzleClientProps) {
         }
     }, [props.onClose, router]);
 
-    if (!data) return null;
+    // --- HOISTED STATE & LOGIC ---
 
-    if (!resolvedPuzzleId) {
-        return (
-            <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-900 text-white">
-                <h1 className="text-2xl mb-4">Puzzle ID Missing</h1>
-                <button
-                    onClick={handleBack}
-                    className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500"
-                >
-                    Back to Map
-                </button>
-            </div>
-        );
-    }
+    // Safe access to puzzle derivation
+    const puzzle = React.useMemo(() =>
+        data?.puzzles?.find(p => p.id === resolvedPuzzleId) ?? null
+        , [data, resolvedPuzzleId]);
 
-    const puzzle = data.puzzles.find(p => p.id === resolvedPuzzleId);
+    const inlineData = React.useMemo(() =>
+        puzzle?.data || puzzle?.interaction_data?.puzzle_data || null
+        , [puzzle]);
 
-    if (!puzzle) {
-        console.warn('[PuzzleClient] Puzzle not found in quest data', {
-            puzzleId,
-            resolvedPuzzleId,
-            puzzlesCount: data.puzzles?.length ?? 0,
-            sampleIds: (data.puzzles ?? []).slice(0, 10).map(p => p.id)
-        });
-        return (
-            <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-900 text-white">
-                <h1 className="text-2xl mb-4">Puzzle Not Found</h1>
-                <button
-                    onClick={handleBack}
-                    className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500"
-                >
-                    Back to Map
-                </button>
-            </div>
-        );
-    }
-
-    const inlineData = puzzle.data || puzzle.interaction_data?.puzzle_data;
+    // Always declare hooks unconditionally
     const [puzzleData, setPuzzleData] = React.useState<any>(inlineData);
-    const [loading, setLoading] = React.useState(!inlineData);
+    // Loading is true if we have a puzzle but no inline data yet (need to fetch)
+    // If no puzzle, we aren't loading (we are erroring/returning early in render)
+    const [loading, setLoading] = React.useState(!!puzzle && !inlineData);
     const [error, setError] = React.useState<string | null>(null);
 
+    // Sync local state when inlineData becomes available (e.g. after data loads)
     React.useEffect(() => {
-        if (inlineData) return;
+        if (inlineData) {
+            setPuzzleData(inlineData);
+            setLoading(false);
+        } else if (puzzle) {
+            // New puzzle loaded but no inline data, reset to loading if needed
+            // But we have a specific fetch effect below
+        }
+    }, [inlineData, puzzle]);
 
+
+    React.useEffect(() => {
+        if (!puzzle || inlineData) return;
+
+        // If we have a puzzle but no inline data, try fetching
         const loadData = async () => {
             try {
                 // Check for interaction_data with URL
@@ -216,10 +204,11 @@ export default function PuzzleClient(props: PuzzleClientProps) {
             }
         };
 
+        setLoading(true);
         loadData();
-    }, [puzzle, resolvedPuzzleId]);
+    }, [puzzle, resolvedPuzzleId, inlineData]);
 
-    const rawType = puzzle.interaction_data?.type || (puzzle as any).type;
+    const rawType = puzzle?.interaction_data?.type || (puzzle as any)?.type;
     const puzzleType: PuzzleType =
         rawType === 'jigsaw_custom' ? 'jigsaw_custom' :
             rawType === 'jigsaw' ? 'jigsaw' :
@@ -228,28 +217,9 @@ export default function PuzzleClient(props: PuzzleClientProps) {
                         rawType === 'spot_diff_ai' ? 'spot_diff_ai' :
                             'fabric_custom';
 
-    if (loading) {
-        return <div className="h-screen w-full flex items-center justify-center bg-gray-900 text-white">Loading Puzzle Data...</div>;
-    }
-
-    if (error || !puzzleData) {
-        return (
-            <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-900 text-white">
-                <h1 className="text-2xl mb-4">Error Loading Puzzle</h1>
-                <p className="mb-4 text-red-400">{error || "Data missing"}</p>
-                <button
-                    onClick={handleBack}
-                    className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500"
-                >
-                    Back to Map
-                </button>
-            </div>
-        );
-    }
-
-    // Handler for puzzle completion
+    // Handler for complete
     const handlePuzzleComplete = React.useCallback(async () => {
-        if (isSubmitting || !sessionId || !runtime) return;
+        if (isSubmitting || !sessionId || !runtime || !puzzle) return;
 
         // Extract points from puzzle data (fallback to 100 if not specified)
         const points = (puzzle as any).points || puzzleData?.points || 100;
@@ -257,21 +227,16 @@ export default function PuzzleClient(props: PuzzleClientProps) {
         setIsSubmitting(true);
 
         try {
-            // Use the runtime context's submitPuzzleSuccess method
-            // This calls the server API AND updates the local snapshot cache with the server response
-            // ensuring the timeline can detect the completed puzzle when returning to the map
             await runtime.submitPuzzleSuccess({
-                puzzleId: resolvedPuzzleId,
+                puzzleId: resolvedPuzzleId!, // safe because puzzle exists
                 objectId: objectId || undefined,
                 points
             });
 
-            // Show congratulations popup with points earned
             markPuzzleCompletedLocally(resolvedPuzzleId);
             setCongratsPoints(points);
         } catch (error) {
             console.error('Error completing puzzle:', error);
-            // Still show popup even if server call fails (optimistic UI)
             markPuzzleCompletedLocally(resolvedPuzzleId);
             setCongratsPoints(points);
         } finally {
@@ -279,9 +244,6 @@ export default function PuzzleClient(props: PuzzleClientProps) {
         }
     }, [isSubmitting, sessionId, runtime, resolvedPuzzleId, objectId, puzzle, puzzleData, markPuzzleCompletedLocally]);
 
-    // Handler for closing congratulations popup and returning to map
-    // The timeline runner will detect the completed puzzle via useObjectTimeline.ts:656-666
-    // and automatically continue with next items based on runtime state
     const handleClosePopup = React.useCallback(() => {
         if (autoCloseTimerRef.current) {
             window.clearTimeout(autoCloseTimerRef.current);
@@ -289,8 +251,6 @@ export default function PuzzleClient(props: PuzzleClientProps) {
         }
         setCongratsPoints(null);
 
-        // Navigate to map - the timeline will resume automatically if there are more items,
-        // or the object will show as complete if this was the last item
         if (props.onClose) {
             props.onClose();
         } else {
@@ -310,6 +270,67 @@ export default function PuzzleClient(props: PuzzleClientProps) {
             }
         };
     }, [congratsPoints, handleClosePopup]);
+
+    // --- RENDER PHASE (Conditional Logic) ---
+
+    if (!data) return null;
+
+    if (!resolvedPuzzleId) {
+        return (
+            <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-900 text-white">
+                <h1 className="text-2xl mb-4">Puzzle ID Missing</h1>
+                <button
+                    onClick={handleBack}
+                    className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500"
+                >
+                    Back to Map
+                </button>
+            </div>
+        );
+    }
+
+    if (!puzzle) {
+        // Only warn if we have data but no puzzle found
+        if (data.puzzles?.length) {
+            console.warn('[PuzzleClient] Puzzle not found in quest data', {
+                puzzleId,
+                resolvedPuzzleId,
+                puzzlesCount: data.puzzles?.length ?? 0,
+                sampleIds: (data.puzzles ?? []).slice(0, 10).map(p => p.id)
+            });
+        }
+
+        return (
+            <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-900 text-white">
+                <h1 className="text-2xl mb-4">Puzzle Not Found</h1>
+                <button
+                    onClick={handleBack}
+                    className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500"
+                >
+                    Back to Map
+                </button>
+            </div>
+        );
+    }
+
+    if (loading) {
+        return <div className="h-screen w-full flex items-center justify-center bg-gray-900 text-white">Loading Puzzle Data...</div>;
+    }
+
+    if (error || !puzzleData) {
+        return (
+            <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-900 text-white">
+                <h1 className="text-2xl mb-4">Error Loading Puzzle</h1>
+                <p className="mb-4 text-red-400">{error || "Data missing"}</p>
+                <button
+                    onClick={handleBack}
+                    className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500"
+                >
+                    Back to Map
+                </button>
+            </div>
+        );
+    }
 
     return (
         <div className="w-full h-screen">
