@@ -57,4 +57,3 @@ export function parseLatLng(value: unknown): LatLngTuple | null {
 export function formatLatLng(coords: LatLngTuple): string {
   return `${coords[0]}, ${coords[1]}`;
 }
-
