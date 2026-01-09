@@ -1,10 +1,13 @@
+/* eslint-disable react-hooks/refs */
 'use client';
 
-import { useMemo, useState, useEffect, type RefObject, type SyntheticEvent } from 'react';
+import { useMemo, useState, useEffect, useRef, type RefObject, type SyntheticEvent } from 'react';
 import GameStatusPanel from '@/components/map/GameStatusPanel';
 import { StreamingText } from '@/components/StreamingText';
 import { formatTimestamp } from '@/lib/transcriptionUtils';
 import type { Transcription } from '@/types/transcription';
+import { useDebugLog } from '@/context/DebugLogContext';
+import { isQuestDebugEnabled } from '@/lib/debugFlags';
 import styles from './QuestMapOverlay.module.css';
 
 export type QuestMapOverlayDocument = {
@@ -85,14 +88,13 @@ export default function QuestMapOverlay({
   audioPanel,
   timelinePanel
 }: QuestMapOverlayProps) {
+  const { addLog } = useDebugLog();
   const [folderOpen, setFolderOpen] = useState(false);
   const [selectedDocId, setSelectedDocId] = useState<string | null>(null);
   const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
   const [gameStartTime, setGameStartTime] = useState<Date | null>(null);
-  const hasTranscript = !!audioPanel?.transcription?.words?.some((word) => {
-    return word.word.trim().length > 0;
-  });
-
+  const debugEnabled = useMemo(() => isQuestDebugEnabled(), []);
+  const lastAudioDebugRef = useRef<{ url: string; words: number; mode: string } | null>(null);
   useEffect(() => {
     setGameStartTime(new Date());
   }, []);
@@ -105,6 +107,27 @@ export default function QuestMapOverlay({
   const docCount = documents.length;
   const isStepsMode = mode === 'steps';
   const canNext = isStepsMode && stepTotal > 0 && stepIndex < stepTotal;
+
+  useEffect(() => {
+    if (!debugEnabled) return;
+    if (!audioPanel) return;
+    const url = audioPanel.audioUrl || '';
+    const words = audioPanel.transcription?.words?.length ?? 0;
+    const m = audioPanel.mode;
+    const prev = lastAudioDebugRef.current;
+    if (prev && prev.url === url && prev.words === words && prev.mode === m) return;
+    lastAudioDebugRef.current = { url, words, mode: m };
+    addLog('info', '[QuestMapOverlay] audioPanel render', {
+      mode: audioPanel.mode,
+      title: audioPanel.title,
+      audioUrl: url,
+      isPlaying: audioPanel.isPlaying,
+      currentTime: audioPanel.currentTime,
+      duration: audioPanel.duration,
+      hasTranscription: !!audioPanel.transcription,
+      words
+    });
+  }, [addLog, audioPanel, debugEnabled, lastAudioDebugRef]);
 
   return (
     <div className={styles.overlay} aria-hidden={false}>
@@ -183,22 +206,24 @@ export default function QuestMapOverlay({
               >
                 Play mode
               </button>
-              <button
-                type="button"
-                className={[styles.stepsButton, mode === 'steps' ? styles.stepsButtonOn : ''].join(' ')}
-                onClick={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  onSelectMode?.('steps');
-                }}
-                onTouchStart={(event) => {
-                  event.stopPropagation();
-                }}
-                aria-pressed={mode === 'steps'}
-                data-testid="mode-steps"
-              >
-                Steps mode
-              </button>
+              {(process.env.NEXT_PUBLIC_ENABLE_STEPS_MODE === 'true') && (
+                <button
+                  type="button"
+                  className={[styles.stepsButton, mode === 'steps' ? styles.stepsButtonOn : ''].join(' ')}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    onSelectMode?.('steps');
+                  }}
+                  onTouchStart={(event) => {
+                    event.stopPropagation();
+                  }}
+                  aria-pressed={mode === 'steps'}
+                  data-testid="mode-steps"
+                >
+                  Steps mode
+                </button>
+              )}
             </div>
 
             {mode === null && (
@@ -333,15 +358,15 @@ export default function QuestMapOverlay({
       </div>
 
 
-	      {audioPanel && (
-	        <>
-	          <audio
-	            ref={audioPanel.audioRef}
-	            src={audioPanel.audioUrl || undefined}
-	            controls={false}
-	            preload="metadata"
-	            playsInline
-	            className={styles.hiddenAudioElement}
+      {audioPanel && (
+        <>
+          <audio
+            ref={audioPanel.audioRef}
+            src={audioPanel.audioUrl || undefined}
+            controls={false}
+            preload="metadata"
+            playsInline
+            className={styles.hiddenAudioElement}
             onTimeUpdate={audioPanel.onTimeUpdate}
             onPlay={audioPanel.onPlay}
             onPause={audioPanel.onPause}
@@ -349,7 +374,7 @@ export default function QuestMapOverlay({
             onLoadedMetadata={audioPanel.onLoadedMetadata}
             onError={audioPanel.onError}
           />
-          {audioPanel.mode === 'narration' && audioPanel.transcription && (
+          {audioPanel.mode === 'narration' && (
             <div
               className={`${styles.audioPanel} ${audioPanel.isCollapsed ? styles.audioPanelCollapsed : ''}`}
               role="dialog"
