@@ -148,20 +148,20 @@ const runTests = () => {
             null
         );
 
-	        const mockPosition: GeolocationPosition = {
-	            coords: {
-	                latitude: 45.5,
-	                longitude: 9.5,
-	                accuracy: 10,
-	                altitude: null,
-	                altitudeAccuracy: null,
-	                heading: null,
-	                speed: null,
-	                toJSON: () => ({})
-	            },
-	            timestamp: Date.now(),
-	            toJSON: () => ({})
-	        };
+        const mockPosition: GeolocationPosition = {
+            coords: {
+                latitude: 45.5,
+                longitude: 9.5,
+                accuracy: 10,
+                altitude: null,
+                altitudeAccuracy: null,
+                heading: null,
+                speed: null,
+                toJSON: () => ({})
+            },
+            timestamp: Date.now(),
+            toJSON: () => ({})
+        };
 
         state = updatePosition(state, mockPosition);
 
@@ -218,7 +218,7 @@ const runTests = () => {
 
     // Test 6: Sequential completion enforcement
     test('Prevent out-of-order completion', () => {
-        let state = initializePlayerState(
+        const state = initializePlayerState(
             mockQuestObjects,
             'player-1',
             'session-1',
@@ -229,7 +229,7 @@ const runTests = () => {
         let errorThrown = false;
         try {
             // Try to complete obj-2 before obj-1
-            state = completeObject(state, 'obj-2', mockQuestObjects);
+            completeObject(state, 'obj-2', mockQuestObjects);
         } catch (error) {
             errorThrown = true;
             assert(
