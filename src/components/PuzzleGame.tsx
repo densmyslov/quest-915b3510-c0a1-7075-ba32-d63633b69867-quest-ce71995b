@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Canvas, FabricImage, Point, Rect } from 'fabric';
 import { PuzzleData, PieceData } from '@/types/puzzle';
 
@@ -278,7 +278,7 @@ export default function PuzzleGame({ puzzleData, onComplete }: PuzzleGameProps) 
                     const cx = (t1.clientX + t2.clientX) / 2;
                     const cy = (t1.clientY + t2.clientY) / 2;
 
-                    // We need to convert screen point to canvas point? 
+                    // We need to convert screen point to canvas point?
                     // fabric.Point takes offset relative to canvas.
                     // clientX is global.
                     // Assuming canvas fills screen or we account for offset.
@@ -345,7 +345,7 @@ export default function PuzzleGame({ puzzleData, onComplete }: PuzzleGameProps) 
             // Place in center of VIEWPORT (not canvas constant center)
             // We need to invert viewport transform to find "center of screen in canvas coords"
             const vpt = fabricCanvas.viewportTransform!;
-            const invert = (val: number, trans: number) => (val - trans) / vpt[0]; // simplistic inverse for zoom/pan
+            // const invert = (val: number, trans: number) => (val - trans) / vpt[0]; // simplistic inverse for zoom/pan
 
             // Or better: canvas.getCenter()... but getCenter returns point in canvas space?
             // Let's just put it at actual center of visible area.
@@ -408,17 +408,17 @@ export default function PuzzleGame({ puzzleData, onComplete }: PuzzleGameProps) 
 
         // Board position (Top-Left of the image object on canvas)
         // boardRef.left/top is the top-left coordinate
-        const boardX = boardRef.current.left;
-        const boardY = boardRef.current.top;
-        const scale = boardRef.current.scale;
+        // const boardX = boardRef.current.left;
+        // const boardY = boardRef.current.top;
+        // const scale = boardRef.current.scale;
 
         // Target Global Position = Board Origin + (Relative Correct Pos * Scale)
-        // Note: puzzleData.correctPosition is usually relative to Top-Left of original image? 
+        // Note: puzzleData.correctPosition is usually relative to Top-Left of original image?
         // Need to verify standard. In `extractPieces`, correctPosition is bounded rect center.
         // Wait, correctPosition x/y is the CENTER of the piece in original image coords.
         // Fabric Image origin is Center.
         // So:
-        const targetX = boardX + (data.correctX * scale); // ? No.
+        // const targetX = boardX + (data.correctX * scale); // ? No.
 
         // Let's re-verify coordinates.
         // In most of our implementations:
@@ -549,32 +549,32 @@ export default function PuzzleGame({ puzzleData, onComplete }: PuzzleGameProps) 
                         All pieces on board!
                     </div>
                 ) : (
-	                    unplacedPieces.map(piece => (
-	                        <div
-	                            key={piece.id}
-	                            onClick={() => handlePieceFromTray(piece)}
+                    unplacedPieces.map(piece => (
+                        <div
+                            key={piece.id}
+                            onClick={() => handlePieceFromTray(piece)}
                             className="relative flex-shrink-0 cursor-pointer hover:scale-105 transition-transform active:scale-95"
-	                            style={{
-	                                width: CONFIG.PIECE_TRAY_SIZE,
-	                                height: CONFIG.PIECE_TRAY_SIZE,
-	                                display: 'flex',
-	                                alignItems: 'center',
-	                                justifyContent: 'center'
-	                            }}
-	                        >
-	                            {(piece.imageDataUrl || piece.imageUrl) ? (
-	                                <img
-	                                    src={piece.imageDataUrl || piece.imageUrl}
-	                                    alt="puzzle piece"
-	                                    className="max-w-full max-h-full drop-shadow-md"
-	                                    style={{ pointerEvents: 'none' }}
-	                                />
-	                            ) : (
-	                                <div className="text-xs text-gray-400">No image</div>
-	                            )}
-	                        </div>
-	                    ))
-	                )}
+                            style={{
+                                width: CONFIG.PIECE_TRAY_SIZE,
+                                height: CONFIG.PIECE_TRAY_SIZE,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            {(piece.imageDataUrl || piece.imageUrl) ? (
+                                <img
+                                    src={piece.imageDataUrl || piece.imageUrl}
+                                    alt="puzzle piece"
+                                    className="max-w-full max-h-full drop-shadow-md"
+                                    style={{ pointerEvents: 'none' }}
+                                />
+                            ) : (
+                                <div className="text-xs text-gray-400">No image</div>
+                            )}
+                        </div>
+                    ))
+                )}
             </div>
 
         </div>
