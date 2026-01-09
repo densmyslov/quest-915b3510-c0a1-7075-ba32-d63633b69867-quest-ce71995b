@@ -374,12 +374,12 @@ import {
     completePuzzle as completePuzzleFn,
     completeObject as completeObjectFn,
     updatePosition as updatePositionFn,
-    isLegacyState,
+    // isLegacyState,
     migrateLegacyState,
-    serializePlayerState,
-    deserializePlayerState,
-    serializeTeamState as serializeTeamStateV2,
-    deserializeTeamState as deserializeTeamStateV2,
+    // serializePlayerState,
+    // deserializePlayerState,
+    // serializeTeamState as serializeTeamStateV2,
+    // deserializeTeamState as deserializeTeamStateV2,
     addTeamMember
 } from '@/lib/quest-state';
 import type { QuestObject } from '@/types/quest';
