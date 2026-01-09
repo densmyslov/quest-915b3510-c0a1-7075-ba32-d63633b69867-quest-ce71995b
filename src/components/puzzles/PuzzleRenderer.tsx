@@ -73,20 +73,16 @@ const absolutisePuzzleDataUrl = (u: unknown): string => {
 };
 
 const normaliseFabricData = (pData: PuzzleData): PuzzleData => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const boardImageUrl = absolutiseImageUrl((pData as any).boardImageUrl);
   const boardImageDataUrl =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     typeof (pData as any).boardImageDataUrl === 'string' ? (pData as any).boardImageDataUrl : '';
   const originalImageUrl =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     absolutiseImageUrl((pData as any).originalImageUrl) || boardImageUrl || boardImageDataUrl || '';
 
   return {
     ...pData,
     boardImageUrl,
     originalImageUrl,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pieces: (pData.pieces || []).map((pc: any) => ({
       ...pc,
       imageUrl: absolutiseImageUrl(pc.imageUrl),
@@ -208,7 +204,6 @@ export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
         if (!res.ok) throw new Error('Failed to load puzzles');
 
         const data = await res.json();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const puzzle = (data.puzzles || []).find((p: any) => p.id === puzzleId);
         if (!puzzle) throw new Error('Puzzle not found');
 
@@ -241,7 +236,6 @@ export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
 
         if (!alive) return;
         setPuzzleData(pData);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         if (e?.name === 'AbortError') return;
         if (!alive) return;
@@ -323,7 +317,6 @@ export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
         return (
           <SpotDiffAiGame
             key={`${type}:${puzzleId}`}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             puzzleData={renderData as any}
             onComplete={onComplete}
           />
