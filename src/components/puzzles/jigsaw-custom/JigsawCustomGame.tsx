@@ -120,11 +120,11 @@ export default function JigsawCustomGame({ puzzleData, onComplete }: JigsawCusto
     const piecesRef = useRef<Map<string, JigsawSprite>>(new Map());
     const trayPiecesRef = useRef<Set<string>>(new Set());
     const objectUrlMap = useRef<Map<string, string>>(new Map());
-	    const refBoardRef = useRef<PIXI.Sprite | null>(null);
-	    const gridContainerRef = useRef<PIXI.Container | null>(null);
-	    const gridScaleRef = useRef(1);
-	    const imageDimensionsRef = useRef<{ width: number; height: number } | null>(null);
-	    const loadTokenRef = useRef(0);
+    const refBoardRef = useRef<PIXI.Sprite | null>(null);
+    const gridContainerRef = useRef<PIXI.Container | null>(null);
+    const gridScaleRef = useRef(1);
+    const imageDimensionsRef = useRef<{ width: number; height: number } | null>(null);
+    const loadTokenRef = useRef(0);
     const trayLayoutRef = useRef<{
         puzzleId: string;
         order: string[];
@@ -858,19 +858,19 @@ export default function JigsawCustomGame({ puzzleData, onComplete }: JigsawCusto
                     gridY >= boardOffsetY &&
                     gridY <= boardOffsetY + boardHeightPx;
 
-            piece.zIndex = PIECE_DRAG_Z_INDEX;
-            app.stage.sortChildren();
+                piece.zIndex = PIECE_DRAG_Z_INDEX;
+                app.stage.sortChildren();
 
-            if (slot) {
-                // Snap to the slot (even if incorrect)
-                if (piece.jigsawPieceData && !isPieceInCorrectSlot(piece.jigsawPieceData, slot)) {
-                    playWrongSlotSound();
-                }
-                piece.scale.set(gridScale);
-                snapPieceToSlot(piece, slot);
-            } else if (isOverBoard && dragSourceSlotRef.current) {
-                // Dropped on board but not in a slot - return to source slot
-                const { row, col } = dragSourceSlotRef.current;
+                if (slot) {
+                    // Snap to the slot (even if incorrect)
+                    if (piece.jigsawPieceData && !isPieceInCorrectSlot(piece.jigsawPieceData, slot)) {
+                        playWrongSlotSound();
+                    }
+                    piece.scale.set(gridScale);
+                    snapPieceToSlot(piece, slot);
+                } else if (isOverBoard && dragSourceSlotRef.current) {
+                    // Dropped on board but not in a slot - return to source slot
+                    const { row, col } = dragSourceSlotRef.current;
                     const sourceSlot = gridSlotsRef.current[row][col];
                     const gridOffsetX = gridContainerRef.current?.x || 0;
                     const globalX = sourceSlot.x + gridOffsetX;
@@ -1002,6 +1002,8 @@ export default function JigsawCustomGame({ puzzleData, onComplete }: JigsawCusto
             safeDestroy();
         });
 
+        const urlMap = objectUrlMap.current;
+
         const handleResize = () => {
             if (isCleanedUp) return;
             const renderer = (app as any).renderer as PIXI.Renderer | undefined;
@@ -1016,9 +1018,9 @@ export default function JigsawCustomGame({ puzzleData, onComplete }: JigsawCusto
             isCleanedUp = true;
             window.removeEventListener('resize', handleResize);
             void initPromise.finally(() => safeDestroy());
-            objectUrlMap.current.forEach((_, key) => revokeObjectUrl(key));
+            urlMap.forEach((_, key) => revokeObjectUrl(key));
         };
-    }, []);
+    }, [loadPuzzle, revokeObjectUrl, theme.bg]);
 
     return (
         <div
