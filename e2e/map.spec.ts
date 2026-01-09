@@ -3,11 +3,11 @@ import { test, expect } from '@playwright/test';
 test.describe('Quest Map Regression', () => {
 
     test('should display map, compass, and controls', async ({ page }) => {
-        // 1. Mock the Quest Context/Data if necessary? 
-        // Actually, usually the template app looks for local JSON or fetches. 
+        // 1. Mock the Quest Context/Data if necessary?
+        // Actually, usually the template app looks for local JSON or fetches.
         // If running `npm run dev` in template, it might use mock data or fail if no quest ID is passed?
-        // But defaults usually work. Let's see. 
-        // The `Page` component uses `useQuest()`. 
+        // But defaults usually work. Let's see.
+        // The `Page` component uses `useQuest()`.
         // If it relies on `QuestContext` which fetches from URL or local `src/data/quest.json`.
         // We should assume `src/data/quest.json` exists in the template.
 
@@ -21,7 +21,7 @@ test.describe('Quest Map Regression', () => {
         // await expect(page.getByText('Loading map...')).toBeVisible();
 
         // 3. Verify Map Container is present
-        // The container has `leaflet-container` class usually added by Leaflet, 
+        // The container has `leaflet-container` class usually added by Leaflet,
         // OR we check for our wrapper.
         const mapWrapper = page.locator('.leaflet-container');
         await expect(mapWrapper).toBeVisible({ timeout: 30000 });
@@ -98,11 +98,11 @@ test.describe('Quest Map Regression', () => {
         // Wait, logic in QuestMap:
         // non-iOS: compass = 360 - alpha.
         // alpha = 90 (East). compass = 270 (West? No. 360-90 = 270).
-        // If alpha is 90, Heading is 270? 
+        // If alpha is 90, Heading is 270?
         // Standard: Alpha 0 = North, 90 = East, 180 = South, 270 = West.
         // Compass heading usually means "Degree from North".
-        // modifying QuestMap: `compass = 360 - event.alpha`. 
-        // If alpha=90 (East), compass=270. 
+        // modifying QuestMap: `compass = 360 - event.alpha`.
+        // If alpha=90 (East), compass=270.
         // Transform: `rotate(${-heading}deg)` -> `rotate(-270deg)`.
 
         await expect(compassContainer).toHaveAttribute('style', /rotate\(-270deg\)/);
