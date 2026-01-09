@@ -3,7 +3,7 @@ export const runtime = 'edge';
 
 /**
  * API Endpoint: Update player GPS position
- * 
+ *
  * Refactored to safe no-op for AWS Runtime migration.
  * Position updates should now be sent via WebSocket (useTeamWebSocket).
  */
