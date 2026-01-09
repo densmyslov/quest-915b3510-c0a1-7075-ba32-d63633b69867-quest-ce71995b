@@ -82,9 +82,8 @@ export default function TimelineVideoOverlay({
         </button>
       </div>
       <div style={{ marginTop: 12 }}>
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-	        <video
-	          src={overlay.url}
+        <video
+          src={overlay.url}
           controls
           playsInline
           preload="metadata"
@@ -92,12 +91,12 @@ export default function TimelineVideoOverlay({
           muted={overlay.muted}
           loop={overlay.loop}
           poster={overlay.posterUrl}
-	          onEnded={onEnded}
-	          onError={onError}
-	          style={{
-	            width: '100%',
-	            maxHeight: '50vh',
-	            borderRadius: 8,
+          onEnded={onEnded}
+          onError={onError}
+          style={{
+            width: '100%',
+            maxHeight: '50vh',
+            borderRadius: 8,
             background: 'rgba(0,0,0,0.8)',
             boxShadow: '0 6px 20px rgba(0,0,0,0.4)'
           }}
