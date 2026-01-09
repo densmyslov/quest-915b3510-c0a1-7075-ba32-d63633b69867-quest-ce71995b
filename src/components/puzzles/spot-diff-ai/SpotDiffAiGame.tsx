@@ -83,6 +83,5 @@ export default function SpotDiffAiGame({ puzzleData, onComplete }: SpotDiffAiGam
         };
     }, [puzzleData]);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return <SpotDifferenceGame puzzleData={adaptedPuzzleData as any} onComplete={onComplete} />;
 }
