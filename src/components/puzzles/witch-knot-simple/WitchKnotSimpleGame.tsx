@@ -111,81 +111,7 @@ const formatTime = (timeSeconds: number) => {
   return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 };
 
-const drawRopeKnot = (
-  graphics: PIXI.Graphics,
-  pattern: Pattern,
-  studsList: Stud[],
-  imageWidth: number,
-  imageHeight: number,
-  canvasWidth: number,
-  canvasHeight: number
-) => {
-  if (!pattern.points || pattern.points.length < 2) return;
 
-  const color = parseInt((pattern.color || '#cc3333').replace('#', '0x'), 16);
-
-  const displayPoints = pattern.points
-    .filter(idx => studsList[idx] !== undefined)
-    .map(idx =>
-      getDisplayCoords(studsList[idx], imageWidth, imageHeight, canvasWidth, canvasHeight)
-    )
-    .filter(p => p !== null);
-
-  if (displayPoints.length < 2) return;
-
-  const drawSmoothCurve = (points: Point[], offsetX: number, offsetY: number, strokeStyle: any) => {
-    if (points.length < 2) return;
-
-    graphics.moveTo(points[0].x + offsetX, points[0].y + offsetY);
-
-    if (points.length === 2) {
-      graphics.lineTo(points[1].x + offsetX, points[1].y + offsetY);
-    } else {
-      for (let i = 0; i < points.length - 1; i++) {
-        const p1 = points[i + 1];
-
-        if (i === points.length - 2) {
-          graphics.lineTo(p1.x + offsetX, p1.y + offsetY);
-        } else {
-          const p2 = points[i + 2];
-          const midX = (p1.x + p2.x) / 2;
-          const midY = (p1.y + p2.y) / 2;
-
-          graphics.quadraticCurveTo(
-            p1.x + offsetX,
-            p1.y + offsetY,
-            midX + offsetX,
-            midY + offsetY
-          );
-        }
-      }
-    }
-
-    graphics.stroke(strokeStyle);
-  };
-
-  // Draw shadow
-  drawSmoothCurve(displayPoints, 2, 2, { width: 8, color: 0x000000, alpha: 0.3 });
-  // Draw main rope
-  drawSmoothCurve(displayPoints, 0, 0, { width: 6, color });
-  // Draw highlight
-  drawSmoothCurve(displayPoints, -1, -1, { width: 2, color: 0xffffff, alpha: 0.3 });
-
-  // Draw knots at stud points
-  pattern.points.forEach((idx) => {
-    if (!studsList[idx]) return;
-    const stud = getDisplayCoords(studsList[idx], imageWidth, imageHeight, canvasWidth, canvasHeight);
-    if (!stud) return;
-
-    // Draw filled circle
-    graphics.circle(stud.x, stud.y, 4);
-    graphics.fill({ color });
-
-    // Draw circle outline
-    graphics.circle(stud.x, stud.y, 4);
-    graphics.stroke({ width: 1, color: 0xffffff, alpha: 0.5 });
-  });
-};
 
 const renderReferenceBoard = (
   graphics: PIXI.Graphics,
@@ -375,9 +301,11 @@ export default function WitchKnotSimpleGame({
   } = puzzleData || {};
 
   // Memoize studs and patterns to prevent unnecessary re-renders
-  const studs = useMemo(() => rawStuds, [JSON.stringify(rawStuds)]);
+  const rawStudsStr = JSON.stringify(rawStuds);
+  const studs = useMemo(() => rawStuds, [rawStudsStr]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Pattern distribution: Each player gets ONE pattern instead of all patterns
+  const rawPatternsStr = JSON.stringify(rawPatterns);
   const patterns = useMemo(() => {
     // If no distribution context, show all patterns (backward compatibility)
     if (!sessionId || !puzzleId || rawPatterns.length === 0) {
@@ -422,7 +350,8 @@ export default function WitchKnotSimpleGame({
 
     // Return only the assigned pattern
     return [rawPatterns[patternIndex]];
-  }, [JSON.stringify(rawPatterns), sessionId, teamCode, startedAt, puzzleId, teamMemberIds]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rawPatternsStr, sessionId, teamCode, startedAt, puzzleId, teamMemberIds]);
 
   const imageUrl = originalImageUrl || doorImageUrl || doorImageDataUrl;
 
@@ -788,6 +717,7 @@ export default function WitchKnotSimpleGame({
         lowerAppRef.current = null;
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [puzzleData, imageUrl, studs]);
 
   // Update reference board when pattern changes
@@ -877,7 +807,7 @@ export default function WitchKnotSimpleGame({
         imageDimensions: imageDimensionsRef.current
       };
     }
-  }, [state, studGraphicsRef.current, mainStageContainerRef.current]);
+  }, [state]);
 
   if (!puzzleData) {
     return (
@@ -922,7 +852,7 @@ export default function WitchKnotSimpleGame({
 
       lastTouchPosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
 
-      let newPanX = panPosRef.current.x + dx;
+      const newPanX = panPosRef.current.x + dx;
       let newPanY = panPosRef.current.y + dy;
 
       // Constraint: scroll up to 3/4 of image height
