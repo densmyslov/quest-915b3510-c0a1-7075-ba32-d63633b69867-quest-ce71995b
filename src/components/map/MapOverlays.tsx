@@ -29,6 +29,11 @@ export type MapOverlaysProps = {
     // Chat overlay
     timelineChatOverlay: Maybe<any>;
     closeTimelineChat: () => void;
+
+    // Audio sync
+    audioCurrentTime: number;
+    audioDuration: number;
+    audioIsPlaying: boolean;
 };
 
 export default function MapOverlays(props: MapOverlaysProps) {
@@ -45,6 +50,10 @@ export default function MapOverlays(props: MapOverlaysProps) {
 
         timelineChatOverlay,
         closeTimelineChat,
+
+        audioCurrentTime,
+        audioDuration,
+        audioIsPlaying
     } = props;
 
     // Common palette for overlays
@@ -66,14 +75,7 @@ export default function MapOverlays(props: MapOverlaysProps) {
                 />
             ) : null}
 
-            {/* Timeline text overlay */}
-            {timelineTextOverlay ? (
-                <TimelineTextOverlay
-                    overlay={timelineTextOverlay}
-                    onClose={closeTimelineText}
-                    palette={palette}
-                />
-            ) : null}
+            {/* Timeline text overlay - Removed in favor of generic audio panel */}
 
             {/* Timeline chat overlay */}
             {timelineChatOverlay ? (
