@@ -24,7 +24,7 @@ export interface PieceData {
         height: number;
     };
 
-    /** 
+    /**
      * The correct center position where this piece should be placed
      * Used for snap detection in the game
      */
@@ -103,7 +103,7 @@ export interface PuzzleData {
     /** Optional: URL or data URL of the difference image */
     diffImageUrl?: string;
 
-    /** 
+    /**
      * Base64 encoded PNG of the board with holes punched out
      * Used as the background in the puzzle game
      */
@@ -147,9 +147,9 @@ export interface PuzzleData {
         centerY: number;
         isSaved: boolean;
     }>;
-    /** 
+    /**
      * If true, correctPosition coordinates are already normalized relative to the image (0,0).
-     * If false, they may include canvas margins and require auto-detection. 
+     * If false, they may include canvas margins and require auto-detection.
      */
     isNormalized?: boolean;
 
