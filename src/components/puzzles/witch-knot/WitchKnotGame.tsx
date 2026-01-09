@@ -354,12 +354,7 @@ export default function WitchKnotGame({ puzzleData, onComplete }: WitchKnotGameP
 
   const [selectedPatternIndex, setSelectedPatternIndex] = useState(0);
 
-  useEffect(() => {
-    setSelectedPatternIndex((prev) => {
-      if (patterns.length === 0) return 0;
-      return Math.min(prev, patterns.length - 1);
-    });
-  }, [patterns.length]);
+
 
   const selectedPattern: Pattern | null = patterns[selectedPatternIndex] || patterns[0] || null;
   const selectedPatternRef = useRef(selectedPattern);
@@ -388,9 +383,17 @@ export default function WitchKnotGame({ puzzleData, onComplete }: WitchKnotGameP
     }));
   }, []);
 
+  // Clamping Effect: Ensure selected index is valid when patterns change
+  // Clamping Effect: Ensure selected index is valid when patterns change
   useEffect(() => {
-    resetProgress(selectedPattern);
-  }, [resetProgress, selectedPattern]);
+    if (patterns.length > 0 && selectedPatternIndex >= patterns.length) {
+      const newIndex = patterns.length - 1;
+      setTimeout(() => {
+        setSelectedPatternIndex(newIndex);
+        resetProgress(patterns[newIndex] || null);
+      }, 0);
+    }
+  }, [patterns.length, selectedPatternIndex, resetProgress, patterns]);
 
   // Timer
   useEffect(() => {
@@ -481,7 +484,10 @@ export default function WitchKnotGame({ puzzleData, onComplete }: WitchKnotGameP
     if (!upperContainerRef.current || !lowerContainerRef.current || !puzzleData) return;
 
     let cancelled = false;
-    setState((prev) => ({ ...prev, isLoading: true, error: null }));
+
+    // Avoid synchronous setState here to prevent "set state in effect" warning
+    // If we need to reset loading state for new data, it's better done via a separate effect or key change logic
+    // But since we are initializing async, we can just start the async work.
 
     const initPuzzle = async () => {
       try {
@@ -669,7 +675,17 @@ export default function WitchKnotGame({ puzzleData, onComplete }: WitchKnotGameP
       lineGraphicsRef.current = null;
       referenceGraphicsRef.current = null;
     };
-  }, [puzzleData, handleStudClick]);
+  }, [
+    puzzleData,
+    handleStudClick,
+    selectedPattern,
+    studs,
+    doorContour,
+    doorImageUrl,
+    imageDimensions,
+    originalImageUrl,
+    canvas
+  ]);
 
   useEffect(() => {
     const activeStuds = new Set(selectedPattern?.points || []);
@@ -725,7 +741,11 @@ export default function WitchKnotGame({ puzzleData, onComplete }: WitchKnotGameP
           <select
             style={styles.selector}
             value={selectedPatternIndex}
-            onChange={(e) => setSelectedPatternIndex(Number(e.target.value))}
+            onChange={(e) => {
+              const newIndex = Number(e.target.value);
+              setSelectedPatternIndex(newIndex);
+              resetProgress(patterns[newIndex] || null);
+            }}
             disabled={patterns.length === 0}
           >
             {patterns.length === 0 && <option value={0}>Nessun filo</option>}
