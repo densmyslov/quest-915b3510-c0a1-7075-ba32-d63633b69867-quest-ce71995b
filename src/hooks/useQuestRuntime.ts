@@ -74,7 +74,7 @@ export type QuestRuntimeClient = {
   scoreByPlayerId: Map<string, number>;
 
   refresh: () => Promise<void>;
-  startOrJoin: () => Promise<void>;
+  startOrJoin: (options?: { reset?: boolean }) => Promise<void>;
   arriveAtObject: (objectId: ObjectId) => Promise<void>;
   completeNode: (nodeId: NodeId) => Promise<void>;
   submitPuzzleSuccess: (params: { puzzleId: string; objectId?: string; points?: number }) => Promise<void>;
@@ -113,6 +113,7 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
   const [deltas, setDeltas] = useState<RuntimeDelta[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasStarted, setHasStarted] = useState<boolean>(false);
 
   const puzzleNodeIdByKey = useMemo(() => {
     const map = new Map<string, string>();
@@ -176,7 +177,7 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
     setDefinition(res.data.definition);
   }, [questId, questVersion]);
 
-  const startOrJoin = useCallback(async () => {
+  const startOrJoin = useCallback(async (options?: { reset?: boolean }) => {
     if (!questId || !runtimeSessionId || !playerId || !playerName) return;
     setLoading(true);
     try {
@@ -195,6 +196,7 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
         questVersion,
         eventId: makeId(),
         dedupeKey: `start:${runtimeSessionId}:${playerId}`,
+        reset: options?.reset,
       });
       if (!res.ok) {
         setError(res.error);
@@ -207,10 +209,15 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
       if (res.data.snapshot) setSnapshot(res.data.snapshot);
       if (Array.isArray(res.data.deltas)) setDeltas(res.data.deltas);
       setError(null);
+      setHasStarted(true);
     } finally {
       setLoading(false);
     }
   }, [loadDefinition, playerId, playerName, questId, questVersion, runtimeSessionId]);
+
+  useEffect(() => {
+    setHasStarted(false);
+  }, [playerId, questId, questVersion, runtimeSessionId]);
 
   const arriveAtObject = useCallback(
     async (objectId: ObjectId) => {
@@ -387,13 +394,13 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
       console.log('[useQuestRuntime] Poll key changed:', lastPollKey);
     }
 
-    if (!autoStart) return;
     if (!questId || !playerId || !runtimeSessionId) return;
+    if (!autoStart && !hasStarted) return;
 
     // Only start/join if we haven't already done so for this session configuration.
     // This prevents redundant Start calls when other deps (like pollIntervalMs) change.
     const sessionKey = `${questId}:${questVersion}:${runtimeSessionId}:${playerId}`;
-    if (startedSessionKeyRef.current !== sessionKey) {
+    if (autoStart && startedSessionKeyRef.current !== sessionKey) {
       console.log('[useQuestRuntime] Auto-starting session:', sessionKey);
       startedSessionKeyRef.current = sessionKey;
       void startOrJoin();
@@ -409,7 +416,7 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
       if (pollRef.current) window.clearInterval(pollRef.current);
       pollRef.current = null;
     };
-  }, [autoStart, pollIntervalMs, questId, questVersion, playerId, refresh, runtimeSessionId, startOrJoin, lastPollKey]);
+  }, [autoStart, hasStarted, pollIntervalMs, questId, questVersion, playerId, refresh, runtimeSessionId, startOrJoin, lastPollKey]);
 
   const completedObjects = useMemo(() => {
     const set = new Set<string>();
@@ -445,12 +452,15 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
   // Auto-refresh when runtime deltas arrive via TeamRoom WS (dispatched as a window event).
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    // Avoid pulling snapshots / triggering server-side traversal before the user explicitly starts the runtime
+    // (when autoStart is disabled).
+    if (!autoStart && !hasStarted) return;
     const handler = () => void refresh();
     window.addEventListener('quest_runtime_deltas', handler);
     return () => {
       window.removeEventListener('quest_runtime_deltas', handler);
     };
-  }, [refresh]);
+  }, [autoStart, hasStarted, refresh]);
 
   return useMemo(() => ({
     sessionId: runtimeSessionId,
