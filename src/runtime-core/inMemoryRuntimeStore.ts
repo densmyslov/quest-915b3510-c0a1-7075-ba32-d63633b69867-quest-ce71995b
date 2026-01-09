@@ -37,4 +37,3 @@ export function clearInMemoryRuntimeStore() {
   sessions.clear();
   playerToSession.clear();
 }
-
