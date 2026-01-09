@@ -25,29 +25,29 @@ def create_lambda_role(iam, role_name):
             }
         ]
     }
-    
+
     try:
         role = iam.create_role(
             RoleName=role_name,
             AssumeRolePolicyDocument=json.dumps(trust_policy)
         )
-        
+
         # Attach basic execution permission
         iam.attach_role_policy(
             RoleName=role_name,
             PolicyArn='arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
         )
-        
+
         # Attach DynamoDB Full Access (Simplify for dev, scope down for prod ideally)
         iam.attach_role_policy(
             RoleName=role_name,
             PolicyArn='arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess'
         )
-        
+
         print("Waiting for Role propagation...")
         time.sleep(10) # Important
         return role['Role']['Arn']
-        
+
     except Exception as e:
         print(f"Error creating role: {e}")
         # If exists, return ARN
@@ -71,34 +71,34 @@ def main():
     parser.add_argument('--region', type=str, default='us-east-1', help='AWS Region')
     parser.add_argument('--env', type=str, default='-dev', help='Environment suffix (e.g., -dev)')
     args = parser.parse_args()
-    
+
     region = args.region
     suffix = args.env # e.g. "-dev" or ""
-    
+
     print(f"Deploying to {region} with suffix '{suffix}'")
-    
+
     iam = boto3.client('iam', region_name=region)
     awslambda = boto3.client('lambda', region_name=region)
     apigateway = boto3.client('apigatewayv2', region_name=region)
-    
+
     role_name = f"QuestLambdaRole{suffix}"
     role_arn = get_role_arn(iam, role_name)
     if not role_arn:
         role_arn = create_lambda_role(iam, role_name)
-        
+
     function_name = f"quest-api{suffix}"
-    
+
     # Zip Code
     print("Zipping backend code...")
     zip_content = create_zip('backend')
-    
+
     # Environment Variables
     env_vars = {
         'DYNAMODB_TABLE_SESSIONS': f'quest-sessions{suffix}',
         'DYNAMODB_TABLE_TEAMS': f'quest-teams{suffix}'
         # AWS_DEFAULT_REGION is reserved and set automatically
     }
-    
+
     try:
         print(f"Checking if function {function_name} exists...")
         awslambda.get_function(FunctionName=function_name)
@@ -123,15 +123,15 @@ def main():
             Environment={'Variables': env_vars},
             Timeout=15
         )
-    
+
     # API Gateway
     api_name = f"quest-api-gateway{suffix}"
     print(f"Setting up API Gateway: {api_name}...")
-    
+
     # Check if exists (Simple check by name)
     apis = apigateway.get_apis()['Items']
     api_id = next((api['ApiId'] for api in apis if api['Name'] == api_name), None)
-    
+
     if not api_id:
         api = apigateway.create_api(
             Name=api_name,
@@ -146,17 +146,17 @@ def main():
         print(f"Created API Gateway: {api_id}")
     else:
         print(f"Found existing API Gateway: {api_id}")
-        
+
     # Integration
     # We need to find or create the integration
     # For simplicity, we create/update route.
-    
+
     # 1. Integration
     integrations = apigateway.get_integrations(ApiId=api_id)['Items']
     integration_id = next((i['IntegrationId'] for i in integrations if 'quest-api' in i.get('IntegrationUri', '')), None)
-    
+
     lambda_arn = awslambda.get_function(FunctionName=function_name)['Configuration']['FunctionArn']
-    
+
     if not integration_id:
         print("Creating Integration...")
         integ = apigateway.create_integration(
@@ -166,13 +166,13 @@ def main():
             PayloadFormatVersion='2.0'
         )
         integration_id = integ['IntegrationId']
-        
+
     # 2. Route
     # We use ANY /{proxy+} for catch-all
     routes = apigateway.get_routes(ApiId=api_id)['Items']
     route_key = "ANY /{proxy+}"
     route_exists = any(r['RouteKey'] == route_key for r in routes)
-    
+
     if not route_exists:
         print("Creating Route...")
         apigateway.create_route(
