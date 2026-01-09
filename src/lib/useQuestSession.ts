@@ -23,6 +23,7 @@ const SOLO_TEAM_STORAGE = {
 
 const WEBSOCKET_URL_KEY = 'quest_websocketUrl';
 
+/*
 function getOrCreateDeviceId(): string {
     if (typeof window === 'undefined') return 'unknown-device';
     const key = 'quest_deviceId';
@@ -35,19 +36,14 @@ function getOrCreateDeviceId(): string {
     localStorage.setItem(key, created);
     return created;
 }
+*/
 
 function notifySessionChanged() {
     if (typeof window === 'undefined') return;
     window.dispatchEvent(new Event('quest_session_changed'));
 }
 
-function splitName(fullName: string): { firstName: string; lastName: string } {
-    const trimmed = fullName.trim();
-    if (!trimmed) return { firstName: 'Player', lastName: '' };
-    const parts = trimmed.split(/\s+/);
-    if (parts.length === 1) return { firstName: parts[0], lastName: '' };
-    return { firstName: parts[0], lastName: parts.slice(1).join(' ') };
-}
+
 
 export function useQuestSession() {
     const [session, setSession] = useState<Session | null>(null);
@@ -273,33 +269,23 @@ export function useQuestSession() {
 }
 
 export function useQuestTimer(session: Session | null) {
-    const [remaining, setRemaining] = useState<number | null>(null);
-    const [isExpired, setIsExpired] = useState(false);
+    const [now, setNow] = useState<number>(() => Math.floor(Date.now() / 1000));
 
     useEffect(() => {
-        if (!session) return;
-        if (!session.expiresAt) {
-            setRemaining(null);
-            setIsExpired(false);
-            return;
-        }
-
-        const tick = () => {
-            const now = Math.floor(Date.now() / 1000);
-            const left = (session.expiresAt as number) - now;
-            if (left <= 0) {
-                setRemaining(0);
-                setIsExpired(true);
-            } else {
-                setRemaining(left);
-                setIsExpired(false);
-            }
-        };
-
-        tick();
-        const interval = setInterval(tick, 1000);
+        if (!session?.expiresAt) return; // No timer needed if no session or expiry
+        const interval = setInterval(() => {
+            setNow(Math.floor(Date.now() / 1000));
+        }, 1000);
         return () => clearInterval(interval);
-    }, [session]);
+    }, [session?.expiresAt]);
+
+    if (!session || !session.expiresAt) {
+        return { remaining: null, isExpired: false };
+    }
+
+    const left = session.expiresAt - now;
+    const isExpired = left <= 0;
+    const remaining = isExpired ? 0 : left;
 
     return { remaining, isExpired };
 }
