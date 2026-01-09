@@ -3,34 +3,44 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { TimelineTextOverlayState } from './types';
 
+import { StreamingText } from '@/components/StreamingText';
+
 type TimelineTextOverlayPalette = {
   gold: string;
   goldLight: string;
   parchment: string;
 };
 
-type TimelineTextOverlayProps = {
-  overlay: TimelineTextOverlayState | null;
+interface TimelineTextOverlayProps {
+  overlay: TimelineTextOverlayState;
   onClose: () => void;
   palette: TimelineTextOverlayPalette;
+  currentTime?: number;
+  duration?: number;
+  isPlaying?: boolean;
 };
+
+// --- Main Component ---
 
 export default function TimelineTextOverlay({
   overlay,
   onClose,
-  palette
+  palette,
+  currentTime = 0,
+  duration = 0,
+  isPlaying = false
 }: TimelineTextOverlayProps) {
-  if (!overlay) return null;
-
   const imageUrls = useMemo(() => {
-    const urls = overlay.imageUrls ?? [];
+    if (!overlay?.imageUrls) return [];
+    const urls = overlay.imageUrls;
     return Array.isArray(urls) ? urls.filter((v): v is string => typeof v === 'string' && v.length > 0) : [];
-  }, [overlay.imageUrls]);
+  }, [overlay?.imageUrls]);
 
   const [expandedUrl, setExpandedUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    setExpandedUrl(null);
+    const timer = setTimeout(() => setExpandedUrl(null), 0);
+    return () => clearTimeout(timer);
   }, [overlay]);
 
   useEffect(() => {
@@ -42,6 +52,13 @@ export default function TimelineTextOverlay({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [expandedUrl]);
 
+  if (!overlay) return null;
+
+  // Extract transcription if available (assuming it might be passed in overlay even if not typed yet)
+  const transcription = (overlay as any).transcription;
+  const hasTranscription = !!transcription;
+
+
   return (
     <>
       <div
@@ -52,42 +69,103 @@ export default function TimelineTextOverlay({
           transform: 'translateX(-50%)',
           zIndex: 5200,
           width: 'min(520px, calc(100vw - 32px))',
-          padding: '14px 18px',
-          background: 'linear-gradient(135deg, rgba(26, 21, 16, 0.95) 0%, rgba(44, 36, 28, 0.95) 100%)',
+          padding: '18px 22px', // Increased padding for better reading
+          background: 'linear-gradient(135deg, rgba(26, 21, 16, 0.98) 0%, rgba(44, 36, 28, 0.98) 100%)', // Slightly more opaque
           border: `2px solid ${palette.gold}`,
           boxShadow: '0 10px 36px rgba(0,0,0,0.55), inset 0 1px 0 rgba(201, 169, 97, 0.2)',
           color: palette.parchment,
-          pointerEvents: 'auto'
+          pointerEvents: 'auto',
+          borderRadius: '4px'
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'flex-start' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0, flex: 1 }}>
             <div
               style={{
                 fontFamily: "'Cinzel', serif",
-                fontSize: '11px',
+                fontSize: '13px',
                 fontWeight: 800,
                 letterSpacing: '1.2px',
                 textTransform: 'uppercase',
-                color: palette.goldLight
+                color: palette.goldLight,
+                marginBottom: '8px'
               }}
             >
               {overlay.title}
             </div>
-            <div
-              style={{
-                fontFamily: "'Crimson Text', Georgia, serif",
-                fontSize: '14px',
-                lineHeight: 1.4,
-                whiteSpace: 'pre-wrap',
-                wordBreak: 'break-word'
-              }}
-            >
-              {overlay.text}
-            </div>
+
+            {hasTranscription ? (
+              /* Use shared StreamingText for synchronized audio transcription */
+              <div style={{ maxHeight: '60vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <StreamingText
+                  transcription={transcription}
+                  currentTime={currentTime ?? 0}
+                  audioDuration={duration}
+                  isPlaying={isPlaying}
+                  className="timeline-streaming-text"
+                  showFutureWords={true}
+                />
+                <style>{`
+                  /* Override StreamingText styles to match the vintage overlay theme */
+                  .timeline-streaming-text {
+                    background: transparent !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                    padding: 0 !important;
+                    min-height: auto !important;
+                  }
+                  .timeline-streaming-text > div {
+                    font-family: 'Crimson Text', Georgia, serif !important;
+                    font-size: 18px !important;
+                    line-height: 1.5 !important;
+                    color: ${palette.parchment} !important;
+                  }
+                  .timeline-streaming-text span {
+                    color: rgba(245, 230, 211, 0.5) !important; /* Future/standard words dimmed */
+                    padding: 0 4px 0 0 !important;
+                    margin: 0 !important;
+                    border-radius: 0 !important;
+                    display: inline !important;
+                  }
+                  /* Try to target current word specifically if possible.
+                     StreamingText adds a specific class for current word.
+                     We can try to match the style attribute or add a data attribute in StreamingText if needed.
+                     For now, let's rely on the fact that StreamingText adds classes.
+                     We can use attribute 'class' contains 'currentWord'.
+                  */
+                  .timeline-streaming-text span[class*="currentWord"] {
+                    color: ${palette.gold} !important;
+                    background: transparent !important;
+                    box-shadow: none !important;
+                    font-weight: bold !important;
+                    transform: scale(1.05) !important;
+                    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3) !important;
+                  }
+                  .timeline-streaming-text span[class*="pastWord"] {
+                     color: ${palette.parchment} !important;
+                  }
+                  .timeline-streaming-text span[class*="futureWord"] {
+                     opacity: 0.3 !important;
+                  }
+                `}</style>
+              </div>
+            ) : (
+              /* Fallback for simple text without transcription */
+              <div
+                style={{
+                  fontFamily: "'Crimson Text', Georgia, serif",
+                  fontSize: '18px',
+                  lineHeight: 1.5,
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word'
+                }}
+              >
+                {overlay.text}
+              </div>
+            )}
 
             {imageUrls.length > 0 && (
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 14 }}>
                 {imageUrls.map((url) => (
                   <button
                     key={url}
@@ -136,7 +214,8 @@ export default function TimelineTextOverlay({
               cursor: 'pointer',
               fontFamily: "'Cinzel', serif",
               fontSize: 16,
-              lineHeight: '26px'
+              lineHeight: '26px',
+              flexShrink: 0
             }}
           >
             &times;
