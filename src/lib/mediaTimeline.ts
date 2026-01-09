@@ -26,8 +26,12 @@ function clampNonNegative(value: unknown, fallback: number): number {
 }
 
 function getRawTimeline(obj: QuestObject): MediaTimeline | null {
-  const raw = (obj as any).mediaTimeline ?? (obj as any).media_timeline ?? null;
-  if (!raw || typeof raw !== 'object') return null;
+  const raw = (obj as any).mediaTimeline ?? (obj as any).media_timeline ?? (obj as any).media ?? null;
+  if (!raw) return null;
+  // If raw is array, treat as items list
+  if (Array.isArray(raw)) {
+    return { version: 1, items: raw } as MediaTimeline;
+  }
   const version = typeof (raw as any).version === 'number' ? (raw as any).version : 1;
   const items = Array.isArray((raw as any).items) ? (raw as any).items : [];
   return { version, items } as MediaTimeline;
