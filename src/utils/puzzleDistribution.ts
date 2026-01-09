@@ -112,4 +112,3 @@ export function distributeObjectPuzzles(
     selected_puzzle_ids: selectedPuzzleIds,
   };
 }
-
