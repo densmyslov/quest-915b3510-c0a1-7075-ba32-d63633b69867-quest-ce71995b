@@ -86,7 +86,7 @@ test.describe('Witch Knot Simple Puzzle', () => {
         // 1. Test Zoom (Pinch)
         // Playwright doesn't have a simple high-level pinch, but we can access CDP on Chromium
         // or attempt to use page.touchscreen logic if supported.
-        // However, generic multi-touch simulation is complex. 
+        // However, generic multi-touch simulation is complex.
         // For 'Mobile Safari' (WebKit), CDP is not available directly via page.
         // We will try to simulate Pan (1 finger) first which is easier.
         // If we strictly need pinch, we might need to skip or use browser-specific logic.
@@ -111,11 +111,11 @@ test.describe('Witch Knot Simple Puzzle', () => {
         await page.touchscreen.tap(centerX, centerY); // Focus
 
         // Dispatch touch sequence manually if page.touchscreen.drag is not available?
-        // Playwright has page.mouse.move etc. page.touchscreen currently has tap. 
+        // Playwright has page.mouse.move etc. page.touchscreen currently has tap.
         // We can use the experimental loose CDP for android, but for iOS in Playwright...
-        // Actually, let's try to trust that pure TouchEvent dispatching WAS the way to go, 
+        // Actually, let's try to trust that pure TouchEvent dispatching WAS the way to go,
         // but we just did it wrong (constructor issues).
-        // Since we are skipping on Desktop, we can try using TouchEvent constructor again? 
+        // Since we are skipping on Desktop, we can try using TouchEvent constructor again?
         // NO, WebKit supports TouchEvent.
 
         // Let's rely on checking if TouchEvent exists before running.
@@ -186,4 +186,3 @@ test.describe('Witch Knot Simple Puzzle', () => {
         }).toBe(initialWrongClicks + 1);
     });
 });
-
