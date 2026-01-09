@@ -215,4 +215,3 @@ test.describe('Mozaic - Play Mode (Regression)', () => {
         expect(snappedCorrect).toBe(true);
     });
 });
-
