@@ -9,6 +9,7 @@
 
 import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import * as PIXI from 'pixi.js';
+import { useTeamSync } from '@/context/TeamSyncContext';
 import { distributeObjectPuzzles } from '@/utils/puzzleDistribution';
 
 // ============================================================================
@@ -24,6 +25,8 @@ interface WitchKnotSimpleGameProps {
   startedAt?: string;
   puzzleId?: string;
   teamMemberIds?: string[]; // Session IDs of all team members for distribution
+  stopId?: string;
+  onClose?: () => void;
 }
 
 interface PuzzleState {
@@ -253,7 +256,9 @@ export default function WitchKnotSimpleGame({
   teamCode,
   startedAt,
   puzzleId,
-  teamMemberIds
+  teamMemberIds,
+  stopId,
+  onClose
 }: WitchKnotSimpleGameProps) {
   const upperContainerRef = useRef<HTMLDivElement>(null);
   const lowerContainerRef = useRef<HTMLDivElement>(null);
@@ -272,6 +277,11 @@ export default function WitchKnotSimpleGame({
   const clickSoundRef = useRef<HTMLAudioElement | null>(null);
   const wrongSoundRef = useRef<HTMLAudioElement | null>(null);
 
+  // Reference tray panning refs
+  const refPanRef = useRef<{ x: number, y: number }>({ x: 0, y: 0 });
+  const refIsDraggingRef = useRef(false);
+  const refLastPosRef = useRef<{ x: number, y: number } | null>(null);
+
   const [pixiReady, setPixiReady] = useState(false);
 
   const [state, setState] = useState<PuzzleState>({
@@ -285,6 +295,20 @@ export default function WitchKnotSimpleGame({
     timeElapsed: 0,
     isRunning: false
   });
+
+  const { sendPuzzleInteraction, setOnPuzzleInteraction, team } = useTeamSync();
+
+  // Team completion state
+  const [teamCompletions, setTeamCompletions] = useState<Set<string>>(new Set());
+  const [remoteInteractions, setRemoteInteractions] = useState<{ x: number, y: number, id: string }[]>([]);
+
+  // Sound ref for remote clicks
+  const remoteClickSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize remote click sound
+  useEffect(() => {
+    remoteClickSoundRef.current = new Audio('https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251225-195816-70908bc1.mp3'); remoteClickSoundRef.current.volume = 0.5;
+  }, []);
 
   const stateRef = useRef(state);
   useEffect(() => {
@@ -480,6 +504,14 @@ export default function WitchKnotSimpleGame({
         isRunning: isComplete ? false : prev.isRunning || shouldStart
       }));
 
+      // Send interaction
+      if (stopId && puzzleId) {
+        sendPuzzleInteraction(stopId, puzzleId, 'stud_click', { studIndex });
+        if (isComplete) {
+          sendPuzzleInteraction(stopId, puzzleId, 'pattern_complete', { patternIndex: selectedPatternIndex });
+        }
+      }
+
       // Reveal the clicked stud (if it was hidden)
       if (studGraphicsRef.current[studIndex]) {
         studGraphicsRef.current[studIndex].alpha = 1;
@@ -489,7 +521,10 @@ export default function WitchKnotSimpleGame({
       // The user must click the next hidden dot to reveal it
 
       if (isComplete) {
-        onComplete?.();
+        // In team mode, do NOT close immediately. Wait for user to interact with overlay.
+        if (!stopId) {
+          onComplete?.();
+        }
       }
     } else {
       // Play wrong sound
@@ -671,6 +706,42 @@ export default function WitchKnotSimpleGame({
         lowerContainerRef.current!.appendChild(lowerApp.canvas);
         lowerAppRef.current = lowerApp;
 
+        // Make stage interactive for panning
+        lowerApp.stage.eventMode = 'static';
+        lowerApp.stage.hitArea = lowerApp.screen;
+        lowerApp.stage.cursor = 'grab';
+
+        const onRefDragStart = (e: any) => {
+          refIsDraggingRef.current = true;
+          refLastPosRef.current = { x: e.global.x, y: e.global.y };
+          lowerApp.stage.cursor = 'grabbing';
+        };
+
+        const onRefDragMove = (e: any) => {
+          if (refIsDraggingRef.current && refLastPosRef.current && referenceGraphicsRef.current) {
+            const newPos = { x: e.global.x, y: e.global.y };
+            const dx = newPos.x - refLastPosRef.current.x;
+            const dy = newPos.y - refLastPosRef.current.y;
+
+            refPanRef.current.x += dx;
+            refPanRef.current.y += dy;
+
+            referenceGraphicsRef.current.position.set(refPanRef.current.x, refPanRef.current.y);
+            refLastPosRef.current = newPos;
+          }
+        };
+
+        const onRefDragEnd = () => {
+          refIsDraggingRef.current = false;
+          refLastPosRef.current = null;
+          lowerApp.stage.cursor = 'grab';
+        };
+
+        lowerApp.stage.on('pointerdown', onRefDragStart);
+        lowerApp.stage.on('pointermove', onRefDragMove);
+        lowerApp.stage.on('pointerup', onRefDragEnd);
+        lowerApp.stage.on('pointerupoutside', onRefDragEnd);
+
         // Reference graphics - draw knot pattern only
         const refGraphics = new PIXI.Graphics();
         lowerApp.stage.addChild(refGraphics);
@@ -724,6 +795,10 @@ export default function WitchKnotSimpleGame({
   useEffect(() => {
     if (!referenceGraphicsRef.current || !imageDimensionsRef.current) return;
 
+    // Reset pan when pattern changes
+    refPanRef.current = { x: 0, y: 0 };
+    referenceGraphicsRef.current.position.set(0, 0);
+
     renderReferenceBoard(
       referenceGraphicsRef.current,
       selectedPattern,
@@ -736,6 +811,89 @@ export default function WitchKnotSimpleGame({
     );
   }, [selectedPattern, studs]);
 
+  // Handle remote interactions
+  useEffect(() => {
+    if (!sessionId) return;
+
+    setOnPuzzleInteraction((senderId, rStopId, rPuzzleId, type, data) => {
+      // Ignore own messages
+      if (senderId === sessionId) return;
+      // Ignore mismatching puzzle
+      if (rStopId !== stopId || rPuzzleId !== puzzleId) return;
+
+      const currentState = stateRef.current;
+      // Only show interactions if I have completed my puzzle
+      if (!currentState.showCompletion) return;
+
+      if (type === 'stud_click') {
+        const { studIndex } = data;
+        const stud = studsRef.current[studIndex];
+        const dims = imageDimensionsRef.current;
+        if (stud && dims) {
+          const studPos = getDisplayCoords(stud, dims.width, dims.height, dims.canvasWidth, dims.canvasHeight);
+          setRemoteInteractions(prev => [...prev, { x: studPos.x, y: studPos.y, id: `${Date.now()}-${Math.random()}` }]);
+
+          // Play faint sound
+          if (remoteClickSoundRef.current) {
+            remoteClickSoundRef.current.currentTime = 0;
+            remoteClickSoundRef.current.play().catch(() => { });
+          }
+        }
+      } else if (type === 'pattern_complete') {
+        setTeamCompletions(prev => {
+          const next = new Set(prev);
+          next.add(senderId);
+          return next;
+        });
+      }
+    });
+
+    return () => setOnPuzzleInteraction(null);
+  }, [sessionId, stopId, puzzleId, setOnPuzzleInteraction, state.showCompletion]); // Fixed dependency on state.showCompletion
+
+  // Render remote interactions (ghost ripples)
+  useEffect(() => {
+    const app = upperAppRef.current;
+    if (!app) return;
+
+    const container = new PIXI.Container();
+    app.stage.addChild(container);
+
+    // We need a loop to render transient effects
+    // Actually simpler: add graphics to stage when event happens, tween it out
+  }, []);
+
+  // Alternative: useEffect watching remoteInteractions
+  useEffect(() => {
+    const app = upperAppRef.current;
+    if (!app || remoteInteractions.length === 0) return;
+
+    const last = remoteInteractions[remoteInteractions.length - 1];
+    const g = new PIXI.Graphics();
+    g.circle(0, 0, 20);
+    g.stroke({ width: 2, color: 0x00ff00, alpha: 0.8 }); // Green ripple for others
+    g.x = last.x;
+    g.y = last.y;
+    app.stage.addChild(g);
+
+    // Animate out
+    let alpha = 0.8;
+    let scale = 1;
+    const ticker = (tick: PIXI.Ticker) => {
+      alpha -= 0.02 * tick.deltaTime;
+      scale += 0.05 * tick.deltaTime;
+      g.alpha = alpha;
+      g.scale.set(scale);
+      if (alpha <= 0) {
+        app.ticker.remove(ticker);
+        g.destroy();
+      }
+    };
+    app.ticker.add(ticker);
+
+  }, [remoteInteractions]);
+
+
   // Blinking effect for the second stud (index 1 in pattern points)
   // This helps guide the user to the starting move
   const blinkingTickerRef = useRef<((ticker: PIXI.Ticker) => void) | null>(null);
@@ -747,7 +905,7 @@ export default function WitchKnotSimpleGame({
 
     // Cleanup function
     const stopBlinking = () => {
-      if (blinkingTickerRef.current && app) {
+      if (blinkingTickerRef.current && app?.ticker) {
         app.ticker.remove(blinkingTickerRef.current);
         blinkingTickerRef.current = null;
       }
@@ -1007,6 +1165,67 @@ export default function WitchKnotSimpleGame({
         src="https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251219-075237-f8dda15b.mp3"
         preload="auto"
       />
+
+      {state.showCompletion && stopId && (
+        <div style={styles.teamCompletionOverlay}>
+          <h2 style={{ fontSize: '24px', marginBottom: '20px', color: '#d4c5a9' }}>Puzzle Completato!</h2>
+          <p style={{ marginBottom: '20px', fontSize: '16px', color: '#b0a090', textAlign: 'center' }}>
+            Ottimo lavoro! Puoi vedere i progressi del team qui sotto.<br />
+            Vedi i &quot;fantasmi&quot; cliccare sui nodi in tempo reale!
+          </p>
+
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
+            {team?.members.map(member => {
+              const isMe = member.sessionId === sessionId;
+              const completionList = team.stopCompletions?.[stopId] || []; // Use stopId from props
+              const isConfirmed = completionList.includes(member.sessionId) || teamCompletions.has(member.sessionId) || (isMe && state.showCompletion);
+
+              return (
+                <div key={member.sessionId} style={styles.teamMemberRow}>
+                  <span style={{ color: '#d4c5a9' }}>{member.playerName} {isMe ? '(Tu)' : ''}</span>
+                  <span>{isConfirmed ? '✅' : '⏳'}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          {(() => {
+            const allMembersDone = team?.members.every(member => {
+              const isMe = member.sessionId === sessionId;
+              const completionList = team.stopCompletions?.[stopId!] || [];
+              return completionList.includes(member.sessionId) || teamCompletions.has(member.sessionId) || (isMe && state.showCompletion);
+            });
+
+            return (
+              <>
+                {!allMembersDone && (
+                  <p style={{ color: '#b0a090', fontSize: '14px', marginBottom: '10px', fontStyle: 'italic' }}>
+                    In attesa che tutti i membri completino il puzzle...
+                  </p>
+                )}
+                <button
+                  style={{
+                    ...styles.resetButton,
+                    backgroundColor: allMembersDone ? '#8b6914' : '#4a3c28',
+                    border: allMembersDone ? '1px solid #d4c5a9' : '1px solid #6b5a45',
+                    opacity: allMembersDone ? 1 : 0.6,
+                    cursor: allMembersDone ? 'pointer' : 'not-allowed'
+                  }}
+                  disabled={!allMembersDone}
+                  onClick={() => {
+                    if (allMembersDone) {
+                      onComplete?.();
+                      onClose?.();
+                    }
+                  }}
+                >
+                  Concludi e Esci
+                </button>
+              </>
+            );
+          })()}
+        </div>
+      )}
     </div>
   );
 }
@@ -1151,6 +1370,32 @@ const styles: { [key: string]: React.CSSProperties } = {
     cursor: 'pointer',
     fontSize: '14px',
     fontWeight: 'bold'
+  },
+  teamCompletionOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.85)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#d4c5a9',
+    zIndex: 100,
+    padding: '20px',
+  },
+  teamMemberRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    maxWidth: '300px',
+    marginBottom: '10px',
+    padding: '10px',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: '8px',
   },
   completionBanner: {
     backgroundColor: 'rgba(139, 105, 20, 0.25)',

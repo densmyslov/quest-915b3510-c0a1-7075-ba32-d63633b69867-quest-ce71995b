@@ -252,11 +252,17 @@ export default function PuzzleClient(props: PuzzleClientProps) {
         setCongratsPoints(null);
 
         if (props.onClose) {
-            props.onClose();
+            // In steps mode (objectId present), do NOT close automatically after popup
+            // Let the user interact with the team overlay, then click exit there
+            if (objectId) {
+                // Do nothing, just close the popup
+            } else {
+                props.onClose();
+            }
         } else {
             router.push('/map');
         }
-    }, [router, props.onClose]);
+    }, [router, props.onClose, objectId]);
 
     React.useEffect(() => {
         if (congratsPoints === null) return;
@@ -343,7 +349,9 @@ export default function PuzzleClient(props: PuzzleClientProps) {
                 teamCode={teamSync.teamCode || undefined}
                 startedAt={startedAtIso}
                 teamMemberIds={teamMemberIds}
+                stopId={objectId || undefined}
                 onComplete={handlePuzzleComplete}
+                onClose={handleBack}
             />
             {congratsPoints !== null && (
                 <CongratulationsPopup

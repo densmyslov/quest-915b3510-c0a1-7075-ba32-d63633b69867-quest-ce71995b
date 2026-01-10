@@ -15,7 +15,7 @@ interface JigsawCustomGameProps {
 const HUD_HEIGHT = 60;
 const BOARD_MARGIN = 20;
 const REF_BOARD_WIDTH_RATIO = 0.2; // 20% of canvas width for reference board
-const TRAY_HEIGHT_RATIO = 0.25; // 25% of canvas height for piece tray
+const TRAY_HEIGHT_RATIO = 0.30; // 30% of canvas height for piece tray (Increased from 0.25)
 const GRID_LINE_WIDTH = 1;
 const SNAP_DISTANCE_PX = 30;
 const PIECE_TEXTURE_PADDING_PX = 4;
@@ -697,7 +697,25 @@ export default function JigsawCustomGame({ puzzleData, onComplete }: JigsawCusto
             const trayContentWidth = gridAreaWidth - BOARD_MARGIN * 2;
             const trayContentHeight = trayHeight - BOARD_MARGIN * 2;
 
-            const piecesPerRow = gridCols;
+            // Calculate optimal columns to maximize piece size
+            // Try different column counts from 1 to total pieces
+            let bestCols = gridCols; // Fallback
+            let maxMinDim = 0;
+
+            const totalPieces = pieces.length;
+            // Iterate reasonable column counts (e.g. from 2 up to total pieces)
+            for (let cols = 2; cols <= Math.min(totalPieces, 24); cols++) {
+                const rows = Math.ceil(totalPieces / cols);
+                const w = trayContentWidth / cols;
+                const h = trayContentHeight / rows;
+                const minDim = Math.min(w, h);
+                if (minDim > maxMinDim) {
+                    maxMinDim = minDim;
+                    bestCols = cols;
+                }
+            }
+
+            const piecesPerRow = bestCols;
             const pieceSlotWidth = trayContentWidth / piecesPerRow;
             const pieceSlotHeight = trayContentHeight / Math.ceil(pieces.length / piecesPerRow);
 

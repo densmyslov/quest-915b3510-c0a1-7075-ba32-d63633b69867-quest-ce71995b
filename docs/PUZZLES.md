@@ -317,6 +317,7 @@ Points can be configured at multiple levels:
 - Popup triggered by `score_update` WebSocket message
 - **All team members see real-time score updates** as any player completes puzzles
 - Team score calculated by summing all members' `totalPoints`
+- **Synchronized Completion**: In certain puzzle types (e.g., Simple Witch Knot), the UI enforces that **ALL** team members must complete the puzzle before the session can be closed. This ensures that no team member is left behind.
 
 ### Real-Time Team Score Updates
 

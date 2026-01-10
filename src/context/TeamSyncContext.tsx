@@ -17,6 +17,8 @@ type TeamSyncContextValue = {
   sendChat: ReturnType<typeof useTeamWebSocket>['sendChat'];
   requestSync: ReturnType<typeof useTeamWebSocket>['requestSync'];
   updatePlayerState: ReturnType<typeof useTeamWebSocket>['updatePlayerState'];
+  sendPuzzleInteraction: ReturnType<typeof useTeamWebSocket>['sendPuzzleInteraction'];
+  setOnPuzzleInteraction: (handler: ((sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => void) | null) => void;
 };
 
 const TeamSyncContext = createContext<TeamSyncContextValue | null>(null);
@@ -90,7 +92,14 @@ export function TeamSyncProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const wsOptions = useMemo(() => ({ websocketUrl }), [websocketUrl]);
+  const [puzzleHandler, setPuzzleHandler] = useState<((sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => void) | null>(null);
+
+  const wsOptions = useMemo(() => ({
+    websocketUrl,
+    onPuzzleInteraction: (sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => {
+      puzzleHandler?.(sessionId, stopId, puzzleId, interactionType, data);
+    }
+  }), [websocketUrl, puzzleHandler]);
   const ws = useTeamWebSocket(teamCode, session, wsOptions);
 
   const value: TeamSyncContextValue = useMemo(
@@ -108,8 +117,10 @@ export function TeamSyncProvider({ children }: { children: React.ReactNode }) {
       sendChat: ws.sendChat,
       requestSync: ws.requestSync,
       updatePlayerState: ws.updatePlayerState,
+      sendPuzzleInteraction: ws.sendPuzzleInteraction,
+      setOnPuzzleInteraction: setPuzzleHandler,
     }),
-    [session, teamCode, ws],
+    [session, teamCode, ws, puzzleHandler],
   );
 
   return <TeamSyncContext.Provider value={value}>{children}</TeamSyncContext.Provider>;

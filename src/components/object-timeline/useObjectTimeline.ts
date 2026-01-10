@@ -148,16 +148,19 @@ export function useObjectTimeline({
     }
   }, [questRuntime.completedPuzzles]);
 
+
+
   const computeRuntimeTimelineProgress = useCallback(
     (objectId: string, items: NormalizedMediaTimelineItem[], reset: boolean): TimelineProgressState => {
       if (reset) return { nextIndex: 0, completedKeys: {}, blockedByPuzzleId: null };
 
       const completedKeys: Record<string, true> = {};
 
-      // Build completed keys map from snapshot
+      // Build completed keys map
       for (const item of items) {
         if (!item.enabled) continue;
         const nodeId = makeTimelineItemNodeId(objectId, item.key);
+
         const node = snapshotRef.current?.nodes?.[nodeId];
         if (node?.status === 'completed') {
           completedKeys[item.key] = true;
@@ -165,14 +168,13 @@ export function useObjectTimeline({
       }
 
       // Find the first enabled item that is not completed yet.
-      // Always scan from the beginning to avoid skipping a node when a completion call fails (e.g. 409 conflict).
+      // Always scan from the beginning to avoid skipping a node when a completion call fails.
       let nextIndex = items.length;
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (!item.enabled) continue;
-        const nodeId = makeTimelineItemNodeId(objectId, item.key);
-        const node = snapshotRef.current?.nodes?.[nodeId];
-        if (node?.status !== 'completed') {
+
+        if (!completedKeys[item.key]) {
           nextIndex = i;
           break;
         }
@@ -180,27 +182,41 @@ export function useObjectTimeline({
 
       return { nextIndex: nextIndex >= items.length ? items.length : nextIndex, completedKeys, blockedByPuzzleId: null };
     },
-    [] // Stable
+    [stepsMode] // Removed currentSessionId dependency
   );
 
 
   const completeRuntimeNode = useCallback(
     async (objectId: string, itemKey: string) => {
-      if (!currentSessionId) return false;
+      // NOTE: We don't strictly need currentSessionId for the API call (questRuntime handles it),
+      // but keeping the check if needed for safety. Removing strict dependency if feasible.
+      if (!questRuntimeRef.current) return false;
+
       const nodeId = makeTimelineItemNodeId(objectId, itemKey);
+
       try {
         const beforeVersion = snapshotRef.current?.version ?? null;
-        await questRuntimeRef.current.completeNode(nodeId);
+        let result = await questRuntimeRef.current.completeNode(nodeId);
 
-        // Wait (briefly) for snapshot propagation. If completion failed (e.g. 409),
-        // snapshot version won't advance and node won't flip to completed.
+        // RETRY LOGIC (Handling 409 Conflicts due to stale snapshot version)
+        if (!result.success && result.error?.includes('conflict') || result.error?.includes('version')) {
+          console.warn('[useObjectTimeline] Conflict detected. Starting retry loop...');
+          for (let i = 0; i < 3; i++) {
+            await new Promise(r => setTimeout(r, 800)); // Wait 800ms
+            console.log(`[useObjectTimeline] Retry attempt ${i + 1}`);
+            result = await questRuntimeRef.current.completeNode(nodeId);
+            if (result.success) break;
+          }
+        }
+
+        // Wait (briefly) for snapshot propagation.
         const deadline = Date.now() + 1500;
         while (Date.now() < deadline) {
           const snap = snapshotRef.current;
           const node = snap?.nodes?.[nodeId];
           if (node?.status === 'completed') return true;
           if (beforeVersion !== null && snap && snap.version > beforeVersion) {
-            // If snapshot advanced but node still isn't completed, treat as failure.
+            // Snapshot updated but node not complete
             break;
           }
           await new Promise<void>((resolve) => window.setTimeout(resolve, 50));
@@ -208,8 +224,9 @@ export function useObjectTimeline({
 
         const node = snapshotRef.current?.nodes?.[nodeId];
         const ok = node?.status === 'completed';
+
         if (!ok) {
-          console.warn('[QuestMap] Runtime node did not complete (likely blocked)', { objectId, itemKey, nodeId, node });
+          console.warn('[QuestMap] Runtime node did not complete', { objectId, itemKey, nodeId, node });
         }
         return ok;
       } catch (err) {
@@ -217,7 +234,7 @@ export function useObjectTimeline({
         return false;
       }
     },
-    [currentSessionId]
+    [stepsMode] // Removed currentSessionId dependency if not needed, or keep it.
   );
 
   const setTimelineProgress = useCallback((objectId: string, version: number, progress: TimelineProgressState) => {
@@ -1044,7 +1061,9 @@ export function useObjectTimeline({
             }
 
             if (stepsMode) {
-              break; // Wait for user to open/skip the puzzle in Steps mode.
+              // In steps mode, we now want autoplay behavior (same as Play mode),
+              // so we do NOT break here anymore.
+              // break;
             }
 
             navigateToPuzzle(puzzleId, obj.id, item.key);
@@ -1146,6 +1165,77 @@ export function useObjectTimeline({
       navigateToPuzzle(puzzleId, timelineUi.objectId, itemKey);
     },
     [addLog, debugEnabled, navigateToPuzzle, timelineUi]
+  );
+
+  const openTimelineAction = useCallback(
+    async (itemKey: string) => {
+      if (!timelineUi) return;
+      const item = timelineUi.items.find((it) => it.key === itemKey);
+      if (!item || item.type !== 'action') return;
+
+      const actionKind =
+        (item as any).actionKind ??
+        (item as any).action_kind ??
+        (item as any).payload?.actionKind ??
+        (item as any).payload?.action_kind;
+      const actionKindStr = typeof actionKind === 'string' && actionKind.length ? actionKind : 'action';
+      const rawParams = (item as any).params ?? (item as any).payload?.params ?? (item as any).payload ?? {};
+      const actionParams = rawParams && typeof rawParams === 'object' ? (rawParams as Record<string, any>) : {};
+
+      if (debugEnabled) {
+        addLog('info', '[useObjectTimeline] openTimelineAction (Steps UI)', {
+          itemKey,
+          actionKind: actionKindStr,
+          objectId: timelineUi.objectId
+        });
+      }
+
+      const nodeId = makeTimelineItemNodeId(timelineUi.objectId, item.key);
+      const attempt = await questRuntime.startActionAttempt(nodeId);
+      if (!attempt) {
+        console.warn('[useObjectTimeline] Failed to start action attempt (Steps mode)', { nodeId, actionKind: actionKindStr });
+        await showTimelineText({
+          title: item.title ?? timelineUi.objectName,
+          text: 'Unable to start this action. Please try again.',
+          mode: 'seconds',
+          seconds: 3,
+          blocking: true,
+        });
+        return;
+      }
+
+      const evidence = await showTimelineAction({
+        title: item.title ?? timelineUi.objectName,
+        actionKind: actionKindStr,
+        params: actionParams,
+      });
+
+      const cancelled =
+        (evidence as any)?.__cancelled === true ||
+        (evidence && typeof evidence === 'object' && Object.keys(evidence).length === 0);
+      if (cancelled) {
+        console.log('[useObjectTimeline] Action cancelled (Steps mode)', { nodeId, key: item.key, actionKind: actionKindStr });
+        return;
+      }
+
+      const submitted = await questRuntime.submitAction({
+        nodeId,
+        attemptId: attempt.attemptId,
+        attemptGroupId: attempt.attemptGroupId,
+        evidence,
+      });
+      if (!submitted) {
+        console.warn('[useObjectTimeline] Action submit failed (Steps mode)', { nodeId, key: item.key, actionKind: actionKindStr });
+        return;
+      }
+
+      // Refresh timeline after successful action completion
+      const obj = objectsById.get(timelineUi.objectId);
+      if (obj) {
+        void runObjectTimeline(obj);
+      }
+    },
+    [addLog, debugEnabled, timelineUi, questRuntime, showTimelineText, showTimelineAction, objectsById, runObjectTimeline]
   );
 
   const skipTimelineItem = useCallback(
@@ -1316,6 +1406,21 @@ export function useObjectTimeline({
     ],
   );
 
+  const openTimelineItem = useCallback(
+    (itemKey: string) => {
+      if (!timelineUi) return;
+      const item = timelineUi.items.find((it) => it.key === itemKey);
+      if (!item) return;
+
+      if (item.type === 'puzzle') {
+        openTimelinePuzzle(itemKey);
+      } else if (item.type === 'action') {
+        void openTimelineAction(itemKey);
+      }
+    },
+    [timelineUi, openTimelinePuzzle, openTimelineAction]
+  );
+
   const stepsTimelinePanel: TimelinePanel | null = useMemo(() => {
     // console.log('[useObjectTimeline] Computing stepsTimelinePanel', { stepsMode, hasTimelineUi: !!timelineUi });
     if (!stepsMode) return null;
@@ -1349,24 +1454,30 @@ export function useObjectTimeline({
         return item.type;
       })();
 
+      // Determine if item can be opened
+      const canOpenPuzzle = item.type === 'puzzle' && typeof puzzleId === 'string' && puzzleId.length > 0;
+      const canOpenAction = item.type === 'action'; // All actions can be opened
+      const canOpen = canOpenPuzzle || canOpenAction;
+
       return {
         key: item.key,
         type: item.type,
         label,
         done,
         current,
-        canOpen: item.type === 'puzzle' && typeof puzzleId === 'string' && puzzleId.length > 0
+        canOpen
       };
     });
 
     return {
+      objectId: timelineUi.objectId,
       objectName: timelineUi.objectName,
       blockedByPuzzleId: timelineUi.progress.blockedByPuzzleId,
       items,
       onSkip: skipTimelineItem,
-      onOpen: openTimelinePuzzle
+      onOpen: openTimelineItem
     };
-  }, [openTimelinePuzzle, questRuntime.completedPuzzles, skipTimelineItem, stepsMode, timelineUi]);
+  }, [openTimelineItem, questRuntime.completedPuzzles, skipTimelineItem, stepsMode, timelineUi]);
 
   return {
     runObjectTimeline,

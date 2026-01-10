@@ -1,6 +1,6 @@
 {
   "name": "quest-app-template",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -25,7 +25,8 @@
     "next": "^16.0.8",
     "pixi.js": "^8.14.3",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",
@@ -34,6 +35,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/uuid": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.6",
     "tailwindcss": "^4",

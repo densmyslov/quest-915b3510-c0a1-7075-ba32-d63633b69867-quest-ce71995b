@@ -1245,7 +1245,7 @@ export default function QuestMap() {
         return () => {
             clearPulsatingCircles();
             markers.clear();
-            triggerCircles.forEach((circles) => circles.forEach((c) => c.remove()));
+            triggerCircles.forEach((circles) => circles?.forEach((c) => c?.remove && c.remove()));
             triggerCircles.clear();
             if (mapInstance) {
                 // Save current zoom and center before destroying map
@@ -1564,7 +1564,19 @@ export default function QuestMap() {
                     totalPoints={totalPointsAvailable}
                     votesFor={votesFor}
                     votesAgainst={votesAgainst}
-                    timelinePanel={stepsTimelinePanel ?? undefined}
+                    timelinePanel={(() => {
+                        if (!stepsTimelinePanel) return undefined;
+                        // Find the expected object for the current step to prevent stale timeline data
+                        const expectedObj = data?.objects?.find(obj => {
+                            const num = getItineraryNumber(obj);
+                            return num === currentItineraryStep;
+                        });
+                        // Only show timeline panel if it matches the current step's object
+                        if (expectedObj && stepsTimelinePanel.objectId === expectedObj.id) {
+                            return stepsTimelinePanel;
+                        }
+                        return undefined;
+                    })()}
                     audioPanel={audioPanelProps}
                 />
 

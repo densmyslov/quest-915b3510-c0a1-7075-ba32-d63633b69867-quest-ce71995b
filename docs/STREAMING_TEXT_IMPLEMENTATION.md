@@ -133,3 +133,24 @@ Transcription data is loaded alongside object data. When a `streaming_text_audio
 ### "Jerky" text?
 - **Immersive**: Ensure CSS transitions are active on opacity.
 - **Panel**: Auto-scroll logic is debounced; check for scroll conflicts.
+
+## 3. Timing Modes
+
+The `StreamingText` component supports two modes for determining word timing, which are automatically selected based on data quality:
+
+### A. Timestamp Mode (Default)
+Used when the transcription contains valid `start` and `end` timestamps for each word.
+- **Logic**: Precise highlighting based on `currentTime >= word.start && currentTime < word.end`.
+- **Requirements**: `transcription.words` must have non-zero timestamps.
+
+### B. Interpolation Mode (Fallback)
+Used when timestamps are missing or invalid (e.g., all 0.0s) but the full text is available.
+- **Logic**: Calculates word timing by distributing all words evenly across the audio duration.
+- **Formula**: `durationPerWord = audioDuration / totalWords`.
+- **Requirements**:
+    - `transcription.words` must exist.
+    - `audioDuration` prop MUST be passed to `StreamingText`.
+    - `transcription.words` timestamps are deemed invalid (max end time < 0.1s).
+
+> [!IMPORTANT]
+> If `audioDuration` is not passed to `StreamingText`, the component cannot calculate interpolated timings, and text will fail to stream (it may show all at once or none, depending on the implementation state). Always pass `audioDuration` from `useMapAudio` or the audio element.

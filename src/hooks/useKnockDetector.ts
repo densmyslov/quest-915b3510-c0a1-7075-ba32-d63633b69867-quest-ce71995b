@@ -22,9 +22,9 @@ type KnockDetectorState = {
 };
 
 const ACCELERATION_THRESHOLDS: Record<KnockSensitivity, number> = {
-  low: 25,
-  medium: 15,
-  high: 10,
+  low: 8,      // Was 25 (approx 0.8g)
+  medium: 5,   // Was 15 (approx 0.5g)
+  high: 2,     // Was 10 (approx 0.2g)
 };
 
 const AUDIO_THRESHOLDS: Record<KnockSensitivity, number> = {
@@ -105,11 +105,26 @@ export function useKnockDetector(config: KnockDetectorConfig) {
     const threshold = ACCELERATION_THRESHOLDS[config.sensitivity];
 
     const handleMotion = (event: DeviceMotionEvent) => {
+      // 1. Try to use gravity-compensated acceleration first (cleaner signal)
+      if (event.acceleration && event.acceleration.x !== null) {
+        const { x, y, z } = event.acceleration;
+        if (x === null || y === null || z === null) return;
+        const magnitude = Math.sqrt(x * x + y * y + z * z);
+        if (magnitude > threshold) {
+          handleKnock(Date.now());
+        }
+        return;
+      }
+
+      // 2. Fallback to acceleration including gravity
       const acc = event.accelerationIncludingGravity;
       if (!acc || acc.x === null || acc.y === null || acc.z === null) return;
 
-      const magnitude = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z) - 9.8;
-      if (Math.abs(magnitude) > threshold) {
+      const magnitude = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z);
+      // Simple gravity removal approximation
+      const delta = Math.abs(magnitude - 9.8);
+
+      if (delta > threshold) {
         handleKnock(Date.now());
       }
     };

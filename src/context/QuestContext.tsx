@@ -6,6 +6,7 @@ import { normalizeQuestData } from '@/lib/questDataUtils';
 
 import { useQuestRuntime } from '@/hooks/useQuestRuntime';
 import { useTeamSync } from '@/context/TeamSyncContext';
+import { getOrCreateDeviceId } from '@/utils/deviceId';
 
 interface QuestContextType {
     data: QuestData | null;
@@ -49,15 +50,17 @@ export function QuestProvider({ data, children }: QuestProviderProps) {
     const normalizedData = React.useMemo(() => normalizeQuestData(data), [data]);
     const teamSync = useTeamSync();
 
-    // Determine player ID consistently with QuestMap logic
-    const currentSessionId = teamSync.session?.sessionId ?? null;
+
+    // Initialize Runtime globally so it persists across page navigations
+
 
     // Initialize Runtime globally so it persists across page navigations
     const runtime = useQuestRuntime({
         questId: normalizedData.questId ?? normalizedData.quest.id,
         questVersion: normalizedData.questVersion ?? 'v1',
-        playerId: currentSessionId,
+        playerId: getOrCreateDeviceId(), // Use unique device ID
         teamCode: teamSync.teamCode,
+        sessionId: teamSync.session?.sessionId, // Use user-specific session ID from TeamSync
         autoStart: false,
         pollIntervalMs: teamSync.connectionStatus === 'connected' ? 0 : 10_000
     });

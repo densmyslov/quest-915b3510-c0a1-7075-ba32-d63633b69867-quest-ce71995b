@@ -70,6 +70,7 @@ export type TimelinePanelItem = {
 };
 
 export type TimelinePanel = {
+  objectId: string;
   objectName: string;
   blockedByPuzzleId: string | null;
   items: TimelinePanelItem[];

@@ -58,6 +58,7 @@ export type UseTeamWebSocketOptions = {
   onLocationUpdate?: (sessionId: string, playerName: string, stopId: string) => void;
   onChatMessage?: (sessionId: string, playerName: string, message: string, timestamp: string) => void;
   onScoreUpdate?: (points: number, playerTotalPoints: number, teamTotalPoints: number, stopId: string, puzzleId: string) => void;
+  onPuzzleInteraction?: (sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => void;
   onError?: (code: string, message: string) => void;
 };
 
@@ -521,6 +522,18 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
         return;
       }
 
+      if (type === 'puzzle_interaction') {
+        const sessionId: string | undefined = msg.sessionId;
+        const stopId: string | undefined = msg.stopId;
+        const puzzleId: string | undefined = msg.puzzleId;
+        const interactionType: string | undefined = msg.interactionType;
+        const data: any = msg.data;
+
+        if (!sessionId || !stopId || !puzzleId || !interactionType) return;
+        optionsRef.current.onPuzzleInteraction?.(sessionId, stopId, puzzleId, interactionType, data);
+        return;
+      }
+
       if (type === 'player_state_update') {
         const sessionId: string | undefined = msg.sessionId;
         const currentObjectId: string | null | undefined = msg.currentObjectId;
@@ -676,6 +689,21 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
     [sendRaw, session],
   );
 
+
+  const sendPuzzleInteraction = useCallback(
+    (stopId: string, puzzleId: string, interactionType: string, data?: any) => {
+      if (!session) return;
+      sendRaw({
+        type: 'puzzle_interaction',
+        sessionId: session.sessionId,
+        stopId,
+        puzzleId,
+        interactionType,
+        data,
+      });
+    },
+    [sendRaw, session],
+  );
   return {
     team,
     connectionStatus,
@@ -688,5 +716,6 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
     sendChat,
     requestSync,
     updatePlayerState,
+    sendPuzzleInteraction,
   };
 }

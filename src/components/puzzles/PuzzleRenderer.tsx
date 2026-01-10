@@ -149,7 +149,10 @@ export interface PuzzleRendererProps {
   sessionId?: string;
   teamCode?: string;
   startedAt?: string;
+
   teamMemberIds?: string[]; // Session IDs of all team members for distribution
+  stopId?: string; // The object ID this puzzle belongs to
+  onClose?: () => void;
 }
 
 export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
@@ -161,7 +164,10 @@ export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
   sessionId,
   teamCode,
   startedAt,
-  teamMemberIds
+
+  teamMemberIds,
+  stopId,
+  onClose
 }) => {
   const [puzzleData, setPuzzleData] = React.useState<PuzzlePayload | null>(initialData ?? null);
   const [error, setError] = React.useState<string | null>(null);
@@ -309,7 +315,10 @@ export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
             teamCode={teamCode}
             startedAt={startedAt}
             puzzleId={puzzleId}
+
             teamMemberIds={teamMemberIds}
+            stopId={stopId}
+            onClose={onClose}
           />
         );
       case 'spot_diff_ai':

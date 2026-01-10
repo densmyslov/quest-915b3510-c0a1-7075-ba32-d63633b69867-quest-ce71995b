@@ -17,9 +17,27 @@ Steps mode is a manual quest progression tool that simulates GPS-based gameplay 
 
 ## How It Works
 
+### Feature Flag
+
+Steps mode is controlled by an environment variable to enable/disable it for different deployments:
+
+**Environment Variable:** `NEXT_PUBLIC_ENABLE_STEPS_MODE`
+
+- **Set to `"true"`**: Steps mode button is visible and functional
+- **Not set or `"false"`**: Steps mode button is hidden (production default)
+
+This allows:
+- **Development/Testing**: Enable steps mode for rapid testing
+- **Production**: Disable steps mode for end users (GPS-only gameplay)
+- **Staging**: Selectively enable for QA testing
+
+**Configuration Location:**
+- Quest Platform deployment: [deployment_logic.py](../../quest-platform/backend/src/tools/deployment-manager/deployment_logic.py)
+- Local development: `.env.local` file (add `NEXT_PUBLIC_ENABLE_STEPS_MODE=true`)
+
 ### Activation
 
-Steps mode can be toggled on/off via the "Steps mode" button in the quest map overlay.
+Steps mode can be toggled on/off via the "Steps mode" button in the quest map overlay (when the feature flag is enabled).
 
 > **Note:** The "Steps mode" button is hidden by default in production. To enable it, set the environment variable `NEXT_PUBLIC_ENABLE_STEPS_MODE=true`.
 
@@ -43,9 +61,10 @@ When steps mode is active, three controls appear:
 
 Steps mode also shows a **Timeline** card for the current object:
 
-- **Open**: Opens the puzzle for the current timeline item.
+- **Autoplay**: Puzzles open automatically when the timeline reaches them (same as Play mode).
 - **Skip**: Marks the item as completed.
   - For **puzzle** items, Skip simulates puzzle completion and **awards points** (counts toward the "For" score).
+  - **Blocked State**: If the timeline is blocked by a puzzle, a hint "Waiting for puzzle [ID] to complete..." is displayed.
   - If puzzle points are not specified, it falls back to **100** points.
 
 ### Arrival Simulation Flow
@@ -93,6 +112,21 @@ Steps mode uses a **different visibility model** than play mode:
 - **Timeline Sync**: Side panel automatically updates to show the content (tasks/media) for the currently selected step
 
 **Formula:** `visible if (object.itineraryNumber <= currentStep)`
+
+## Hybrid State Isolation (Team Mode)
+
+In Steps Mode, to prevent interference between team members while maintaining collaboration, a **Hybrid State Model** is used:
+
+### 1. Content (Local State)
+*   **Items**: Text, Video, Chat, Audio
+*   **Behavior**: Completion is tracked **locally** (per device).
+*   **Reason**: Prevents "spoilers". If Player A reads a text, it remains "unread" for Player B so they can experience the story themselves.
+
+### 2. Puzzles (Shared State)
+*   **Items**: Interactive Puzzles (e.g., Witch Knot)
+*   **Behavior**: Completion is **shared** via the backend.
+*   **Reason**: Puzzles are "gates". If the team solves the lock, it opens for everyone.
+*   **Note**: For Puzzles, the UI enforces that **ALL** team members must complete the puzzle interaction before the "Concludi" button becomes active.
 
 ## Technical Implementation
 
@@ -221,8 +255,8 @@ Content-Type: application/json
 | API Calls | Same | Same |
 | Audio Playback | Yes | Yes |
 | State Updates | Yes | Yes |
-| Puzzle Solving | Manual | Manual |
-| Object Completion | Manual | Manual |
+| Puzzle Solving | Manual | Manual (Shared State - All members must complete) |
+| Object Completion | Manual | Hybrid (Content = Local; Puzzles = Shared) |
 
 ## Best Practices
 

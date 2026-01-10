@@ -418,8 +418,8 @@
 }
 
 .timelineRowCurrent {
-  border-color: rgba(201, 162, 39, 0.65);
-  box-shadow: 0 0 16px rgba(201, 162, 39, 0.18);
+  border-color: rgba(45, 90, 61, 0.85); /* --ink-green */
+  box-shadow: 0 0 16px rgba(45, 90, 61, 0.45);
 }
 
 .timelineRowLabel {

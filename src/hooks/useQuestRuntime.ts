@@ -6,6 +6,7 @@ import type { RuntimeDelta, RuntimeSnapshot } from '@/runtime-core/runtimeState'
 
 type UseQuestRuntimeParams = {
   questId: string | null;
+  sessionId?: string | null;
   questVersion: string;
   playerId: string | null;
   teamCode?: string | null;
@@ -15,6 +16,7 @@ type UseQuestRuntimeParams = {
 };
 
 type RuntimeResult<T> = { ok: true; data: T } | { ok: false; error: string };
+
 
 async function postJson<T>(url: string, body: unknown): Promise<RuntimeResult<T>> {
   console.log(`[QuestRuntime] POST ${url}`, body);
@@ -76,7 +78,7 @@ export type QuestRuntimeClient = {
   refresh: () => Promise<void>;
   startOrJoin: (options?: { reset?: boolean }) => Promise<void>;
   arriveAtObject: (objectId: ObjectId) => Promise<void>;
-  completeNode: (nodeId: NodeId) => Promise<void>;
+  completeNode: (nodeId: NodeId) => Promise<{ success: boolean; error?: string }>;
   submitPuzzleSuccess: (params: { puzzleId: string; objectId?: string; points?: number }) => Promise<void>;
   startActionAttempt: (nodeId: NodeId) => Promise<{ attemptId: string; attemptGroupId: string | null } | null>;
   submitAction: (params: {
@@ -94,15 +96,22 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
     questVersion,
     playerId,
     teamCode,
+    sessionId, // Destructure new param
     playerName: playerNameProp,
     autoStart = true,
     pollIntervalMs = 10_000,
   } = params;
 
   const runtimeSessionId = useMemo(() => {
-    if (!playerId) return null;
-    return (teamCode && teamCode.trim().length ? teamCode.trim() : playerId) as string;
-  }, [playerId, teamCode]);
+    // 1. Explicit session ID (e.g. from API/TeamSync) takes precedence
+    if (sessionId) return sessionId;
+
+    // 2. Fallback to playerId (User-specific)
+    // We intentionally ignore teamCode here to prevent shared sessions
+    if (playerId) return playerId;
+
+    return null;
+  }, [sessionId, playerId]);
 
   const playerName = useMemo(() => {
     return playerNameProp ?? readPlayerNameFromStorage() ?? (playerId ? `Player-${playerId.slice(0, 8)}` : null);
@@ -248,8 +257,8 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
   );
 
   const completeNode = useCallback(
-    async (nodeId: NodeId) => {
-      if (!playerId || !runtimeSessionId) return;
+    async (nodeId: NodeId): Promise<{ success: boolean; error?: string }> => {
+      if (!playerId || !runtimeSessionId) return { success: false, error: 'No session' };
       const res = await postJson<{ success: boolean; snapshot?: RuntimeSnapshot; deltas?: RuntimeDelta[]; error?: string }>(
         '/api/runtime/node/complete',
         {
@@ -262,15 +271,16 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
       );
       if (!res.ok) {
         setError(res.error);
-        return;
+        return { success: false, error: res.error };
       }
       if (!res.data.success) {
         setError(res.data.error ?? 'Node completion failed');
-        return;
+        return { success: false, error: res.data.error };
       }
       if (res.data.snapshot) setSnapshot(res.data.snapshot);
       if (Array.isArray(res.data.deltas)) setDeltas(res.data.deltas);
       setError(null);
+      return { success: true };
     },
     [playerId, runtimeSessionId],
   );

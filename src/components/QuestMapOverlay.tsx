@@ -108,26 +108,7 @@ export default function QuestMapOverlay({
   const isStepsMode = mode === 'steps';
   const canNext = isStepsMode && stepTotal > 0 && stepIndex < stepTotal;
 
-  useEffect(() => {
-    if (!debugEnabled) return;
-    if (!audioPanel) return;
-    const url = audioPanel.audioUrl || '';
-    const words = audioPanel.transcription?.words?.length ?? 0;
-    const m = audioPanel.mode;
-    const prev = lastAudioDebugRef.current;
-    if (prev && prev.url === url && prev.words === words && prev.mode === m) return;
-    lastAudioDebugRef.current = { url, words, mode: m };
-    addLog('info', '[QuestMapOverlay] audioPanel render', {
-      mode: audioPanel.mode,
-      title: audioPanel.title,
-      audioUrl: url,
-      isPlaying: audioPanel.isPlaying,
-      currentTime: audioPanel.currentTime,
-      duration: audioPanel.duration,
-      hasTranscription: !!audioPanel.transcription,
-      words
-    });
-  }, [addLog, audioPanel, debugEnabled, lastAudioDebugRef]);
+
 
   return (
     <div className={styles.overlay} aria-hidden={false}>
@@ -294,7 +275,7 @@ export default function QuestMapOverlay({
                         <span className={styles.timelineLabelText}>{item.label}</span>
                       </div>
                       <div className={styles.timelineRowActions}>
-                        {item.canOpen && item.current && !item.done && (
+                        {item.canOpen && (item.current || item.done) && (
                           <button
                             type="button"
                             className={styles.timelineButton}
@@ -305,23 +286,10 @@ export default function QuestMapOverlay({
                             }}
                             onTouchStart={(event) => event.stopPropagation()}
                           >
-                            Open
+                            {item.type === 'action' ? 'Start' : 'Open'}
                           </button>
                         )}
-                        {!item.done && (
-                          <button
-                            type="button"
-                            className={styles.timelineButton}
-                            onClick={(event) => {
-                              event.preventDefault();
-                              event.stopPropagation();
-                              void timelinePanel.onSkip(item.key);
-                            }}
-                            onTouchStart={(event) => event.stopPropagation()}
-                          >
-                            Skip
-                          </button>
-                        )}
+
                       </div>
                     </div>
                   );
@@ -415,6 +383,7 @@ export default function QuestMapOverlay({
                 <StreamingText
                   transcription={audioPanel.transcription}
                   currentTime={audioPanel.currentTime}
+                  audioDuration={audioPanel.duration}
                   isPlaying={audioPanel.isPlaying}
                   className={styles.audioTranscript}
                 />

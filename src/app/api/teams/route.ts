@@ -94,7 +94,7 @@ export async function POST(request: NextRequest) {
             console.log('[/api/teams] questId provided, initializing runtime session');
             try {
                 const runtimePayload = {
-                    sessionId: team.teamCode,
+                    sessionId: team.leaderSessionId,
                     playerId: team.leaderSessionId,
                     playerName: team.leaderName,
                     questId,

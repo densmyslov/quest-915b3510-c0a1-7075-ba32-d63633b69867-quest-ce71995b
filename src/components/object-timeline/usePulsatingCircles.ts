@@ -123,7 +123,7 @@ export function usePulsatingCircles({
         toRemove.forEach((objId) => {
           const entry = pulsatingCirclesRef.current.get(objId);
           if (entry) {
-            entry.circle.remove();
+            entry?.circle?.remove?.();
             pulsatingCirclesRef.current.delete(objId);
           }
         });
@@ -192,7 +192,7 @@ export function usePulsatingCircles({
       const entry = pulsatingCirclesRef.current.get(objectId);
       if (!entry) return;
       if (entry.source !== 'timeline') return;
-      entry.circle.remove();
+      entry?.circle?.remove?.();
       pulsatingCirclesRef.current.delete(objectId);
       restartPulsatingInterval();
     },
@@ -205,7 +205,7 @@ export function usePulsatingCircles({
       animationIntervalRef.current = null;
     }
     animationIntervalMsRef.current = null;
-    pulsatingCirclesRef.current.forEach(({ circle }) => circle.remove());
+    pulsatingCirclesRef.current.forEach(({ circle }) => circle?.remove?.());
     pulsatingCirclesRef.current.clear();
   }, []);
 
@@ -247,7 +247,7 @@ export function usePulsatingCircles({
         if (shouldShow) {
           if (!map.hasLayer(circle)) circle.addTo(map);
         } else if (map.hasLayer(circle)) {
-          circle.remove();
+          circle?.remove?.();
         }
       });
     },

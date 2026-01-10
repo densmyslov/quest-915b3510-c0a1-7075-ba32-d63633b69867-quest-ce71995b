@@ -24,6 +24,30 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - Responsive design
 - Offline-capable with service workers
 
+## Environment Variables
+
+### Local Development
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# Enable Steps Mode for testing (optional)
+NEXT_PUBLIC_ENABLE_STEPS_MODE=true
+
+# Quest API URLs (required for full functionality)
+NEXT_PUBLIC_QUEST_API_URL=https://your-quest-api.example.com
+NEXT_PUBLIC_RUNTIME_API_URL=https://your-runtime-api.example.com
+NEXT_PUBLIC_RUNTIME_WS_URL=wss://your-websocket-api.example.com
+```
+
+**Steps Mode**: Set `NEXT_PUBLIC_ENABLE_STEPS_MODE=true` to enable manual quest progression without GPS movement. Useful for development, testing, and demonstrations. See [STEPS_MODE.md](./docs/STEPS_MODE.md) for details.
+
+### Production Deployments
+
+Environment variables are automatically configured by the Quest Platform deployment manager. To modify them:
+1. Update `deployment_logic.py` in quest-platform backend
+2. Redeploy via GitHub Actions (never deploy locally - see quest-platform docs)
+
 ## Getting Started
 
 First, run the development server:
@@ -54,6 +78,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - [Audio Unlock System](./docs/AUDIO_UNLOCK_SYSTEM.md) - Technical details on audio unlocking
 - [Map Effects](./docs/MAP_EFFECTS.md) - Pulsating effects and visual customization
 - [Puzzle Distribution](./docs/PUZZLE_DISTRIBUTION.md) - Team puzzle assignment system
+- [Steps Mode](./docs/STEPS_MODE.md) - Manual quest progression for testing/development
 
 ### Technical Guides
 - [Audio Trigger Fix](./docs/AUDIO_TRIGGER_FIX.md) - Troubleshooting audio issues

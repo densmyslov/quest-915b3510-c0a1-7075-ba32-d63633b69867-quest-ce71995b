@@ -75,7 +75,17 @@ export default function MapOverlays(props: MapOverlaysProps) {
                 />
             ) : null}
 
-            {/* Timeline text overlay - Removed in favor of generic audio panel */}
+            {/* Timeline text overlay */}
+            {timelineTextOverlay ? (
+                <TimelineTextOverlay
+                    overlay={timelineTextOverlay}
+                    onClose={closeTimelineText}
+                    palette={palette}
+                    currentTime={audioCurrentTime}
+                    duration={audioDuration}
+                    isPlaying={audioIsPlaying}
+                />
+            ) : null}
 
             {/* Timeline chat overlay */}
             {timelineChatOverlay ? (
