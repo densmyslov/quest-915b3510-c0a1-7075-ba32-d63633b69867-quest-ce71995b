@@ -6,10 +6,10 @@
     "deployUrl": "https://quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b.pages.dev",
     "repoUrl": "https://github.com/densmyslov/quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b",
     "projectName": "quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b",
-    "contentHash": "03cb86dc7a97ffca4467d8ab690a5fa3",
+    "contentHash": "4b91392f3ed6bddd014da01ff8eaa4b9",
     "createdAt": "2025-12-07",
-    "deploymentId": "72404116-beb2-4327-afc1-473231bf93b9",
-    "lastDeployed": "2026-01-09T19:13:37.334984",
+    "deploymentId": "97680b8e-8ab4-45b2-bccc-8a0605212727",
+    "lastDeployed": "2026-01-10T07:50:53.870393",
     "description": "",
     "userId": "915b3510-c0a1-7075-ba32-d63633b69867",
     "questApiUrl": "https://esino-quest-api.denslov.workers.dev"
@@ -50,7 +50,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=10x99UFNfHyyyR4phpWM4q2fnjY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=jEatq67ahzWYcNatlM9uXXYNqfk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -117,2453 +117,2453 @@
             "order": 3.0,
             "transcription_words": [
               {
-                "start": 0.0,
+                "start": 0.46,
                 "word": "Grazie",
-                "end": 0.0
+                "end": 0.84
               },
               {
-                "start": 0.0,
+                "start": 0.84,
                 "word": "a",
-                "end": 0.0
+                "end": 1.06
               },
               {
-                "start": 0.0,
+                "start": 1.06,
                 "word": "Dio,",
-                "end": 0.0
+                "end": 2.0
               },
               {
-                "start": 0.0,
+                "start": 2.0,
                 "word": "le",
-                "end": 0.0
+                "end": 2.14
               },
               {
-                "start": 0.0,
+                "start": 2.14,
                 "word": "leggende",
-                "end": 0.0
+                "end": 2.62
               },
               {
-                "start": 0.0,
+                "start": 2.62,
                 "word": "non",
-                "end": 0.0
+                "end": 2.88
               },
               {
-                "start": 0.0,
+                "start": 2.88,
                 "word": "mentivano.",
-                "end": 0.0
+                "end": 4.16
               },
               {
-                "start": 0.0,
+                "start": 4.16,
                 "word": "Le",
-                "end": 0.0
+                "end": 4.88
               },
               {
-                "start": 0.0,
+                "start": 4.88,
                 "word": "porte",
-                "end": 0.0
+                "end": 5.3
               },
               {
-                "start": 0.0,
+                "start": 5.3,
                 "word": "di",
-                "end": 0.0
+                "end": 5.5
               },
               {
-                "start": 0.0,
+                "start": 5.5,
                 "word": "Prada",
-                "end": 0.0
+                "end": 5.86
               },
               {
-                "start": 0.0,
+                "start": 5.86,
                 "word": "sono",
-                "end": 0.0
+                "end": 7.12
               },
               {
-                "start": 0.0,
+                "start": 7.12,
                 "word": "reali.",
-                "end": 0.0
+                "end": 7.7
               },
               {
-                "start": 0.0,
+                "start": 7.7,
                 "word": "Non",
-                "end": 0.0
+                "end": 9.14
               },
               {
-                "start": 0.0,
+                "start": 9.14,
                 "word": "sono",
-                "end": 0.0
+                "end": 9.58
               },
               {
-                "start": 0.0,
+                "start": 9.58,
                 "word": "solo.",
-                "end": 0.0
+                "end": 10.9
               },
               {
-                "start": 0.0,
+                "start": 10.9,
                 "word": "Qualcosa",
-                "end": 0.0
+                "end": 11.52
               },
               {
-                "start": 0.0,
+                "start": 11.52,
                 "word": "sta",
-                "end": 0.0
+                "end": 11.86
               },
               {
-                "start": 0.0,
+                "start": 11.52,
                 "word": "succedendo.",
-                "end": 0.0
+                "end": 13.62
               },
               {
-                "start": 0.0,
+                "start": 13.62,
                 "word": "Devo",
-                "end": 0.0
+                "end": 14.06
               },
               {
-                "start": 0.0,
+                "start": 14.06,
                 "word": "dirvelo.",
-                "end": 0.0
+                "end": 14.54
               },
               {
-                "start": 0.0,
+                "start": 14.54,
                 "word": "Mi",
-                "end": 0.0
+                "end": 16.2
               },
               {
-                "start": 0.0,
+                "start": 16.2,
                 "word": "chiamo",
-                "end": 0.0
+                "end": 16.52
               },
               {
-                "start": 0.0,
+                "start": 16.52,
                 "word": "Pasqualin.",
-                "end": 0.0
+                "end": 18.32
               },
               {
-                "start": 0.0,
+                "start": 18.32,
                 "word": "Amo",
-                "end": 0.0
+                "end": 18.66
               },
               {
-                "start": 0.0,
+                "start": 18.66,
                 "word": "una",
-                "end": 0.0
+                "end": 18.82
               },
               {
-                "start": 0.0,
+                "start": 18.82,
                 "word": "ragazza.",
-                "end": 0.0
+                "end": 19.84
               },
               {
-                "start": 0.0,
+                "start": 19.84,
                 "word": "Si",
-                "end": 0.0
+                "end": 19.96
               },
               {
-                "start": 0.0,
+                "start": 19.96,
                 "word": "chiama",
-                "end": 0.0
+                "end": 20.2
               },
               {
-                "start": 0.0,
-                "word": "Ghit.",
-                "end": 0.0
+                "start": 20.2,
+                "word": "Gitt.",
+                "end": 21.2
               },
               {
-                "start": 0.0,
+                "start": 21.2,
                 "word": "Voglio",
-                "end": 0.0
+                "end": 21.94
               },
               {
-                "start": 0.0,
+                "start": 21.94,
                 "word": "sposarla.",
-                "end": 0.0
+                "end": 22.92
               },
               {
-                "start": 0.0,
+                "start": 22.92,
                 "word": "Ma",
-                "end": 0.0
+                "end": 23.6
               },
               {
-                "start": 0.0,
+                "start": 23.68,
                 "word": "lei",
-                "end": 0.0
+                "end": 23.84
               },
               {
-                "start": 0.0,
+                "start": 23.84,
                 "word": "viene",
-                "end": 0.0
+                "end": 24.16
               },
               {
-                "start": 0.0,
+                "start": 24.16,
                 "word": "dall'altra",
-                "end": 0.0
+                "end": 24.64
               },
               {
-                "start": 0.0,
+                "start": 24.64,
                 "word": "parte",
-                "end": 0.0
+                "end": 25.0
               },
               {
-                "start": 0.0,
+                "start": 25.0,
                 "word": "del",
-                "end": 0.0
+                "end": 25.24
               },
               {
-                "start": 0.0,
+                "start": 25.24,
                 "word": "paese.",
-                "end": 0.0
+                "end": 25.98
               },
               {
-                "start": 0.0,
+                "start": 25.98,
                 "word": "Per",
-                "end": 0.0
+                "end": 26.82
               },
               {
-                "start": 0.0,
+                "start": 26.82,
                 "word": "i",
-                "end": 0.0
+                "end": 26.94
               },
               {
-                "start": 0.0,
+                "start": 26.94,
                 "word": "nostri",
-                "end": 0.0
+                "end": 27.28
               },
               {
-                "start": 0.0,
+                "start": 27.28,
                 "word": "genitori,",
-                "end": 0.0
+                "end": 28.18
               },
               {
-                "start": 0.0,
+                "start": 28.18,
                 "word": "per",
-                "end": 0.0
+                "end": 28.28
               },
               {
-                "start": 0.0,
+                "start": 28.28,
                 "word": "i",
-                "end": 0.0
+                "end": 28.38
               },
               {
-                "start": 0.0,
+                "start": 28.38,
                 "word": "vicini,",
-                "end": 0.0
+                "end": 29.46
               },
               {
-                "start": 0.0,
+                "start": 29.46,
                 "word": "per",
-                "end": 0.0
+                "end": 29.6
               },
               {
-                "start": 0.0,
-                "word": "tutta",
-                "end": 0.0
+                "start": 29.6,
+                "word": "tutto",
+                "end": 30.1
               },
               {
-                "start": 0.0,
+                "start": 30.1,
                 "word": "Esino Lario,",
-                "end": 0.0
+                "end": 31.2
               },
               {
-                "start": 0.0,
+                "start": 30.5,
                 "word": "\u00e8",
-                "end": 0.0
+                "end": 31.64
               },
               {
-                "start": 0.0,
+                "start": 31.64,
                 "word": "una",
-                "end": 0.0
+                "end": 31.86
               },
               {
-                "start": 0.0,
+                "start": 31.86,
                 "word": "follia.",
-                "end": 0.0
+                "end": 33.18
               },
               {
-                "start": 0.0,
+                "start": 33.18,
                 "word": "Due",
-                "end": 0.0
+                "end": 33.7
               },
               {
-                "start": 0.0,
+                "start": 33.7,
                 "word": "parti,",
-                "end": 0.0
+                "end": 34.98
               },
               {
-                "start": 0.0,
+                "start": 34.98,
                 "word": "due",
-                "end": 0.0
+                "end": 35.26
               },
               {
-                "start": 0.0,
+                "start": 35.26,
                 "word": "odi,",
-                "end": 0.0
+                "end": 35.86
               },
               {
-                "start": 0.0,
+                "start": 35.86,
                 "word": "e",
-                "end": 0.0
+                "end": 36.72
               },
               {
-                "start": 0.0,
+                "start": 36.72,
                 "word": "nessuno",
-                "end": 0.0
+                "end": 37.32
               },
               {
-                "start": 0.0,
+                "start": 37.32,
                 "word": "crede",
-                "end": 0.0
+                "end": 37.68
               },
               {
-                "start": 0.0,
+                "start": 37.68,
                 "word": "pi\u00f9",
-                "end": 0.0
+                "end": 37.82
               },
               {
-                "start": 0.0,
+                "start": 37.82,
                 "word": "nella",
-                "end": 0.0
+                "end": 38.1
               },
               {
-                "start": 0.0,
+                "start": 38.1,
                 "word": "pace.",
-                "end": 0.0
+                "end": 38.52
               },
               {
-                "start": 0.0,
+                "start": 38.52,
                 "word": "I",
-                "end": 0.0
+                "end": 40.12
               },
               {
-                "start": 0.0,
+                "start": 40.12,
                 "word": "genitori",
-                "end": 0.0
+                "end": 40.62
               },
               {
-                "start": 0.0,
+                "start": 40.62,
                 "word": "della",
-                "end": 0.0
+                "end": 40.88
               },
               {
-                "start": 0.0,
-                "word": "Ghit",
-                "end": 0.0
+                "start": 40.88,
+                "word": "Gitt",
+                "end": 41.14
               },
               {
-                "start": 0.0,
+                "start": 41.14,
                 "word": "vogliono",
-                "end": 0.0
+                "end": 41.96
               },
               {
-                "start": 0.0,
+                "start": 41.7,
                 "word": "darla",
-                "end": 0.0
+                "end": 42.3
               },
               {
-                "start": 0.0,
+                "start": 42.3,
                 "word": "a",
-                "end": 0.0
+                "end": 42.42
               },
               {
-                "start": 0.0,
+                "start": 42.42,
                 "word": "un",
-                "end": 0.0
+                "end": 42.52
               },
               {
-                "start": 0.0,
+                "start": 42.52,
                 "word": "uomo",
-                "end": 0.0
+                "end": 42.78
               },
               {
-                "start": 0.0,
+                "start": 42.78,
                 "word": "della",
-                "end": 0.0
+                "end": 43.02
               },
               {
-                "start": 0.0,
+                "start": 43.02,
                 "word": "sua",
-                "end": 0.0
+                "end": 43.18
               },
               {
-                "start": 0.0,
+                "start": 43.18,
                 "word": "parte,",
-                "end": 0.0
+                "end": 43.92
               },
               {
-                "start": 0.0,
+                "start": 43.92,
                 "word": "ma",
-                "end": 0.0
+                "end": 44.62
               },
               {
-                "start": 0.0,
+                "start": 44.62,
                 "word": "lei",
-                "end": 0.0
+                "end": 44.86
               },
               {
-                "start": 0.0,
+                "start": 44.86,
                 "word": "ama",
-                "end": 0.0
+                "end": 45.02
               },
               {
-                "start": 0.0,
+                "start": 45.02,
                 "word": "solo",
-                "end": 0.0
+                "end": 45.34
               },
               {
-                "start": 0.0,
+                "start": 45.34,
                 "word": "me.",
-                "end": 0.0
+                "end": 46.44
               },
               {
-                "start": 0.0,
+                "start": 46.44,
                 "word": "Oggi",
-                "end": 0.0
+                "end": 47.18
               },
               {
-                "start": 0.0,
+                "start": 47.18,
                 "word": "l'hanno",
-                "end": 0.0
+                "end": 47.48
               },
               {
-                "start": 0.0,
+                "start": 47.48,
                 "word": "chiusa",
-                "end": 0.0
+                "end": 47.76
               },
               {
-                "start": 0.0,
+                "start": 47.76,
                 "word": "in",
-                "end": 0.0
+                "end": 47.9
               },
               {
-                "start": 0.0,
-                "word": "casa,",
-                "end": 0.0
+                "start": 47.9,
+                "word": "casa;",
+                "end": 48.62
               },
               {
-                "start": 0.0,
+                "start": 49.06,
                 "word": "non",
-                "end": 0.0
+                "end": 49.2
               },
               {
-                "start": 0.0,
+                "start": 49.2,
                 "word": "la",
-                "end": 0.0
+                "end": 49.34
               },
               {
-                "start": 0.0,
+                "start": 49.34,
                 "word": "lasceranno",
-                "end": 0.0
+                "end": 49.84
               },
               {
-                "start": 0.0,
+                "start": 49.84,
                 "word": "uscire",
-                "end": 0.0
+                "end": 50.38
               },
               {
-                "start": 0.0,
+                "start": 50.38,
                 "word": "fino",
-                "end": 0.0
+                "end": 51.84
               },
               {
-                "start": 0.0,
+                "start": 51.84,
                 "word": "al",
-                "end": 0.0
+                "end": 52.0
               },
               {
-                "start": 0.0,
+                "start": 52.0,
                 "word": "matrimonio.",
-                "end": 0.0
+                "end": 54.22
               },
               {
-                "start": 0.0,
+                "start": 54.22,
                 "word": "\u00c8",
-                "end": 0.0
+                "end": 54.24
               },
               {
-                "start": 0.0,
+                "start": 54.24,
                 "word": "domani.",
-                "end": 0.0
+                "end": 55.48
               },
               {
-                "start": 0.0,
+                "start": 55.48,
                 "word": "Se",
-                "end": 0.0
+                "end": 56.02
               },
               {
-                "start": 0.0,
+                "start": 56.02,
                 "word": "non",
-                "end": 0.0
+                "end": 56.2
               },
               {
-                "start": 0.0,
+                "start": 56.2,
                 "word": "fate",
-                "end": 0.0
+                "end": 56.44
               },
               {
-                "start": 0.0,
-                "word": "qualcosa",
-                "end": 0.0
+                "start": 56.44,
+                "word": "qualcosa,",
+                "end": 57.0
               },
               {
-                "start": 0.0,
+                "start": 57.0,
                 "word": "ci",
-                "end": 0.0
+                "end": 57.78
               },
               {
-                "start": 0.0,
+                "start": 57.78,
                 "word": "separeranno",
-                "end": 0.0
+                "end": 58.4
               },
               {
-                "start": 0.0,
+                "start": 57.94,
                 "word": "per",
-                "end": 0.0
+                "end": 58.66
               },
               {
-                "start": 0.0,
+                "start": 58.66,
                 "word": "sempre.",
-                "end": 0.0
+                "end": 59.98
               },
               {
-                "start": 0.0,
+                "start": 59.98,
                 "word": "Vi",
-                "end": 0.0
+                "end": 60.08
               },
               {
-                "start": 0.0,
+                "start": 60.08,
                 "word": "prego,",
-                "end": 0.0
+                "end": 61.34
               },
               {
-                "start": 0.0,
+                "start": 61.34,
                 "word": "siete",
-                "end": 0.0
+                "end": 61.4
               },
               {
-                "start": 0.0,
+                "start": 61.4,
                 "word": "la",
-                "end": 0.0
+                "end": 61.64
               },
               {
-                "start": 0.0,
+                "start": 61.64,
                 "word": "nostra",
-                "end": 0.0
+                "end": 61.92
               },
               {
-                "start": 0.0,
+                "start": 61.92,
                 "word": "unica",
-                "end": 0.0
+                "end": 62.32
               },
               {
-                "start": 0.0,
+                "start": 62.32,
                 "word": "speranza.",
-                "end": 0.0
+                "end": 63.66
               },
               {
-                "start": 0.0,
+                "start": 63.66,
                 "word": "Ascoltate,",
-                "end": 0.0
+                "end": 65.38
               },
               {
-                "start": 0.0,
+                "start": 65.38,
                 "word": "ora",
-                "end": 0.0
+                "end": 65.58
               },
               {
-                "start": 0.0,
+                "start": 65.58,
                 "word": "viene",
-                "end": 0.0
+                "end": 65.78
               },
               {
-                "start": 0.0,
+                "start": 65.78,
                 "word": "la",
-                "end": 0.0
+                "end": 65.98
               },
               {
-                "start": 0.0,
+                "start": 65.98,
                 "word": "cosa",
-                "end": 0.0
+                "end": 66.2
               },
               {
-                "start": 0.0,
+                "start": 66.2,
                 "word": "pi\u00f9",
-                "end": 0.0
+                "end": 66.44
               },
               {
-                "start": 0.0,
+                "start": 66.2,
                 "word": "importante.",
-                "end": 0.0
+                "end": 68.26
               },
               {
-                "start": 0.0,
+                "start": 68.26,
                 "word": "La",
-                "end": 0.0
+                "end": 68.8
               },
               {
-                "start": 0.0,
-                "word": "Ghit",
-                "end": 0.0
+                "start": 68.8,
+                "word": "Gitt",
+                "end": 69.08
               },
               {
-                "start": 0.0,
+                "start": 69.06447,
                 "word": "ha",
-                "end": 0.0
+                "end": 69.26447
               },
               {
-                "start": 0.0,
+                "start": 69.26447,
                 "word": "trovato",
-                "end": 0.0
+                "end": 69.664474
               },
               {
-                "start": 0.0,
+                "start": 69.664474,
                 "word": "vecchi",
-                "end": 0.0
+                "end": 69.96447
               },
               {
-                "start": 0.0,
+                "start": 69.96447,
                 "word": "documenti,",
-                "end": 0.0
+                "end": 70.76447
               },
               {
-                "start": 0.0,
+                "start": 70.76447,
                 "word": "nascosti",
-                "end": 0.0
+                "end": 71.86447
               },
               {
-                "start": 0.0,
+                "start": 71.86447,
                 "word": "negli",
-                "end": 0.0
+                "end": 72.12447
               },
               {
-                "start": 0.0,
+                "start": 72.12447,
                 "word": "archivi.",
-                "end": 0.0
+                "end": 72.984474
               },
               {
-                "start": 0.0,
+                "start": 73.86447,
                 "word": "Potrebbero",
-                "end": 0.0
+                "end": 74.40447
               },
               {
-                "start": 0.0,
+                "start": 74.40447,
                 "word": "provare",
-                "end": 0.0
+                "end": 74.884476
               },
               {
-                "start": 0.0,
+                "start": 74.884476,
                 "word": "che",
-                "end": 0.0
+                "end": 75.06447
               },
               {
-                "start": 0.0,
+                "start": 75.06447,
                 "word": "l'eterna",
-                "end": 0.0
+                "end": 76.26447
               },
               {
-                "start": 0.0,
+                "start": 76.26447,
                 "word": "divisione",
-                "end": 0.0
+                "end": 76.884476
               },
               {
-                "start": 0.0,
+                "start": 76.884476,
                 "word": "di",
-                "end": 0.0
+                "end": 77.024475
               },
               {
-                "start": 0.0,
+                "start": 77.024475,
                 "word": "Esino Lario",
-                "end": 0.0
+                "end": 77.76447
               },
               {
-                "start": 0.0,
+                "start": 77.76447,
                 "word": "\u00e8",
-                "end": 0.0
+                "end": 78.164474
               },
               {
-                "start": 0.0,
+                "start": 78.164474,
                 "word": "una",
-                "end": 0.0
+                "end": 78.36447
               },
               {
-                "start": 0.0,
+                "start": 78.36447,
                 "word": "menzogna.",
-                "end": 0.0
+                "end": 79.22447
               },
               {
-                "start": 0.0,
+                "start": 79.22447,
                 "word": "Se",
-                "end": 0.0
+                "end": 80.26447
               },
               {
-                "start": 0.0,
+                "start": 80.26447,
                 "word": "li",
-                "end": 0.0
+                "end": 80.384476
               },
               {
-                "start": 0.0,
+                "start": 80.384476,
                 "word": "troviamo,",
-                "end": 0.0
+                "end": 81.10447
               },
               {
-                "start": 0.0,
+                "start": 81.304474,
                 "word": "possiamo",
-                "end": 0.0
+                "end": 81.68447
               },
               {
-                "start": 0.0,
+                "start": 81.68447,
                 "word": "dire",
-                "end": 0.0
+                "end": 81.96447
               },
               {
-                "start": 0.0,
+                "start": 81.96447,
                 "word": "la",
-                "end": 0.0
+                "end": 82.12447
               },
               {
-                "start": 0.0,
-                "word": "verit\u00e0,",
-                "end": 0.0
+                "start": 82.12447,
+                "word": "verit\u00e0;",
+                "end": 83.10447
               },
               {
-                "start": 0.0,
+                "start": 83.10447,
                 "word": "possiamo",
-                "end": 0.0
+                "end": 83.50447
               },
               {
-                "start": 0.0,
+                "start": 83.50447,
                 "word": "ricordare",
-                "end": 0.0
+                "end": 84.12447
               },
               {
-                "start": 0.0,
+                "start": 84.12447,
                 "word": "alla",
-                "end": 0.0
+                "end": 84.28447
               },
               {
-                "start": 0.0,
+                "start": 84.28447,
                 "word": "gente",
-                "end": 0.0
+                "end": 84.70447
               },
               {
-                "start": 0.0,
+                "start": 84.70447,
                 "word": "che",
-                "end": 0.0
+                "end": 84.90447
               },
               {
-                "start": 0.0,
+                "start": 84.90447,
                 "word": "il",
-                "end": 0.0
+                "end": 85.04447
               },
               {
-                "start": 0.0,
+                "start": 85.04447,
                 "word": "paese",
-                "end": 0.0
+                "end": 85.50447
               },
               {
-                "start": 0.0,
+                "start": 85.50447,
                 "word": "era",
-                "end": 0.0
+                "end": 85.94447
               },
               {
-                "start": 0.0,
+                "start": 85.94447,
                 "word": "uno.",
-                "end": 0.0
+                "end": 86.56447
               },
               {
-                "start": 0.0,
+                "start": 86.56447,
                 "word": "Allora",
-                "end": 0.0
+                "end": 88.12447
               },
               {
-                "start": 0.0,
+                "start": 88.12447,
                 "word": "il",
-                "end": 0.0
+                "end": 88.304474
               },
               {
-                "start": 0.0,
+                "start": 88.304474,
                 "word": "nostro",
-                "end": 0.0
+                "end": 88.62447
               },
               {
-                "start": 0.0,
+                "start": 88.664474,
                 "word": "matrimonio",
-                "end": 0.0
+                "end": 89.32447
               },
               {
-                "start": 0.0,
+                "start": 89.32447,
                 "word": "sarebbe",
-                "end": 0.0
+                "end": 90.12447
               },
               {
-                "start": 0.0,
+                "start": 90.12447,
                 "word": "possibile,",
-                "end": 0.0
+                "end": 90.72447
               },
               {
-                "start": 0.0,
+                "start": 90.72447,
                 "word": "non",
-                "end": 0.0
+                "end": 92.22447
               },
               {
-                "start": 0.0,
+                "start": 92.22447,
                 "word": "come",
-                "end": 0.0
+                "end": 92.60447
               },
               {
-                "start": 0.0,
+                "start": 92.60447,
                 "word": "una",
-                "end": 0.0
+                "end": 92.78447
               },
               {
-                "start": 0.0,
+                "start": 92.78447,
                 "word": "nuova",
-                "end": 0.0
+                "end": 93.06447
               },
               {
-                "start": 0.0,
+                "start": 93.06447,
                 "word": "provocazione,",
-                "end": 0.0
+                "end": 93.96447
               },
               {
-                "start": 0.0,
+                "start": 93.96447,
                 "word": "ma",
-                "end": 0.0
+                "end": 94.96447
               },
               {
-                "start": 0.0,
+                "start": 94.96447,
                 "word": "come",
-                "end": 0.0
+                "end": 95.24447
               },
               {
-                "start": 0.0,
+                "start": 95.24447,
                 "word": "un",
-                "end": 0.0
+                "end": 95.384476
               },
               {
-                "start": 0.0,
+                "start": 95.384476,
                 "word": "segno",
-                "end": 0.0
+                "end": 95.82447
               },
               {
-                "start": 0.0,
+                "start": 95.82447,
                 "word": "di",
-                "end": 0.0
+                "end": 96.024475
               },
               {
-                "start": 0.0,
+                "start": 96.024475,
                 "word": "riunione,",
-                "end": 0.0
+                "end": 96.60447
               },
               {
-                "start": 0.0,
+                "start": 96.60447,
                 "word": "la",
-                "end": 0.0
+                "end": 98.04447
               },
               {
-                "start": 0.0,
+                "start": 98.04447,
                 "word": "fine",
-                "end": 0.0
+                "end": 98.40447
               },
               {
-                "start": 0.0,
+                "start": 98.04447,
                 "word": "dell'odio.",
-                "end": 0.0
+                "end": 99.124466
               },
               {
-                "start": 0.0,
+                "start": 99.124466,
                 "word": "Ora",
-                "end": 0.0
+                "end": 101.00447
               },
               {
-                "start": 0.0,
+                "start": 101.00447,
                 "word": "mi",
-                "end": 0.0
+                "end": 101.20447
               },
               {
-                "start": 0.0,
+                "start": 101.20447,
                 "word": "nascondo",
-                "end": 0.0
+                "end": 101.664474
               },
               {
-                "start": 0.0,
+                "start": 101.664474,
                 "word": "in",
-                "end": 0.0
+                "end": 101.82447
               },
               {
-                "start": 0.0,
+                "start": 101.82447,
                 "word": "una",
-                "end": 0.0
+                "end": 101.98447
               },
               {
-                "start": 0.0,
+                "start": 101.98447,
                 "word": "grotta",
-                "end": 0.0
+                "end": 102.26447
               },
               {
-                "start": 0.0,
+                "start": 102.26447,
                 "word": "carsica",
-                "end": 0.0
+                "end": 102.94447
               },
               {
-                "start": 0.0,
+                "start": 102.94447,
                 "word": "poco",
-                "end": 0.0
+                "end": 103.40447
               },
               {
-                "start": 0.0,
+                "start": 103.40447,
                 "word": "fuori",
-                "end": 0.0
+                "end": 103.72447
               },
               {
-                "start": 0.0,
+                "start": 103.72447,
                 "word": "dal",
-                "end": 0.0
+                "end": 103.92447
               },
               {
-                "start": 0.0,
-                "word": "paese.",
-                "end": 0.0
+                "start": 103.92447,
+                "word": "paese;",
+                "end": 104.34447
               },
               {
-                "start": 0.0,
-                "word": "Qui",
-                "end": 0.0
+                "start": 104.34447,
+                "word": "qui",
+                "end": 105.78447
               },
               {
-                "start": 0.0,
+                "start": 105.78447,
                 "word": "succede",
-                "end": 0.0
+                "end": 106.28447
               },
               {
-                "start": 0.0,
+                "start": 106.28447,
                 "word": "qualcosa",
-                "end": 0.0
+                "end": 106.64447
               },
               {
-                "start": 0.0,
+                "start": 106.64447,
                 "word": "di",
-                "end": 0.0
+                "end": 107.00447
               },
               {
-                "start": 0.0,
+                "start": 107.00447,
                 "word": "strano,",
-                "end": 0.0
+                "end": 107.46447
               },
               {
-                "start": 0.0,
+                "start": 108.54447,
                 "word": "ma",
-                "end": 0.0
+                "end": 108.72447
               },
               {
-                "start": 0.0,
+                "start": 108.72447,
                 "word": "rester\u00f2",
-                "end": 0.0
+                "end": 109.18447
               },
               {
-                "start": 0.0,
+                "start": 109.18447,
                 "word": "con",
-                "end": 0.0
+                "end": 109.44447
               },
               {
-                "start": 0.0,
+                "start": 109.44447,
                 "word": "voi;",
-                "end": 0.0
+                "end": 109.74448
               },
               {
-                "start": 0.0,
+                "start": 109.74448,
                 "word": "vi",
-                "end": 0.0
+                "end": 110.50447
               },
               {
-                "start": 0.0,
+                "start": 110.50447,
                 "word": "aiuter\u00f2",
-                "end": 0.0
+                "end": 111.00447
               },
               {
-                "start": 0.0,
+                "start": 111.00447,
                 "word": "in",
-                "end": 0.0
+                "end": 111.44447
               },
               {
-                "start": 0.0,
+                "start": 111.44447,
                 "word": "ogni",
-                "end": 0.0
+                "end": 111.70447
               },
               {
-                "start": 0.0,
+                "start": 111.70447,
                 "word": "modo",
-                "end": 0.0
+                "end": 111.96447
               },
               {
-                "start": 0.0,
+                "start": 111.96447,
                 "word": "possibile.",
-                "end": 0.0
+                "end": 112.48447
               },
               {
-                "start": 0.0,
+                "start": 112.48447,
                 "word": "E",
-                "end": 0.0
+                "end": 114.10448
               },
               {
-                "start": 0.0,
+                "start": 114.10448,
                 "word": "un'ultima",
-                "end": 0.0
+                "end": 115.22447
               },
               {
-                "start": 0.0,
+                "start": 115.22447,
                 "word": "cosa:",
-                "end": 0.0
+                "end": 115.60448
               },
               {
-                "start": 0.0,
+                "start": 115.60448,
                 "word": "l'ultima",
-                "end": 0.0
+                "end": 117.20447
               },
               {
-                "start": 0.0,
+                "start": 117.20447,
                 "word": "volta",
-                "end": 0.0
+                "end": 117.54447
               },
               {
-                "start": 0.0,
+                "start": 117.54447,
                 "word": "che",
-                "end": 0.0
+                "end": 117.804474
               },
               {
-                "start": 0.0,
+                "start": 117.82447,
                 "word": "l'ho",
-                "end": 0.0
+                "end": 117.98447
               },
               {
-                "start": 0.0,
+                "start": 117.98447,
                 "word": "vista,",
-                "end": 0.0
+                "end": 118.36447
               },
               {
-                "start": 0.0,
+                "start": 118.36447,
                 "word": "la",
-                "end": 0.0
+                "end": 119.18447
               },
               {
-                "start": 0.0,
-                "word": "Ghit",
-                "end": 0.0
+                "start": 119.18447,
+                "word": "Gitt",
+                "end": 119.384476
               },
               {
-                "start": 0.0,
+                "start": 119.384476,
                 "word": "mi",
-                "end": 0.0
+                "end": 119.64447
               },
               {
-                "start": 0.0,
+                "start": 119.64447,
                 "word": "ha",
-                "end": 0.0
+                "end": 119.72447
               },
               {
-                "start": 0.0,
+                "start": 119.72447,
                 "word": "detto",
-                "end": 0.0
+                "end": 119.98447
               },
               {
-                "start": 0.0,
+                "start": 119.98447,
                 "word": "di",
-                "end": 0.0
+                "end": 120.164474
               },
               {
-                "start": 0.0,
+                "start": 120.164474,
                 "word": "aver",
-                "end": 0.0
+                "end": 120.32447
               },
               {
-                "start": 0.0,
+                "start": 120.32447,
                 "word": "nascosto",
-                "end": 0.0
+                "end": 120.96447
               },
               {
-                "start": 0.0,
+                "start": 120.96447,
                 "word": "alcuni",
-                "end": 0.0
+                "end": 121.44447
               },
               {
-                "start": 0.0,
+                "start": 121.44447,
                 "word": "documenti",
-                "end": 0.0
+                "end": 122.22447
               },
               {
-                "start": 0.0,
+                "start": 122.22447,
                 "word": "vicino",
-                "end": 0.0
+                "end": 123.48447
               },
               {
-                "start": 0.0,
+                "start": 123.48447,
                 "word": "alla",
-                "end": 0.0
+                "end": 123.68447
               },
               {
-                "start": 0.0,
+                "start": 123.68447,
                 "word": "casa",
-                "end": 0.0
+                "end": 123.98447
               },
               {
-                "start": 0.0,
+                "start": 123.98447,
                 "word": "della",
-                "end": 0.0
+                "end": 124.28447
               },
               {
-                "start": 0.0,
+                "start": 124.28447,
                 "word": "strega.",
-                "end": 0.0
+                "end": 124.804474
               },
               {
-                "start": 0.0,
+                "start": 126.24448,
                 "word": "Mia",
-                "end": 0.0
+                "end": 126.44447
               },
               {
-                "start": 0.0,
+                "start": 126.44447,
                 "word": "nonna",
-                "end": 0.0
+                "end": 126.76447
               },
               {
-                "start": 0.0,
+                "start": 126.76447,
                 "word": "diceva",
-                "end": 0.0
+                "end": 127.26447
               },
               {
-                "start": 0.0,
+                "start": 127.26447,
                 "word": "che",
-                "end": 0.0
+                "end": 127.40447
               },
               {
-                "start": 0.0,
+                "start": 127.40447,
                 "word": "la",
-                "end": 0.0
+                "end": 127.524475
               },
               {
-                "start": 0.0,
+                "start": 127.524475,
                 "word": "divisione",
-                "end": 0.0
+                "end": 128.04446
               },
               {
-                "start": 0.0,
+                "start": 128.04446,
                 "word": "del",
-                "end": 0.0
+                "end": 128.22447
               },
               {
-                "start": 0.0,
+                "start": 128.22447,
                 "word": "paese",
-                "end": 0.0
+                "end": 128.68448
               },
               {
-                "start": 0.0,
+                "start": 128.68448,
                 "word": "non",
-                "end": 0.0
+                "end": 129.30447
               },
               {
-                "start": 0.0,
+                "start": 129.30447,
                 "word": "\u00e8",
-                "end": 0.0
+                "end": 129.44447
               },
               {
-                "start": 0.0,
+                "start": 129.44447,
                 "word": "nata",
-                "end": 0.0
+                "end": 129.76447
               },
               {
-                "start": 0.0,
+                "start": 129.76447,
                 "word": "da",
-                "end": 0.0
+                "end": 129.94447
               },
               {
-                "start": 0.0,
-                "word": "sola,",
-                "end": 0.0
+                "start": 129.94447,
+                "word": "sola;",
+                "end": 130.28447
               },
               {
-                "start": 0.0,
+                "start": 130.28447,
                 "word": "che",
-                "end": 0.0
+                "end": 131.68448
               },
               {
-                "start": 0.0,
+                "start": 131.68448,
                 "word": "le",
-                "end": 0.0
+                "end": 131.82446
               },
               {
-                "start": 0.0,
+                "start": 131.82446,
                 "word": "streghe",
-                "end": 0.0
+                "end": 132.36447
               },
               {
-                "start": 0.0,
+                "start": 132.36447,
                 "word": "c'entravano.",
-                "end": 0.0
+                "end": 134.08447
               },
               {
-                "start": 0.0,
+                "start": 135.68448,
                 "word": "Trovate",
-                "end": 0.0
+                "end": 136.06447
               },
               {
-                "start": 0.0,
+                "start": 136.06447,
                 "word": "la",
-                "end": 0.0
+                "end": 136.30447
               },
               {
-                "start": 0.0,
+                "start": 136.30447,
                 "word": "casa",
-                "end": 0.0
+                "end": 136.62448
               },
               {
-                "start": 0.0,
+                "start": 136.62448,
                 "word": "prima",
-                "end": 0.0
+                "end": 138.20447
               },
               {
-                "start": 0.0,
+                "start": 138.20447,
                 "word": "che",
-                "end": 0.0
+                "end": 138.42447
               },
               {
-                "start": 0.0,
+                "start": 138.42447,
                 "word": "sia",
-                "end": 0.0
+                "end": 138.64447
               },
               {
-                "start": 0.0,
+                "start": 138.64447,
                 "word": "troppo",
-                "end": 0.0
+                "end": 139.02448
               },
               {
-                "start": 0.0,
+                "start": 139.02448,
                 "word": "tardi.",
-                "end": 0.0
+                "end": 139.52448
               }
             ],
-            "transcription_text": "Grazie a Dio, le leggende non mentivano. Le porte di Prada sono reali. Non sono solo. Qualcosa sta succedendo. Devo dirvelo. Mi chiamo Pasqualin. Amo una ragazza. Si chiama Ghit. Voglio sposarla. Ma lei viene dall'altra parte del paese. Per i nostri genitori, per i vicini, per tutta Esino Lario, \u00e8 una follia. Due parti, due odi, e nessuno crede pi\u00f9 nella pace. I genitori della Ghit vogliono darla a un uomo della sua parte, ma lei ama solo me. Oggi l'hanno chiusa in casa, non la lasceranno uscire fino al matrimonio. \u00c8 domani. Se non fate qualcosa ci separeranno per sempre. Vi prego, siete la nostra unica speranza. Ascoltate, ora viene la cosa pi\u00f9 importante. La Ghit ha trovato vecchi documenti, nascosti negli archivi. Potrebbero provare che l'eterna divisione di Esino Lario \u00e8 una menzogna. Se li troviamo, possiamo dire la verit\u00e0, possiamo ricordare alla gente che il paese era uno. Allora il nostro matrimonio sarebbe possibile, non come una nuova provocazione, ma come un segno di riunione, la fine dell'odio. Ora mi nascondo in una grotta carsica poco fuori dal paese. Qui succede qualcosa di strano, ma rester\u00f2 con voi; vi aiuter\u00f2 in ogni modo possibile. E un'ultima cosa: l'ultima volta che l'ho vista, la Ghit mi ha detto di aver nascosto alcuni documenti vicino alla casa della strega. Mia nonna diceva che la divisione del paese non \u00e8 nata da sola, che le streghe c'entravano. Trovate la casa prima che sia troppo tardi.",
+            "transcription_text": "Grazie a Dio, le leggende non mentivano. Le porte di Prada sono reali. Non sono solo. Qualcosa sta succedendo. Devo dirvelo. Mi chiamo Pasqualin. Amo una ragazza. Si chiama Gitt. Voglio sposarla. Ma lei viene dall'altra parte del paese. Per i nostri genitori, per i vicini, per tutto Esino Lario, \u00e8 una follia. Due parti, due odi, e nessuno crede pi\u00f9 nella pace. I genitori della Gitt vogliono darla a un uomo della sua parte, ma lei ama solo me. Oggi l'hanno chiusa in casa; non la lasceranno uscire fino al matrimonio. \u00c8 domani. Se non fate qualcosa, ci separeranno per sempre. Vi prego, siete la nostra unica speranza. Ascoltate, ora viene la cosa pi\u00f9 importante. La Gitt ha trovato vecchi documenti, nascosti negli archivi. Potrebbero provare che l'eterna divisione di Esino Lario \u00e8 una menzogna. Se li troviamo, possiamo dire la verit\u00e0; possiamo ricordare alla gente che il paese era uno. Allora il nostro matrimonio sarebbe possibile, non come una nuova provocazione, ma come un segno di riunione, la fine dell'odio. Ora mi nascondo in una grotta carsica poco fuori dal paese; qui succede qualcosa di strano, ma rester\u00f2 con voi; vi aiuter\u00f2 in ogni modo possibile. E un'ultima cosa: l'ultima volta che l'ho vista, la Gitt mi ha detto di aver nascosto alcuni documenti vicino alla casa della strega. Mia nonna diceva che la divisione del paese non \u00e8 nata da sola; che le streghe c'entravano. Trovate la casa prima che sia troppo tardi.",
             "transcription_data": {
               "duration": 139.714469,
               "words": [
                 {
-                  "start": 0.0,
+                  "start": 0.46,
                   "word": "Grazie",
-                  "end": 0.0
+                  "end": 0.84
                 },
                 {
-                  "start": 0.0,
+                  "start": 0.84,
                   "word": "a",
-                  "end": 0.0
+                  "end": 1.06
                 },
                 {
-                  "start": 0.0,
+                  "start": 1.06,
                   "word": "Dio,",
-                  "end": 0.0
+                  "end": 2.0
                 },
                 {
-                  "start": 0.0,
+                  "start": 2.0,
                   "word": "le",
-                  "end": 0.0
+                  "end": 2.14
                 },
                 {
-                  "start": 0.0,
+                  "start": 2.14,
                   "word": "leggende",
-                  "end": 0.0
+                  "end": 2.62
                 },
                 {
-                  "start": 0.0,
+                  "start": 2.62,
                   "word": "non",
-                  "end": 0.0
+                  "end": 2.88
                 },
                 {
-                  "start": 0.0,
+                  "start": 2.88,
                   "word": "mentivano.",
-                  "end": 0.0
+                  "end": 4.16
                 },
                 {
-                  "start": 0.0,
+                  "start": 4.16,
                   "word": "Le",
-                  "end": 0.0
+                  "end": 4.88
                 },
                 {
-                  "start": 0.0,
+                  "start": 4.88,
                   "word": "porte",
-                  "end": 0.0
+                  "end": 5.3
                 },
                 {
-                  "start": 0.0,
+                  "start": 5.3,
                   "word": "di",
-                  "end": 0.0
+                  "end": 5.5
                 },
                 {
-                  "start": 0.0,
+                  "start": 5.5,
                   "word": "Prada",
-                  "end": 0.0
+                  "end": 5.86
                 },
                 {
-                  "start": 0.0,
+                  "start": 5.86,
                   "word": "sono",
-                  "end": 0.0
+                  "end": 7.12
                 },
                 {
-                  "start": 0.0,
+                  "start": 7.12,
                   "word": "reali.",
-                  "end": 0.0
+                  "end": 7.7
                 },
                 {
-                  "start": 0.0,
+                  "start": 7.7,
                   "word": "Non",
-                  "end": 0.0
+                  "end": 9.14
                 },
                 {
-                  "start": 0.0,
+                  "start": 9.14,
                   "word": "sono",
-                  "end": 0.0
+                  "end": 9.58
                 },
                 {
-                  "start": 0.0,
+                  "start": 9.58,
                   "word": "solo.",
-                  "end": 0.0
+                  "end": 10.9
                 },
                 {
-                  "start": 0.0,
+                  "start": 10.9,
                   "word": "Qualcosa",
-                  "end": 0.0
+                  "end": 11.52
                 },
                 {
-                  "start": 0.0,
+                  "start": 11.52,
                   "word": "sta",
-                  "end": 0.0
+                  "end": 11.86
                 },
                 {
-                  "start": 0.0,
+                  "start": 11.52,
                   "word": "succedendo.",
-                  "end": 0.0
+                  "end": 13.62
                 },
                 {
-                  "start": 0.0,
+                  "start": 13.62,
                   "word": "Devo",
-                  "end": 0.0
+                  "end": 14.06
                 },
                 {
-                  "start": 0.0,
+                  "start": 14.06,
                   "word": "dirvelo.",
-                  "end": 0.0
+                  "end": 14.54
                 },
                 {
-                  "start": 0.0,
+                  "start": 14.54,
                   "word": "Mi",
-                  "end": 0.0
+                  "end": 16.2
                 },
                 {
-                  "start": 0.0,
+                  "start": 16.2,
                   "word": "chiamo",
-                  "end": 0.0
+                  "end": 16.52
                 },
                 {
-                  "start": 0.0,
+                  "start": 16.52,
                   "word": "Pasqualin.",
-                  "end": 0.0
+                  "end": 18.32
                 },
                 {
-                  "start": 0.0,
+                  "start": 18.32,
                   "word": "Amo",
-                  "end": 0.0
+                  "end": 18.66
                 },
                 {
-                  "start": 0.0,
+                  "start": 18.66,
                   "word": "una",
-                  "end": 0.0
+                  "end": 18.82
                 },
                 {
-                  "start": 0.0,
+                  "start": 18.82,
                   "word": "ragazza.",
-                  "end": 0.0
+                  "end": 19.84
                 },
                 {
-                  "start": 0.0,
+                  "start": 19.84,
                   "word": "Si",
-                  "end": 0.0
+                  "end": 19.96
                 },
                 {
-                  "start": 0.0,
+                  "start": 19.96,
                   "word": "chiama",
-                  "end": 0.0
+                  "end": 20.2
                 },
                 {
-                  "start": 0.0,
-                  "word": "Ghit.",
-                  "end": 0.0
+                  "start": 20.2,
+                  "word": "Gitt.",
+                  "end": 21.2
                 },
                 {
-                  "start": 0.0,
+                  "start": 21.2,
                   "word": "Voglio",
-                  "end": 0.0
+                  "end": 21.94
                 },
                 {
-                  "start": 0.0,
+                  "start": 21.94,
                   "word": "sposarla.",
-                  "end": 0.0
+                  "end": 22.92
                 },
                 {
-                  "start": 0.0,
+                  "start": 22.92,
                   "word": "Ma",
-                  "end": 0.0
+                  "end": 23.6
                 },
                 {
-                  "start": 0.0,
+                  "start": 23.68,
                   "word": "lei",
-                  "end": 0.0
+                  "end": 23.84
                 },
                 {
-                  "start": 0.0,
+                  "start": 23.84,
                   "word": "viene",
-                  "end": 0.0
+                  "end": 24.16
                 },
                 {
-                  "start": 0.0,
+                  "start": 24.16,
                   "word": "dall'altra",
-                  "end": 0.0
+                  "end": 24.64
                 },
                 {
-                  "start": 0.0,
+                  "start": 24.64,
                   "word": "parte",
-                  "end": 0.0
+                  "end": 25.0
                 },
                 {
-                  "start": 0.0,
+                  "start": 25.0,
                   "word": "del",
-                  "end": 0.0
+                  "end": 25.24
                 },
                 {
-                  "start": 0.0,
+                  "start": 25.24,
                   "word": "paese.",
-                  "end": 0.0
+                  "end": 25.98
                 },
                 {
-                  "start": 0.0,
+                  "start": 25.98,
                   "word": "Per",
-                  "end": 0.0
+                  "end": 26.82
                 },
                 {
-                  "start": 0.0,
+                  "start": 26.82,
                   "word": "i",
-                  "end": 0.0
+                  "end": 26.94
                 },
                 {
-                  "start": 0.0,
+                  "start": 26.94,
                   "word": "nostri",
-                  "end": 0.0
+                  "end": 27.28
                 },
                 {
-                  "start": 0.0,
+                  "start": 27.28,
                   "word": "genitori,",
-                  "end": 0.0
+                  "end": 28.18
                 },
                 {
-                  "start": 0.0,
+                  "start": 28.18,
                   "word": "per",
-                  "end": 0.0
+                  "end": 28.28
                 },
                 {
-                  "start": 0.0,
+                  "start": 28.28,
                   "word": "i",
-                  "end": 0.0
+                  "end": 28.38
                 },
                 {
-                  "start": 0.0,
+                  "start": 28.38,
                   "word": "vicini,",
-                  "end": 0.0
+                  "end": 29.46
                 },
                 {
-                  "start": 0.0,
+                  "start": 29.46,
                   "word": "per",
-                  "end": 0.0
+                  "end": 29.6
                 },
                 {
-                  "start": 0.0,
-                  "word": "tutta",
-                  "end": 0.0
+                  "start": 29.6,
+                  "word": "tutto",
+                  "end": 30.1
                 },
                 {
-                  "start": 0.0,
+                  "start": 30.1,
                   "word": "Esino Lario,",
-                  "end": 0.0
+                  "end": 31.2
                 },
                 {
-                  "start": 0.0,
+                  "start": 30.5,
                   "word": "\u00e8",
-                  "end": 0.0
+                  "end": 31.64
                 },
                 {
-                  "start": 0.0,
+                  "start": 31.64,
                   "word": "una",
-                  "end": 0.0
+                  "end": 31.86
                 },
                 {
-                  "start": 0.0,
+                  "start": 31.86,
                   "word": "follia.",
-                  "end": 0.0
+                  "end": 33.18
                 },
                 {
-                  "start": 0.0,
+                  "start": 33.18,
                   "word": "Due",
-                  "end": 0.0
+                  "end": 33.7
                 },
                 {
-                  "start": 0.0,
+                  "start": 33.7,
                   "word": "parti,",
-                  "end": 0.0
+                  "end": 34.98
                 },
                 {
-                  "start": 0.0,
+                  "start": 34.98,
                   "word": "due",
-                  "end": 0.0
+                  "end": 35.26
                 },
                 {
-                  "start": 0.0,
+                  "start": 35.26,
                   "word": "odi,",
-                  "end": 0.0
+                  "end": 35.86
                 },
                 {
-                  "start": 0.0,
+                  "start": 35.86,
                   "word": "e",
-                  "end": 0.0
+                  "end": 36.72
                 },
                 {
-                  "start": 0.0,
+                  "start": 36.72,
                   "word": "nessuno",
-                  "end": 0.0
+                  "end": 37.32
                 },
                 {
-                  "start": 0.0,
+                  "start": 37.32,
                   "word": "crede",
-                  "end": 0.0
+                  "end": 37.68
                 },
                 {
-                  "start": 0.0,
+                  "start": 37.68,
                   "word": "pi\u00f9",
-                  "end": 0.0
+                  "end": 37.82
                 },
                 {
-                  "start": 0.0,
+                  "start": 37.82,
                   "word": "nella",
-                  "end": 0.0
+                  "end": 38.1
                 },
                 {
-                  "start": 0.0,
+                  "start": 38.1,
                   "word": "pace.",
-                  "end": 0.0
+                  "end": 38.52
                 },
                 {
-                  "start": 0.0,
+                  "start": 38.52,
                   "word": "I",
-                  "end": 0.0
+                  "end": 40.12
                 },
                 {
-                  "start": 0.0,
+                  "start": 40.12,
                   "word": "genitori",
-                  "end": 0.0
+                  "end": 40.62
                 },
                 {
-                  "start": 0.0,
+                  "start": 40.62,
                   "word": "della",
-                  "end": 0.0
+                  "end": 40.88
                 },
                 {
-                  "start": 0.0,
-                  "word": "Ghit",
-                  "end": 0.0
+                  "start": 40.88,
+                  "word": "Gitt",
+                  "end": 41.14
                 },
                 {
-                  "start": 0.0,
+                  "start": 41.14,
                   "word": "vogliono",
-                  "end": 0.0
+                  "end": 41.96
                 },
                 {
-                  "start": 0.0,
+                  "start": 41.7,
                   "word": "darla",
-                  "end": 0.0
+                  "end": 42.3
                 },
                 {
-                  "start": 0.0,
+                  "start": 42.3,
                   "word": "a",
-                  "end": 0.0
+                  "end": 42.42
                 },
                 {
-                  "start": 0.0,
+                  "start": 42.42,
                   "word": "un",
-                  "end": 0.0
+                  "end": 42.52
                 },
                 {
-                  "start": 0.0,
+                  "start": 42.52,
                   "word": "uomo",
-                  "end": 0.0
+                  "end": 42.78
                 },
                 {
-                  "start": 0.0,
+                  "start": 42.78,
                   "word": "della",
-                  "end": 0.0
+                  "end": 43.02
                 },
                 {
-                  "start": 0.0,
+                  "start": 43.02,
                   "word": "sua",
-                  "end": 0.0
+                  "end": 43.18
                 },
                 {
-                  "start": 0.0,
+                  "start": 43.18,
                   "word": "parte,",
-                  "end": 0.0
+                  "end": 43.92
                 },
                 {
-                  "start": 0.0,
+                  "start": 43.92,
                   "word": "ma",
-                  "end": 0.0
+                  "end": 44.62
                 },
                 {
-                  "start": 0.0,
+                  "start": 44.62,
                   "word": "lei",
-                  "end": 0.0
+                  "end": 44.86
                 },
                 {
-                  "start": 0.0,
+                  "start": 44.86,
                   "word": "ama",
-                  "end": 0.0
+                  "end": 45.02
                 },
                 {
-                  "start": 0.0,
+                  "start": 45.02,
                   "word": "solo",
-                  "end": 0.0
+                  "end": 45.34
                 },
                 {
-                  "start": 0.0,
+                  "start": 45.34,
                   "word": "me.",
-                  "end": 0.0
+                  "end": 46.44
                 },
                 {
-                  "start": 0.0,
+                  "start": 46.44,
                   "word": "Oggi",
-                  "end": 0.0
+                  "end": 47.18
                 },
                 {
-                  "start": 0.0,
+                  "start": 47.18,
                   "word": "l'hanno",
-                  "end": 0.0
+                  "end": 47.48
                 },
                 {
-                  "start": 0.0,
+                  "start": 47.48,
                   "word": "chiusa",
-                  "end": 0.0
+                  "end": 47.76
                 },
                 {
-                  "start": 0.0,
+                  "start": 47.76,
                   "word": "in",
-                  "end": 0.0
+                  "end": 47.9
                 },
                 {
-                  "start": 0.0,
-                  "word": "casa,",
-                  "end": 0.0
+                  "start": 47.9,
+                  "word": "casa;",
+                  "end": 48.62
                 },
                 {
-                  "start": 0.0,
+                  "start": 49.06,
                   "word": "non",
-                  "end": 0.0
+                  "end": 49.2
                 },
                 {
-                  "start": 0.0,
+                  "start": 49.2,
                   "word": "la",
-                  "end": 0.0
+                  "end": 49.34
                 },
                 {
-                  "start": 0.0,
+                  "start": 49.34,
                   "word": "lasceranno",
-                  "end": 0.0
+                  "end": 49.84
                 },
                 {
-                  "start": 0.0,
+                  "start": 49.84,
                   "word": "uscire",
-                  "end": 0.0
+                  "end": 50.38
                 },
                 {
-                  "start": 0.0,
+                  "start": 50.38,
                   "word": "fino",
-                  "end": 0.0
+                  "end": 51.84
                 },
                 {
-                  "start": 0.0,
+                  "start": 51.84,
                   "word": "al",
-                  "end": 0.0
+                  "end": 52.0
                 },
                 {
-                  "start": 0.0,
+                  "start": 52.0,
                   "word": "matrimonio.",
-                  "end": 0.0
+                  "end": 54.22
                 },
                 {
-                  "start": 0.0,
+                  "start": 54.22,
                   "word": "\u00c8",
-                  "end": 0.0
+                  "end": 54.24
                 },
                 {
-                  "start": 0.0,
+                  "start": 54.24,
                   "word": "domani.",
-                  "end": 0.0
+                  "end": 55.48
                 },
                 {
-                  "start": 0.0,
+                  "start": 55.48,
                   "word": "Se",
-                  "end": 0.0
+                  "end": 56.02
                 },
                 {
-                  "start": 0.0,
+                  "start": 56.02,
                   "word": "non",
-                  "end": 0.0
+                  "end": 56.2
                 },
                 {
-                  "start": 0.0,
+                  "start": 56.2,
                   "word": "fate",
-                  "end": 0.0
+                  "end": 56.44
                 },
                 {
-                  "start": 0.0,
-                  "word": "qualcosa",
-                  "end": 0.0
+                  "start": 56.44,
+                  "word": "qualcosa,",
+                  "end": 57.0
                 },
                 {
-                  "start": 0.0,
+                  "start": 57.0,
                   "word": "ci",
-                  "end": 0.0
+                  "end": 57.78
                 },
                 {
-                  "start": 0.0,
+                  "start": 57.78,
                   "word": "separeranno",
-                  "end": 0.0
+                  "end": 58.4
                 },
                 {
-                  "start": 0.0,
+                  "start": 57.94,
                   "word": "per",
-                  "end": 0.0
+                  "end": 58.66
                 },
                 {
-                  "start": 0.0,
+                  "start": 58.66,
                   "word": "sempre.",
-                  "end": 0.0
+                  "end": 59.98
                 },
                 {
-                  "start": 0.0,
+                  "start": 59.98,
                   "word": "Vi",
-                  "end": 0.0
+                  "end": 60.08
                 },
                 {
-                  "start": 0.0,
+                  "start": 60.08,
                   "word": "prego,",
-                  "end": 0.0
+                  "end": 61.34
                 },
                 {
-                  "start": 0.0,
+                  "start": 61.34,
                   "word": "siete",
-                  "end": 0.0
+                  "end": 61.4
                 },
                 {
-                  "start": 0.0,
+                  "start": 61.4,
                   "word": "la",
-                  "end": 0.0
+                  "end": 61.64
                 },
                 {
-                  "start": 0.0,
+                  "start": 61.64,
                   "word": "nostra",
-                  "end": 0.0
+                  "end": 61.92
                 },
                 {
-                  "start": 0.0,
+                  "start": 61.92,
                   "word": "unica",
-                  "end": 0.0
+                  "end": 62.32
                 },
                 {
-                  "start": 0.0,
+                  "start": 62.32,
                   "word": "speranza.",
-                  "end": 0.0
+                  "end": 63.66
                 },
                 {
-                  "start": 0.0,
+                  "start": 63.66,
                   "word": "Ascoltate,",
-                  "end": 0.0
+                  "end": 65.38
                 },
                 {
-                  "start": 0.0,
+                  "start": 65.38,
                   "word": "ora",
-                  "end": 0.0
+                  "end": 65.58
                 },
                 {
-                  "start": 0.0,
+                  "start": 65.58,
                   "word": "viene",
-                  "end": 0.0
+                  "end": 65.78
                 },
                 {
-                  "start": 0.0,
+                  "start": 65.78,
                   "word": "la",
-                  "end": 0.0
+                  "end": 65.98
                 },
                 {
-                  "start": 0.0,
+                  "start": 65.98,
                   "word": "cosa",
-                  "end": 0.0
+                  "end": 66.2
                 },
                 {
-                  "start": 0.0,
+                  "start": 66.2,
                   "word": "pi\u00f9",
-                  "end": 0.0
+                  "end": 66.44
                 },
                 {
-                  "start": 0.0,
+                  "start": 66.2,
                   "word": "importante.",
-                  "end": 0.0
+                  "end": 68.26
                 },
                 {
-                  "start": 0.0,
+                  "start": 68.26,
                   "word": "La",
-                  "end": 0.0
+                  "end": 68.8
                 },
                 {
-                  "start": 0.0,
-                  "word": "Ghit",
-                  "end": 0.0
+                  "start": 68.8,
+                  "word": "Gitt",
+                  "end": 69.08
                 },
                 {
-                  "start": 0.0,
+                  "start": 69.06447,
                   "word": "ha",
-                  "end": 0.0
+                  "end": 69.26447
                 },
                 {
-                  "start": 0.0,
+                  "start": 69.26447,
                   "word": "trovato",
-                  "end": 0.0
+                  "end": 69.664474
                 },
                 {
-                  "start": 0.0,
+                  "start": 69.664474,
                   "word": "vecchi",
-                  "end": 0.0
+                  "end": 69.96447
                 },
                 {
-                  "start": 0.0,
+                  "start": 69.96447,
                   "word": "documenti,",
-                  "end": 0.0
+                  "end": 70.76447
                 },
                 {
-                  "start": 0.0,
+                  "start": 70.76447,
                   "word": "nascosti",
-                  "end": 0.0
+                  "end": 71.86447
                 },
                 {
-                  "start": 0.0,
+                  "start": 71.86447,
                   "word": "negli",
-                  "end": 0.0
+                  "end": 72.12447
                 },
                 {
-                  "start": 0.0,
+                  "start": 72.12447,
                   "word": "archivi.",
-                  "end": 0.0
+                  "end": 72.984474
                 },
                 {
-                  "start": 0.0,
+                  "start": 73.86447,
                   "word": "Potrebbero",
-                  "end": 0.0
+                  "end": 74.40447
                 },
                 {
-                  "start": 0.0,
+                  "start": 74.40447,
                   "word": "provare",
-                  "end": 0.0
+                  "end": 74.884476
                 },
                 {
-                  "start": 0.0,
+                  "start": 74.884476,
                   "word": "che",
-                  "end": 0.0
+                  "end": 75.06447
                 },
                 {
-                  "start": 0.0,
+                  "start": 75.06447,
                   "word": "l'eterna",
-                  "end": 0.0
+                  "end": 76.26447
                 },
                 {
-                  "start": 0.0,
+                  "start": 76.26447,
                   "word": "divisione",
-                  "end": 0.0
+                  "end": 76.884476
                 },
                 {
-                  "start": 0.0,
+                  "start": 76.884476,
                   "word": "di",
-                  "end": 0.0
+                  "end": 77.024475
                 },
                 {
-                  "start": 0.0,
+                  "start": 77.024475,
                   "word": "Esino Lario",
-                  "end": 0.0
+                  "end": 77.76447
                 },
                 {
-                  "start": 0.0,
+                  "start": 77.76447,
                   "word": "\u00e8",
-                  "end": 0.0
+                  "end": 78.164474
                 },
                 {
-                  "start": 0.0,
+                  "start": 78.164474,
                   "word": "una",
-                  "end": 0.0
+                  "end": 78.36447
                 },
                 {
-                  "start": 0.0,
+                  "start": 78.36447,
                   "word": "menzogna.",
-                  "end": 0.0
+                  "end": 79.22447
                 },
                 {
-                  "start": 0.0,
+                  "start": 79.22447,
                   "word": "Se",
-                  "end": 0.0
+                  "end": 80.26447
                 },
                 {
-                  "start": 0.0,
+                  "start": 80.26447,
                   "word": "li",
-                  "end": 0.0
+                  "end": 80.384476
                 },
                 {
-                  "start": 0.0,
+                  "start": 80.384476,
                   "word": "troviamo,",
-                  "end": 0.0
+                  "end": 81.10447
                 },
                 {
-                  "start": 0.0,
+                  "start": 81.304474,
                   "word": "possiamo",
-                  "end": 0.0
+                  "end": 81.68447
                 },
                 {
-                  "start": 0.0,
+                  "start": 81.68447,
                   "word": "dire",
-                  "end": 0.0
+                  "end": 81.96447
                 },
                 {
-                  "start": 0.0,
+                  "start": 81.96447,
                   "word": "la",
-                  "end": 0.0
+                  "end": 82.12447
                 },
                 {
-                  "start": 0.0,
-                  "word": "verit\u00e0,",
-                  "end": 0.0
+                  "start": 82.12447,
+                  "word": "verit\u00e0;",
+                  "end": 83.10447
                 },
                 {
-                  "start": 0.0,
+                  "start": 83.10447,
                   "word": "possiamo",
-                  "end": 0.0
+                  "end": 83.50447
                 },
                 {
-                  "start": 0.0,
+                  "start": 83.50447,
                   "word": "ricordare",
-                  "end": 0.0
+                  "end": 84.12447
                 },
                 {
-                  "start": 0.0,
+                  "start": 84.12447,
                   "word": "alla",
-                  "end": 0.0
+                  "end": 84.28447
                 },
                 {
-                  "start": 0.0,
+                  "start": 84.28447,
                   "word": "gente",
-                  "end": 0.0
+                  "end": 84.70447
                 },
                 {
-                  "start": 0.0,
+                  "start": 84.70447,
                   "word": "che",
-                  "end": 0.0
+                  "end": 84.90447
                 },
                 {
-                  "start": 0.0,
+                  "start": 84.90447,
                   "word": "il",
-                  "end": 0.0
+                  "end": 85.04447
                 },
                 {
-                  "start": 0.0,
+                  "start": 85.04447,
                   "word": "paese",
-                  "end": 0.0
+                  "end": 85.50447
                 },
                 {
-                  "start": 0.0,
+                  "start": 85.50447,
                   "word": "era",
-                  "end": 0.0
+                  "end": 85.94447
                 },
                 {
-                  "start": 0.0,
+                  "start": 85.94447,
                   "word": "uno.",
-                  "end": 0.0
+                  "end": 86.56447
                 },
                 {
-                  "start": 0.0,
+                  "start": 86.56447,
                   "word": "Allora",
-                  "end": 0.0
+                  "end": 88.12447
                 },
                 {
-                  "start": 0.0,
+                  "start": 88.12447,
                   "word": "il",
-                  "end": 0.0
+                  "end": 88.304474
                 },
                 {
-                  "start": 0.0,
+                  "start": 88.304474,
                   "word": "nostro",
-                  "end": 0.0
+                  "end": 88.62447
                 },
                 {
-                  "start": 0.0,
+                  "start": 88.664474,
                   "word": "matrimonio",
-                  "end": 0.0
+                  "end": 89.32447
                 },
                 {
-                  "start": 0.0,
+                  "start": 89.32447,
                   "word": "sarebbe",
-                  "end": 0.0
+                  "end": 90.12447
                 },
                 {
-                  "start": 0.0,
+                  "start": 90.12447,
                   "word": "possibile,",
-                  "end": 0.0
+                  "end": 90.72447
                 },
                 {
-                  "start": 0.0,
+                  "start": 90.72447,
                   "word": "non",
-                  "end": 0.0
+                  "end": 92.22447
                 },
                 {
-                  "start": 0.0,
+                  "start": 92.22447,
                   "word": "come",
-                  "end": 0.0
+                  "end": 92.60447
                 },
                 {
-                  "start": 0.0,
+                  "start": 92.60447,
                   "word": "una",
-                  "end": 0.0
+                  "end": 92.78447
                 },
                 {
-                  "start": 0.0,
+                  "start": 92.78447,
                   "word": "nuova",
-                  "end": 0.0
+                  "end": 93.06447
                 },
                 {
-                  "start": 0.0,
+                  "start": 93.06447,
                   "word": "provocazione,",
-                  "end": 0.0
+                  "end": 93.96447
                 },
                 {
-                  "start": 0.0,
+                  "start": 93.96447,
                   "word": "ma",
-                  "end": 0.0
+                  "end": 94.96447
                 },
                 {
-                  "start": 0.0,
+                  "start": 94.96447,
                   "word": "come",
-                  "end": 0.0
+                  "end": 95.24447
                 },
                 {
-                  "start": 0.0,
+                  "start": 95.24447,
                   "word": "un",
-                  "end": 0.0
+                  "end": 95.384476
                 },
                 {
-                  "start": 0.0,
+                  "start": 95.384476,
                   "word": "segno",
-                  "end": 0.0
+                  "end": 95.82447
                 },
                 {
-                  "start": 0.0,
+                  "start": 95.82447,
                   "word": "di",
-                  "end": 0.0
+                  "end": 96.024475
                 },
                 {
-                  "start": 0.0,
+                  "start": 96.024475,
                   "word": "riunione,",
-                  "end": 0.0
+                  "end": 96.60447
                 },
                 {
-                  "start": 0.0,
+                  "start": 96.60447,
                   "word": "la",
-                  "end": 0.0
+                  "end": 98.04447
                 },
                 {
-                  "start": 0.0,
+                  "start": 98.04447,
                   "word": "fine",
-                  "end": 0.0
+                  "end": 98.40447
                 },
                 {
-                  "start": 0.0,
+                  "start": 98.04447,
                   "word": "dell'odio.",
-                  "end": 0.0
+                  "end": 99.124466
                 },
                 {
-                  "start": 0.0,
+                  "start": 99.124466,
                   "word": "Ora",
-                  "end": 0.0
+                  "end": 101.00447
                 },
                 {
-                  "start": 0.0,
+                  "start": 101.00447,
                   "word": "mi",
-                  "end": 0.0
+                  "end": 101.20447
                 },
                 {
-                  "start": 0.0,
+                  "start": 101.20447,
                   "word": "nascondo",
-                  "end": 0.0
+                  "end": 101.664474
                 },
                 {
-                  "start": 0.0,
+                  "start": 101.664474,
                   "word": "in",
-                  "end": 0.0
+                  "end": 101.82447
                 },
                 {
-                  "start": 0.0,
+                  "start": 101.82447,
                   "word": "una",
-                  "end": 0.0
+                  "end": 101.98447
                 },
                 {
-                  "start": 0.0,
+                  "start": 101.98447,
                   "word": "grotta",
-                  "end": 0.0
+                  "end": 102.26447
                 },
                 {
-                  "start": 0.0,
+                  "start": 102.26447,
                   "word": "carsica",
-                  "end": 0.0
+                  "end": 102.94447
                 },
                 {
-                  "start": 0.0,
+                  "start": 102.94447,
                   "word": "poco",
-                  "end": 0.0
+                  "end": 103.40447
                 },
                 {
-                  "start": 0.0,
+                  "start": 103.40447,
                   "word": "fuori",
-                  "end": 0.0
+                  "end": 103.72447
                 },
                 {
-                  "start": 0.0,
+                  "start": 103.72447,
                   "word": "dal",
-                  "end": 0.0
+                  "end": 103.92447
                 },
                 {
-                  "start": 0.0,
-                  "word": "paese.",
-                  "end": 0.0
+                  "start": 103.92447,
+                  "word": "paese;",
+                  "end": 104.34447
                 },
                 {
-                  "start": 0.0,
-                  "word": "Qui",
-                  "end": 0.0
+                  "start": 104.34447,
+                  "word": "qui",
+                  "end": 105.78447
                 },
                 {
-                  "start": 0.0,
+                  "start": 105.78447,
                   "word": "succede",
-                  "end": 0.0
+                  "end": 106.28447
                 },
                 {
-                  "start": 0.0,
+                  "start": 106.28447,
                   "word": "qualcosa",
-                  "end": 0.0
+                  "end": 106.64447
                 },
                 {
-                  "start": 0.0,
+                  "start": 106.64447,
                   "word": "di",
-                  "end": 0.0
+                  "end": 107.00447
                 },
                 {
-                  "start": 0.0,
+                  "start": 107.00447,
                   "word": "strano,",
-                  "end": 0.0
+                  "end": 107.46447
                 },
                 {
-                  "start": 0.0,
+                  "start": 108.54447,
                   "word": "ma",
-                  "end": 0.0
+                  "end": 108.72447
                 },
                 {
-                  "start": 0.0,
+                  "start": 108.72447,
                   "word": "rester\u00f2",
-                  "end": 0.0
+                  "end": 109.18447
                 },
                 {
-                  "start": 0.0,
+                  "start": 109.18447,
                   "word": "con",
-                  "end": 0.0
+                  "end": 109.44447
                 },
                 {
-                  "start": 0.0,
+                  "start": 109.44447,
                   "word": "voi;",
-                  "end": 0.0
+                  "end": 109.74448
                 },
                 {
-                  "start": 0.0,
+                  "start": 109.74448,
                   "word": "vi",
-                  "end": 0.0
+                  "end": 110.50447
                 },
                 {
-                  "start": 0.0,
+                  "start": 110.50447,
                   "word": "aiuter\u00f2",
-                  "end": 0.0
+                  "end": 111.00447
                 },
                 {
-                  "start": 0.0,
+                  "start": 111.00447,
                   "word": "in",
-                  "end": 0.0
+                  "end": 111.44447
                 },
                 {
-                  "start": 0.0,
+                  "start": 111.44447,
                   "word": "ogni",
-                  "end": 0.0
+                  "end": 111.70447
                 },
                 {
-                  "start": 0.0,
+                  "start": 111.70447,
                   "word": "modo",
-                  "end": 0.0
+                  "end": 111.96447
                 },
                 {
-                  "start": 0.0,
+                  "start": 111.96447,
                   "word": "possibile.",
-                  "end": 0.0
+                  "end": 112.48447
                 },
                 {
-                  "start": 0.0,
+                  "start": 112.48447,
                   "word": "E",
-                  "end": 0.0
+                  "end": 114.10448
                 },
                 {
-                  "start": 0.0,
+                  "start": 114.10448,
                   "word": "un'ultima",
-                  "end": 0.0
+                  "end": 115.22447
                 },
                 {
-                  "start": 0.0,
+                  "start": 115.22447,
                   "word": "cosa:",
-                  "end": 0.0
+                  "end": 115.60448
                 },
                 {
-                  "start": 0.0,
+                  "start": 115.60448,
                   "word": "l'ultima",
-                  "end": 0.0
+                  "end": 117.20447
                 },
                 {
-                  "start": 0.0,
+                  "start": 117.20447,
                   "word": "volta",
-                  "end": 0.0
+                  "end": 117.54447
                 },
                 {
-                  "start": 0.0,
+                  "start": 117.54447,
                   "word": "che",
-                  "end": 0.0
+                  "end": 117.804474
                 },
                 {
-                  "start": 0.0,
+                  "start": 117.82447,
                   "word": "l'ho",
-                  "end": 0.0
+                  "end": 117.98447
                 },
                 {
-                  "start": 0.0,
+                  "start": 117.98447,
                   "word": "vista,",
-                  "end": 0.0
+                  "end": 118.36447
                 },
                 {
-                  "start": 0.0,
+                  "start": 118.36447,
                   "word": "la",
-                  "end": 0.0
+                  "end": 119.18447
                 },
                 {
-                  "start": 0.0,
-                  "word": "Ghit",
-                  "end": 0.0
+                  "start": 119.18447,
+                  "word": "Gitt",
+                  "end": 119.384476
                 },
                 {
-                  "start": 0.0,
+                  "start": 119.384476,
                   "word": "mi",
-                  "end": 0.0
+                  "end": 119.64447
                 },
                 {
-                  "start": 0.0,
+                  "start": 119.64447,
                   "word": "ha",
-                  "end": 0.0
+                  "end": 119.72447
                 },
                 {
-                  "start": 0.0,
+                  "start": 119.72447,
                   "word": "detto",
-                  "end": 0.0
+                  "end": 119.98447
                 },
                 {
-                  "start": 0.0,
+                  "start": 119.98447,
                   "word": "di",
-                  "end": 0.0
+                  "end": 120.164474
                 },
                 {
-                  "start": 0.0,
+                  "start": 120.164474,
                   "word": "aver",
-                  "end": 0.0
+                  "end": 120.32447
                 },
                 {
-                  "start": 0.0,
+                  "start": 120.32447,
                   "word": "nascosto",
-                  "end": 0.0
+                  "end": 120.96447
                 },
                 {
-                  "start": 0.0,
+                  "start": 120.96447,
                   "word": "alcuni",
-                  "end": 0.0
+                  "end": 121.44447
                 },
                 {
-                  "start": 0.0,
+                  "start": 121.44447,
                   "word": "documenti",
-                  "end": 0.0
+                  "end": 122.22447
                 },
                 {
-                  "start": 0.0,
+                  "start": 122.22447,
                   "word": "vicino",
-                  "end": 0.0
+                  "end": 123.48447
                 },
                 {
-                  "start": 0.0,
+                  "start": 123.48447,
                   "word": "alla",
-                  "end": 0.0
+                  "end": 123.68447
                 },
                 {
-                  "start": 0.0,
+                  "start": 123.68447,
                   "word": "casa",
-                  "end": 0.0
+                  "end": 123.98447
                 },
                 {
-                  "start": 0.0,
+                  "start": 123.98447,
                   "word": "della",
-                  "end": 0.0
+                  "end": 124.28447
                 },
                 {
-                  "start": 0.0,
+                  "start": 124.28447,
                   "word": "strega.",
-                  "end": 0.0
+                  "end": 124.804474
                 },
                 {
-                  "start": 0.0,
+                  "start": 126.24448,
                   "word": "Mia",
-                  "end": 0.0
+                  "end": 126.44447
                 },
                 {
-                  "start": 0.0,
+                  "start": 126.44447,
                   "word": "nonna",
-                  "end": 0.0
+                  "end": 126.76447
                 },
                 {
-                  "start": 0.0,
+                  "start": 126.76447,
                   "word": "diceva",
-                  "end": 0.0
+                  "end": 127.26447
                 },
                 {
-                  "start": 0.0,
+                  "start": 127.26447,
                   "word": "che",
-                  "end": 0.0
+                  "end": 127.40447
                 },
                 {
-                  "start": 0.0,
+                  "start": 127.40447,
                   "word": "la",
-                  "end": 0.0
+                  "end": 127.524475
                 },
                 {
-                  "start": 0.0,
+                  "start": 127.524475,
                   "word": "divisione",
-                  "end": 0.0
+                  "end": 128.04446
                 },
                 {
-                  "start": 0.0,
+                  "start": 128.04446,
                   "word": "del",
-                  "end": 0.0
+                  "end": 128.22447
                 },
                 {
-                  "start": 0.0,
+                  "start": 128.22447,
                   "word": "paese",
-                  "end": 0.0
+                  "end": 128.68448
                 },
                 {
-                  "start": 0.0,
+                  "start": 128.68448,
                   "word": "non",
-                  "end": 0.0
+                  "end": 129.30447
                 },
                 {
-                  "start": 0.0,
+                  "start": 129.30447,
                   "word": "\u00e8",
-                  "end": 0.0
+                  "end": 129.44447
                 },
                 {
-                  "start": 0.0,
+                  "start": 129.44447,
                   "word": "nata",
-                  "end": 0.0
+                  "end": 129.76447
                 },
                 {
-                  "start": 0.0,
+                  "start": 129.76447,
                   "word": "da",
-                  "end": 0.0
+                  "end": 129.94447
                 },
                 {
-                  "start": 0.0,
-                  "word": "sola,",
-                  "end": 0.0
+                  "start": 129.94447,
+                  "word": "sola;",
+                  "end": 130.28447
                 },
                 {
-                  "start": 0.0,
+                  "start": 130.28447,
                   "word": "che",
-                  "end": 0.0
+                  "end": 131.68448
                 },
                 {
-                  "start": 0.0,
+                  "start": 131.68448,
                   "word": "le",
-                  "end": 0.0
+                  "end": 131.82446
                 },
                 {
-                  "start": 0.0,
+                  "start": 131.82446,
                   "word": "streghe",
-                  "end": 0.0
+                  "end": 132.36447
                 },
                 {
-                  "start": 0.0,
+                  "start": 132.36447,
                   "word": "c'entravano.",
-                  "end": 0.0
+                  "end": 134.08447
                 },
                 {
-                  "start": 0.0,
+                  "start": 135.68448,
                   "word": "Trovate",
-                  "end": 0.0
+                  "end": 136.06447
                 },
                 {
-                  "start": 0.0,
+                  "start": 136.06447,
                   "word": "la",
-                  "end": 0.0
+                  "end": 136.30447
                 },
                 {
-                  "start": 0.0,
+                  "start": 136.30447,
                   "word": "casa",
-                  "end": 0.0
+                  "end": 136.62448
                 },
                 {
-                  "start": 0.0,
+                  "start": 136.62448,
                   "word": "prima",
-                  "end": 0.0
+                  "end": 138.20447
                 },
                 {
-                  "start": 0.0,
+                  "start": 138.20447,
                   "word": "che",
-                  "end": 0.0
+                  "end": 138.42447
                 },
                 {
-                  "start": 0.0,
+                  "start": 138.42447,
                   "word": "sia",
-                  "end": 0.0
+                  "end": 138.64447
                 },
                 {
-                  "start": 0.0,
+                  "start": 138.64447,
                   "word": "troppo",
-                  "end": 0.0
+                  "end": 139.02448
                 },
                 {
-                  "start": 0.0,
+                  "start": 139.02448,
                   "word": "tardi.",
-                  "end": 0.0
+                  "end": 139.52448
                 }
               ],
               "language": "it",
-              "text": "Grazie a Dio, le leggende non mentivano. Le porte di Prada sono reali. Non sono solo. Qualcosa sta succedendo. Devo dirvelo. Mi chiamo Pasqualin. Amo una ragazza. Si chiama Ghit. Voglio sposarla. Ma lei viene dall'altra parte del paese. Per i nostri genitori, per i vicini, per tutta Esino Lario, \u00e8 una follia. Due parti, due odi, e nessuno crede pi\u00f9 nella pace. I genitori della Ghit vogliono darla a un uomo della sua parte, ma lei ama solo me. Oggi l'hanno chiusa in casa, non la lasceranno uscire fino al matrimonio. \u00c8 domani. Se non fate qualcosa ci separeranno per sempre. Vi prego, siete la nostra unica speranza. Ascoltate, ora viene la cosa pi\u00f9 importante. La Ghit ha trovato vecchi documenti, nascosti negli archivi. Potrebbero provare che l'eterna divisione di Esino Lario \u00e8 una menzogna. Se li troviamo, possiamo dire la verit\u00e0, possiamo ricordare alla gente che il paese era uno. Allora il nostro matrimonio sarebbe possibile, non come una nuova provocazione, ma come un segno di riunione, la fine dell'odio. Ora mi nascondo in una grotta carsica poco fuori dal paese. Qui succede qualcosa di strano, ma rester\u00f2 con voi; vi aiuter\u00f2 in ogni modo possibile. E un'ultima cosa: l'ultima volta che l'ho vista, la Ghit mi ha detto di aver nascosto alcuni documenti vicino alla casa della strega. Mia nonna diceva che la divisione del paese non \u00e8 nata da sola, che le streghe c'entravano. Trovate la casa prima che sia troppo tardi."
+              "text": "Grazie a Dio, le leggende non mentivano. Le porte di Prada sono reali. Non sono solo. Qualcosa sta succedendo. Devo dirvelo. Mi chiamo Pasqualin. Amo una ragazza. Si chiama Gitt. Voglio sposarla. Ma lei viene dall'altra parte del paese. Per i nostri genitori, per i vicini, per tutto Esino Lario, \u00e8 una follia. Due parti, due odi, e nessuno crede pi\u00f9 nella pace. I genitori della Gitt vogliono darla a un uomo della sua parte, ma lei ama solo me. Oggi l'hanno chiusa in casa; non la lasceranno uscire fino al matrimonio. \u00c8 domani. Se non fate qualcosa, ci separeranno per sempre. Vi prego, siete la nostra unica speranza. Ascoltate, ora viene la cosa pi\u00f9 importante. La Gitt ha trovato vecchi documenti, nascosti negli archivi. Potrebbero provare che l'eterna divisione di Esino Lario \u00e8 una menzogna. Se li troviamo, possiamo dire la verit\u00e0; possiamo ricordare alla gente che il paese era uno. Allora il nostro matrimonio sarebbe possibile, non come una nuova provocazione, ma come un segno di riunione, la fine dell'odio. Ora mi nascondo in una grotta carsica poco fuori dal paese; qui succede qualcosa di strano, ma rester\u00f2 con voi; vi aiuter\u00f2 in ogni modo possibile. E un'ultima cosa: l'ultima volta che l'ho vista, la Gitt mi ha detto di aver nascosto alcuni documenti vicino alla casa della strega. Mia nonna diceva che la divisione del paese non \u00e8 nata da sola; che le streghe c'entravano. Trovate la casa prima che sia troppo tardi."
             }
           }
         ]
@@ -2607,7 +2607,7 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 131111221111111,
+        "version": 1311112211111111,
         "items": [
           {
             "delayMs": 0.0,
@@ -2632,28 +2632,11 @@
               "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143604-dd800545.jpg/public"
             ],
             "id": "f91fa7c6-b333-402e-b84e-1d6547192600",
-            "text": "Trova una vecchia porta, punta le tue strane macchine verso di essa e scatta una foto. Una strega ha intrecciato un nodo magico con il filo su questa porta. Cerca di rompere l'incantesimo.",
+            "text": "Trova una vecchia porta. Una strega ha intrecciato un nodo magico con il filo su questa porta. Cerca di rompere l'incantesimo.",
             "type": "text",
             "enabled": true,
             "displayMode": "until_close",
             "order": 2.0
-          },
-          {
-            "delayMs": 0.0,
-            "blocking": true,
-            "actionKind": "image_match",
-            "id": "2edbeb1d-75ec-4557-8e98-85ab78c649b9",
-            "type": "action",
-            "params": {
-              "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-102720-8642c34a/20251221-102720-8642c34a.jpg",
-              "successDurationMs": "3000",
-              "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-102720-8642c34a/20251221-102720-8642c34a.jpg/public",
-              "maxScore": "0.6",
-              "maxDistanceMeters": "10",
-              "successMessage": "you found it"
-            },
-            "enabled": true,
-            "order": 3.0
           },
           {
             "delayMs": 0.0,
@@ -2663,7 +2646,52 @@
             "type": "puzzle",
             "puzzleId": "puz-6a23902b",
             "enabled": true,
+            "order": 3.0
+          },
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260108-045037-18a6281b",
+            "id": "404ece1b-b434-4d7d-ba00-5fcc3c8c3010",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260108-045037-18a6281b.mp3",
+            "enabled": true,
             "order": 4.0
+          },
+          {
+            "delayMs": 0.0,
+            "displaySeconds": 5.0,
+            "blocking": true,
+            "image_media_ids": [
+              "20260105-143604-dd800545"
+            ],
+            "image_urls": [
+              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143604-dd800545.jpg/public"
+            ],
+            "id": "f0b6c86a-c7a9-4ea9-8555-dbfc570b0241",
+            "text": "Punta le tue strane macchine verso di porta e scatta una foto.",
+            "type": "text",
+            "enabled": true,
+            "displayMode": "seconds",
+            "order": 5.0
+          },
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "actionKind": "image_match",
+            "id": "0cebc429-41cf-458d-84a5-e89712efe42a",
+            "type": "action",
+            "params": {
+              "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-125915-240492cd/20251221-125915-240492cd.jpg",
+              "successDurationMs": 1000.0,
+              "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-125915-240492cd/20251221-125915-240492cd.jpg/public",
+              "maxScore": 0.6,
+              "maxDistanceMeters": 10.0,
+              "successMessage": ""
+            },
+            "enabled": true,
+            "order": 6.0
           },
           {
             "delayMs": 0.0,
@@ -2674,57 +2702,26 @@
             "type": "video",
             "media_url": "https://videodelivery.net/ed523c0a6a7f81d405caf4a418653a79/manifest/video.m3u8",
             "enabled": true,
-            "order": 5.0
-          },
-          {
-            "delayMs": 0.0,
-            "role": "normal",
-            "blocking": false,
-            "media_id": "20260108-045326-1b2c8d74",
-            "id": "6ab0ef56-c65c-401f-8c26-51e658bde044",
-            "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260108-045326-1b2c8d74.mp3",
-            "enabled": true,
-            "order": 6.0
-          },
-          {
-            "delayMs": 200.0,
-            "repeatPolicy": "once",
-            "role": "normal",
-            "blocking": true,
-            "media_id": "20251228-194115-69fc01d9",
-            "id": "38c63a3c-c3e6-430d-b7dd-4dda73af86eb",
-            "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-194115-69fc01d9.mp3",
-            "enabled": true,
             "order": 7.0
           },
           {
-            "delayMs": 100.0,
-            "repeatPolicy": "once",
-            "role": "normal",
+            "delayMs": 0.0,
             "blocking": true,
-            "media_id": "20251228-175013-00fa7c5e",
-            "id": "525cad76-19cf-41f7-b3d3-4a2d7c1b60f0",
-            "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-175013-00fa7c5e.wav",
+            "id": "bda14d48-eacd-47f2-87a3-997702417bb2",
+            "text": "Bravo, sei riuscito a conquistare la famiglia Dell'Era.",
+            "type": "text",
             "enabled": true,
+            "displayMode": "until_close",
             "order": 8.0
           },
           {
-            "delayMs": 100.0,
-            "repeatPolicy": "once",
+            "delayMs": 0.0,
             "blocking": true,
-            "image_media_ids": [
-              "20260105-143613-9ef86085"
-            ],
-            "image_urls": [
-              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143613-9ef86085.jpg/public"
-            ],
-            "id": "7357c22b-dafd-4745-8bda-9b66184a0ce9",
+            "id": "b48e61b2-4292-4b1e-8df0-01abd405f1ee",
             "text": "Amici, trovate velocemente la casa della strega e bussate forte alla porta 3 volte.",
             "type": "text",
             "enabled": true,
+            "displayMode": "until_close",
             "order": 9.0
           }
         ]
@@ -2741,7 +2738,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133315-64456715.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=MAMxk6rqxcuvKJyRZFsWn7jS8hI%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133315-64456715.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=dm%2BCYti%2BAH9tuz6UF4sDV6kiTug%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -2773,7 +2770,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-140903-933836eb.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=cOMbKjDsIJBLRgupnGsdW1uKabE%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-140903-933836eb.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=KE1%2FGqb4fhHAnN%2FWxhZg6J726Sw%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -2849,7 +2846,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134232-69496af8.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=BFn29IvWxXrMQI3X%2F%2FirzOOetv4%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134232-69496af8.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=f6yxDtBczzDVmglxirlVRtr6WWs%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -2881,7 +2878,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-144859-62241687.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=AM78gM8jyLszd%2B1d2XsAW9XOGrc%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-144859-62241687.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=tng%2FC9GAAYhoFwTqUXCyO%2B4IohY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -2913,7 +2910,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135937-a1453844.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=oXNOSqlz6Mx2Ku23GqrDcZKqHiY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135937-a1453844.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=%2B06get%2BoqGaGVxS2Ol9B1Ipt4n4%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -2989,7 +2986,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-141509-1839bbd8.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=Z3PEzrT%2FYEBUV76nXjZmdVGeyjw%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-141509-1839bbd8.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=%2FKFEa4Fv%2BfEkvf6Qf2%2FrPfui1UE%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -3021,7 +3018,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134808-9333a9f4.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=oiyKSu2lqvGE3zH%2F547NdKRqWA0%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134808-9333a9f4.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=96XOVhgud4GfTRix3rck7JMUA%2F8%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -3129,7 +3126,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133122-acd205c9.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=C486e%2F%2BOzP9voq1hzWjAGZdwYWU%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133122-acd205c9.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=KUeeycMGPl%2BnHdj7prUCaMXFR8g%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
@@ -3150,7 +3147,7 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 1,
+        "version": 11,
         "items": [
           {
             "delayMs": 0.0,
@@ -3161,11 +3158,22 @@
             "params": {
               "detectionMode": "both",
               "sensitivity": "high",
-              "requiredKnocks": 3.0,
-              "maxIntervalMs": 2000.0
+              "requiredKnocks": "3",
+              "maxIntervalMs": "2000"
             },
             "enabled": true,
             "order": 1.0
+          },
+          {
+            "delayMs": 50.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260110-034228-0c461c25",
+            "id": "97beffb6-2715-40e4-8162-efb9bf235d1f",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260110-034228-0c461c25.mp3",
+            "enabled": true,
+            "order": 2.0
           }
         ]
       },
@@ -3181,7 +3189,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133402-2f84d641/20251209-133402-2f84d641.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133402-2f84d641/20251209-133402-2f84d641.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133442-e3b3dd95.webm?AWSAccessKeyId=ASIAQZSZZFTKETQME2K2&Signature=kQ4gVseoPanl5TKo3NrYK%2FgiKa0%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEOT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQCyWxk5BX4tsX0zZGutILGZi%2BqXaxSXGY1PPIdpcB7rVQIgP5Xve70ZRC80Nlqfh6yciBx1V75NKvhSwZC6wi%2BOiN4quAMIrP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDJJ70mGKJgQfLuGaGyqMAx56E2f1UFdv%2Bo%2B1F0TJH9%2Bmw0HwVSG0%2BQ2VRc%2By11LejRlwxWncg9FgbComcyAXHfI9W5vwReuB44rud1nYyIORG6aFqAvVr%2FA3pJ64wXxhoxVsmqJuT%2BnIUD%2FV8gbvTKCG8eAZGY8kFNWaoYpltqrg71GcYXDMcMpUibs7dmAFS5sK5rsmLcdcA00bHF%2FI1bS34k3OE4rjjxpWvn9TD%2B340K1tbeYWuqFhUbckvHsandSmICSJ50WlrLZ6jqSfI%2FK6G%2B3AZEruWwiysss4KQ74iJ4Q2zrbO7fwYOgatHcme4QdgZbAJ4gtrHPyt3x0IEplxnm8cmeXmIB2doC%2B6QSRafVRgDRW1B7R3fvrS0lrNNqNL8aD%2FELTu6CJWrSf9dVg3oKXTlNl3c72m90eTukVUdSClUJbEj2exPOV72NLNtspKT9s0%2FtmhNOeJq9pJWFq7tevXaPR6n4JxvnWowokc3tFCoymByGIR%2FxOp6MXmDrpoC7TU%2BhT5AO8RqkXLqgy46UjE0NV%2BoT8BzDipoXLBjqdAWO6ZdbSKRbCxKeYusQxJA9hwHFOoA1RdqYZOh5jZnCiSTMFEVTJd3i%2F6JnAPcBL1EwSWjGRbhbyMaBb354NtLj0pS4Fm469DPP4pNItoaFPImAzj%2Fyxmdcxw%2B0zy8U6UzeWa04D9b8Ba8wcfzRWCMrFLJMqh4iDlegZf01dPWrTl4SG%2BwTAScROESfT4aYMeISjsQqh3eXWl1mNXTo%3D&Expires=1768590821"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133442-e3b3dd95.webm?AWSAccessKeyId=ASIAQZSZZFTKH53IHNDF&Signature=LcbObOIT7ALlCh0Jcj9IXGvyASc%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQC3pLKr1%2BY%2B27gpX90CLLp9PxWqLIMrCMk4ZUe%2Fu6hk1QIhAOj%2BhylZ4r4eOm9l7zNsukkiOu%2BklJ3X0xMRzeRiLLcXKrgDCLn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4IgzGHCuUU5fMRpyKDiUqjAM8wOCQ8R6r07xz1uoslkZtyBq%2B36aCu0%2BL6RSuzWmlZWc3jA1P0HYrfY13u1gLJS9X5nz8WOoDvXJpoFIZgKw%2F2jiInU5X%2BbLNEiWByigquYdnZc632Xn2EreD%2FIybuBI0C6vbHaBW%2BbsKcFaNAQxuACRjVsiInbOwAK%2F%2Fni5Xqvzvvd03EWrcJ%2Fl7XGLI1Lw0xU1RfYj3VGAm6CqKL%2BhJ%2Fz5A%2Fu7FLJXxSpwCadhPV4Ox73gRY47IXr5To9wxv%2BC8rTWONW5WkNF5QaL1slWkCr%2BvWZk5J7CXBwAqYM6%2BUwyjlIu7SxuZ7KY36xbb1iZLXWft432ZUYByfVefg2Ki0e9dssTukvxRf1Pl3EPXFTupbw7ErsRdlni0gmIVUyvvCiGQVQ7M7dIjilk5wdrFtqsNm%2Bfj58FPPx51tCfAdWePXECcl%2F45c1qbnsdWmVlKmAFpwomFe5hKLZ3oQe67SgUIJvAgxPSQFF92P6XUQicevSYG3i9194VjKzHkJRj18rOzyYrXOV0mDuEw34mIywY6nAHdAbkyXXxANzjJwhVPB3Py12iuiDvj%2Fh3aXS7wbf3kKJ%2BYgtknr0WyBfa4Z3tHFwsx2c%2BVmGe3Ne6X6Kw8iucq%2BSgF4pBxzThWt1f47m5HFeYYc8XN2FlrYSID2XJqWEBgDv2MBB7564AxmzmBsD4fdST7x6EJtMN3DhT69aTb5JUJIQ7rJZXvLyKtoKleG6x8ziR1Y0t01cej3JM%3D&Expires=1768636258"
           ]
         }
       ]
