@@ -6,10 +6,10 @@
     "deployUrl": "https://quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b.pages.dev",
     "repoUrl": "https://github.com/densmyslov/quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b",
     "projectName": "quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b",
-    "contentHash": "16ce4ea475143f44132feff3d82b747e",
+    "contentHash": "4eec905b18f5f6ae3b7e33153fd25aed",
     "createdAt": "2025-12-07",
-    "deploymentId": "97680b8e-8ab4-45b2-bccc-8a0605212727",
-    "lastDeployed": "2026-01-10T09:05:06.076986",
+    "deploymentId": "3a8c9b6f-5414-4097-bfa2-33e26ffc89d6",
+    "lastDeployed": "2026-01-12T17:14:40.294443",
     "description": "",
     "userId": "915b3510-c0a1-7075-ba32-d63633b69867",
     "questApiUrl": "https://esino-quest-api.denslov.workers.dev"
@@ -50,7 +50,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=LAMvxKLo0WfwPNH7uxMDe1ZjYuw%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=7jtFCCRwN3u8y0Mn8QY0tjs7esU%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -71,17 +71,17 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 11112111111,
+        "version": 11112111111111,
         "items": [
           {
             "delayMs": 0.0,
             "repeatPolicy": "on_each_arrival",
             "role": "normal",
             "blocking": true,
-            "media_id": "20251228-175013-00fa7c5e",
+            "media_id": "20260111-141546-8d042419",
             "id": "208619d3-b530-4c1d-b3d5-c060c715ea4e",
             "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-175013-00fa7c5e.wav",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
             "enabled": true,
             "order": 1.0
           },
@@ -90,11 +90,35 @@
             "firstMessage": "\"Sono disperato. Chiunque tu sia, sei disposto ad aiutarmi?\"",
             "blocking": true,
             "goal_injection": {
-              "goal": "",
-              "tone": [],
-              "success_criteria": [],
-              "constraints": [],
-              "failsafe_if_player_refuses": ""
+              "goal": "Convince the player to listen to the story of you and Ghit. After player agreed, tell him to close the \"portal\" and listen to the story.",
+              "tone": [
+                "Quietly urgent",
+                "intimate",
+                "and human. Pasqualin speaks as someone afraid of losing everything",
+                "but trying to remain composed. His voice is sincere",
+                "restrained",
+                "and personal \u2014 never theatrical",
+                "never heroic. He addresses the player as a real person",
+                "not a saviour",
+                "and avoids grand claims. Emotion comes from vulnerability and honesty",
+                "not drama or pressure."
+              ],
+              "success_criteria": [
+                "Player agrees to listen to your story"
+              ],
+              "constraints": [
+                "Do not reveal the full story",
+                "Do not pressure, threaten, or guilt the player into agreeing",
+                "Speak only from Pasqualin\u2019s personal perspective (no omniscient knowledge)",
+                "Keep messages emotionally sincere, not theatrical or exaggerated",
+                "Do not mention future puzzles, rewards, or game mechanics",
+                "Do not advance the main plot beyond the request to listen",
+                "Use short, conversational messages (max 2\u20133 sentences each)",
+                "Allow the player to refuse or delay without penalty",
+                "Avoid repeating the same persuasion argument verbatim",
+                "Maintain historical tone consistent with 1920s Esino Lario"
+              ],
+              "failsafe_if_player_refuses": "I understand.\nA stranger\u2019s voice, asking for your time \u2014 it\u2019s not a small thing.\nI\u2019ll be here, if you decide you want to hear it."
             },
             "id": "ed69773a-5607-4a19-af9b-e0c014118451",
             "text": "\"Sono disperato. Chiunque tu sia, sei disposto ad aiutarmi?\"",
@@ -2607,7 +2631,7 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 1311112211111111,
+        "version": 131111221111111111,
         "items": [
           {
             "delayMs": 0.0,
@@ -2620,6 +2644,17 @@
             "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251228-174933-f1ccce42.mp3",
             "enabled": true,
             "order": 1.0
+          },
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": false,
+            "media_id": "20260110-035110-b800511f",
+            "id": "c97b6068-3bcb-4b58-8514-39a6dadb6e33",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260110-035110-b800511f.m4a",
+            "enabled": true,
+            "order": 2.0
           },
           {
             "delayMs": 0.0,
@@ -2636,7 +2671,7 @@
             "type": "text",
             "enabled": true,
             "displayMode": "until_close",
-            "order": 2.0
+            "order": 3.0
           },
           {
             "delayMs": 0.0,
@@ -2646,7 +2681,7 @@
             "type": "puzzle",
             "puzzleId": "puz-6a23902b",
             "enabled": true,
-            "order": 3.0
+            "order": 4.0
           },
           {
             "delayMs": 0.0,
@@ -2657,7 +2692,7 @@
             "type": "audio",
             "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260108-045037-18a6281b.mp3",
             "enabled": true,
-            "order": 4.0
+            "order": 5.0
           },
           {
             "delayMs": 0.0,
@@ -2674,7 +2709,7 @@
             "type": "text",
             "enabled": true,
             "displayMode": "seconds",
-            "order": 5.0
+            "order": 6.0
           },
           {
             "delayMs": 0.0,
@@ -2684,14 +2719,14 @@
             "type": "action",
             "params": {
               "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-125915-240492cd/20251221-125915-240492cd.jpg",
-              "successDurationMs": 1000.0,
+              "successDurationMs": "1000",
               "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-125915-240492cd/20251221-125915-240492cd.jpg/public",
-              "maxScore": 0.6,
-              "maxDistanceMeters": 10.0,
+              "maxScore": "0.6",
+              "maxDistanceMeters": "10",
               "successMessage": ""
             },
             "enabled": true,
-            "order": 6.0
+            "order": 7.0
           },
           {
             "delayMs": 0.0,
@@ -2702,7 +2737,7 @@
             "type": "video",
             "media_url": "https://videodelivery.net/ed523c0a6a7f81d405caf4a418653a79/manifest/video.m3u8",
             "enabled": true,
-            "order": 7.0
+            "order": 8.0
           },
           {
             "delayMs": 0.0,
@@ -2712,7 +2747,7 @@
             "type": "text",
             "enabled": true,
             "displayMode": "until_close",
-            "order": 8.0
+            "order": 9.0
           },
           {
             "delayMs": 0.0,
@@ -2722,7 +2757,7 @@
             "type": "text",
             "enabled": true,
             "displayMode": "until_close",
-            "order": 9.0
+            "order": 10.0
           }
         ]
       },
@@ -2738,7 +2773,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133315-64456715.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=lfF1riG9PXz%2BSbVwwebL%2FwIXq18%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133315-64456715.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=ocNT0JiP%2BDeMVjbD05%2B4O4j0lCw%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -2770,7 +2805,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-140903-933836eb.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=rt09sSoUG2wak8PQOQGpJGyPoFQ%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-140903-933836eb.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=p%2F7ivQO9TnN6CBk84WivPC3D%2F6g%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -2846,7 +2881,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134232-69496af8.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=Rup1RD3PGbAH7dHLf6l4Tu3lj7s%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134232-69496af8.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=YADKXnenJDT8pxiWiKnIyhyu1xo%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -2878,7 +2913,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-144859-62241687.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=S%2FYZEQdqclZF%2FJaepjKy0qAey70%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-144859-62241687.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=%2BfAnrMwzNHuf504jjF4mhsf9q7s%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -2898,6 +2933,20 @@
       "quest_ids": [
         "quest-8371e45f"
       ],
+      "mediaTimeline": {
+        "version": 1,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "id": "8b4586dc-2d86-4416-9025-b6e9a0dfcf21",
+            "type": "puzzle",
+            "puzzleId": "puz-ff95a90d",
+            "enabled": true,
+            "order": 1.0
+          }
+        ]
+      },
       "isMain": true,
       "isStart": false,
       "isVisible": false,
@@ -2910,7 +2959,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135937-a1453844.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=qvHxuhdHMBB7WiQP3X%2Bvg1vdSHQ%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135937-a1453844.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=VT6VdNHthlVJlcMsUMCVT%2FLF6sU%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -2986,7 +3035,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-141509-1839bbd8.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=8gQHT5lSXXeYoie1Bzs3sUnjYm0%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-141509-1839bbd8.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=mrrGJMRdMuYMwyvv78zsmfNk460%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -3018,7 +3067,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134808-9333a9f4.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=02xRgFL61O3BCzUtUOKNGKVzsjg%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134808-9333a9f4.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=G%2Bw%2FViqOOXAJjW%2FK1IboWbtFLsg%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -3126,7 +3175,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133122-acd205c9.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=c%2F%2Bvo2P6wUpb3sDmdNy%2Bt%2BtZASA%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133122-acd205c9.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=6l%2BA91x2By6Zz1ImZCQwDwnaQzc%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
@@ -3147,7 +3196,7 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 11,
+        "version": 1111,
         "items": [
           {
             "delayMs": 0.0,
@@ -3156,8 +3205,8 @@
             "id": "d8f69f40-77ab-49a0-941d-f0d4794acce8",
             "type": "action",
             "params": {
-              "detectionMode": "both",
-              "sensitivity": "high",
+              "detectionMode": "accelerometer",
+              "sensitivity": "medium",
               "requiredKnocks": "3",
               "maxIntervalMs": "2000"
             },
@@ -3174,6 +3223,18 @@
             "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260110-034228-0c461c25.mp3",
             "enabled": true,
             "order": 2.0
+          },
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "media_id": "20260112-043929-67e4f6d5",
+            "id": "5753da4a-81d1-485c-828b-12bc7ff2752c",
+            "type": "document",
+            "title": "Carta di Esino",
+            "media_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260112-043929-67e4f6d5.png/public",
+            "enabled": true,
+            "displayMode": "seconds",
+            "order": 3.0
           }
         ]
       },
@@ -3189,313 +3250,13 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133402-2f84d641/20251209-133402-2f84d641.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133402-2f84d641/20251209-133402-2f84d641.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133442-e3b3dd95.webm?AWSAccessKeyId=ASIAQZSZZFTKNEXB3BWX&Signature=q7f4IndQGvwd%2BIxJwkJSHtlJXaE%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEPL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQD5o26v%2FC2o2%2BlMXAlyXoIFkCavldkfv4Z6nw%2BxLn%2B0RgIhAIqxVWRK8KXUsOZirp4zj2XuI1a90v6X8jBcPth0%2FsrPKrgDCLr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMDU0OTQ5MTI5NDI4Igyynw6POYK3POkIgtsqjAP0Mdt5DeIz6fCOrkIyLBgiDItsGiYShPMerq6GaibKllcjmb3YYCZyJqkeNhACsJ0pW28oUgJSgfUj%2BBEXrllFKut6WLrnGVKOK1b1OGhIvyfBTKctBlRAZusrbVdkdEJx8sVU2K9Gk58iCSuyJh%2FRerC5fWQxSv7UZbO0O05WrlBogGUAoEO%2BucVwDhnB7cZGHDxZxDuU2yGNeVG85HeM3vWuhRGvp8f84i5IPNtq0hzp3IA3PQNjspGH9cgKdUjqrreW8kyn1xsMg6ZuNicx5JrE8PFpI1q1CKYI%2B78xkh%2F%2FnDfRKSTySeMOqf8pEQXsosmh4kQHELeO2bnMlhQ80qkg%2FCSGImqIAReBvysNiZAakYQEOEmPCCLGxt4F5%2F3f%2BohUH0y%2FGjmNNK%2BgQz9DWQs1NeNjiqpywPxnhGfiFRddcEaJYrF3eo4Vl%2B5jdd%2B3VUG765hHuQF%2FVxqKpwWXooNZd4OMwIZSjabrEK9abguVKwDGFr%2BLHjE%2Bj0xkaZkpJxCUcYre%2Feqo4nsww6yIywY6nAFUU%2BvbUAQrVjxWeMzM8B4Awc6s4PArsqvT5bctGt%2FdEfhuJfMAOmGNFn2tTijQnCnAmiWOZ4QdD0NANTCEwlCZyJhfyF6yfL3fTmO8Aw%2BkK7zwv%2B3sBK3ZLL5dmqCxTCs9Zn05KlXcpYipWtsFF4FTialw8bl2yjYC3DItjRuX%2Fap%2FiwWXkgthlYbK0gErkN0c0TyuFpTibTMcL8U%3D&Expires=1768640710"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133442-e3b3dd95.webm?AWSAccessKeyId=ASIAQZSZZFTKJKVOZVU6&Signature=UN%2FKoRz3twfy9d%2B5OigWeX%2BTuwI%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECoaCXVzLWVhc3QtMSJGMEQCIAZS%2FR%2Bhn72nsNHksy8XwRz7kEh8ZmA7kwCuPqBNzNIJAiAvuPvowkaamjmO%2Fx5CLI5P5ngWbB7TVFuTxY91Fyop3Sq4Awjy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDA1NDk0OTEyOTQyOCIMUadHBxpEXKNiXIfpKowDkZcq9tWgzRzkr1dr27otnmuDPp9%2BAAh3brBljzlGLZ8D9m5KO6rrjuiTwa7qZFaPG8jNnAMm%2BCAmJGY8F9Y3VGj4Gz0fkeei7%2BOw%2BjPSmXlE9N3ThhkH7juAOiriHTd1DDshaKtrg2k0RQPKRQVyWb9VF7HBWOyCVj7kEFC5sDtuZ%2FcToZdI2WDPu%2B56a1ChkU%2BNZJyuEZpS9L%2B%2B3XScufv%2BPNAiXqba5Q6Yxb2tCW6vA69FC1LSmUgGn4E7fslwvvgcPjESV%2BbUKSTvJf00sGM%2Fe%2BFPvHY8fR1tdoByGnNhjrRFh0AlKZqJlo8OmFuzVSgVtw03ktqL34L3NGAyyGOaHTN7BihGc%2BiqVhvZ8oWF5gMXTxzbNQdveuoQhmq%2F%2FxxbKxa%2FTzaWD1fhUDzT%2F0N1534uaf27uYobtQfnkp4HenTIWAlM9nS%2B4jhVsiw3S3az1xEWuSi606lnbK1QaM7xwSI7QleZMi3oEm3c6MF5OQUDd2%2FfA%2FXO1mqAQIHQkKrz1ihijHBuKkYYMIHYlMsGOp4BvtKJ8xOT5nPoQsdO0Jc5slVgDpPyCGUbkqNj61hB16pKdWC6oK2OTCryca2Xgr%2BsRxZLq04fk4FFE5jHK%2B64BU4JxYmDZQl%2B2BEFdRJ0GibVlEcftncnPtvn5Wt8%2B3xWYLbGcPLLbwh%2BjT7vRVB0FlD5kwWBiJm2WMG1%2BIOfTTXgoThgYrAWpmKAGU46J1Si9K2OWSoxY4OV2apN83A%3D&Expires=1768842884"
           ]
         }
       ]
     }
   ],
   "puzzles": [
-    {
-      "id": "puz-0d8cfe4d",
-      "name": "Musical Fontan",
-      "status": "active",
-      "photo_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-194548-1917b5d8/20251221-194548-1917b5d8.png/public",
-      "linked_objects": [
-        "34bc1725-b682-4dac-88ec-0a16990f5ecb"
-      ],
-      "quest_id": "platform-library",
-      "interaction_data": {
-        "type": "fabric_custom",
-        "puzzle_data_url": "https://quest-image-manager.denslov.workers.dev/image/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/data.json",
-        "linked_objects": [
-          "34bc1725-b682-4dac-88ec-0a16990f5ecb"
-        ],
-        "puzzle_data": {
-          "pieces": [
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 120.86552258748796,
-                "y": 90.11959595298534
-              },
-              "id": "8f3351bd-5064-473a-a00c-a93761751dd6",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 119.98655664138369,
-                "top": 82.14871481218432,
-                "left": 265.45557760012946,
-                "height": 55.941762281602024
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/8f3351bd-5064-473a-a00c-a93761751dd6.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 60.32566722252025,
-                "y": 166.11304597690534
-              },
-              "id": "b37b0d88-fb56-4a05-9f94-19987c2d05ed",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 89.39799814118942,
-                "top": 154.7965412501456,
-                "left": 220.21000148525889,
-                "height": 62.63300945351949
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/b37b0d88-fb56-4a05-9f94-19987c2d05ed.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 70.99979961581718,
-                "y": 220.9175466230866
-              },
-              "id": "f99e5e81-cb0a-40df-a3fc-50443f17483d",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 98.63829185478983,
-                "top": 219.79722806305824,
-                "left": 226.2639870217556,
-                "height": 42.240637120056704
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/f99e5e81-cb0a-40df-a3fc-50443f17483d.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 76.7351543346036,
-                "y": 264.88859946711585
-              },
-              "id": "24ee492d-09f5-4dc1-964e-ecd61b8ec585",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 105.01090820899697,
-                "top": 264.4055425425082,
-                "left": 228.81303356343847,
-                "height": 40.966113849215276
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/24ee492d-09f5-4dc1-964e-ecd61b8ec585.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 99.68710645992158,
-                "y": 304.13285629635084
-              },
-              "id": "2bb4b513-4a70-4bd4-8957-284855a7f926",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 58.696207201643574,
-                "top": 305.97633100353744,
-                "left": 274.92233619243314,
-                "height": 36.3130505856268
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/2bb4b513-4a70-4bd4-8957-284855a7f926.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 48.20584624308293,
-                "y": 309.6508430343101
-              },
-              "id": "d7c4b279-9b4a-45de-a40c-f848bb45e545",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 34.73306305979037,
-                "top": 307.49647051703164,
-                "left": 235.4226480465211,
-                "height": 44.30874503455698
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/d7c4b279-9b4a-45de-a40c-f848bb45e545.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 269.0225717679317,
-                "y": 92.5134144644145
-              },
-              "id": "a05be00c-eff8-46d6-a7e2-683bf31e1fe8",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 108.87267179600485,
-                "top": 82.99768116101222,
-                "left": 419.16956920326265,
-                "height": 59.03146660680454
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/a05be00c-eff8-46d6-a7e2-683bf31e1fe8.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 314.77424217237717,
-                "y": 155.7734056660919
-              },
-              "id": "40e623cd-f354-4145-9996-ff9d5b81a336",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 118.0741250617034,
-                "top": 143.5739151601942,
-                "left": 460.32051297485884,
-                "height": 64.3989810117954
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/40e623cd-f354-4145-9996-ff9d5b81a336.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 288.1454100192784,
-                "y": 211.46844883477561
-              },
-              "id": "b0800d33-e18c-4d13-8d01-3f479eecd945",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 61.758527250977295,
-                "top": 211.1510002525589,
-                "left": 461.84947972712314,
-                "height": 40.634897164433426
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/b0800d33-e18c-4d13-8d01-3f479eecd945.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 344.6031122505866,
-                "y": 209.4521023265146
-              },
-              "id": "d7e35056-a9f1-40be-8def-4ee496af4b82",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 48.316217195903846,
-                "top": 206.9262742352501,
-                "left": 525.028336985968,
-                "height": 45.05165618252897
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/d7e35056-a9f1-40be-8def-4ee496af4b82.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 310.7092876117231,
-                "y": 252.85156050432306
-              },
-              "id": "53cf92bc-5982-4164-841f-8695cd39104f",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 109.95881044845487,
-                "top": 253.39826042564678,
-                "left": 460.313215720829,
-                "height": 38.906600157352585
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/53cf92bc-5982-4164-841f-8695cd39104f.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 278.44774347954694,
-                "y": 298.5554146915726
-              },
-              "id": "fd5e9f1f-5f19-41e9-b407-7d8b57455faa",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 50.42858020455833,
-                "top": 298.7180486113228,
-                "left": 457.81678671060115,
-                "height": 39.674732160499616
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/fd5e9f1f-5f19-41e9-b407-7d8b57455faa.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 334.8094292104619,
-                "y": 299.419563195113
-              },
-              "id": "624cf285-1001-45bb-8773-1f643ef70aa0",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 53.309075216359815,
-                "top": 294.30128959322724,
-                "left": 512.7382249356153,
-                "height": 50.23654720377158
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/624cf285-1001-45bb-8773-1f643ef70aa0.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 34.18417062198418,
-                "y": 98.2330542849103
-              },
-              "id": "ade05116-411e-410c-b724-c7882e2cfc85",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 48.31967125434687,
-                "top": 84.75243527765227,
-                "left": 214.6076683281441,
-                "height": 66.96123801451606
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/ade05116-411e-410c-b724-c7882e2cfc85.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 350.28030264224356,
-                "y": 91.47886342977657
-              },
-              "id": "e1e2be78-ee5b-4303-8436-a413444548a1",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 54.80369447527528,
-                "top": 84.21210000924157,
-                "left": 527.4617887379393,
-                "height": 54.53352684107
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/e1e2be78-ee5b-4303-8436-a413444548a1.png/public"
-            },
-            {
-              "correctRotation": 0.0,
-              "correctPosition": {
-                "x": 198.37533490763136,
-                "y": 91.32765185416726
-              },
-              "id": "8c2f91f0-8826-49f2-ad48-b11944bdb5a9",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 29.655444439891653,
-                "top": 82.93711212579089,
-                "left": 388.1309460210189,
-                "height": 56.781079456752735
-              },
-              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/8c2f91f0-8826-49f2-ad48-b11944bdb5a9.png/public"
-            }
-          ],
-          "totalPieces": 16.0,
-          "originalImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-194548-1917b5d8/20251221-194548-1917b5d8.png/public",
-          "createdAt": "2025-12-21T20:20:04.058Z",
-          "imageDimensions": {
-            "width": 390.8333333333333,
-            "height": 560.0
-          },
-          "puzzleId": "4fd368c9-d684-42f1-af90-140e1ad61447",
-          "isNormalized": true,
-          "boardImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/board.png/public",
-          "updatedAt": "2025-12-24T03:17:26.764Z"
-        },
-        "asset_sources": {
-          "board": {
-            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/board.png/public",
-            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/board.png"
-          },
-          "original": {
-            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-194548-1917b5d8/20251221-194548-1917b5d8.png/public",
-            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-194548-1917b5d8/20251221-194548-1917b5d8.png"
-          }
-        }
-      },
-      "createdAt": "2025-12-21",
-      "updatedAt": "2025-12-24T15:32:50.011493"
-    },
     {
       "id": "puz-d655b1d0",
       "name": "jigsaw-fesa",
@@ -10747,249 +10508,21 @@
       "updatedAt": "2025-12-27T08:16:39.299128"
     },
     {
-      "id": "puz-1cd67f1b",
-      "name": "St Antonio",
+      "id": "puz-ff95a90d",
+      "name": "musical-code-test",
       "status": "active",
-      "photo_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/original.png/public",
-      "linked_objects": [
-        "a94efd34-5cf1-4846-8ddf-1b2e6838dd91",
-        "faf6aa45-1fd8-4460-8bdb-556e2042005c"
-      ],
+      "photo_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-030008-40d27f06.png/public",
+      "linked_objects": [],
       "quest_id": "platform-library",
       "interaction_data": {
-        "type": "spot_diff_ai",
-        "puzzle_data_url": "https://quest-image-manager.denslov.workers.dev/image/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/data.json",
-        "linked_objects": [
-          "a94efd34-5cf1-4846-8ddf-1b2e6838dd91",
-          "faf6aa45-1fd8-4460-8bdb-556e2042005c"
-        ],
-        "puzzle_data": {
-          "pieces": [],
-          "totalPieces": 0.0,
-          "originalImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/original.png/public",
-          "createdAt": "2025-12-24T18:55:37.925Z",
-          "metadata": {
-            "type": "spot_diff_ai"
-          },
-          "imageDimensions": {
-            "width": 2857.0,
-            "height": 3723.0
-          },
-          "spotDiffAi": {
-            "savedCoords": [
-              {
-                "createdAt": "2025-12-24T18:20:31.110Z",
-                "id": "5fefa9b2-3bfa-4164-9079-a0e03420085b",
-                "type": "polygon",
-                "points": [
-                  {
-                    "rx": 0.44990195346165557,
-                    "ry": 0.2768489650526882
-                  },
-                  {
-                    "rx": 0.45377643898853365,
-                    "ry": 0.383885920575242
-                  },
-                  {
-                    "rx": 0.560970538565495,
-                    "ry": 0.38289483765373694
-                  },
-                  {
-                    "rx": 0.5596790433898688,
-                    "ry": 0.27387571628817275
-                  },
-                  {
-                    "rx": 0.5015617604866971,
-                    "ry": 0.26792921875914205
-                  }
-                ],
-                "acceptedAt": "2025-12-24T18:20:31.110Z"
-              },
-              {
-                "createdAt": "2025-12-24T18:30:26.821Z",
-                "id": "f72a019e-67da-4029-b3e1-8cccffc4fb61",
-                "type": "polygon",
-                "points": [
-                  {
-                    "rx": 0.47789067483836173,
-                    "ry": 0.448229178005612
-                  },
-                  {
-                    "rx": 0.5597537379197048,
-                    "ry": 0.44669658540886237
-                  },
-                  {
-                    "rx": 0.5617503979948595,
-                    "ry": 0.3945884371193756
-                  },
-                  {
-                    "rx": 0.47689234480078435,
-                    "ry": 0.3953547334177504
-                  },
-                  {
-                    "rx": 0.47689234480078435,
-                    "ry": 0.3953547334177504
-                  }
-                ],
-                "acceptedAt": "2025-12-24T18:30:26.821Z"
-              },
-              {
-                "createdAt": "2025-12-24T18:37:29.186Z",
-                "id": "509689d1-3aa3-4031-b613-935f7dc6cd7f",
-                "type": "polygon",
-                "points": [
-                  {
-                    "rx": 0.4917991723385708,
-                    "ry": 0.9225736885239262
-                  },
-                  {
-                    "rx": 0.5038870730463739,
-                    "ry": 0.9541202762695642
-                  },
-                  {
-                    "rx": 0.6682825226724972,
-                    "ry": 0.9504089130053714
-                  },
-                  {
-                    "rx": 0.6320188205490875,
-                    "ry": 0.9151509619955408
-                  }
-                ],
-                "acceptedAt": "2025-12-24T18:37:29.186Z"
-              },
-              {
-                "createdAt": "2025-12-24T18:43:43.217Z",
-                "id": "709c623f-ac4b-4e02-b90d-bfe9cb6c97c8",
-                "type": "polygon",
-                "points": [
-                  {
-                    "rx": 0.7387941430152486,
-                    "ry": 0.7010928438455818
-                  },
-                  {
-                    "rx": 0.7387941430152486,
-                    "ry": 0.7378653679112267
-                  },
-                  {
-                    "rx": 0.8096968092645697,
-                    "ry": 0.7349235659859751
-                  },
-                  {
-                    "rx": 0.8058642327105523,
-                    "ry": 0.6981510419203302
-                  }
-                ],
-                "acceptedAt": "2025-12-24T18:43:43.217Z"
-              },
-              {
-                "createdAt": "2025-12-24T18:55:37.925Z",
-                "id": "92b1d84d-ec19-45a9-99d4-d87e26a5b2ec",
-                "type": "polygon",
-                "points": [
-                  {
-                    "rx": 0.7385559097855479,
-                    "ry": 0.0976264793418376
-                  },
-                  {
-                    "rx": 0.7324334280633212,
-                    "ry": 0.016168773303150488
-                  },
-                  {
-                    "rx": 0.7936582452855876,
-                    "ry": 0.020868256343843983
-                  },
-                  {
-                    "rx": 0.8018215542485564,
-                    "ry": 0.12112389454530503
-                  }
-                ],
-                "acceptedAt": "2025-12-24T18:55:37.925Z"
-              }
-            ],
-            "prompt": "create a little dark  chimney pipe",
-            "lastBbox": {
-              "rw": 0.06938812618523515,
-              "rx": 0.7324334280633212,
-              "rh": 0.10495512124215454,
-              "ry": 0.016168773303150488
-            },
-            "acceptedAt": "2025-12-24T18:55:37.925Z",
-            "inpaintHistory": [
-              {
-                "createdAt": "2025-12-24T18:19:37.278Z",
-                "id": "e6b1dac9-d3a4-4f5d-8de7-08d1e15e0745",
-                "prompt": "Keep the window tranperent and put tne grid over it",
-                "bbox": {
-                  "rw": 0.11106858510383938,
-                  "rx": 0.44990195346165557,
-                  "rh": 0.11595670181609996,
-                  "ry": 0.26792921875914205
-                }
-              },
-              {
-                "createdAt": "2025-12-24T18:30:09.335Z",
-                "id": "120c16f0-9419-4026-ad58-35e72fe65e07",
-                "prompt": "deer head with antlers",
-                "bbox": {
-                  "rw": 0.08485805319407513,
-                  "rx": 0.47689234480078435,
-                  "rh": 0.05364074088623644,
-                  "ry": 0.3945884371193756
-                }
-              },
-              {
-                "createdAt": "2025-12-24T18:35:36.467Z",
-                "id": "3ca82f64-bdba-490f-a20a-b80b24dcc8a4",
-                "prompt": "Instead of two capital letters S dot A dot, write the letter A dot S dot",
-                "bbox": {
-                  "rw": 0.17648335033392643,
-                  "rx": 0.4917991723385708,
-                  "rh": 0.03896931427402339,
-                  "ry": 0.9151509619955408
-                }
-              },
-              {
-                "createdAt": "2025-12-24T18:43:09.313Z",
-                "id": "c3fa7449-4f06-486a-b315-a08bca712008",
-                "prompt": "create a white house number plate",
-                "bbox": {
-                  "rw": 0.07090266624932107,
-                  "rx": 0.7387941430152486,
-                  "rh": 0.039714325990896526,
-                  "ry": 0.6981510419203302
-                }
-              },
-              {
-                "createdAt": "2025-12-24T18:55:00.200Z",
-                "id": "56e86d22-6eee-4a22-b2cf-cb4e5571da93",
-                "prompt": "create a little dark  chimney pipe",
-                "bbox": {
-                  "rw": 0.06938812618523515,
-                  "rx": 0.7324334280633212,
-                  "rh": 0.10495512124215454,
-                  "ry": 0.016168773303150488
-                }
-              }
-            ]
-          },
-          "puzzleId": "puz-1cd67f1b",
-          "boardImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/board.png/public",
-          "updatedAt": "2025-12-24T18:55:37.925Z",
-          "diffImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/board.png/public"
-        },
-        "asset_sources": {
-          "board": {
-            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/board.png/public",
-            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/board.png"
-          },
-          "original": {
-            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/original.png/public",
-            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/original.png"
-          }
-        }
+        "x": 0.46224073413257555,
+        "y": 0.6992273750894642,
+        "type": "musical_code_fountain",
+        "message": "You found it!",
+        "puzzle_data_url": "https://quest-image-manager.denslov.workers.dev/image/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-ff95a90d/data.json"
       },
-      "createdAt": "2025-12-24",
-      "updatedAt": "2025-12-29T16:50:40.045128"
+      "createdAt": "2026-01-10",
+      "updatedAt": "2026-01-12T15:38:20.295431"
     },
     {
       "id": "puz-6a23902b",
@@ -11615,6 +11148,551 @@
       },
       "createdAt": "2025-12-24",
       "updatedAt": "2025-12-25T08:56:14.680649"
+    },
+    {
+      "id": "puz-0d8cfe4d",
+      "name": "Musical Fontan",
+      "status": "active",
+      "photo_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-194548-1917b5d8/20251221-194548-1917b5d8.png/public",
+      "linked_objects": [
+        "34bc1725-b682-4dac-88ec-0a16990f5ecb"
+      ],
+      "quest_id": "platform-library",
+      "interaction_data": {
+        "type": "fabric_custom",
+        "puzzle_data_url": "https://quest-image-manager.denslov.workers.dev/image/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/data.json",
+        "linked_objects": [
+          "34bc1725-b682-4dac-88ec-0a16990f5ecb"
+        ],
+        "puzzle_data": {
+          "pieces": [
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 120.86552258748796,
+                "y": 90.11959595298534
+              },
+              "id": "8f3351bd-5064-473a-a00c-a93761751dd6",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 119.98655664138369,
+                "top": 82.14871481218432,
+                "left": 265.45557760012946,
+                "height": 55.941762281602024
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/8f3351bd-5064-473a-a00c-a93761751dd6.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 60.32566722252025,
+                "y": 166.11304597690534
+              },
+              "id": "b37b0d88-fb56-4a05-9f94-19987c2d05ed",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 89.39799814118942,
+                "top": 154.7965412501456,
+                "left": 220.21000148525889,
+                "height": 62.63300945351949
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/b37b0d88-fb56-4a05-9f94-19987c2d05ed.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 70.99979961581718,
+                "y": 220.9175466230866
+              },
+              "id": "f99e5e81-cb0a-40df-a3fc-50443f17483d",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 98.63829185478983,
+                "top": 219.79722806305824,
+                "left": 226.2639870217556,
+                "height": 42.240637120056704
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/f99e5e81-cb0a-40df-a3fc-50443f17483d.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 76.7351543346036,
+                "y": 264.88859946711585
+              },
+              "id": "24ee492d-09f5-4dc1-964e-ecd61b8ec585",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 105.01090820899697,
+                "top": 264.4055425425082,
+                "left": 228.81303356343847,
+                "height": 40.966113849215276
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/24ee492d-09f5-4dc1-964e-ecd61b8ec585.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 99.68710645992158,
+                "y": 304.13285629635084
+              },
+              "id": "2bb4b513-4a70-4bd4-8957-284855a7f926",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 58.696207201643574,
+                "top": 305.97633100353744,
+                "left": 274.92233619243314,
+                "height": 36.3130505856268
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/2bb4b513-4a70-4bd4-8957-284855a7f926.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 48.20584624308293,
+                "y": 309.6508430343101
+              },
+              "id": "d7c4b279-9b4a-45de-a40c-f848bb45e545",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 34.73306305979037,
+                "top": 307.49647051703164,
+                "left": 235.4226480465211,
+                "height": 44.30874503455698
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/d7c4b279-9b4a-45de-a40c-f848bb45e545.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 269.0225717679317,
+                "y": 92.5134144644145
+              },
+              "id": "a05be00c-eff8-46d6-a7e2-683bf31e1fe8",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 108.87267179600485,
+                "top": 82.99768116101222,
+                "left": 419.16956920326265,
+                "height": 59.03146660680454
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/a05be00c-eff8-46d6-a7e2-683bf31e1fe8.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 314.77424217237717,
+                "y": 155.7734056660919
+              },
+              "id": "40e623cd-f354-4145-9996-ff9d5b81a336",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 118.0741250617034,
+                "top": 143.5739151601942,
+                "left": 460.32051297485884,
+                "height": 64.3989810117954
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/40e623cd-f354-4145-9996-ff9d5b81a336.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 288.1454100192784,
+                "y": 211.46844883477561
+              },
+              "id": "b0800d33-e18c-4d13-8d01-3f479eecd945",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 61.758527250977295,
+                "top": 211.1510002525589,
+                "left": 461.84947972712314,
+                "height": 40.634897164433426
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/b0800d33-e18c-4d13-8d01-3f479eecd945.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 344.6031122505866,
+                "y": 209.4521023265146
+              },
+              "id": "d7e35056-a9f1-40be-8def-4ee496af4b82",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 48.316217195903846,
+                "top": 206.9262742352501,
+                "left": 525.028336985968,
+                "height": 45.05165618252897
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/d7e35056-a9f1-40be-8def-4ee496af4b82.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 310.7092876117231,
+                "y": 252.85156050432306
+              },
+              "id": "53cf92bc-5982-4164-841f-8695cd39104f",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 109.95881044845487,
+                "top": 253.39826042564678,
+                "left": 460.313215720829,
+                "height": 38.906600157352585
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/53cf92bc-5982-4164-841f-8695cd39104f.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 278.44774347954694,
+                "y": 298.5554146915726
+              },
+              "id": "fd5e9f1f-5f19-41e9-b407-7d8b57455faa",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 50.42858020455833,
+                "top": 298.7180486113228,
+                "left": 457.81678671060115,
+                "height": 39.674732160499616
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/fd5e9f1f-5f19-41e9-b407-7d8b57455faa.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 334.8094292104619,
+                "y": 299.419563195113
+              },
+              "id": "624cf285-1001-45bb-8773-1f643ef70aa0",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 53.309075216359815,
+                "top": 294.30128959322724,
+                "left": 512.7382249356153,
+                "height": 50.23654720377158
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/624cf285-1001-45bb-8773-1f643ef70aa0.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 34.18417062198418,
+                "y": 98.2330542849103
+              },
+              "id": "ade05116-411e-410c-b724-c7882e2cfc85",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 48.31967125434687,
+                "top": 84.75243527765227,
+                "left": 214.6076683281441,
+                "height": 66.96123801451606
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/ade05116-411e-410c-b724-c7882e2cfc85.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 350.28030264224356,
+                "y": 91.47886342977657
+              },
+              "id": "e1e2be78-ee5b-4303-8436-a413444548a1",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 54.80369447527528,
+                "top": 84.21210000924157,
+                "left": 527.4617887379393,
+                "height": 54.53352684107
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/e1e2be78-ee5b-4303-8436-a413444548a1.png/public"
+            },
+            {
+              "correctRotation": 0.0,
+              "correctPosition": {
+                "x": 198.37533490763136,
+                "y": 91.32765185416726
+              },
+              "id": "8c2f91f0-8826-49f2-ad48-b11944bdb5a9",
+              "isFlipped": false,
+              "boundingRect": {
+                "width": 29.655444439891653,
+                "top": 82.93711212579089,
+                "left": 388.1309460210189,
+                "height": 56.781079456752735
+              },
+              "imageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/pieces/8c2f91f0-8826-49f2-ad48-b11944bdb5a9.png/public"
+            }
+          ],
+          "totalPieces": 16.0,
+          "originalImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-194548-1917b5d8/20251221-194548-1917b5d8.png/public",
+          "createdAt": "2025-12-21T20:20:04.058Z",
+          "imageDimensions": {
+            "width": 390.8333333333333,
+            "height": 560.0
+          },
+          "puzzleId": "4fd368c9-d684-42f1-af90-140e1ad61447",
+          "isNormalized": true,
+          "boardImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/board.png/public",
+          "updatedAt": "2025-12-24T03:17:26.764Z"
+        },
+        "asset_sources": {
+          "board": {
+            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/board.png/public",
+            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-0d8cfe4d/board.png"
+          },
+          "original": {
+            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-194548-1917b5d8/20251221-194548-1917b5d8.png/public",
+            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251221-194548-1917b5d8/20251221-194548-1917b5d8.png"
+          }
+        }
+      },
+      "createdAt": "2025-12-21",
+      "updatedAt": "2025-12-24T15:32:50.011493"
+    },
+    {
+      "id": "puz-1cd67f1b",
+      "name": "St Antonio",
+      "status": "active",
+      "photo_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/original.png/public",
+      "linked_objects": [
+        "a94efd34-5cf1-4846-8ddf-1b2e6838dd91",
+        "faf6aa45-1fd8-4460-8bdb-556e2042005c"
+      ],
+      "quest_id": "platform-library",
+      "interaction_data": {
+        "type": "spot_diff_ai",
+        "puzzle_data_url": "https://quest-image-manager.denslov.workers.dev/image/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/data.json",
+        "linked_objects": [
+          "a94efd34-5cf1-4846-8ddf-1b2e6838dd91",
+          "faf6aa45-1fd8-4460-8bdb-556e2042005c"
+        ],
+        "puzzle_data": {
+          "pieces": [],
+          "totalPieces": 0.0,
+          "originalImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/original.png/public",
+          "createdAt": "2025-12-24T18:55:37.925Z",
+          "metadata": {
+            "type": "spot_diff_ai"
+          },
+          "imageDimensions": {
+            "width": 2857.0,
+            "height": 3723.0
+          },
+          "spotDiffAi": {
+            "savedCoords": [
+              {
+                "createdAt": "2025-12-24T18:20:31.110Z",
+                "id": "5fefa9b2-3bfa-4164-9079-a0e03420085b",
+                "type": "polygon",
+                "points": [
+                  {
+                    "rx": 0.44990195346165557,
+                    "ry": 0.2768489650526882
+                  },
+                  {
+                    "rx": 0.45377643898853365,
+                    "ry": 0.383885920575242
+                  },
+                  {
+                    "rx": 0.560970538565495,
+                    "ry": 0.38289483765373694
+                  },
+                  {
+                    "rx": 0.5596790433898688,
+                    "ry": 0.27387571628817275
+                  },
+                  {
+                    "rx": 0.5015617604866971,
+                    "ry": 0.26792921875914205
+                  }
+                ],
+                "acceptedAt": "2025-12-24T18:20:31.110Z"
+              },
+              {
+                "createdAt": "2025-12-24T18:30:26.821Z",
+                "id": "f72a019e-67da-4029-b3e1-8cccffc4fb61",
+                "type": "polygon",
+                "points": [
+                  {
+                    "rx": 0.47789067483836173,
+                    "ry": 0.448229178005612
+                  },
+                  {
+                    "rx": 0.5597537379197048,
+                    "ry": 0.44669658540886237
+                  },
+                  {
+                    "rx": 0.5617503979948595,
+                    "ry": 0.3945884371193756
+                  },
+                  {
+                    "rx": 0.47689234480078435,
+                    "ry": 0.3953547334177504
+                  },
+                  {
+                    "rx": 0.47689234480078435,
+                    "ry": 0.3953547334177504
+                  }
+                ],
+                "acceptedAt": "2025-12-24T18:30:26.821Z"
+              },
+              {
+                "createdAt": "2025-12-24T18:37:29.186Z",
+                "id": "509689d1-3aa3-4031-b613-935f7dc6cd7f",
+                "type": "polygon",
+                "points": [
+                  {
+                    "rx": 0.4917991723385708,
+                    "ry": 0.9225736885239262
+                  },
+                  {
+                    "rx": 0.5038870730463739,
+                    "ry": 0.9541202762695642
+                  },
+                  {
+                    "rx": 0.6682825226724972,
+                    "ry": 0.9504089130053714
+                  },
+                  {
+                    "rx": 0.6320188205490875,
+                    "ry": 0.9151509619955408
+                  }
+                ],
+                "acceptedAt": "2025-12-24T18:37:29.186Z"
+              },
+              {
+                "createdAt": "2025-12-24T18:43:43.217Z",
+                "id": "709c623f-ac4b-4e02-b90d-bfe9cb6c97c8",
+                "type": "polygon",
+                "points": [
+                  {
+                    "rx": 0.7387941430152486,
+                    "ry": 0.7010928438455818
+                  },
+                  {
+                    "rx": 0.7387941430152486,
+                    "ry": 0.7378653679112267
+                  },
+                  {
+                    "rx": 0.8096968092645697,
+                    "ry": 0.7349235659859751
+                  },
+                  {
+                    "rx": 0.8058642327105523,
+                    "ry": 0.6981510419203302
+                  }
+                ],
+                "acceptedAt": "2025-12-24T18:43:43.217Z"
+              },
+              {
+                "createdAt": "2025-12-24T18:55:37.925Z",
+                "id": "92b1d84d-ec19-45a9-99d4-d87e26a5b2ec",
+                "type": "polygon",
+                "points": [
+                  {
+                    "rx": 0.7385559097855479,
+                    "ry": 0.0976264793418376
+                  },
+                  {
+                    "rx": 0.7324334280633212,
+                    "ry": 0.016168773303150488
+                  },
+                  {
+                    "rx": 0.7936582452855876,
+                    "ry": 0.020868256343843983
+                  },
+                  {
+                    "rx": 0.8018215542485564,
+                    "ry": 0.12112389454530503
+                  }
+                ],
+                "acceptedAt": "2025-12-24T18:55:37.925Z"
+              }
+            ],
+            "prompt": "create a little dark  chimney pipe",
+            "lastBbox": {
+              "rw": 0.06938812618523515,
+              "rx": 0.7324334280633212,
+              "rh": 0.10495512124215454,
+              "ry": 0.016168773303150488
+            },
+            "acceptedAt": "2025-12-24T18:55:37.925Z",
+            "inpaintHistory": [
+              {
+                "createdAt": "2025-12-24T18:19:37.278Z",
+                "id": "e6b1dac9-d3a4-4f5d-8de7-08d1e15e0745",
+                "prompt": "Keep the window tranperent and put tne grid over it",
+                "bbox": {
+                  "rw": 0.11106858510383938,
+                  "rx": 0.44990195346165557,
+                  "rh": 0.11595670181609996,
+                  "ry": 0.26792921875914205
+                }
+              },
+              {
+                "createdAt": "2025-12-24T18:30:09.335Z",
+                "id": "120c16f0-9419-4026-ad58-35e72fe65e07",
+                "prompt": "deer head with antlers",
+                "bbox": {
+                  "rw": 0.08485805319407513,
+                  "rx": 0.47689234480078435,
+                  "rh": 0.05364074088623644,
+                  "ry": 0.3945884371193756
+                }
+              },
+              {
+                "createdAt": "2025-12-24T18:35:36.467Z",
+                "id": "3ca82f64-bdba-490f-a20a-b80b24dcc8a4",
+                "prompt": "Instead of two capital letters S dot A dot, write the letter A dot S dot",
+                "bbox": {
+                  "rw": 0.17648335033392643,
+                  "rx": 0.4917991723385708,
+                  "rh": 0.03896931427402339,
+                  "ry": 0.9151509619955408
+                }
+              },
+              {
+                "createdAt": "2025-12-24T18:43:09.313Z",
+                "id": "c3fa7449-4f06-486a-b315-a08bca712008",
+                "prompt": "create a white house number plate",
+                "bbox": {
+                  "rw": 0.07090266624932107,
+                  "rx": 0.7387941430152486,
+                  "rh": 0.039714325990896526,
+                  "ry": 0.6981510419203302
+                }
+              },
+              {
+                "createdAt": "2025-12-24T18:55:00.200Z",
+                "id": "56e86d22-6eee-4a22-b2cf-cb4e5571da93",
+                "prompt": "create a little dark  chimney pipe",
+                "bbox": {
+                  "rw": 0.06938812618523515,
+                  "rx": 0.7324334280633212,
+                  "rh": 0.10495512124215454,
+                  "ry": 0.016168773303150488
+                }
+              }
+            ]
+          },
+          "puzzleId": "puz-1cd67f1b",
+          "boardImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/board.png/public",
+          "updatedAt": "2025-12-24T18:55:37.925Z",
+          "diffImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/board.png/public"
+        },
+        "asset_sources": {
+          "board": {
+            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/board.png/public",
+            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/board.png"
+          },
+          "original": {
+            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/original.png/public",
+            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-1cd67f1b/original.png"
+          }
+        }
+      },
+      "createdAt": "2025-12-24",
+      "updatedAt": "2025-12-29T16:50:40.045128"
     },
     {
       "id": "puz-ecac15f5",
