@@ -132,6 +132,11 @@ const SpotDiffAiGame = dynamic(() => import('./spot-diff-ai/SpotDiffAiGame'), {
   loading: () => <div>Loading Spot Diff AI...</div>
 });
 
+const MusicalCodeFountainGame = dynamic(() => import('./musical-code-fountain/MusicalCodeFountainGame').then(m => m.MusicalCodeFountainGame), {
+  ssr: false,
+  loading: () => <div>Loading Musical Code...</div>
+});
+
 const JigsawCustomGame = dynamic(() => import('./jigsaw-custom/JigsawCustomGame'), {
   ssr: false,
   loading: () => <div>Loading Jigsaw...</div>
@@ -140,7 +145,7 @@ const JigsawCustomGame = dynamic(() => import('./jigsaw-custom/JigsawCustomGame'
 type PuzzlePayload = PuzzleData | Record<string, unknown>;
 
 export interface PuzzleRendererProps {
-  type: 'mozaic' | 'jigsaw' | 'jigsaw_custom' | 'sliding' | 'fabric_custom' | 'witch_knot' | 'witch_knot_simple' | 'spot_diff_ai';
+  type: 'mozaic' | 'jigsaw' | 'jigsaw_custom' | 'sliding' | 'fabric_custom' | 'witch_knot' | 'witch_knot_simple' | 'spot_diff_ai' | 'musical_code_fountain';
   puzzleId: string;
   userId: string;
   onComplete?: () => void;
@@ -328,6 +333,16 @@ export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
             key={`${type}:${puzzleId}`}
             puzzleData={renderData as any}
             onComplete={onComplete}
+          />
+        );
+      case 'musical_code_fountain':
+        if (!renderData) return <Loader />;
+        return (
+          <MusicalCodeFountainGame
+            key={`${type}:${puzzleId}`}
+            puzzleData={renderData as any}
+            onComplete={onComplete}
+            onClose={onClose}
           />
         );
       default:

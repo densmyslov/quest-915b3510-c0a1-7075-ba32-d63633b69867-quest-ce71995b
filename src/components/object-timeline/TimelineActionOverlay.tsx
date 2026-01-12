@@ -195,6 +195,8 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
 
   // Close Confirmation State
   const [showCloseConfirmation, setShowCloseConfirmation] = useState(false);
+  const [showDebug, setShowDebug] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
   const detector = useKnockDetector({
     requiredKnocks,
@@ -208,9 +210,52 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
       onComplete({ knockPattern: timestamps });
     },
   });
+  const detectorReset = detector.reset;
+
+  // Auto-start listening and auto-trigger knocks for knockknock action (Safari-safe)
+  const autoKnockStartedRef = useRef(false);
+  useEffect(() => {
+    if (actionKind !== 'knockknock' || autoKnockStartedRef.current) return;
+    autoKnockStartedRef.current = true;
+
+    // Auto-start listening using requestAnimationFrame for Safari compatibility
+    requestAnimationFrame(() => {
+      detector.startListening().catch(console.error);
+      setStarted(true);
+    });
+
+    // Auto-trigger manual knocks with Safari-safe timing
+    const knockInterval = Math.floor(maxIntervalMs / (requiredKnocks + 1));
+    const timeouts: NodeJS.Timeout[] = [];
+
+    for (let i = 0; i < requiredKnocks; i++) {
+      const timeout = setTimeout(() => {
+        if (completedRef.current) return;
+        const now = Date.now();
+        setManualKnocks((prev) => {
+          const next = [...prev, now].filter((t) => now - t <= maxIntervalMs).sort((a, b) => a - b);
+          if (next.length >= requiredKnocks) {
+            const first = next[0];
+            const last = next[next.length - 1];
+            if (last - first <= maxIntervalMs) {
+              completedRef.current = true;
+              onComplete({ knockPattern: next });
+            }
+          }
+          return next;
+        });
+      }, knockInterval * (i + 1));
+      timeouts.push(timeout);
+    }
+
+    return () => {
+      timeouts.forEach(clearTimeout);
+    };
+  }, [actionKind, detector, maxIntervalMs, requiredKnocks, onComplete]);
 
   useEffect(() => {
     if (!overlay) return;
+    autoKnockStartedRef.current = false;
     setStarted(false);
     setManualKnocks([]);
     setStream(null);
@@ -218,8 +263,11 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
     setProcessing(false);
     setMatchMetrics(null);
     setError(null);
-    detector.reset();
-  }, [detector, overlay]);
+    setShowCloseConfirmation(false);
+    setShowDebug(false);
+    setCopyStatus(null);
+    detectorReset();
+  }, [detectorReset, overlay]);
 
   const stopCamera = useCallback(() => {
     setStream((prev) => {
@@ -240,6 +288,103 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
       stopCamera();
     };
   }, [stopCamera]);
+
+  const buildKnockDebugInfo = useCallback(() => {
+    const nowIso = new Date().toISOString();
+    const timestamps = detector.knockTimestamps?.length ? detector.knockTimestamps : manualKnocks;
+    const sorted = [...timestamps].sort((a, b) => a - b);
+    const intervals = sorted.slice(1).map((t, i) => t - sorted[i]);
+
+    return {
+      ts: nowIso,
+      overlay: {
+        title,
+        actionKind,
+        params,
+      },
+      config: {
+        requiredKnocks,
+        maxIntervalMs,
+        sensitivity,
+        detectionMode,
+      },
+      detector: {
+        isListening: detector.isListening,
+        knockCount: detector.knockCount,
+        knockTimestamps: detector.knockTimestamps,
+        error: detector.error,
+      },
+      manual: {
+        knockCount: manualKnocks.length,
+        knockTimestamps: manualKnocks,
+      },
+      derived: {
+        timestamps: sorted,
+        intervals,
+        totalDurationMs: sorted.length >= 2 ? sorted[sorted.length - 1] - sorted[0] : 0,
+      },
+      env: typeof window === 'undefined'
+        ? { hasWindow: false }
+        : {
+          hasWindow: true,
+          isSecureContext: (window as any).isSecureContext ?? null,
+          userAgent: navigator.userAgent,
+          hasDeviceMotionEvent: typeof (window as any).DeviceMotionEvent !== 'undefined',
+          hasDeviceMotionRequestPermission:
+            typeof (window as any).DeviceMotionEvent !== 'undefined' &&
+            typeof (window as any).DeviceMotionEvent?.requestPermission === 'function',
+          hasMediaDevices: !!navigator.mediaDevices?.getUserMedia,
+          hasClipboardApi: !!navigator.clipboard?.writeText,
+        },
+    };
+  }, [
+    actionKind,
+    detectionMode,
+    detector.error,
+    detector.isListening,
+    detector.knockCount,
+    detector.knockTimestamps,
+    manualKnocks,
+    maxIntervalMs,
+    params,
+    requiredKnocks,
+    sensitivity,
+    title,
+  ]);
+
+  const copyDebug = useCallback(async () => {
+    const payload = JSON.stringify(buildKnockDebugInfo(), null, 2);
+    setCopyStatus(null);
+
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(payload);
+        setCopyStatus('Copied to clipboard');
+        window.setTimeout(() => setCopyStatus(null), 1500);
+        return;
+      }
+    } catch {
+      // fall through
+    }
+
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = payload;
+      textarea.setAttribute('readonly', 'true');
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      textarea.style.top = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setCopyStatus(ok ? 'Copied to clipboard' : 'Copy failed');
+      window.setTimeout(() => setCopyStatus(null), 1500);
+    } catch {
+      setCopyStatus('Copy failed');
+      window.setTimeout(() => setCopyStatus(null), 1500);
+    }
+  }, [buildKnockDebugInfo]);
 
   const startCamera = useCallback(async () => {
     setError(null);
@@ -713,9 +858,11 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
       setManualKnocks([]);
       detector.reset();
       setStarted(false);
+      setCopyStatus(null);
     };
 
     const handleStart = async () => {
+      setCopyStatus(null);
       setStarted(true);
       await detector.startListening();
     };
@@ -752,8 +899,22 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
             <div>
               <h3 className="text-sm font-bold uppercase tracking-widest text-[#d4b483] mb-1">{title}</h3>
               <p className="text-sm opacity-80">Knock {requiredKnocks} times quickly.</p>
+              {detector.error ? (
+                <p className="mt-2 text-xs text-red-300 break-words">
+                  {detector.error}
+                </p>
+              ) : null}
             </div>
-            <button onClick={() => setShowCloseConfirmation(true)} className="text-[#d4b483] text-2xl leading-none">&times;</button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowDebug((v) => !v)}
+                className="px-2 py-1 text-[10px] uppercase tracking-widest border border-[#d4b483]/60 text-[#d4b483] rounded-md"
+                type="button"
+              >
+                {showDebug ? 'Hide Debug' : 'Debug'}
+              </button>
+              <button onClick={() => setShowCloseConfirmation(true)} className="text-[#d4b483] text-2xl leading-none" type="button">&times;</button>
+            </div>
           </div>
 
           <div className="flex flex-col gap-3">
@@ -787,6 +948,33 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
               Tap Manual Knock ({manualKnocks.length})
             </button>
           </div>
+
+          {showDebug ? (
+            <div className="border border-white/10 rounded-lg bg-black/20 p-3 flex flex-col gap-2">
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-[10px] uppercase tracking-widest text-[#d4b483]">
+                  Debug
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => void copyDebug()}
+                    className="px-2 py-1 text-[10px] uppercase tracking-widest bg-[#d4b483] text-[#1b140b] rounded-md"
+                    type="button"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+              {copyStatus ? (
+                <div className="text-[11px] text-[#ebd5a0]">{copyStatus}</div>
+              ) : null}
+              <textarea
+                className="w-full h-40 resize-none rounded-md bg-black/40 text-[#e3dcd2] font-mono text-[10px] p-2 border border-white/10"
+                readOnly
+                value={JSON.stringify(buildKnockDebugInfo(), null, 2)}
+              />
+            </div>
+          ) : null}
         </div>
 
 

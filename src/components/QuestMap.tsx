@@ -350,7 +350,7 @@ export default function QuestMap() {
     // Memoize audio panel collapse callback to prevent re-renders
     const handleToggleAudioPanelCollapsed = useCallback(() => {
         audioState.setPanelCollapsed(prev => !prev);
-    }, [audioState]);
+    }, [audioState.setPanelCollapsed]);
 
     const audioPanelProps = useMemo(() => ({
         title: activeAudio?.name ?? '',
@@ -635,7 +635,7 @@ export default function QuestMap() {
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [flushPendingAudio, questAudio, runtime, unlockAudio, currentObjectId, isCurrentObjectCompleted, objectsById]);
+    }, [flushPendingAudio, questAudio, runtime?.startOrJoin, unlockAudio, currentObjectId, isCurrentObjectCompleted, objectsById]);
 
     useEffect(() => {
         console.log('[QuestMap] Timeline resume useEffect triggered', {
@@ -1543,16 +1543,7 @@ export default function QuestMap() {
                 {/* Map Container */}
                 <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
 
-                {(() => {
-                    if (mapMode === 'steps') {
-                        console.log('[QuestMap] Rendering QuestMapOverlay', {
-                            mapMode,
-                            hasTimelinePanel: !!stepsTimelinePanel,
-                            itemCount: stepsTimelinePanel?.items?.length
-                        });
-                    }
-                    return null;
-                })()}
+                {/* Debug logging removed to reduce console spam */}
 
                 <QuestMapOverlay
                     mode={mapMode}

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/refs */
 'use client';
 
-import { useMemo, useState, useEffect, useRef, type RefObject, type SyntheticEvent } from 'react';
+import React, { useMemo, useState, useEffect, useRef, type RefObject, type SyntheticEvent } from 'react';
 import GameStatusPanel from '@/components/map/GameStatusPanel';
 import { StreamingText } from '@/components/StreamingText';
 import { formatTimestamp } from '@/lib/transcriptionUtils';
@@ -73,7 +73,7 @@ type QuestMapOverlayProps = {
   timelinePanel?: QuestTimelinePanel;
 };
 
-export default function QuestMapOverlay({
+const QuestMapOverlay = React.memo(function QuestMapOverlay({
   documents = [],
   votesFor = 2,
   votesAgainst = 798,
@@ -88,13 +88,11 @@ export default function QuestMapOverlay({
   audioPanel,
   timelinePanel
 }: QuestMapOverlayProps) {
-  const { addLog } = useDebugLog();
   const [folderOpen, setFolderOpen] = useState(false);
   const [selectedDocId, setSelectedDocId] = useState<string | null>(null);
   const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
   const [gameStartTime, setGameStartTime] = useState<Date | null>(null);
-  const debugEnabled = useMemo(() => isQuestDebugEnabled(), []);
-  const lastAudioDebugRef = useRef<{ url: string; words: number; mode: string } | null>(null);
+
   useEffect(() => {
     setGameStartTime(new Date());
   }, []);
@@ -423,4 +421,6 @@ export default function QuestMapOverlay({
       }
     </div >
   );
-}
+});
+
+export default QuestMapOverlay;

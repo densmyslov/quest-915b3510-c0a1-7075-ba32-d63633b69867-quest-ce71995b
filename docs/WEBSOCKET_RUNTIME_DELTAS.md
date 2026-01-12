@@ -6,10 +6,9 @@ The quest runtime uses WebSocket connections for real-time bidirectional communi
 
 ### Architecture
 
-**Client-Side**: Each team member's phone/browser creates a WebSocket connection
-**Server-Side**: AWS API Gateway WebSocket API + Lambda handlers
-**Persistence**: DynamoDB stores session state and connection mappings
-**Broadcasting**: Runtime state changes are pushed to all connected clients in a session
+**Client-Side**: Each team member's phone/browser creates a WebSocket connection (see `src/lib/useTeamWebSocket.ts`)
+**Server-Side**: Cloudflare Worker + Durable Object “team room” (see `docs/PLAYERS_REGISTRATION.md`)
+**Broadcasting**: Team state changes + runtime deltas are pushed to all connected clients in the team room
 
 ## WebSocket Connection Flow
 
@@ -19,7 +18,7 @@ When a player registers (solo or team), the `/api/teams` endpoint returns:
 {
   teamCode: "7TCJEM",
   session: { sessionId, playerName, mode },
-  websocketUrl: "wss://pbxz5lrxw8.execute-api.us-east-2.amazonaws.com/dev"
+  websocketUrl: "wss://<your-worker-domain>/ws?teamCode=7TCJEM"
 }
 ```
 
@@ -27,7 +26,7 @@ When a player registers (solo or team), the `/api/teams` endpoint returns:
 Each player's device:
 1. Receives the `websocketUrl` from registration response
 2. Stores it in sessionStorage
-3. Creates a WebSocket connection: `new WebSocket(websocketUrl + "?teamCode=" + teamCode)`
+3. Creates a WebSocket connection: `new WebSocket(websocketUrl)`
 4. Sends a join message after connection opens
 
 ### 3. Session Join
@@ -40,18 +39,17 @@ After the WebSocket connection opens, each client sends:
 }
 ```
 
-The server (AWS Lambda) maps the connection ID to the session ID in DynamoDB.
+The server associates the connection with the team room keyed by `teamCode`.
 
 ### 4. Multi-Player Scenario
 For a team of 3 players:
-- Player A (connection `abc123`) → joins session `7TCJEM`
-- Player B (connection `def456`) → joins session `7TCJEM`
-- Player C (connection `ghi789`) → joins session `7TCJEM`
+- Player A → joins team `7TCJEM`
+- Player B → joins team `7TCJEM`
+- Player C → joins team `7TCJEM`
 
 When Player A completes a puzzle:
-- Runtime API Lambda processes the event
-- Generates deltas (state changes)
-- Broadcasts to all connections: `abc123`, `def456`, `ghi789`
+- The backend processes the event and generates deltas (state changes)
+- The backend broadcasts deltas to all connections in the team room
 - All 3 phones receive the update simultaneously
 
 ## Client-Side Implementation
@@ -85,30 +83,22 @@ useEffect(() => {
 }, [refresh]);
 ```
 
-## Server-Side Broadcasting (AWS Backend)
+## Server-Side Broadcasting (Team Backend)
 
-**Status**: ✅ Implemented
+**Status**: ✅ Implemented (team Worker + Durable Object)
 
-### Components
+### Message Types (selected)
 
-1. **WebSocket Lambda** (`quest-runtime-websocket-dev`)
-   - Handles WebSocket lifecycle: `$connect`, `$disconnect`, `$default`
-   - Processes `join_session` messages to map connections to sessions
-   - File: `quest-platform/backend/src/tools/quest-runtime-api/websocket_handler.py`
+- `runtime_delta`: runtime state changes that should trigger `useQuestRuntime()` to refresh
+- `score_update`: points/score updates for team UI
+- `player_state_update`: throttled position/state updates
+- `puzzle_interaction`: ephemeral “micro-events” for puzzle UI effects (ghost clicks, etc.)
 
-2. **Runtime API Lambda** (`quest-runtime-api-dev`)
-   - Processes runtime events (node complete, puzzle submit, etc.)
-   - Generates deltas and broadcasts to WebSocket connections
-   - File: `quest-platform/backend/src/tools/quest-runtime-api/lambda_handler.py`
+### Debugging
 
-3. **API Gateway WebSocket API**
-   - URL: `wss://{api-id}.execute-api.{region}.amazonaws.com/{stage}`
-   - Routes: `$connect`, `$disconnect`, `$default`
-   - Deployed via CDK in `quest_platform_stack.py`
-
-4. **DynamoDB Table** (`quest-runtime-sessions-{env}`)
-   - Stores session state and connection mappings
-   - Each session has a `connections` array of connection IDs
+To log WebSocket send/recv from the client:
+- Add `?wsDebug=1` to the URL, or set `localStorage.quest_ws_debug = "1"`
+- Look for `[useTeamWebSocket] send` and `[useTeamWebSocket] recv` logs
 
 ### Message Format
 
@@ -165,46 +155,13 @@ The `deltas` array contains runtime state changes. Common delta types include:
 
 ### Implementation Notes
 
-1. **Session rooms**: Each WebSocket session should subscribe to a room keyed by `sessionId`
+1. **Team rooms**: Each WebSocket client joins a room keyed by `teamCode`
 2. **Broadcasting**: When the runtime engine processes an event, it returns `{ snapshot, deltas }`
    - The HTTP response includes both for the requesting client
    - The deltas should be broadcast to all other clients in the session room
 3. **Deduplication**: Clients may receive deltas via both HTTP response and WebSocket broadcast
    - The `useQuestRuntime` hook handles this by triggering a single `refresh()` call
 4. **Reconnection**: On reconnect, clients fetch the full snapshot via `GET /api/runtime/session/{sessionId}`
-
-### Example AWS Lambda + API Gateway WebSocket Flow
-
-```typescript
-// Pseudo-code for AWS backend
-async function handleRuntimeEvent(event: RuntimeEvent) {
-  // 1. Apply event to runtime engine
-  const result = await runtimeEngine.apply(event);
-
-  // 2. Persist to DynamoDB
-  await runtimeStore.save(result.snapshot);
-
-  // 3. Broadcast deltas to session room
-  const connections = await getSessionConnections(event.sessionId);
-  await Promise.all(
-    connections
-      .filter(conn => conn.playerId !== event.playerId) // Don't broadcast to sender
-      .map(conn =>
-        apiGateway.postToConnection({
-          ConnectionId: conn.connectionId,
-          Data: JSON.stringify({
-            type: 'runtime_delta',
-            sessionId: event.sessionId,
-            deltas: result.deltas,
-          }),
-        })
-      )
-  );
-
-  // 4. Return snapshot + deltas to HTTP caller
-  return { success: true, snapshot: result.snapshot, deltas: result.deltas };
-}
-```
 
 ## Testing
 

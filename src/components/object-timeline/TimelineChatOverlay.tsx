@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { getQuestApiUrl } from '@/utils/apiConfig';
+import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
 import type { TimelineChatOverlayState } from './types';
 
 type TimelineChatOverlayPalette = {
@@ -59,6 +60,21 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const [expandedUrl, setExpandedUrl] = useState<string | null>(null);
 
+  const { isListening, transcript, startListening, stopListening, hasRecognitionSupport, error: speechError } = useSpeechRecognition();
+  const [draftBeforeListening, setDraftBeforeListening] = useState('');
+
+  const handleStartListening = useCallback(() => {
+    setDraftBeforeListening(draft);
+    startListening();
+  }, [draft, startListening]);
+
+  useEffect(() => {
+    if (isListening) {
+      const prefix = draftBeforeListening ? draftBeforeListening + ' ' : '';
+      setDraft(prefix + transcript);
+    }
+  }, [transcript, isListening, draftBeforeListening]);
+
   const appendedImageUrls = useMemo(() => {
     const urls = overlay?.imageUrls ?? [];
     return Array.isArray(urls) ? urls.filter((v): v is string => typeof v === 'string' && v.length > 0) : [];
@@ -96,6 +112,10 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
     if (!overlay) return;
     const message = draft.trim();
     if (!message || sending) return;
+
+    if (isListening) {
+      stopListening();
+    }
 
     setSending(true);
     setError(null);
@@ -138,7 +158,7 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
     } finally {
       setSending(false);
     }
-  }, [apiBaseUrl, draft, overlay, sending, onClose]);
+  }, [apiBaseUrl, draft, overlay, sending, onClose, isListening, stopListening]);
 
   if (!overlay) return null;
 
@@ -305,6 +325,46 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
             </div>
           )}
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            {hasRecognitionSupport && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (isListening) stopListening();
+                  else handleStartListening();
+                }}
+                title={isListening ? 'Stop listening' : 'Speak'}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: '50%',
+                  border: isListening ? `1px solid ${palette.gold}` : '1px solid rgba(201, 169, 97, 0.35)',
+                  background: isListening ? 'rgba(201, 169, 97, 0.25)' : 'rgba(0,0,0,0.25)',
+                  color: isListening ? palette.gold : palette.parchment,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  flexShrink: 0,
+                }}
+              >
+                {isListening ? (
+                  <span style={{
+                    display: 'block',
+                    width: 12,
+                    height: 12,
+                    background: palette.gold,
+                    borderRadius: 2
+                  }} />
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z" />
+                    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3.5 8V7a.5.5 0 0 1 .5-.5z" />
+                  </svg>
+                )}
+              </button>
+            )}
             <input
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
@@ -314,18 +374,19 @@ export default function TimelineChatOverlay({ overlay, onClose, palette }: Timel
                   void send();
                 }
               }}
-              placeholder={sending ? 'Waiting for reply…' : 'Type a message…'}
+              placeholder={sending ? 'Waiting for reply…' : isListening ? 'Listening...' : 'Type a message…'}
               disabled={sending}
               style={{
                 flex: 1,
                 padding: '10px 12px',
                 borderRadius: 10,
-                border: `1px solid rgba(201, 169, 97, 0.35)`,
+                border: isListening ? `1px solid ${palette.gold}` : `1px solid rgba(201, 169, 97, 0.35)`,
                 background: 'rgba(0,0,0,0.25)',
                 color: palette.parchment,
                 fontFamily: "'Crimson Text', Georgia, serif",
                 fontSize: 14,
                 outline: 'none',
+                transition: 'border-color 0.2s',
               }}
             />
             <button

@@ -274,16 +274,13 @@ export default function RegistrationView({ onStart, onCreateTeamCode }: Registra
                             <div className={`${styles['code-display']} ${styles.visible}`}>
                                 <p className={styles['code-label']}>Share this code with your companions:</p>
                                 <div className={styles['code-box-row']}>
-                                    <div className={styles['code-box']}>
+                                    <div
+                                        className={styles['code-box']}
+                                        onClick={() => void handleCopyTeamCode(generatedCode)}
+                                        title="Click to copy"
+                                    >
                                         <span className={styles['code-text']}>{generatedCode}</span>
                                     </div>
-                                    <button
-                                        type="button"
-                                        className={styles['copy-button']}
-                                        onClick={() => void handleCopyTeamCode(generatedCode)}
-                                    >
-                                        Copy
-                                    </button>
                                 </div>
                                 {teamAction === 'create' && copyFeedback && (
                                     <p
@@ -317,13 +314,6 @@ export default function RegistrationView({ onStart, onCreateTeamCode }: Registra
                             <div className={styles['lobby-code-row']}>
                                 <span className={styles['lobby-code-label']}>Team code:</span>
                                 <span className={styles['lobby-code-text']}>{activeTeamCode}</span>
-                                <button
-                                    type="button"
-                                    className={styles['lobby-copy-button']}
-                                    onClick={() => void handleCopyTeamCode(activeTeamCode)}
-                                >
-                                    Copy
-                                </button>
                             </div>
                         )}
                         <p className={styles['lobby-title']}>Compagni di Viaggio / Travel Companions</p>

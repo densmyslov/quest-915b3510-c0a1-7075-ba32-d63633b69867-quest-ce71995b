@@ -148,6 +148,25 @@ Connect to `/ws?teamCode=...` and immediately send:
 { "type": "join", "sessionId": "…", "playerName": "…" }
 ```
 
+### Puzzle Interactions (ephemeral)
+
+Puzzle UIs can broadcast real-time “micro-events” to teammates (e.g. ghost clicks) using:
+
+```json
+{
+  "type": "puzzle_interaction",
+  "sessionId": "…",
+  "stopId": "…",
+  "puzzleId": "…",
+  "interactionType": "stud_click",
+  "data": { "studIndex": 42, "ok": true }
+}
+```
+
+- These events are intended for **UI effects** (high frequency) and are **not persisted**.
+- The server broadcasts them to the rest of the team (usually excluding the sender).
+- Example: `witch_knot_simple` uses this channel to show spectator “ghost clicks” after a player completes their own knot.
+
 ### Leader Start
 
 - Only the team leader can start the game (`team.leaderSessionId`).
@@ -191,3 +210,4 @@ Solo users are treated as a **team with a single player**:
 - If join fails with `Invalid team code`, ensure the full code is pasted (the UI allows longer prefixes like `PSCIAC-...`) and no unicode dashes/whitespace remain (client + server normalize common paste issues).
 - If the lobby flickers connect/disconnect: ensure the app build includes the sessionStorage change (per-tab) and avoid multiple tabs reusing the same session.
 - If the browser tries to connect to `wss://<your-pages-domain>/ws?...` and fails: configure `QUEST_API_URL` (Pages) or `NEXT_PUBLIC_QUEST_API_URL` (client build time) so the app uses the worker `/ws`.
+- To debug WebSocket traffic, open the puzzle URL with `?wsDebug=1` (or set `localStorage.quest_ws_debug = "1"`) to enable extra `useTeamWebSocket` send/recv logs.

@@ -19,6 +19,7 @@ type TeamSyncContextValue = {
   updatePlayerState: ReturnType<typeof useTeamWebSocket>['updatePlayerState'];
   sendPuzzleInteraction: ReturnType<typeof useTeamWebSocket>['sendPuzzleInteraction'];
   setOnPuzzleInteraction: (handler: ((sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => void) | null) => void;
+  setOnScoreUpdate: (handler: ((points: number, playerTotalPoints: number, teamTotalPoints: number, stopId: string, puzzleId: string) => void) | null) => void;
 };
 
 const TeamSyncContext = createContext<TeamSyncContextValue | null>(null);
@@ -92,14 +93,28 @@ export function TeamSyncProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const [puzzleHandler, setPuzzleHandler] = useState<((sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => void) | null>(null);
+  // Use ref instead of state to avoid triggering re-renders and WebSocket reconnections
+  const puzzleHandlerRef = React.useRef<((sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => void) | null>(null);
+  const scoreUpdateHandlerRef = React.useRef<((points: number, playerTotalPoints: number, teamTotalPoints: number, stopId: string, puzzleId: string) => void) | null>(null);
+
+  // Stable callback that doesn't change when handler is updated
+  const setPuzzleHandler = React.useCallback((handler: ((sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => void) | null) => {
+    puzzleHandlerRef.current = handler;
+  }, []);
+
+  const setScoreUpdateHandler = React.useCallback((handler: ((points: number, playerTotalPoints: number, teamTotalPoints: number, stopId: string, puzzleId: string) => void) | null) => {
+    scoreUpdateHandlerRef.current = handler;
+  }, []);
 
   const wsOptions = useMemo(() => ({
     websocketUrl,
     onPuzzleInteraction: (sessionId: string, stopId: string, puzzleId: string, interactionType: string, data?: any) => {
-      puzzleHandler?.(sessionId, stopId, puzzleId, interactionType, data);
-    }
-  }), [websocketUrl, puzzleHandler]);
+      puzzleHandlerRef.current?.(sessionId, stopId, puzzleId, interactionType, data);
+    },
+    onScoreUpdate: (points: number, playerTotalPoints: number, teamTotalPoints: number, stopId: string, puzzleId: string) => {
+      scoreUpdateHandlerRef.current?.(points, playerTotalPoints, teamTotalPoints, stopId, puzzleId);
+    },
+  }), [websocketUrl]); // Removed puzzleHandler dependency - use ref instead
   const ws = useTeamWebSocket(teamCode, session, wsOptions);
 
   const value: TeamSyncContextValue = useMemo(
@@ -119,8 +134,9 @@ export function TeamSyncProvider({ children }: { children: React.ReactNode }) {
       updatePlayerState: ws.updatePlayerState,
       sendPuzzleInteraction: ws.sendPuzzleInteraction,
       setOnPuzzleInteraction: setPuzzleHandler,
+      setOnScoreUpdate: setScoreUpdateHandler,
     }),
-    [session, teamCode, ws, puzzleHandler],
+    [session, teamCode, ws, setPuzzleHandler, setScoreUpdateHandler], // Removed puzzleHandler dependency
   );
 
   return <TeamSyncContext.Provider value={value}>{children}</TeamSyncContext.Provider>;

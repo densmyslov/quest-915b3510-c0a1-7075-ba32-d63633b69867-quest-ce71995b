@@ -296,11 +296,20 @@ export default function WitchKnotSimpleGame({
     isRunning: false
   });
 
-  const { sendPuzzleInteraction, setOnPuzzleInteraction, team } = useTeamSync();
+  const { sendPuzzleInteraction, setOnPuzzleInteraction, team, connectionStatus } = useTeamSync();
+
+  // Log connection status changes (throttled to avoid spam)
+  const lastLoggedStatusRef = useRef<string>('');
+  useEffect(() => {
+    if (lastLoggedStatusRef.current !== connectionStatus) {
+      console.log('[WitchKnot] WebSocket connection status changed:', lastLoggedStatusRef.current, '→', connectionStatus);
+      lastLoggedStatusRef.current = connectionStatus;
+    }
+  }, [connectionStatus]);
 
   // Team completion state
   const [teamCompletions, setTeamCompletions] = useState<Set<string>>(new Set());
-  const [remoteInteractions, setRemoteInteractions] = useState<{ x: number, y: number, id: string }[]>([]);
+  const [remoteInteractions, setRemoteInteractions] = useState<{ x: number, y: number, id: string, ok?: boolean }[]>([]);
 
   // Sound ref for remote clicks
   const remoteClickSoundRef = useRef<HTMLAudioElement | null>(null);
@@ -315,6 +324,21 @@ export default function WitchKnotSimpleGame({
     stateRef.current = state;
   }, [state]);
 
+  const sendPuzzleInteractionRef = useRef(sendPuzzleInteraction);
+  useEffect(() => {
+    sendPuzzleInteractionRef.current = sendPuzzleInteraction;
+  }, [sendPuzzleInteraction]);
+
+  const stopIdRef = useRef(stopId);
+  useEffect(() => {
+    stopIdRef.current = stopId;
+  }, [stopId]);
+
+  const puzzleIdRef = useRef(puzzleId);
+  useEffect(() => {
+    puzzleIdRef.current = puzzleId;
+  }, [puzzleId]);
+
   const {
     studs: rawStuds = [],
     patterns: rawPatterns = [],
@@ -328,54 +352,59 @@ export default function WitchKnotSimpleGame({
   const rawStudsStr = JSON.stringify(rawStuds);
   const studs = useMemo(() => rawStuds, [rawStudsStr]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Pattern distribution: Each player gets ONE pattern instead of all patterns
   const rawPatternsStr = JSON.stringify(rawPatterns);
-  const patterns = useMemo(() => {
-    // If no distribution context, show all patterns (backward compatibility)
-    if (!sessionId || !puzzleId || rawPatterns.length === 0) {
-      return rawPatterns;
-    }
 
-    // Use distribution algorithm to select ONE pattern for this player
+  // Pre-compute the pattern assignment for each team member so we can color "ghost" interactions.
+  const assignedPatternIndexBySession = useMemo(() => {
+    const map = new Map<string, number>();
+    if (!sessionId || !puzzleId || rawPatterns.length === 0) return map;
+
     const isTeamMode = !!teamCode && !!startedAt;
-    const seed = isTeamMode
-      ? `${teamCode}:${startedAt}:${puzzleId}`
-      : `solo:${sessionId}:${puzzleId}`;
-
+    const seed = isTeamMode ? `${teamCode}:${startedAt}:${puzzleId}` : `solo:${sessionId}:${puzzleId}`;
     const nowMs = isTeamMode && startedAt ? Date.parse(startedAt) : Date.now();
+    const playerIds = teamMemberIds && teamMemberIds.length > 0 ? teamMemberIds : [sessionId];
 
-    // Treat patterns as "puzzles" for distribution purposes
-    const patternPuzzles = rawPatterns.map((_: any, idx: number) => ({
-      puzzle_id: `pattern_${idx}`
-    }));
-
-    // Use all team members for distribution to ensure unique assignments
-    // when patterns >= players
-    const playerIds = teamMemberIds && teamMemberIds.length > 0
-      ? teamMemberIds
-      : [sessionId];
-
+    const patternPuzzles = rawPatterns.map((_: any, idx: number) => ({ puzzle_id: `pattern_${idx}` }));
     const result = distributeObjectPuzzles(
       { puzzles: patternPuzzles },
       playerIds,
       { seed, nowMs: Number.isFinite(nowMs) ? nowMs : Date.now() }
     );
 
-    // Find which pattern was assigned to this player
-    const assignment = result.assignments.find(a => a.user_id === sessionId);
-    if (!assignment) return rawPatterns; // Fallback to all patterns
-
-    const assignedPatternId = assignment.puzzle_id;
-    const patternIndex = parseInt(assignedPatternId.replace('pattern_', ''), 10);
-
-    if (isNaN(patternIndex) || patternIndex < 0 || patternIndex >= rawPatterns.length) {
-      return rawPatterns; // Fallback to all patterns
+    for (const assignment of result.assignments) {
+      const assignedPatternId = assignment.puzzle_id;
+      const patternIndex = parseInt(assignedPatternId.replace('pattern_', ''), 10);
+      if (Number.isFinite(patternIndex) && patternIndex >= 0 && patternIndex < rawPatterns.length) {
+        map.set(assignment.user_id, patternIndex);
+      }
     }
+    return map;
+  }, [rawPatterns, sessionId, teamCode, startedAt, puzzleId, teamMemberIds]);
+
+  const rawPatternsRef = useRef(rawPatterns);
+  useEffect(() => {
+    rawPatternsRef.current = rawPatterns;
+  }, [rawPatterns]);
+
+  const assignedPatternIndexBySessionRef = useRef(assignedPatternIndexBySession);
+  useEffect(() => {
+    assignedPatternIndexBySessionRef.current = assignedPatternIndexBySession;
+  }, [assignedPatternIndexBySession]);
+
+  // Pattern distribution: Each player gets ONE pattern instead of all patterns
+  const patterns = useMemo(() => {
+    // If no distribution context, show all patterns (backward compatibility)
+    if (!sessionId || !puzzleId || rawPatterns.length === 0) {
+      return rawPatterns;
+    }
+
+    const patternIndex = assignedPatternIndexBySession.get(sessionId);
+    if (patternIndex === undefined) return rawPatterns; // Fallback to all patterns
 
     // Return only the assigned pattern
     return [rawPatterns[patternIndex]];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rawPatternsStr, sessionId, teamCode, startedAt, puzzleId, teamMemberIds]);
+  }, [rawPatternsStr, sessionId, puzzleId, assignedPatternIndexBySession]);
 
   const imageUrl = originalImageUrl || doorImageUrl || doorImageDataUrl;
 
@@ -387,6 +416,11 @@ export default function WitchKnotSimpleGame({
       return Math.min(prev, patterns.length - 1);
     });
   }, [patterns.length]);
+
+  const selectedPatternIndexRef = useRef<number>(0);
+  useEffect(() => {
+    selectedPatternIndexRef.current = selectedPatternIndex;
+  }, [selectedPatternIndex]);
 
   // Memoize selectedPattern to prevent unnecessary resets when pattern object reference changes
   const selectedPattern: Pattern | null = useMemo(() => {
@@ -404,8 +438,38 @@ export default function WitchKnotSimpleGame({
     studsRef.current = studs;
   }, [studs]);
 
+  const remoteDotByKeyRef = useRef<Map<string, PIXI.Graphics>>(new Map());
+  const remoteLineBySessionRef = useRef<Map<string, PIXI.Graphics>>(new Map());
+  const remoteLastCorrectStudBySessionRef = useRef<Map<string, number>>(new Map());
+
+  const clearRemoteOverlays = useCallback(() => {
+    const app = upperAppRef.current;
+    if (app) {
+      for (const dot of remoteDotByKeyRef.current.values()) {
+        try {
+          dot.destroy();
+        } catch {
+          // ignore
+        }
+      }
+      for (const line of remoteLineBySessionRef.current.values()) {
+        try {
+          line.destroy();
+        } catch {
+          // ignore
+        }
+      }
+    }
+    remoteDotByKeyRef.current.clear();
+    remoteLineBySessionRef.current.clear();
+    remoteLastCorrectStudBySessionRef.current.clear();
+    setRemoteInteractions([]);
+    setTeamCompletions(new Set());
+  }, []);
+
   const resetProgress = useCallback((pattern: Pattern | null) => {
     lineGraphicsRef.current?.clear();
+    clearRemoteOverlays();
 
     // Hide all studs except the first one in the pattern
     // Use alpha instead of visible so clicks still work on hidden studs
@@ -427,7 +491,7 @@ export default function WitchKnotSimpleGame({
       isRunning: false,
       showCompletion: false
     }));
-  }, []);
+  }, [clearRemoteOverlays]);
 
   // Only reset when the pattern INDEX changes, not when pattern object reference changes
   // Also wait for PIXI to be initialized before resetting
@@ -466,7 +530,17 @@ export default function WitchKnotSimpleGame({
     const expectedIndex = pattern.points[currentState.currentStudIndex];
     if (expectedIndex === undefined) return;
 
-    if (studIndex === expectedIndex) {
+    const isCorrectClick = studIndex === expectedIndex;
+
+    // Send interaction for EVERY stud click (correct or wrong) so spectators can see progress/attempts.
+    const currentStopId = stopIdRef.current;
+    const currentPuzzleId = puzzleIdRef.current;
+    if (currentStopId && currentPuzzleId) {
+      console.log('[WitchKnot] Sending stud_click interaction:', { stopId: currentStopId, puzzleId: currentPuzzleId, studIndex, ok: isCorrectClick });
+      sendPuzzleInteractionRef.current(currentStopId, currentPuzzleId, 'stud_click', { studIndex, ok: isCorrectClick });
+    }
+
+    if (isCorrectClick) {
       // Play success sound
       if (clickSoundRef.current) {
         clickSoundRef.current.currentTime = 0;
@@ -504,12 +578,11 @@ export default function WitchKnotSimpleGame({
         isRunning: isComplete ? false : prev.isRunning || shouldStart
       }));
 
-      // Send interaction
-      if (stopId && puzzleId) {
-        sendPuzzleInteraction(stopId, puzzleId, 'stud_click', { studIndex });
-        if (isComplete) {
-          sendPuzzleInteraction(stopId, puzzleId, 'pattern_complete', { patternIndex: selectedPatternIndex });
-        }
+      // Send completion marker (used for local "everyone finished" overlay)
+      if (isComplete && currentStopId && currentPuzzleId) {
+        const patternIndex = selectedPatternIndexRef.current;
+        console.log('[WitchKnot] Sending pattern_complete interaction:', { stopId: currentStopId, puzzleId: currentPuzzleId, patternIndex });
+        sendPuzzleInteractionRef.current(currentStopId, currentPuzzleId, 'pattern_complete', { patternIndex });
       }
 
       // Reveal the clicked stud (if it was hidden)
@@ -522,7 +595,7 @@ export default function WitchKnotSimpleGame({
 
       if (isComplete) {
         // In team mode, do NOT close immediately. Wait for user to interact with overlay.
-        if (!stopId) {
+        if (!currentStopId) {
           onComplete?.();
         }
       }
@@ -815,23 +888,104 @@ export default function WitchKnotSimpleGame({
   useEffect(() => {
     if (!sessionId) return;
 
-    setOnPuzzleInteraction((senderId, rStopId, rPuzzleId, type, data) => {
-      // Ignore own messages
-      if (senderId === sessionId) return;
-      // Ignore mismatching puzzle
-      if (rStopId !== stopId || rPuzzleId !== puzzleId) return;
+    const handler = (senderId: string, rStopId: string, rPuzzleId: string, type: string, data?: any) => {
+      console.log('[WitchKnot] Received interaction:', { senderId, rStopId, rPuzzleId, type, data });
 
+      // Ignore own messages
+      if (senderId === sessionId) {
+        console.log('[WitchKnot] Ignoring own message');
+        return;
+      }
+
+      // Ignore mismatching puzzle
+      if (rStopId !== stopId || rPuzzleId !== puzzleId) {
+        console.log('[WitchKnot] Ignoring mismatched puzzle:', { rStopId, stopId, rPuzzleId, puzzleId });
+        return;
+      }
+
+      // Use stateRef instead of state to avoid re-registering on every state change
       const currentState = stateRef.current;
       // Only show interactions if I have completed my puzzle
-      if (!currentState.showCompletion) return;
+      if (!currentState.showCompletion) {
+        console.log('[WitchKnot] Not showing interaction - puzzle not completed yet');
+        return;
+      }
 
       if (type === 'stud_click') {
         const { studIndex } = data;
+        const ok: boolean | undefined = typeof data?.ok === 'boolean' ? data.ok : undefined;
         const stud = studsRef.current[studIndex];
         const dims = imageDimensionsRef.current;
         if (stud && dims) {
           const studPos = getDisplayCoords(stud, dims.width, dims.height, dims.canvasWidth, dims.canvasHeight);
-          setRemoteInteractions(prev => [...prev, { x: studPos.x, y: studPos.y, id: `${Date.now()}-${Math.random()}` }]);
+          if (ok === true) {
+            // Persist correct clicks as dots AND connect them with a line.
+            const mainContainer = mainStageContainerRef.current;
+            if (!mainContainer) return;
+
+            const allPatterns = rawPatternsRef.current;
+            const assignedPatternIndex = assignedPatternIndexBySessionRef.current.get(senderId);
+            const assignedPattern = assignedPatternIndex !== undefined ? (allPatterns[assignedPatternIndex] as any) : null;
+            const colorStr = (assignedPattern?.color as string | undefined) || '#00ff00';
+            const color = parseInt(String(colorStr).replace('#', '0x'), 16);
+
+            const ensureDot = (studIdx: number, x: number, y: number) => {
+              const key = `${senderId}:${studIdx}`;
+              if (remoteDotByKeyRef.current.has(key)) return;
+              const dot = new PIXI.Graphics();
+              dot.circle(0, 0, 7);
+              dot.fill({ color, alpha: 0.9 });
+              dot.circle(0, 0, 7);
+              dot.stroke({ width: 1, color: 0xffffff, alpha: 0.6 });
+              dot.x = x;
+              dot.y = y;
+              mainContainer.addChild(dot);
+              remoteDotByKeyRef.current.set(key, dot);
+            };
+
+            const ensureLine = () => {
+              const existing = remoteLineBySessionRef.current.get(senderId);
+              if (existing) return existing;
+              const g = new PIXI.Graphics();
+              mainContainer.addChild(g);
+              remoteLineBySessionRef.current.set(senderId, g);
+              return g;
+            };
+
+            const line = ensureLine();
+            let lastStudIdx = remoteLastCorrectStudBySessionRef.current.get(senderId);
+
+            // First correct click: also place the start node of the other player's knot.
+            if (lastStudIdx === undefined) {
+              const startIdx: number | undefined = Array.isArray(assignedPattern?.points) ? assignedPattern.points[0] : undefined;
+              if (typeof startIdx === 'number') {
+                const startStud = studsRef.current[startIdx];
+                if (startStud) {
+                  const startPos = getDisplayCoords(startStud, dims.width, dims.height, dims.canvasWidth, dims.canvasHeight);
+                  ensureDot(startIdx, startPos.x, startPos.y);
+                  lastStudIdx = startIdx;
+                }
+              }
+            }
+
+            // Draw segment from last correct stud to this stud (including from start node → first click).
+            if (typeof lastStudIdx === 'number' && lastStudIdx !== studIndex) {
+              const prevStud = studsRef.current[lastStudIdx];
+              if (prevStud) {
+                const prevPos = getDisplayCoords(prevStud, dims.width, dims.height, dims.canvasWidth, dims.canvasHeight);
+                line.moveTo(prevPos.x, prevPos.y);
+                line.lineTo(studPos.x, studPos.y);
+                line.stroke({ width: 4, color, alpha: 0.55 });
+              }
+            }
+
+            ensureDot(studIndex, studPos.x, studPos.y);
+            remoteLastCorrectStudBySessionRef.current.set(senderId, studIndex);
+          } else {
+            // Wrong/unknown clicks stay as ripples (current behavior).
+            console.log('[WitchKnot] Adding remote interaction ripple:', studPos);
+            setRemoteInteractions(prev => [...prev, { x: studPos.x, y: studPos.y, ok, id: `${Date.now()}-${Math.random()}` }]);
+          }
 
           // Play faint sound
           if (remoteClickSoundRef.current) {
@@ -840,16 +994,19 @@ export default function WitchKnotSimpleGame({
           }
         }
       } else if (type === 'pattern_complete') {
+        console.log('[WitchKnot] Remote player completed:', senderId);
         setTeamCompletions(prev => {
           const next = new Set(prev);
           next.add(senderId);
           return next;
         });
       }
-    });
+    };
+
+    setOnPuzzleInteraction(handler);
 
     return () => setOnPuzzleInteraction(null);
-  }, [sessionId, stopId, puzzleId, setOnPuzzleInteraction, state.showCompletion]); // Fixed dependency on state.showCompletion
+  }, [sessionId, stopId, puzzleId, setOnPuzzleInteraction]); // Removed state.showCompletion - use stateRef instead!
 
   // Render remote interactions (ghost ripples)
   useEffect(() => {
@@ -866,15 +1023,20 @@ export default function WitchKnotSimpleGame({
   // Alternative: useEffect watching remoteInteractions
   useEffect(() => {
     const app = upperAppRef.current;
-    if (!app || remoteInteractions.length === 0) return;
+    const mainContainer = mainStageContainerRef.current;
+    if (!app || !mainContainer || remoteInteractions.length === 0) return;
 
     const last = remoteInteractions[remoteInteractions.length - 1];
     const g = new PIXI.Graphics();
     g.circle(0, 0, 20);
-    g.stroke({ width: 2, color: 0x00ff00, alpha: 0.8 }); // Green ripple for others
+    const color = last.ok === false ? 0xff3b30 : 0x00ff00; // red for wrong, green for correct/unknown
+    g.stroke({ width: 2, color, alpha: 0.8 });
     g.x = last.x;
     g.y = last.y;
-    app.stage.addChild(g);
+    // Add to mainContainer so it follows zoom/pan transformations
+    mainContainer.addChild(g);
+
+    console.log('[WitchKnot] Showing remote interaction at', last.x, last.y);
 
     // Animate out
     let alpha = 0.8;
@@ -1097,6 +1259,17 @@ export default function WitchKnotSimpleGame({
           <span style={styles.statItem}>
             {state.currentStudIndex}/{state.totalStuds} Chiodi
           </span>
+          {stopId && (
+            <span style={{
+              ...styles.statItem,
+              backgroundColor: connectionStatus === 'connected' ? '#2d5a27' :
+                             connectionStatus === 'connecting' || connectionStatus === 'reconnecting' ? '#8b6914' : '#cc3333'
+            }}>
+              {connectionStatus === 'connected' ? '🟢' :
+               connectionStatus === 'connecting' || connectionStatus === 'reconnecting' ? '🟡' : '🔴'}
+              {connectionStatus}
+            </span>
+          )}
         </div>
       </div>
 
@@ -1166,66 +1339,59 @@ export default function WitchKnotSimpleGame({
         preload="auto"
       />
 
-      {state.showCompletion && stopId && (
-        <div style={styles.teamCompletionOverlay}>
-          <h2 style={{ fontSize: '24px', marginBottom: '20px', color: '#d4c5a9' }}>Puzzle Completato!</h2>
-          <p style={{ marginBottom: '20px', fontSize: '16px', color: '#b0a090', textAlign: 'center' }}>
-            Ottimo lavoro! Puoi vedere i progressi del team qui sotto.<br />
-            Vedi i &quot;fantasmi&quot; cliccare sui nodi in tempo reale!
-          </p>
+      {(() => {
+        // Only show overlay when ALL team members have completed, not just current player
+        if (!state.showCompletion || !stopId || !team?.members) return null;
 
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
-            {team?.members.map(member => {
-              const isMe = member.sessionId === sessionId;
-              const completionList = team.stopCompletions?.[stopId] || []; // Use stopId from props
-              const isConfirmed = completionList.includes(member.sessionId) || teamCompletions.has(member.sessionId) || (isMe && state.showCompletion);
+        const allMembersDone = team.members.every(member => {
+          const isMe = member.sessionId === sessionId;
+          const completionList = team.stopCompletions?.[stopId] || [];
+          return completionList.includes(member.sessionId) || teamCompletions.has(member.sessionId) || (isMe && state.showCompletion);
+        });
 
-              return (
-                <div key={member.sessionId} style={styles.teamMemberRow}>
-                  <span style={{ color: '#d4c5a9' }}>{member.playerName} {isMe ? '(Tu)' : ''}</span>
-                  <span>{isConfirmed ? '✅' : '⏳'}</span>
-                </div>
-              );
-            })}
+        // Don't show overlay until everyone is done
+        if (!allMembersDone) return null;
+
+        return (
+          <div style={styles.teamCompletionOverlay}>
+            <h2 style={{ fontSize: '24px', marginBottom: '20px', color: '#d4c5a9' }}>Puzzle Completato!</h2>
+            <p style={{ marginBottom: '20px', fontSize: '16px', color: '#b0a090', textAlign: 'center' }}>
+              Ottimo lavoro! Tutti hanno completato il puzzle.
+            </p>
+
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
+              {team.members.map(member => {
+                const isMe = member.sessionId === sessionId;
+                const completionList = team.stopCompletions?.[stopId] || [];
+                const isConfirmed = completionList.includes(member.sessionId) || teamCompletions.has(member.sessionId) || (isMe && state.showCompletion);
+
+                return (
+                  <div key={member.sessionId} style={styles.teamMemberRow}>
+                    <span style={{ color: '#d4c5a9' }}>{member.playerName} {isMe ? '(Tu)' : ''}</span>
+                    <span>{isConfirmed ? '✅' : '⏳'}</span>
+                  </div>
+                );
+              })}
+            </div>
+
+            <button
+              style={{
+                ...styles.resetButton,
+                backgroundColor: '#8b6914',
+                border: '1px solid #d4c5a9',
+                cursor: 'pointer'
+              }}
+              onClick={() => {
+                // Call onComplete to trigger congratulations popup and submit puzzle
+                // The popup will auto-close and handle closing the puzzle view
+                onComplete?.();
+              }}
+            >
+              Concludi e Esci
+            </button>
           </div>
-
-          {(() => {
-            const allMembersDone = team?.members.every(member => {
-              const isMe = member.sessionId === sessionId;
-              const completionList = team.stopCompletions?.[stopId!] || [];
-              return completionList.includes(member.sessionId) || teamCompletions.has(member.sessionId) || (isMe && state.showCompletion);
-            });
-
-            return (
-              <>
-                {!allMembersDone && (
-                  <p style={{ color: '#b0a090', fontSize: '14px', marginBottom: '10px', fontStyle: 'italic' }}>
-                    In attesa che tutti i membri completino il puzzle...
-                  </p>
-                )}
-                <button
-                  style={{
-                    ...styles.resetButton,
-                    backgroundColor: allMembersDone ? '#8b6914' : '#4a3c28',
-                    border: allMembersDone ? '1px solid #d4c5a9' : '1px solid #6b5a45',
-                    opacity: allMembersDone ? 1 : 0.6,
-                    cursor: allMembersDone ? 'pointer' : 'not-allowed'
-                  }}
-                  disabled={!allMembersDone}
-                  onClick={() => {
-                    if (allMembersDone) {
-                      onComplete?.();
-                      onClose?.();
-                    }
-                  }}
-                >
-                  Concludi e Esci
-                </button>
-              </>
-            );
-          })()}
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }

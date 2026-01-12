@@ -3,6 +3,10 @@
 ## Overview
 The Puzzle system allows users to play interactive jigsaw-like puzzles. The system is designed to separate **metadata** (JSON) from **assets** (Images) for performance and security.
 
+## Planned Puzzle Types
+
+- Musical “code” fountain puzzle: `quest-app-template/docs/MUSICAL_CODE_FOUNTAIN_PUZZLE.md`
+
 ## Data Flow & Architecture
 
 ### 1. Metadata (`data.json`)
@@ -160,6 +164,10 @@ if (!texture) {
 - **Reveal Logic**: Sequential revealing of dots upon correct selection.
 - **Visual Hints**: The next correct dot (after the start) blinks (alpha oscillates) to guide the player, enabling it to be seen before clicking.
 - **Audio Feedback**: Distinct sounds for correct and incorrect clicks (including background clicks).
+- **Team Spectator “Ghost Clicks”**: after you complete your knot (`showCompletion === true`), you see other players’ clicks in real time via WebSocket `puzzle_interaction`:
+  - Wrong clicks: transient ripples (current behavior)
+  - Correct clicks: persistent colored dots + a connecting line (color matches the sender’s knot)
+  - First correct click also places the sender’s start node, then draws the path from there
 
 ## Puzzle Completion & Scoring
 

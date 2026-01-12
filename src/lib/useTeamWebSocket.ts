@@ -50,6 +50,7 @@ export type ConnectionStatus = 'disconnected' | 'connecting' | 'connected' | 're
 
 export type UseTeamWebSocketOptions = {
   websocketUrl?: string | null;
+  debug?: boolean;
   onMemberJoined?: (member: TeamMember, memberCount: number) => void;
   onMemberLeft?: (sessionId: string, playerName: string, memberCount: number) => void;
   onGameStarted?: (startedAt: string, expiresAt: string) => void;
@@ -69,6 +70,23 @@ type ApiCreateJoinResponse = {
 };
 
 const STORED_WS_URL_KEY = 'quest_websocketUrl';
+const STORED_WS_DEBUG_KEY = 'quest_ws_debug';
+
+function readWsDebugFlag(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('wsDebug') === '1') return true;
+  } catch {
+    // ignore
+  }
+  try {
+    const raw = sessionStorage.getItem(STORED_WS_DEBUG_KEY) ?? localStorage.getItem(STORED_WS_DEBUG_KEY);
+    return raw === '1' || raw === 'true';
+  } catch {
+    return false;
+  }
+}
 
 // function getQuestApiUrl(): string {
 //   // Priority 2: Check environment variables (for local development)
@@ -232,6 +250,10 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('disconnected');
   const [latency, setLatency] = useState<number | null>(null);
 
+  // Extract stable primitives to avoid object identity churn
+  const sessionId = session?.sessionId ?? null;
+  const playerName = session?.playerName ?? null;
+
   const apiUrl = useMemo(() => getQuestApiUrl(), []);
 
   const wsRef = useRef<WebSocket | null>(null);
@@ -245,29 +267,32 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
   const lastPingSentAtRef = useRef<number | null>(null);
 
   const sendQueueRef = useRef<string[]>([]);
+  const debugRef = useRef(false);
 
   useEffect(() => {
     optionsRef.current = options;
+    debugRef.current = options.debug ?? readWsDebugFlag();
   }, [options]);
 
-  const clearReconnectTimer = () => {
+  const clearReconnectTimer = useCallback(() => {
     if (reconnectTimerRef.current !== null) {
       window.clearTimeout(reconnectTimerRef.current);
       reconnectTimerRef.current = null;
     }
-  };
+  }, []);
 
-  const clearPingTimer = () => {
+  const clearPingTimer = useCallback(() => {
     if (pingTimerRef.current !== null) {
       window.clearInterval(pingTimerRef.current);
       pingTimerRef.current = null;
     }
-  };
+  }, []);
 
   const closeSocket = useCallback(() => {
     intentionalCloseRef.current = true;
     clearReconnectTimer();
     clearPingTimer();
+    sendQueueRef.current = [];
     const ws = wsRef.current;
     wsRef.current = null;
     if (ws) {
@@ -277,7 +302,8 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
         // ignore
       }
     }
-  }, []);
+    setConnectionStatus('disconnected');
+  }, [clearPingTimer, clearReconnectTimer]);
 
   const scheduleReconnect = useCallback(() => {
     if (intentionalCloseRef.current) return;
@@ -289,15 +315,24 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
     reconnectTimerRef.current = window.setTimeout(() => {
       connectRef.current?.();
     }, baseDelay + jitter);
-  }, []);
+  }, [clearReconnectTimer]);
+
+  // Store sendRaw and flushQueue in refs to avoid recreation
+  const sendRawRef = useRef<(payload: unknown) => void>(() => {});
+  const flushQueueRef = useRef<() => void>(() => {});
 
   const sendRaw = useCallback((payload: unknown) => {
     const ws = wsRef.current;
     const text = JSON.stringify(payload);
     if (!ws || ws.readyState !== WebSocket.OPEN) {
       sendQueueRef.current.push(text);
+      if (debugRef.current) {
+        const readyState = ws?.readyState ?? null;
+        console.debug('[useTeamWebSocket] queue send', { readyState, queued: sendQueueRef.current.length, payload });
+      }
       return;
     }
+    if (debugRef.current) console.debug('[useTeamWebSocket] send', { payload });
     ws.send(text);
   }, []);
 
@@ -307,6 +342,12 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
     const queue = sendQueueRef.current.splice(0, sendQueueRef.current.length);
     for (const msg of queue) ws.send(msg);
   }, []);
+
+  // Update refs when functions change
+  useEffect(() => {
+    sendRawRef.current = sendRaw;
+    flushQueueRef.current = flushQueue;
+  }, [sendRaw, flushQueue]);
 
   const applyPresence = (state: TeamState, online: string[], offline: string[]) => {
     const onlineSet = new Set(online);
@@ -318,11 +359,34 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
   };
 
   const connect = useCallback(() => {
-    if (!teamCode || !session) return;
+    if (!teamCode || !sessionId || !playerName) return;
+
+    // Prevent duplicate connections
+    if (
+      wsRef.current?.readyState === WebSocket.CONNECTING ||
+      wsRef.current?.readyState === WebSocket.OPEN ||
+      wsRef.current?.readyState === WebSocket.CLOSING
+    ) {
+      console.log('[useTeamWebSocket] Skipping connect - already connecting/connected', {
+        readyState: wsRef.current.readyState
+      });
+      return;
+    }
+
+    console.log('[useTeamWebSocket] Starting connection', { teamCode, sessionId });
 
     intentionalCloseRef.current = false;
     clearReconnectTimer();
     clearPingTimer();
+    if (debugRef.current) {
+      console.debug('[useTeamWebSocket] connect params', {
+        teamCode,
+        sessionId,
+        playerName,
+        explicitWsUrl: optionsRef.current.websocketUrl ?? null,
+        apiUrl,
+      });
+    }
 
     const resolved = resolveWebsocketUrl(apiUrl, teamCode, optionsRef.current.websocketUrl);
     if (!resolved) {
@@ -335,6 +399,7 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
     }
 
     const url = resolved.url;
+    if (debugRef.current) console.debug('[useTeamWebSocket] resolved ws url', resolved);
 
     if (resolved.source === 'apiUrl' && typeof window !== 'undefined') {
       const parsed = new URL(url);
@@ -352,31 +417,46 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
     setConnectionStatus((prev) => (prev === 'connected' ? 'reconnecting' : 'connecting'));
 
     const ws = new WebSocket(url);
+    const wsId = Math.random().toString(16).slice(2, 8);
+    console.log('[useTeamWebSocket] Creating WebSocket', { wsId, url });
     wsRef.current = ws;
 
     ws.addEventListener('open', () => {
+      // Ignore stale socket events
+      if (wsRef.current !== ws) {
+        console.log('[useTeamWebSocket] Ignoring stale open event', { wsId });
+        return;
+      }
+      console.log('[useTeamWebSocket] WebSocket opened', { wsId, url });
       reconnectAttemptRef.current = 0;
       setConnectionStatus('connected');
-      sendQueueRef.current = [];
-      sendRaw({ type: 'join', sessionId: session.sessionId, playerName: session.playerName });
-      flushQueue();
+      sendRawRef.current({ type: 'join', sessionId, playerName });
+      flushQueueRef.current();
 
       pingTimerRef.current = window.setInterval(() => {
         lastPingSentAtRef.current = Date.now();
-        sendRaw({ type: 'ping' });
+        sendRawRef.current({ type: 'ping' });
       }, 10_000);
     });
 
     ws.addEventListener('message', (evt) => {
+      // Ignore stale socket events
+      if (wsRef.current !== ws) return;
       let msg: any;
       try {
         msg = JSON.parse(String(evt.data));
       } catch {
+        if (debugRef.current) console.debug('[useTeamWebSocket] message parse failed', { wsId, data: String(evt.data) });
         return;
       }
 
       const type = typeof msg?.type === 'string' ? msg.type : null;
       if (!type) return;
+      if (debugRef.current) {
+        if (type === 'puzzle_interaction' || type === 'score_update' || type === 'error') {
+          console.debug('[useTeamWebSocket] recv', { wsId, type, msg });
+        }
+      }
 
       if (type === 'pong') {
         const sentAt = lastPingSentAtRef.current;
@@ -507,11 +587,11 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
 
         // Update local team state with player's new total points
         setTeam((prev) => {
-          if (!prev || !session) return prev;
+          if (!prev || !sessionId) return prev;
           return {
             ...prev,
             members: prev.members.map((m) =>
-              m.sessionId === session.sessionId
+              m.sessionId === sessionId
                 ? { ...m, totalPoints: playerTotalPoints }
                 : m
             ),
@@ -582,9 +662,29 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
       }
     });
 
-    ws.addEventListener('close', () => {
+    ws.addEventListener('close', (event) => {
+      // Ignore stale socket events
+      if (wsRef.current !== ws) {
+        console.log('[useTeamWebSocket] Ignoring stale close event', { wsId, code: event.code, reason: event.reason });
+        return;
+      }
       clearPingTimer();
       wsRef.current = null;
+      console.log('[useTeamWebSocket] WebSocket closed', {
+        code: event.code,
+        reason: event.reason,
+        wasClean: event.wasClean,
+        intentional: intentionalCloseRef.current,
+        url
+      });
+      if (!intentionalCloseRef.current && event.code === 1000 && event.reason === 'replaced') {
+        setConnectionStatus('error');
+        optionsRef.current.onError?.(
+          'ws_replaced',
+          'WebSocket connection was replaced by another connection for this session (another tab/device).',
+        );
+        return;
+      }
       if (!intentionalCloseRef.current) {
         setConnectionStatus('reconnecting');
         scheduleReconnect();
@@ -593,17 +693,22 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
       }
     });
 
-    ws.addEventListener('error', () => {
+    ws.addEventListener('error', (event) => {
+      // Ignore stale socket events
+      if (wsRef.current !== ws) return;
+      console.error('[useTeamWebSocket] WebSocket error', { event, url });
       setConnectionStatus('error');
     });
-  }, [apiUrl, flushQueue, scheduleReconnect, sendRaw, session, teamCode]);
+  }, [apiUrl, clearPingTimer, clearReconnectTimer, scheduleReconnect, sessionId, playerName, teamCode]);
 
   useEffect(() => {
     connectRef.current = connect;
   }, [connect]);
 
   useEffect(() => {
-    if (!teamCode || !session) {
+    console.log('[useTeamWebSocket] Main effect triggered', { teamCode, sessionId, playerName });
+
+    if (!teamCode || !sessionId || !playerName) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setTeam(null);
       setLatency(null);
@@ -615,58 +720,59 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
     connect();
 
     return () => {
+      console.log('[useTeamWebSocket] Main effect cleanup', { teamCode, sessionId, playerName });
       closeSocket();
     };
-  }, [closeSocket, connect, session, teamCode]);
+  }, [closeSocket, connect, sessionId, playerName, teamCode]);
 
   const setReady = useCallback(
     (ready: boolean) => {
-      if (!session) return;
-      sendRaw({ type: 'ready', sessionId: session.sessionId, ready });
+      if (!sessionId) return;
+      sendRaw({ type: 'ready', sessionId, ready });
     },
-    [sendRaw, session],
+    [sendRaw, sessionId],
   );
 
   const startGame = useCallback(() => {
-    if (!session) return;
-    sendRaw({ type: 'start_game', sessionId: session.sessionId });
-  }, [sendRaw, session]);
+    if (!sessionId) return;
+    sendRaw({ type: 'start_game', sessionId });
+  }, [sendRaw, sessionId]);
 
   const leaveTeam = useCallback(() => {
-    if (!session) return;
-    sendRaw({ type: 'leave', sessionId: session.sessionId });
+    if (!sessionId) return;
+    sendRaw({ type: 'leave', sessionId });
     closeSocket();
     setTeam(null);
-  }, [closeSocket, sendRaw, session]);
+  }, [closeSocket, sendRaw, sessionId]);
 
   const completePuzzle = useCallback(
     (stopId: string, puzzleId: string) => {
-      if (!session) return;
-      sendRaw({ type: 'puzzle_complete', sessionId: session.sessionId, stopId, puzzleId });
+      if (!sessionId) return;
+      sendRaw({ type: 'puzzle_complete', sessionId, stopId, puzzleId });
     },
-    [sendRaw, session],
+    [sendRaw, sessionId],
   );
 
   const arriveAtLocation = useCallback(
     (stopId: string) => {
-      if (!session) return;
-      sendRaw({ type: 'location_arrived', sessionId: session.sessionId, stopId });
+      if (!sessionId) return;
+      sendRaw({ type: 'location_arrived', sessionId, stopId });
     },
-    [sendRaw, session],
+    [sendRaw, sessionId],
   );
 
   const sendChat = useCallback(
     (message: string) => {
-      if (!session) return;
-      sendRaw({ type: 'chat', sessionId: session.sessionId, message });
+      if (!sessionId) return;
+      sendRaw({ type: 'chat', sessionId, message });
     },
-    [sendRaw, session],
+    [sendRaw, sessionId],
   );
 
   const requestSync = useCallback(() => {
-    if (!session) return;
-    sendRaw({ type: 'sync_request', sessionId: session.sessionId });
-  }, [sendRaw, session]);
+    if (!sessionId) return;
+    sendRaw({ type: 'sync_request', sessionId });
+  }, [sendRaw, sessionId]);
 
   const updatePlayerState = useCallback(
     (update: {
@@ -679,30 +785,30 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
         timestamp: string;
       } | null;
     }) => {
-      if (!session) return;
+      if (!sessionId) return;
       sendRaw({
         type: 'player_state_update',
-        sessionId: session.sessionId,
+        sessionId,
         ...update,
       });
     },
-    [sendRaw, session],
+    [sendRaw, sessionId],
   );
 
 
   const sendPuzzleInteraction = useCallback(
     (stopId: string, puzzleId: string, interactionType: string, data?: any) => {
-      if (!session) return;
+      if (!sessionId) return;
       sendRaw({
         type: 'puzzle_interaction',
-        sessionId: session.sessionId,
+        sessionId,
         stopId,
         puzzleId,
         interactionType,
         data,
       });
     },
-    [sendRaw, session],
+    [sendRaw, sessionId],
   );
   return {
     team,

@@ -162,7 +162,14 @@ export function useObjectTimeline({
         const nodeId = makeTimelineItemNodeId(objectId, item.key);
 
         const node = snapshotRef.current?.nodes?.[nodeId];
-        if (node?.status === 'completed') {
+        const isCompleted =
+          node?.status === 'completed' &&
+          // For branching nodes, treat explicit failure as incomplete so the player can retry.
+          // The runtime supports overwriting fail -> success for puzzles/actions.
+          !(item.type === 'action' && node.outcome === 'fail') &&
+          !(item.type === 'puzzle' && node.outcome === 'fail');
+
+        if (isCompleted) {
           completedKeys[item.key] = true;
         }
       }
@@ -988,6 +995,34 @@ export function useObjectTimeline({
             });
             if (!submitted) {
               console.warn('[useObjectTimeline] Action submit failed', { nodeId, key: item.key, actionKind: actionKindStr });
+              await showTimelineText({
+                title: item.title ?? obj.name,
+                text: 'Action submit failed. Please try again.',
+                mode: 'seconds',
+                seconds: 4,
+                blocking: true,
+              });
+              break;
+            }
+
+            if (submitted.outcome === 'fail') {
+              console.warn('[useObjectTimeline] Action verification failed', { nodeId, key: item.key, actionKind: actionKindStr });
+              if (debugEnabled) {
+                addLog('warn', '[useObjectTimeline] action outcome=fail', {
+                  objectId: obj.id,
+                  nodeId,
+                  key: item.key,
+                  actionKind: actionKindStr,
+                  verificationDetails: submitted.verificationDetails ?? null,
+                });
+              }
+              await showTimelineText({
+                title: item.title ?? obj.name,
+                text: 'Action failed. Try again.',
+                mode: 'seconds',
+                seconds: 3,
+                blocking: true,
+              });
               break;
             }
 

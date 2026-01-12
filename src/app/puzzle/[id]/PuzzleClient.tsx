@@ -7,7 +7,6 @@ import { useTeamSync } from '@/context/TeamSyncContext';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { getSoloTeamStartedAt, isSoloTeamSession } from '@/lib/soloTeam';
 import { CongratulationsPopup } from '@/components/CongratulationsPopup';
-import { useTeamWebSocket } from '@/lib/useTeamWebSocket';
 
 const PuzzleRenderer = dynamic(() => import('@/components/puzzles/PuzzleRenderer').then(mod => mod.PuzzleRenderer), {
     ssr: false,
@@ -20,7 +19,14 @@ interface PuzzleClientProps {
     onClose?: () => void;
 }
 
-type PuzzleType = 'fabric_custom' | 'jigsaw_custom' | 'jigsaw' | 'witch_knot' | 'witch_knot_simple' | 'spot_diff_ai';
+type PuzzleType =
+    | 'fabric_custom'
+    | 'jigsaw_custom'
+    | 'jigsaw'
+    | 'witch_knot'
+    | 'witch_knot_simple'
+    | 'spot_diff_ai'
+    | 'musical_code_fountain';
 
 export default function PuzzleClient(props: PuzzleClientProps) {
     const { puzzleId } = props;
@@ -81,13 +87,27 @@ export default function PuzzleClient(props: PuzzleClientProps) {
         }
     }, []);
 
-    // Set up WebSocket listener for score updates (team mode)
-    useTeamWebSocket(teamSync.teamCode, teamSync.session, {
-        onScoreUpdate: (points) => {
-            // Show congratulations popup when player earns points
+    const currentPuzzleType = React.useMemo(() => {
+        const currentPuzzle = data?.puzzles?.find(p => p.id === resolvedPuzzleId);
+        return currentPuzzle?.interaction_data?.type || (currentPuzzle as any)?.type || null;
+    }, [data?.puzzles, resolvedPuzzleId]);
+
+    React.useEffect(() => {
+        if (!teamSync.teamCode || !teamSync.session) {
+            teamSync.setOnScoreUpdate(null);
+            return;
+        }
+
+        teamSync.setOnScoreUpdate((points) => {
+            const isTeamSyncPuzzle = currentPuzzleType === 'witch_knot_simple';
+            const isTeamModeForPopup = !!teamSync.teamCode && !!objectId;
+
+            if (isTeamSyncPuzzle && isTeamModeForPopup) return;
             setCongratsPoints(points);
-        },
-    });
+        });
+
+        return () => teamSync.setOnScoreUpdate(null);
+    }, [teamSync.setOnScoreUpdate, teamSync.teamCode, teamSync.session, currentPuzzleType, objectId]);
 
     // Initialize quest session on mount
     React.useEffect(() => {
@@ -215,6 +235,7 @@ export default function PuzzleClient(props: PuzzleClientProps) {
                 rawType === 'witch_knot' ? 'witch_knot' :
                     rawType === 'witch_knot_simple' ? 'witch_knot_simple' :
                         rawType === 'spot_diff_ai' ? 'spot_diff_ai' :
+                            rawType === 'musical_code_fountain' ? 'musical_code_fountain' :
                             'fabric_custom';
 
     // Handler for complete
