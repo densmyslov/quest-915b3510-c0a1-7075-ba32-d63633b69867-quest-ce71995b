@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useQuestData } from '@/context/QuestContext';
 import Navigation from '@/components/Navigation';
 
-const QuestMap = dynamic(() => import('@/components/QuestMap'), {
+const QuestMap = dynamic(() => import('@/components/quest-map/QuestMap'), {
     ssr: false,
     loading: () => <div className="h-full w-full flex items-center justify-center bg-gray-100">Loading Map...</div>
 });

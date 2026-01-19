@@ -418,7 +418,8 @@
 }
 
 .timelineRowCurrent {
-  border-color: rgba(45, 90, 61, 0.85); /* --ink-green */
+  border-color: rgba(45, 90, 61, 0.85);
+  /* --ink-green */
   box-shadow: 0 0 16px rgba(45, 90, 61, 0.45);
 }
 
@@ -502,14 +503,17 @@
   width: 70px;
   height: 56px;
   position: relative;
-  filter: drop-shadow(var(--shadow-soft));
+  background: transparent;
+  border: none;
 }
+
 
 .folderImage {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: contain;
+  background: transparent;
 }
 
 .folderTab {
@@ -1134,7 +1138,7 @@
 @media (max-width: 600px) {
   .topBar {
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 8px;
     padding: 8px 10px;
   }
@@ -1142,12 +1146,16 @@
   .folderContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 6px;
+    /* Keep folder on the left side */
+    order: -1;
   }
 
   .stepsContainer {
     gap: 6px;
+    /* Steps container below folder on mobile */
+    width: 100%;
   }
 
   .folderExpanded {

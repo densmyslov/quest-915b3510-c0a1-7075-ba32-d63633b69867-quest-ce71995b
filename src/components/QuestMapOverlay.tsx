@@ -47,6 +47,9 @@ type QuestTimelinePanelItem = {
   done: boolean;
   current: boolean;
   canOpen: boolean;
+  gpsLocked?: boolean;
+  gpsTriggerMode?: 'approach' | 'departure' | 'distance_range' | null;
+  gpsDistanceMeters?: number | null;
 };
 
 type QuestTimelinePanel = {
@@ -271,6 +274,22 @@ const QuestMapOverlay = React.memo(function QuestMapOverlay({
                       <div className={styles.timelineRowLabel}>
                         <span className={styles.timelineType}>{item.type}</span>
                         <span className={styles.timelineLabelText}>{item.label}</span>
+                        {item.gpsLocked && (
+                          <span style={{
+                            marginLeft: '8px',
+                            padding: '2px 6px',
+                            background: 'rgba(201, 169, 97, 0.2)',
+                            border: '1px solid #C9A961',
+                            borderRadius: '3px',
+                            fontSize: '10px',
+                            color: '#C9A961',
+                            fontWeight: 600
+                          }}>
+                            📍 {item.gpsTriggerMode === 'approach' ? 'Get closer' :
+                                item.gpsTriggerMode === 'departure' ? 'Move away' :
+                                'GPS locked'}
+                          </span>
+                        )}
                       </div>
                       <div className={styles.timelineRowActions}>
                         {item.canOpen && (item.current || item.done) && (

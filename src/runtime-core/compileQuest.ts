@@ -3,6 +3,7 @@ import { normalizeTranscription } from '@/lib/transcriptionUtils';
 import type { QuestObject } from '@/types/quest';
 import type { Transcription } from '@/types/transcription';
 import type {
+  ActionNode,
   AudioNode,
   ChatNode,
   CompiledQuestDefinition,
@@ -150,6 +151,19 @@ function readEffectKind(item: any): EffectNode['payload']['effect'] | null {
   // Legacy naming in this template uses "pulsating_circles" at times.
   if (raw === 'pulsating_circles') return 'pulsating_circles';
   return null;
+}
+
+function readActionKind(item: any): 'image_match' | 'knockknock' | null {
+  const raw = item?.actionKind ?? item?.action_kind ?? item?.payload?.actionKind ?? item?.payload?.action_kind ?? null;
+  if (raw === 'image_match' || raw === 'knockknock') {
+    return raw;
+  }
+  return null;
+}
+
+function readActionParams(item: any): Record<string, unknown> {
+  const params = item?.params ?? item?.payload?.params ?? item?.payload ?? {};
+  return isRecord(params) ? (params as Record<string, unknown>) : {};
 }
 
 
@@ -330,6 +344,24 @@ export function compileQuestFromObjects(objects: QuestObject[], options: Compile
           ...common,
           type: 'puzzle',
           payload: { puzzleId },
+          successOutNodeIds: [nextNodeId],
+          failureOutNodeIds: [],
+        };
+        timelineNodes[nodeId] = node;
+        continue;
+      }
+
+      if (type === 'action') {
+        const actionKind = readActionKind(item);
+        if (!actionKind) throw new Error(`Missing/unknown actionKind for ${objectId} item ${item.key}`);
+        const params = readActionParams(item);
+        const node: ActionNode = {
+          ...common,
+          type: 'action',
+          payload: {
+            actionKind,
+            params,
+          },
           successOutNodeIds: [nextNodeId],
           failureOutNodeIds: [],
         };

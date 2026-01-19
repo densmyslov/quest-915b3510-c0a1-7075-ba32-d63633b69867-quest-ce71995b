@@ -54,7 +54,7 @@ The compiled definition is validated by `docs/schemas/compiled.quest.schema.json
 
 #### Node Types
 - **State nodes**: `__start`, `__end` (auto-advance)
-- **Media nodes**: `audio`, `video`, `text`, `effect`
+- **Media nodes**: `audio`, `video`, `text`, `document`, `effect`
 - **Interactive nodes**: `puzzle`, `action`
 
 #### Policies & Gates
@@ -162,7 +162,7 @@ The store rejects duplicates and the engine remains deterministic.
 Action nodes require specific evidence verification logic implemented in `action_verifier.py`.
 
 #### Image Match Action (`image_match`)
-Validates an uploaded image against a target reference image using the `image-matcher-rust` Lambda service.
+Validates an uploaded image against a target reference image using the VLM image matching API (`POST /api/v1/match-vlm`).
 
 **Client-Side Processing:**
 - Images are automatically resized locally before upload to fit within a **1280x1280** bounding box (maintaining aspect ratio).
@@ -170,25 +170,25 @@ Validates an uploaded image against a target reference image using the `image-ma
 
 **Quest Definition Paramaters:**
 - `targetImageKey`: Key of the reference image in S3.
-- `maxScore`: (Optional) Similarity threshold (0.0 - 2.0). Default `0.6`. Lower is better.
+- `minProbability`: (Optional) Minimum VLM confidence (0.0 - 1.0). Default `0.7`.
 - `maxDistanceMeters`: (Optional) Max allowed distance from target. Default `10.0`.
 - `targetLatitude` / `targetLongitude`: (Optional) required for distance check.
 
 **Submission Evidence:**
 ```json
 {
-  "queryImagePath": "clients/.../image.jpg",
+  "query_image_path": "clients/.../image.jpg",
+  "targetImageKey": "clients/.../base-images/.../image.webp",
   "playerLatitude": 45.123,   // Optional
   "playerLongitude": 12.123   // Optional
 }
 ```
 
 **Verification Logic:**
-1. Call `image-matcher-rust` with `queryImagePath`
-2. Validate **Score**: `topMatch.score < maxScore`
-3. Validate **Target**: `topMatch.id` contains `targetImageKey`
-4. Validate **Distance** (if coords provided): `distance(player, target) < maxDistanceMeters`
-5. Outcome is `success` only if **ALL** checks pass.
+1. Call `POST /api/v1/match-vlm` with `query_image_path` and `target_image_path` (from `targetImageKey`)
+2. Validate **Match**: `is_match === true` (and optionally `probability >= minProbability`)
+3. Validate **Distance** (if coords provided): `distance(player, target) < maxDistanceMeters`
+4. Outcome is `success` only if **ALL** checks pass.
 
 #### Knock Action (`knock`)
 Validates a rhythmic pattern of taps/knocks.
@@ -451,7 +451,7 @@ useEffect(() => {
 - [x] `POST /runtime/action/start` - generates attempt tokens
 - [x] `POST /runtime/action/submit` - verifies evidence + applies outcome
 - [x] Session-scope consensus gates (`all_players_success` with `requireSameAttempt`)
-- [x] Image matching integration (AWS Lambda `image-matcher-rust`)
+- [x] Image matching integration (VLM `POST /api/v1/match-vlm`)
 - [x] Knock pattern matching with normalized intervals
 
 #### Timeline Navigation Fix (2026-01-01)
@@ -489,6 +489,66 @@ useEffect(() => {
 ---
 
 ## Recent Changes
+
+### 2026-01-15: Object Completion - CurrentObjectId Update Fix
+
+**Problem**: When a player completed an object in Play mode, the next object would not appear on the map, and timeline items would not autoplay. This only affected Play mode; Steps mode worked correctly.
+
+**Root Cause**: When an object was completed (via the `__end` state node), the `currentObjectId` in the player's runtime session state was **not being updated** to point to the next available incomplete object.
+
+**Impact on Play Mode**:
+1. **Object Visibility**: The map uses a sliding window around `currentObjectId` to determine which objects are visible. With `currentObjectId` still pointing to the completed object, the next object was outside the visibility window.
+2. **Timeline Autoplay**: The timeline autoplay logic depends on `currentObjectId` to determine which object's timeline should run. Without the update, the system couldn't detect which object should become active next.
+
+**Why Steps Mode Wasn't Affected**: Steps mode uses different visibility logic - it shows ALL completed objects plus the current one (see [QuestMap.tsx:238-247](../src/components/QuestMap.tsx#L238-L247)), so objects remained visible regardless of `currentObjectId`.
+
+**Solution**: Modified the `autoAdvanceStateNodes` function in the runtime engine to update `currentObjectId` when an object completes.
+
+**Implementation** ([engine.ts:285-289](../src/runtime-core/engine.ts#L285-L289)):
+
+```typescript
+if (node.stateKind === 'end') {
+  const objState = getObjectState(session, playerId, node.objectId);
+  if (!objState.completedAt) {
+    objState.completedAt = nowIso();
+    deltas.push({ type: 'OBJECT_COMPLETED', playerId, objectId: node.objectId });
+
+    // Update currentObjectId to point to the next available incomplete object
+    const completed = getCompletedObjects(session, playerId);
+    const available = computeAvailableObjectIds(def, completed);
+    const nextObjectId = computeCurrentObjectId(def, available, completed);
+    session.players[playerId].currentObjectId = nextObjectId;
+  }
+}
+```
+
+**Object Visibility Flow**:
+1. Player completes final timeline item → unlocks `__end` node
+2. `autoAdvanceStateNodes` detects `__end` completion
+3. Marks object as completed
+4. Recalculates available objects (includes newly unlocked objects from completed one's `outObjectIds`)
+5. Computes next current object (first available incomplete object in graph order)
+6. Updates `session.players[playerId].currentObjectId`
+7. Frontend snapshot updates → `visibleObjectIds` recalculated to include next object
+8. Map shows next object marker
+9. Timeline autoplays when player arrives at next object
+
+**Files Changed**:
+- `src/runtime-core/engine.ts` - Added currentObjectId update in autoAdvanceStateNodes
+
+**Commit**: [pending]
+
+**Testing**:
+- Verify next object appears on map immediately after completing current object in Play mode
+- Verify timeline autoplays when arriving at next object
+- Verify object visibility window correctly slides forward as objects are completed
+- Check console for `currentObjectId` updates in snapshot
+
+**Impact**:
+- Play mode progression now works seamlessly
+- Next objects appear on map without requiring manual refresh
+- Timeline autoplay works correctly for sequential objects
+- Maintains backward compatibility with Steps mode
 
 ### 2026-01-01: Timeline Resume After Puzzle Fix (Part 3)
 

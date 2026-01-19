@@ -2,8 +2,17 @@
 
 ## Status
 
-Phase 2 (fountain image + polygon hit regions) is implemented in:
-- `quest-app-template/src/components/puzzles/musical-code-fountain/MusicalCodeFountainGame.tsx`
+Implemented:
+- Phase 1–2 gameplay (score render + highlighting, stones, judging, fountain hit regions):
+  - `quest-app-template/src/components/puzzles/musical-code-fountain/MusicalCodeFountainGame.tsx`
+- Phase 5 editor workflow (crop, preview/alignment, content outputs) in the platform Puzzle Editor:
+  - `quest-platform/frontend/components/puzzles/musical-code-fountain/MusicalCodeFountainCreator.tsx`
+- Server-side physical MP3 cropping (FFmpeg → public R2 audio bucket):
+  - `quest-platform/backend/src/tools/puzzle-manager/lambda_handler.py`
+  - `quest-platform/backend/src/tools/ffmpeg-operator/lambda_handler.py`
+
+Not implemented yet:
+- Phase 4 multiplayer ensemble mode (server time sync + aggregation + judge)
 
 ## Target experience
 
@@ -28,6 +37,11 @@ The puzzle JSON payload (inline `interaction_data.puzzle_data` or via `interacti
   "fountainHintDurationMs": 1200,
   "fountainHintFadeMs": 900,
   "fountainEffectsEnabled": true,
+  "audioOriginalUrl": "clients/<client>/platform-library/<puzzleId>/audio_original.wav",
+  "audioUrl": "https://<PUBLIC_R2_DOMAIN>/clients/<client>/platform-library/<puzzleId>/audio.mp3",
+  "audioCrop": { "cropStartSec": 0.0, "cropEndSec": 12.34 },
+  "adjustmentMode": "timeline_shift",
+  "visualNudgeMs": 0,
   "referenceUrl": "clients/.../reference.json",
   "reference": {
     "version": 1,
@@ -76,12 +90,25 @@ The puzzle JSON payload (inline `interaction_data.puzzle_data` or via `interacti
 Notes:
 - `reference` is recommended (Phase 0 output). If omitted, the client can generate a basic reference timeline from MusicXML for simple monophonic scores.
 - `stones` is optional; if omitted, stones are derived from unique pitches in `reference.events`.
+- Stone `color` should be a Canvas-friendly CSS color (recommend `#RRGGBB`). Older space-separated forms like `hsl(120 85% 55%)` are normalized at runtime for compatibility.
 - `noteId` is stable per score note and is based on `partId`, `measureIndex` (0-based), local tick within the measure, staff, voice, and chord index.
 - `fountainImageUrl` is the background image used for Phase 2 hit regions.
 - `fountainMapUrl`/`fountainMap` define polygon regions that map `stoneId` → user input; `stoneId` is then mapped to a pitch via `stones`.
+- `fountainMap` is only persisted when the platform editor saves it (it’s gated by `includeFountainMap` in the creator UI). Preview does not persist.
 - `fountainHintMode`: `always` (default), `memory` (show then fade during input), or `off` (no hints).
 - `fountainHintDurationMs`/`fountainHintFadeMs`: how long hints stay visible and how fast they fade (memory mode).
 - `fountainEffectsEnabled`: enables glow/ripple/particle feedback on presses.
+- `audioUrl`/`audioOriginalUrl`: optional reference audio for playback (if omitted, playback uses a synth).
+  - `audioOriginalUrl` points to the “source of truth” upload (e.g. `audio_original.wav`).
+  - `audioUrl` points to the “runtime playback” file. If you export a physical crop, this is `audio.mp3` in the public R2 audio bucket.
+- `audioCrop`: `{ cropStartSec, cropEndSec? }` defines the segment of the original audio to use.
+  - If `audioUrl` is already physically cropped (`audioUrl !== audioOriginalUrl`), runtime plays from offset `0`.
+  - Otherwise runtime plays from offset `cropStartSec` into `audioOriginalUrl`.
+- `adjustmentMode`:
+  - `timeline_shift` (default): MusicXML unchanged; generated reference timeline is shifted by `cropStartSec` (notes before the crop are dropped).
+  - `musicxml_cut`: editor rewrites `music.musicxml` to keep only measures intersecting the crop window, and converts non-overlapping notes in the first/last measure into rests (so the score stays valid), then regenerates the reference from that rewritten MusicXML.
+- `visualNudgeMs`: optional highlight-only micro-offset (±200ms) for last-mile alignment tweaks.
+- `editorPreview` is an internal flag used by the platform editor Preview overlay (it should not be persisted into `data.json`).
 
 ---
 
@@ -96,6 +123,42 @@ Unified reference model (what playback/highlighting/judging use):
 
 Current helper:
 - `quest-app-template/src/lib/musicxmlToReference.ts` exports `musicXmlToReference(xml)` and produces a per-note event timeline with stable `noteId`s (handles ties; supports tempo marks + changes).
+
+---
+
+## Phase 5 — Editor pipeline (implemented)
+
+The in-browser Puzzle Editor (platform) supports a “publishable puzzle pack” workflow without any out-of-browser tools.
+
+### 5.1 Audio: upload + crop + export (physical MP3)
+
+- Upload `audio_original.*` (many formats accepted); store it in the public R2 audio bucket (same bucket used for other MP3 assets).
+- Set crop start/end (`audioCrop.cropStartSec`, `audioCrop.cropEndSec`).
+- Click **Export Cropped MP3**:
+  - Calls the platform API crop action, which invokes FFmpeg in `ffmpeg-operator`.
+  - Writes `clients/<client>/platform-library/<puzzleId>/audio.mp3` to the public R2 bucket.
+  - Updates `audioUrl` to the new public URL.
+
+### 5.2 Notation alignment
+
+Two supported adjustment modes:
+
+1) `timeline_shift` (non-destructive)
+- Keep `music.musicxml` unchanged.
+- Generate `reference` by shifting note times by `cropStartSec` (dropping notes before the crop).
+
+2) `musicxml_cut` (destructive; measure-based)
+- Rewrite `music.musicxml` to remove measures outside the crop window.
+- Copies the latest `<attributes>` and tempo marking into the new first measure to keep rendering/parsing consistent.
+- Renumbers measures starting at `1`.
+- If crop start/end are not exactly on measure boundaries, the editor keeps the overlapping measures and converts non-overlapping notes in the first/last measure into rests (so the score still renders cleanly).
+
+### 5.3 Preview & alignment polish
+
+- **Preview Puzzle** opens a fullscreen overlay to test audio + score + highlighting + stones using the current in-editor data.
+- Preview does not persist `fountainMap` / regions; use **Save Musical Code** to persist.
+- `visualNudgeMs` has both a number input and a slider for quick highlight alignment (audio remains unchanged).
+- **Restore Original** deletes the exported `audio.mp3` from the public R2 audio bucket and switches `audioUrl` back to `audioOriginalUrl` (also resets crop start/end in the editor).
 
 ---
 
@@ -121,9 +184,12 @@ Judging:
 Integration:
 - On pass, calls `onComplete()` so `PuzzleClient` submits `outcome: "success"` via `/api/runtime/puzzle/submit`
 
+Small correctness note:
+- `judgeAttemptV3` previously skipped notes with `actualMs === 0` due to a falsy check; this was fixed so the first correctly-timed hit is counted.
+
 ---
 
 ## Next steps
 
-- Phase 3: improve judge (anchoring, miss/extra handling, adaptive windows)
 - Phase 4: multiplayer ensemble mode via WebSocket time sync + server-side aggregation/judge
+- Optional: smarter partial-measure cuts (today: notes crossing crop boundaries are converted to rests; there’s no attempt to split durations)

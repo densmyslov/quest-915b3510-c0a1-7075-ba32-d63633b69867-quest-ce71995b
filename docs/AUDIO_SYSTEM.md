@@ -222,7 +222,36 @@ Simple linear playback.
 | **Safari shows "playing" but no sound** | Audio metadata not loaded (`duration: 0`). | Force reload when `duration === 0` or `readyState < 1`. |
 | **Background audio doesn't start** | Volume too low for Safari. | Start at minimum 10% volume, not 0-5%. |
 
-## 8. Architecture & Code Map
+## 8. Effect Audio Completion (Blocking Playback)
+
+Effect audio (timeline `audio` type items) uses a blocking mechanism to ensure audio completes before the timeline proceeds.
+
+### Implementation Details (`useMapAudio.ts`)
+
+The `startEffectPlaybackBlocking` function manages blocking effect audio playback:
+
+1. **Event Listener Registration**: Attaches `ended` and `error` event listeners via `addEventListener`.
+2. **Redundant Resolution**: The `onended` property handler also calls `resolveBlockingEffect()` as a fallback.
+3. **Promise Resolution**: When audio ends, `resolveBlockingEffect()` is called to unblock the timeline.
+
+```typescript
+// Redundant resolution for reliability
+audio.addEventListener('ended', handleDone);
+audio.addEventListener('error', handleDone);
+
+audio.onended = () => {
+    activeEffectRef.current = null;
+    // Ensure blocking promise resolves even if addEventListener callback doesn't fire
+    resolveBlockingEffect();
+};
+```
+
+**Why redundant resolution?**
+Some browsers (particularly Safari in certain conditions) may not reliably fire the `addEventListener` callback. By also resolving in the `onended` property handler, we ensure the timeline always proceeds after audio playback completes.
+
+The `resolveBlockingEffect()` function is safe to call multiple times—it checks if the resolve ref is set before calling and clears it afterward.
+
+## 9. Architecture & Code Map
 
 *   **`QuestMap.tsx`**: Orchestrates state, GPS, and the "Gesture Gate".
 *   **`useMapAudio.ts`**: Handles low-level audio element management, unlocking, and error recovery.
@@ -231,7 +260,7 @@ Simple linear playback.
 
 ---
 
-## 9. Safari Background Audio - Complete Flow
+## 10. Safari Background Audio - Complete Flow
 
 **Registration → INTRO Screen:**
 

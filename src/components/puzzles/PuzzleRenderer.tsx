@@ -220,8 +220,8 @@ export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
 
         let pData: PuzzleData;
 
-        if (puzzle.interaction_data?.puzzle_data_url) {
-          const puzzleDataUrl = puzzle.interaction_data.puzzle_data_url as unknown;
+        if (puzzle.interaction_data?.puzzle_data_url || puzzle.puzzle_data_url) {
+          const puzzleDataUrl = (puzzle.interaction_data?.puzzle_data_url || puzzle.puzzle_data_url) as unknown;
           let fullUrl = absolutisePuzzleDataUrl(puzzleDataUrl);
 
           // bypass “/image/” for JSON files if needed
@@ -235,7 +235,7 @@ export const PuzzleRenderer: React.FC<PuzzleRendererProps> = ({
           pData = (await dataRes.json()) as PuzzleData;
         } else if (puzzle.interaction_data?.puzzle_data) {
           pData = puzzle.interaction_data.puzzle_data as PuzzleData;
-        } else if (puzzle.data && puzzle.data.pieces) {
+        } else if (puzzle.data) {
           pData = puzzle.data as PuzzleData;
         } else if (puzzle.pieces) {
           pData = puzzle as PuzzleData;

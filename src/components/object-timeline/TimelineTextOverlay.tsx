@@ -96,7 +96,7 @@ export default function TimelineTextOverlay({
 
             {hasTranscription ? (
               /* Use shared StreamingText for synchronized audio transcription */
-              <div style={{ maxHeight: '60vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ minHeight: '140px', maxHeight: '60vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                 <StreamingText
                   transcription={transcription}
                   currentTime={currentTime ?? 0}
@@ -157,7 +157,8 @@ export default function TimelineTextOverlay({
                   fontSize: '18px',
                   lineHeight: 1.5,
                   whiteSpace: 'pre-wrap',
-                  wordBreak: 'break-word'
+                  wordBreak: 'break-word',
+                  minHeight: '140px'
                 }}
               >
                 {overlay.text}

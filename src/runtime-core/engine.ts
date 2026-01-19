@@ -181,16 +181,16 @@ export function computeVisibleObjectIds(def: CompiledQuestDefinition, session: R
   const completed = getCompletedObjects(session, playerId);
   const available = computeAvailableObjectIds(def, completed);
   const current = computeCurrentObjectId(def, available, completed);
-  const previous = def.policies.objectVisibility.includeCompletedInWindow
-    ? computePreviousCompletedObjectId(session, playerId)
-    : null;
+  const includeCompletedInWindow = def.policies?.objectVisibility?.includeCompletedInWindow !== false;
+  const previous = includeCompletedInWindow ? computePreviousCompletedObjectId(session, playerId) : null;
 
   const visible: ObjectId[] = [];
   if (previous && previous !== current) visible.push(previous);
   if (current) visible.push(current);
 
   // Fill remaining window with other AVAILABLE objects (use deterministic order).
-  const windowSize = Math.max(1, def.policies.objectVisibility.windowSize);
+  const rawWindowSize = Number(def.policies?.objectVisibility?.windowSize);
+  const windowSize = Number.isFinite(rawWindowSize) ? Math.max(1, rawWindowSize) : 2;
   if (visible.length < windowSize) {
     const order = computeObjectOrder(def);
     for (const objectId of order) {
@@ -281,6 +281,12 @@ function autoAdvanceStateNodes(params: {
           if (!objState.completedAt) {
             objState.completedAt = nowIso();
             deltas.push({ type: 'OBJECT_COMPLETED', playerId, objectId: node.objectId });
+
+            // Update currentObjectId to point to the next available incomplete object
+            const completed = getCompletedObjects(session, playerId);
+            const available = computeAvailableObjectIds(def, completed);
+            const nextObjectId = computeCurrentObjectId(def, available, completed);
+            session.players[playerId].currentObjectId = nextObjectId;
           }
         }
       }

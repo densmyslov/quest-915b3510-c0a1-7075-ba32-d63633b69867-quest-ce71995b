@@ -41,10 +41,18 @@ const parseChatText = (text: string | null): string => {
 
 function readChatResponseText(raw: unknown): { text: string | null; goalAchieved: boolean } {
   try {
-    const output = (raw as any)?.[0]?.output?.[0];
+    // Quest Platform `/api/v1/chat` responds with a 1-element list:
+    //   [{ output: [{ content: [{ text: "..." }] }], goal_achieved: true/false }]
+    // Keep compatibility with older/alternate shapes by checking multiple locations.
+    const first = (raw as any)?.[0];
+    const output = first?.output?.[0];
     const textRaw = output?.content?.[0]?.text;
     const text = typeof textRaw === 'string' && textRaw.trim().length ? parseChatText(textRaw) : null;
-    const goalAchieved = output?.goal_achieved === true || (raw as any)?.goal_achieved === true;
+    const goalAchieved =
+      first?.goal_achieved === true ||
+      output?.goal_achieved === true ||
+      // Legacy/non-list response shape (defensive fallback).
+      (raw as any)?.goal_achieved === true;
     return { text, goalAchieved };
   } catch {
     return { text: null, goalAchieved: false };

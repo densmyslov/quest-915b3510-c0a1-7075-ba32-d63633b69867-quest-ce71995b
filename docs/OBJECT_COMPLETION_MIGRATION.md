@@ -22,9 +22,20 @@ if (node.stateKind === 'end') {
   if (!objState.completedAt) {
     objState.completedAt = nowIso();
     deltas.push({ type: 'OBJECT_COMPLETED', playerId, objectId: node.objectId });
+
+    // Update currentObjectId to point to the next available incomplete object
+    // This ensures the next object becomes visible in Play mode and timeline can autoplay
+    const completed = getCompletedObjects(session, playerId);
+    const available = computeAvailableObjectIds(def, completed);
+    const nextObjectId = computeCurrentObjectId(def, available, completed);
+    session.players[playerId].currentObjectId = nextObjectId;
   }
 }
 ```
+
+**Important**: When an object completes, the runtime automatically updates `currentObjectId` to point to the next available incomplete object. This ensures:
+- In **Play mode**: The next object becomes visible on the map (via sliding window visibility)
+- In **all modes**: Timeline knows which object should be active next
 
 ## Migration Path
 

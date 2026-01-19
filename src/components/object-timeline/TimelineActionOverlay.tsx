@@ -50,11 +50,11 @@ function isKnockDetectionMode(value: unknown): value is KnockDetectionMode {
   return value === 'accelerometer' || value === 'microphone' || value === 'both';
 }
 
-function normalizeMaxScore(value: unknown): number {
+function normalizeMinProbability(value: unknown): number {
   const n = coerceFloat(value);
-  if (n === null) return 0.6;
-  if (n > 2 && n <= 100) return n / 100.0;
-  return n;
+  if (n === null) return 0.7;
+  if (n > 1 && n <= 100) return n / 100.0;
+  return Math.max(0, Math.min(1, n));
 }
 
 function parseTenantFromImageKey(targetImageKey: unknown): { clientId: string; questId: string } | null {
@@ -167,8 +167,8 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
       targetImageKey: typeof targetImageKey === 'string' ? targetImageKey : null,
       targetImageUrl: typeof targetImageUrl === 'string' ? targetImageUrl : null,
       tenant,
+      minProbability: normalizeMinProbability((params as any)?.minProbability ?? (params as any)?.min_probability),
       maxDistanceMeters: coerceFloat((params as any)?.maxDistanceMeters ?? (params as any)?.max_distance_meters),
-      maxScore: normalizeMaxScore((params as any)?.maxScore), // maxScore usually consistent, but could check max_score if needed
       targetLatitude: coerceFloat((params as any)?.targetLatitude ?? (params as any)?.target_latitude),
       targetLongitude: coerceFloat((params as any)?.targetLongitude ?? (params as any)?.target_longitude),
     };
@@ -181,11 +181,10 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false); // Combined capture + upload + match state
   const [matchMetrics, setMatchMetrics] = useState<{
-    topScore: number | null;
-    maxScore: number | null;
+    probability: number | null;
+    minProbability: number;
     distanceMeters: number | null;
     maxDistanceMeters: number | null;
-    matchedTarget: boolean | null;
     ok: boolean;
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -269,7 +268,17 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
     detectorReset();
   }, [detectorReset, overlay]);
 
+  /* ------------------- Torch Logic State ------------------- */
+  const brightnessIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const torchRef = useRef(false);
+
   const stopCamera = useCallback(() => {
+    if (brightnessIntervalRef.current) {
+      clearInterval(brightnessIntervalRef.current);
+      brightnessIntervalRef.current = null;
+    }
+    torchRef.current = false; // Reset torch state
+
     setStream((prev) => {
       prev?.getTracks().forEach((t) => t.stop());
       return null;
@@ -418,6 +427,68 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
           // Playback might need gesture
         }
       }
+
+      // Start brightness detection loop to auto-enable torch in dark conditions
+      try {
+        const track = next.getVideoTracks()[0];
+        if (track) {
+          const capabilities = track.getCapabilities() as MediaTrackCapabilities & { torch?: boolean };
+          if (!capabilities.torch) return; // Exit if torch not supported
+
+          // Cleanup previous interval if any (safety)
+          if (brightnessIntervalRef.current) {
+            clearInterval(brightnessIntervalRef.current);
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = 64; // Small size for performance
+          canvas.height = 64;
+          const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+          if (!ctx || !videoRef.current) return;
+
+          // Hysteresis thresholds (0-255)
+          const DARK_THRESHOLD = 40; // Turn ON if avg brightness < 40
+          const BRIGHT_THRESHOLD = 70; // Turn OFF if avg brightness > 70
+
+          brightnessIntervalRef.current = setInterval(async () => {
+            if (!videoRef.current || videoRef.current.paused || videoRef.current.ended) return;
+
+            try {
+              ctx.drawImage(videoRef.current, 0, 0, 64, 64);
+              const frame = ctx.getImageData(0, 0, 64, 64);
+              const data = frame.data;
+              let r, g, b, avg;
+              let colorSum = 0;
+
+              for (let i = 0; i < data.length; i += 4) {
+                r = data[i];
+                g = data[i + 1];
+                b = data[i + 2];
+                avg = Math.floor((r + g + b) / 3);
+                colorSum += avg;
+              }
+
+              const brightness = Math.floor(colorSum / (64 * 64));
+              const currentTorch = torchRef.current; // Need to add torchRef to component
+
+              if (!currentTorch && brightness < DARK_THRESHOLD) {
+                // Turn torch ON
+                await track.applyConstraints({ advanced: [{ torch: true } as any] });
+                torchRef.current = true;
+              } else if (currentTorch && brightness > BRIGHT_THRESHOLD) {
+                // Turn torch OFF
+                await track.applyConstraints({ advanced: [{ torch: false } as any] });
+                torchRef.current = false;
+              }
+            } catch (err) {
+              console.warn('Error in brightness detection loop:', err);
+            }
+          }, 1000); // Check every 1s
+        }
+      } catch (err) {
+        console.warn('Failed to init torch logic:', err);
+      }
     } catch {
       setError('Could not access camera. Please check permissions.');
     }
@@ -475,47 +546,41 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
       const queryPath = typeof uploadJson?.filename === 'string' ? uploadJson.filename : typeof uploadJson?.key === 'string' ? uploadJson.key : null;
       if (!queryPath) throw new Error('Upload invalid. Please try again.');
 
-      // 2. Match
-      const matchRes = await fetch(`${apiBaseUrl}/match`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query_image_path: queryPath }),
-      });
-      const matchText = await matchRes.text().catch(() => '');
-      if (!matchRes.ok) throw new Error('Verification service error.');
+      type VlmMatchResult = {
+        objects_same?: 'YES' | 'NO';
+        probability?: string | number;
+        is_match?: boolean;
+        message?: string;
+        query_image_path?: string;
+        target_image_path?: string;
+      };
 
-      const matchJson = JSON.parse(matchText) as any;
-      const matches = Array.isArray(matchJson?.matches) ? matchJson.matches : [];
-
-      // Select best match
-      const normalized = matches
-        .map((m: any) => ({ id: m?.id, score: coerceFloat(m?.score) }))
-        .filter((m: any) => typeof m.id === 'string' && m.id.length && typeof m.score === 'number')
-        .sort((a: any, b: any) => a.score - b.score);
-
-      // Determine outcome
       let outcomeOk = false;
-      let topScore = null;
-      let matchedTarget = false;
-
-      if (normalized.length > 0) {
-        const top = normalized[0];
-        topScore = top.score;
-        const targetKey = imageMatch.targetImageKey;
-
-        // Check ID match
-        matchedTarget = typeof targetKey === 'string' && targetKey.length
-          ? top.id === targetKey || top.id.includes(targetKey) || targetKey.includes(top.id)
-          : true;
-
-        // Check Score
-        const scoreOk = top.score < imageMatch.maxScore;
-
-        outcomeOk = matchedTarget && scoreOk;
+      let distanceMeters: number | null = null;
+      if (!imageMatch.targetImageKey || !imageMatch.targetImageKey.length) {
+        throw new Error('System Error: Missing target image key for VLM matching.');
       }
 
+      const vlmRes = await fetch(`${apiBaseUrl}/match-vlm`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query_image_path: queryPath,
+          target_image_path: imageMatch.targetImageKey,
+        }),
+      });
+      const vlmText = await vlmRes.text().catch(() => '');
+      if (!vlmRes.ok) throw new Error(vlmText || 'VLM match failed.');
+
+      const vlmJson = JSON.parse(vlmText) as VlmMatchResult;
+      const probability = typeof vlmJson?.probability === 'string' ? coerceFloat(vlmJson.probability) : coerceFloat(vlmJson?.probability);
+      const backendIsMatch = typeof vlmJson?.is_match === 'boolean' ? vlmJson.is_match : null;
+      const meetsProbability = probability !== null && probability >= imageMatch.minProbability;
+      const derivedIsMatch = vlmJson?.objects_same === 'YES' && meetsProbability;
+
+      outcomeOk = backendIsMatch ?? derivedIsMatch;
+
       // Check Distance if applicable
-      let distanceMeters = null;
       if (location && typeof imageMatch.targetLatitude === 'number' && typeof imageMatch.targetLongitude === 'number') {
         distanceMeters = haversineMeters(location.latitude, location.longitude, imageMatch.targetLatitude, imageMatch.targetLongitude);
 
@@ -526,12 +591,11 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
       }
 
       setMatchMetrics({
-        topScore,
-        maxScore: imageMatch.maxScore,
+        probability,
+        minProbability: imageMatch.minProbability,
         distanceMeters,
         maxDistanceMeters: imageMatch.maxDistanceMeters,
-        matchedTarget: matchedTarget ? true : (normalized.length > 0 ? false : null), // null if no matches found at all
-        ok: outcomeOk
+        ok: outcomeOk,
       });
 
       if (outcomeOk) {
@@ -696,9 +760,9 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
                     {/* Debug Metrics (Success) */}
                     <div className="mt-4 p-3 rounded bg-black/50 border border-white/10 text-xs font-mono text-white/80 space-y-1 backdrop-blur-md">
                       <div className="flex justify-between gap-4">
-                        <span>Score:</span>
-                        <span className={matchMetrics.topScore !== null && matchMetrics.maxScore !== null && matchMetrics.topScore < matchMetrics.maxScore ? "text-green-400" : "text-white"}>
-                          {matchMetrics.topScore?.toFixed(3) ?? "N/A"} / {matchMetrics.maxScore?.toFixed(3) ?? "N/A"}
+                        <span>Conf:</span>
+                        <span className={matchMetrics.probability !== null && matchMetrics.probability >= matchMetrics.minProbability ? "text-green-400" : "text-white"}>
+                          {matchMetrics.probability?.toFixed(3) ?? "N/A"} / {matchMetrics.minProbability.toFixed(3)}
                         </span>
                       </div>
                       {matchMetrics.distanceMeters !== null && (
@@ -718,7 +782,7 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
                     </div>
                     <div className="text-xl font-bold text-white drop-shadow-md mb-2">NO MATCH</div>
                     <div className="text-sm text-white/80 max-w-[240px] text-center mb-6">
-                      {matchMetrics.distanceMeters && matchMetrics.maxDistanceMeters && matchMetrics.distanceMeters > matchMetrics.maxDistanceMeters
+                      {matchMetrics.distanceMeters !== null && matchMetrics.maxDistanceMeters !== null && matchMetrics.distanceMeters > matchMetrics.maxDistanceMeters
                         ? "Too far away from target location."
                         : "Image doesn't match the target pattern."}
                     </div>
@@ -726,9 +790,9 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
                     {/* Debug Metrics (Failure) */}
                     <div className="mb-6 p-3 rounded bg-black/50 border border-white/10 text-xs font-mono text-white/80 space-y-1 backdrop-blur-md animate-in slide-in-from-bottom-2">
                       <div className="flex justify-between gap-4">
-                        <span>Score:</span>
-                        <span className={matchMetrics.topScore !== null && matchMetrics.maxScore !== null && matchMetrics.topScore > matchMetrics.maxScore ? "text-red-400" : "text-white"}>
-                          {matchMetrics.topScore?.toFixed(3) ?? "N/A"} / {matchMetrics.maxScore?.toFixed(3) ?? "N/A"}
+                        <span>Conf:</span>
+                        <span className={matchMetrics.probability !== null && matchMetrics.probability < matchMetrics.minProbability ? "text-red-400" : "text-white"}>
+                          {matchMetrics.probability?.toFixed(3) ?? "N/A"} / {matchMetrics.minProbability.toFixed(3)}
                         </span>
                       </div>
                       {matchMetrics.distanceMeters !== null && (
@@ -1032,5 +1096,25 @@ export default function TimelineActionOverlay({ overlay, onComplete, onCancel, p
     );
   }
 
-  return null;
+  // 3. Fallback for unknown action kinds
+  console.warn('[TimelineActionOverlay] Unknown action kind:', actionKind, overlay);
+  return (
+    <div className="fixed inset-0 z-[5000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-red-900/90 text-white p-6 rounded-xl border border-red-500 shadow-2xl max-w-md text-center">
+        <h3 className="text-xl font-bold mb-2">Unknown Action</h3>
+        <p className="mb-4">System received an action type that cannot be displayed.</p>
+        <div className="font-mono text-xs bg-black/50 p-2 rounded mb-4 text-left overflow-auto max-h-40">
+          <p>Kind: {JSON.stringify(actionKind)}</p>
+          <p>Title: {title}</p>
+          <pre>{JSON.stringify(params, null, 2)}</pre>
+        </div>
+        <button
+          onClick={() => onCancel()}
+          className="px-6 py-2 bg-white text-black font-bold rounded-full hover:bg-neutral-200"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
 }

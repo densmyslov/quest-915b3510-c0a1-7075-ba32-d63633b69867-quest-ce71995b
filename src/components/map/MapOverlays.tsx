@@ -6,6 +6,7 @@ import TimelineActionOverlay from '@/components/object-timeline/TimelineActionOv
 import TimelineTextOverlay from '@/components/object-timeline/TimelineTextOverlay';
 import TimelineChatOverlay from '@/components/object-timeline/TimelineChatOverlay';
 import TimelineVideoOverlay from '@/components/object-timeline/TimelineVideoOverlay';
+import TimelineDocumentOverlay from '@/components/object-timeline/TimelineDocumentOverlay';
 import { COLORS } from './MapStyles';
 
 // Using 'any' for overlay states for now to ensure safe extraction without circular dependency or strict type issues initially.
@@ -34,6 +35,10 @@ export type MapOverlaysProps = {
     audioCurrentTime: number;
     audioDuration: number;
     audioIsPlaying: boolean;
+
+    // Document overlay
+    timelineDocumentOverlay: Maybe<any>;
+    closeTimelineDocument: () => void;
 };
 
 export default function MapOverlays(props: MapOverlaysProps) {
@@ -53,7 +58,9 @@ export default function MapOverlays(props: MapOverlaysProps) {
 
         audioCurrentTime,
         audioDuration,
-        audioIsPlaying
+        audioIsPlaying,
+        timelineDocumentOverlay,
+        closeTimelineDocument
     } = props;
 
     // Common palette for overlays
@@ -103,6 +110,15 @@ export default function MapOverlays(props: MapOverlaysProps) {
                     onClose={closeTimelineVideo}
                     onEnded={closeTimelineVideo}
                     onError={() => closeTimelineVideo()}
+                    palette={palette}
+                />
+            ) : null}
+
+            {/* Timeline document overlay */}
+            {timelineDocumentOverlay ? (
+                <TimelineDocumentOverlay
+                    overlay={timelineDocumentOverlay}
+                    onClose={closeTimelineDocument}
                     palette={palette}
                 />
             ) : null}

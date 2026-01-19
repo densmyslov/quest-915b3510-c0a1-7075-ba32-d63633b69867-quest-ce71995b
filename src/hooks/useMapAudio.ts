@@ -68,6 +68,8 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
     const [audioCurrentTime, setAudioCurrentTime] = useState(0);
     const [audioDuration, setAudioDuration] = useState(0);
     const [audioPanelCollapsed, setAudioPanelCollapsed] = useState(false);
+    const [effectPlaybackRate, setEffectPlaybackRateState] = useState(1);
+    const [isEffectPlaying, setIsEffectPlaying] = useState(false);
 
     // Sync activeAudioRef
     useEffect(() => {
@@ -127,6 +129,27 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
         } catch {
             // ignore
         }
+    }, []);
+
+    // Effect playback rate control (1x to 5x)
+    const setEffectPlaybackRate = useCallback((rate: number) => {
+        const clampedRate = Math.max(1, Math.min(5, Math.round(rate)));
+        setEffectPlaybackRateState(clampedRate);
+        const audio = effectAudioRef.current;
+        if (audio) {
+            audio.playbackRate = clampedRate;
+        }
+    }, []);
+
+    const cycleEffectPlaybackRate = useCallback(() => {
+        setEffectPlaybackRateState(prev => {
+            const nextRate = prev >= 5 ? 1 : prev + 1;
+            const audio = effectAudioRef.current;
+            if (audio) {
+                audio.playbackRate = nextRate;
+            }
+            return nextRate;
+        });
     }, []);
 
     // Core Logic
@@ -348,6 +371,7 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
 
         activeEffectRef.current = null;
         pendingEffectAudioRef.current = null;
+        setIsEffectPlaying(false);
 
         const pendingBlocking = pendingEffectBlockingRef.current;
         pendingEffectBlockingRef.current = null;
@@ -394,11 +418,15 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
 
         activeEffectRef.current = { objectId: payload.objectId, loop: !!payload.loop };
         audio.onended = () => {
-            if (!audio.loop) activeEffectRef.current = null;
+            if (!audio.loop) {
+                activeEffectRef.current = null;
+                setIsEffectPlaying(false);
+            }
         };
 
         try {
             await audio.play();
+            setIsEffectPlaying(true);
         } catch (err: any) {
             if (err?.name === 'NotAllowedError') {
                 audioUnlockedRef.current = false;
@@ -427,6 +455,7 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
         const handleDone = () => {
             cleanup();
             activeEffectRef.current = null;
+            setIsEffectPlaying(false);
             resolveBlockingEffect();
         };
 
@@ -458,8 +487,12 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
         activeEffectRef.current = { objectId: payload.objectId, loop: false };
         audio.onended = () => {
             activeEffectRef.current = null;
+            setIsEffectPlaying(false);
+            // Ensure blocking promise resolves even if addEventListener callback doesn't fire
+            resolveBlockingEffect();
         };
 
+        setIsEffectPlaying(true);
         try {
             const playPromise = audio.play();
             if (playPromise && typeof (playPromise as any).catch === 'function') {
@@ -687,7 +720,9 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
             currentTime: audioCurrentTime,
             duration: audioDuration,
             isPanelCollapsed: audioPanelCollapsed,
-            setPanelCollapsed: setAudioPanelCollapsed
+            setPanelCollapsed: setAudioPanelCollapsed,
+            effectPlaybackRate,
+            isEffectPlaying
         },
         controls: {
             unlockAudio,
@@ -699,7 +734,9 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
             stopEffectAudio,
             waitForAudioPanelClose,
             flushPendingAudio,
-            audioCurrentTime
+            audioCurrentTime,
+            setEffectPlaybackRate,
+            cycleEffectPlaybackRate
         },
         refs: {
             audioRef,

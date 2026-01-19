@@ -40,7 +40,8 @@ export type MediaTimelineItemType =
   | 'puzzle'
   | 'action'
   | 'chat'
-  | 'text';
+  | 'text'
+  | 'document';
 
 export type MediaTimelineRole = 'normal' | 'background';
 
@@ -55,6 +56,19 @@ export interface MediaTimelineItemBase {
   title?: string;
   displayMode?: 'seconds' | 'until_close';
   displaySeconds?: number;
+
+  // GPS Trigger Configuration
+  gpsTrigger?: {
+    enabled: boolean;
+    mode: 'approach' | 'departure' | 'distance_range';
+    distanceMeters?: number;        // Default: 20m
+    minDistanceMeters?: number;     // For distance_range mode
+    maxDistanceMeters?: number;     // For distance_range mode
+    coordinates?: {                 // Optional override (defaults to parent object)
+      lat: number;
+      lng: number;
+    };
+  };
 }
 
 export interface MediaTimelineAudioItem extends MediaTimelineItemBase {
@@ -124,6 +138,14 @@ export interface MediaTimelineActionItem extends MediaTimelineItemBase {
   params?: Record<string, unknown>;
 }
 
+export interface MediaTimelineDocumentItem extends MediaTimelineItemBase {
+  type: 'document';
+  title?: string;
+  media_id?: string;
+  media_url?: string;
+  text?: string;
+}
+
 export type MediaTimelineItem =
   | MediaTimelineAudioItem
   | MediaTimelineVideoItem
@@ -131,7 +153,8 @@ export type MediaTimelineItem =
   | MediaTimelinePuzzleItem
   | MediaTimelineActionItem
   | MediaTimelineChatItem
-  | MediaTimelineTextItem;
+  | MediaTimelineTextItem
+  | MediaTimelineDocumentItem;
 
 export interface MediaTimeline {
   version: number;

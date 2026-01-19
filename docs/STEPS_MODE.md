@@ -110,8 +110,11 @@ Steps mode uses a **different visibility model** than play mode:
 - **Static**: Based on itinerary number, not completion
 - **Full Preview**: Can see all objects you've stepped through
 - **Timeline Sync**: Side panel automatically updates to show the content (tasks/media) for the currently selected step
+- **Independent of currentObjectId**: Visibility is determined by itinerary number and completion status, not by the runtime's `currentObjectId` field
 
-**Formula:** `visible if (object.itineraryNumber <= currentStep)`
+**Formula:** `visible if (completedObjects.has(objectId) OR objectId === currentObjectId)`
+
+**Why Steps Mode Doesn't Rely on currentObjectId**: The visibility logic in Steps mode shows ALL completed objects plus the current one (see [QuestMap.tsx:238-247](../src/components/QuestMap.tsx#L238-L247)). This is different from Play mode's sliding window approach, which means Steps mode continued to work even when `currentObjectId` wasn't being updated correctly after object completion. This is why the [2026-01-15 currentObjectId update fix](./QUEST_RUNTIME.md#2026-01-15-object-completion---currentobjectid-update-fix) only affected Play mode.
 
 ## Hybrid State Isolation (Team Mode)
 

@@ -3,9 +3,9 @@
 ## Overview
 The Puzzle system allows users to play interactive jigsaw-like puzzles. The system is designed to separate **metadata** (JSON) from **assets** (Images) for performance and security.
 
-## Planned Puzzle Types
+## Puzzle Types
 
-- Musical “code” fountain puzzle: `quest-app-template/docs/MUSICAL_CODE_FOUNTAIN_PUZZLE.md`
+- Musical “code” fountain puzzle (implemented): `quest-app-template/docs/MUSICAL_CODE_FOUNTAIN_PUZZLE.md`
 
 ## Data Flow & Architecture
 

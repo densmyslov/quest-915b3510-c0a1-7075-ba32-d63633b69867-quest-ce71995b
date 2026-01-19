@@ -91,6 +91,33 @@ export const createMarkerSVG = (type: 'location' | 'locationSecondary' | 'player
     };
     const c = configs[type];
 
+    // Special override for player icon to show a person silhouette
+    if (type === 'player') {
+        return `
+        <svg viewBox="0 0 36 48" width="36" height="48" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="pin-${type}" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="${c.border}"/>
+                    <stop offset="50%" stop-color="${c.bg}"/>
+                    <stop offset="100%" stop-color="${c.border}"/>
+                </linearGradient>
+                <filter id="shadow-${type}" x="-50%" y="-30%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.5"/>
+                    <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="${c.glow}" flood-opacity="0.8"/>
+                </filter>
+            </defs>
+            <path d="M18 0 C8 0 0 8 0 18 C0 28 18 48 18 48 C18 48 36 28 36 18 C36 8 28 0 18 0"
+                  fill="url(#pin-${type})" stroke="${c.border}" stroke-width="2.5" filter="url(#shadow-${type})"/>
+
+            <!-- Person Icon -->
+            <g transform="translate(9, 9) scale(0.9)">
+                <path d="M10 0a4 4 0 1 1-4 4 4.005 4.005 0 0 1 4-4zm6.5 10 h-1.15a5.954 5.954 0 0 0-10.7 0H3.5A3.504 3.504 0 0 0 0 13.5V17a1 1 0 0 0 1 1 h18 a1 1 0 0 0 1-1v-3.5a3.504 3.504 0 0 0-3.5-3.5z"
+                      fill="${c.inner}" stroke="${c.border}" stroke-width="1"/>
+            </g>
+        </svg>
+    `;
+    }
+
     return `
         <svg viewBox="0 0 36 48" width="36" height="48" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -129,9 +156,12 @@ export const createVintageIcon = (
         ? `<div style="position:absolute;top:16px;left:18px;transform:translate(-50%,-50%);font-family:'Cinzel',serif;font-weight:700;font-size:${labelFontSizePx}px;letter-spacing:0.5px;color:${COLORS.goldLight};text-shadow:0 1px 2px rgba(0,0,0,0.75);pointer-events:none;user-select:none;">${escapeHtml(labelText)}</div>`
         : '';
 
+    const isActive = type === 'active' || type === 'activeSecondary';
+    const flashAnimation = isActive ? 'animation:questFlash 1.5s ease-in-out infinite;' : '';
+
     return new DivIcon({
         className: '',
-        html: `<div style="position:relative;width:36px;height:48px;">${createMarkerSVG(type)}${labelHtml}${type === 'active' || type === 'activeSecondary' ? `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border:2px solid #FFD700;border-radius:50%;animation:questPulse 2s ease-out infinite;pointer-events:none;"></div>` : ''
+        html: `<div style="position:relative;width:36px;height:48px;${flashAnimation}">${createMarkerSVG(type)}${labelHtml}${isActive ? `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border:2px solid #FFD700;border-radius:50%;animation:questPulse 2s ease-out infinite;pointer-events:none;"></div>` : ''
             }</div>`,
         iconSize: [36, 48],
         iconAnchor: [18, 48],

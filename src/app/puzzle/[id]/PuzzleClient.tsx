@@ -236,7 +236,7 @@ export default function PuzzleClient(props: PuzzleClientProps) {
                     rawType === 'witch_knot_simple' ? 'witch_knot_simple' :
                         rawType === 'spot_diff_ai' ? 'spot_diff_ai' :
                             rawType === 'musical_code_fountain' ? 'musical_code_fountain' :
-                            'fabric_custom';
+                                'fabric_custom';
 
     // Handler for complete
     const handlePuzzleComplete = React.useCallback(async () => {
@@ -273,17 +273,11 @@ export default function PuzzleClient(props: PuzzleClientProps) {
         setCongratsPoints(null);
 
         if (props.onClose) {
-            // In steps mode (objectId present), do NOT close automatically after popup
-            // Let the user interact with the team overlay, then click exit there
-            if (objectId) {
-                // Do nothing, just close the popup
-            } else {
-                props.onClose();
-            }
+            props.onClose();
         } else {
             router.push('/map');
         }
-    }, [router, props.onClose, objectId]);
+    }, [router, props.onClose]);
 
     React.useEffect(() => {
         if (congratsPoints === null) return;

@@ -50,6 +50,15 @@ export type TimelineActionOverlayState = {
   params: Record<string, any>;
 };
 
+export type TimelineDocumentOverlayState = {
+  title: string;
+  media_id?: string;
+  media_url?: string;
+  text?: string;
+  objectId?: string;
+  itemKey?: string;
+};
+
 export type PulsatingCircleEffect = {
   minRadius: number;
   maxRadius: number;
@@ -67,6 +76,11 @@ export type TimelinePanelItem = {
   done: boolean;
   current: boolean;
   canOpen: boolean;
+
+  // GPS trigger info
+  gpsLocked?: boolean;
+  gpsTriggerMode?: 'approach' | 'departure' | 'distance_range' | null;
+  gpsDistanceMeters?: number | null;
 };
 
 export type TimelinePanel = {

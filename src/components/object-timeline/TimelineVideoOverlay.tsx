@@ -1,6 +1,6 @@
 'use client';
 
-import type { SyntheticEvent } from 'react';
+import { useRef, useCallback, type SyntheticEvent } from 'react';
 import type { TimelineVideoOverlayState } from './types';
 
 type TimelineVideoOverlayPalette = {
@@ -24,6 +24,50 @@ export default function TimelineVideoOverlay({
   onError,
   palette
 }: TimelineVideoOverlayProps) {
+  const playAttemptedRef = useRef(false);
+  const currentUrlRef = useRef<string | null>(null);
+
+  const attemptAutoplay = useCallback(async (video: HTMLVideoElement) => {
+    if (!overlay?.autoPlay) return;
+    if (playAttemptedRef.current && currentUrlRef.current === overlay.url) return;
+
+    playAttemptedRef.current = true;
+    currentUrlRef.current = overlay.url;
+
+    try {
+      await video.play();
+    } catch {
+      // Autoplay was blocked - retry with muted
+      if (!video.muted) {
+        video.muted = true;
+        try {
+          await video.play();
+        } catch {
+          // Still failed, user will need to click play
+        }
+      }
+    }
+  }, [overlay]);
+
+  // Ref callback: called when video element mounts
+  const videoRefCallback = useCallback((video: HTMLVideoElement | null) => {
+    if (!video || !overlay?.autoPlay) return;
+
+    // Reset play attempt tracker when URL changes
+    if (currentUrlRef.current !== overlay.url) {
+      playAttemptedRef.current = false;
+    }
+
+    // If video already has enough data, try to play immediately
+    if (video.readyState >= 3) {
+      void attemptAutoplay(video);
+    }
+  }, [overlay, attemptAutoplay]);
+
+  const handleLoadedData = useCallback((event: SyntheticEvent<HTMLVideoElement>) => {
+    void attemptAutoplay(event.currentTarget);
+  }, [attemptAutoplay]);
+
   if (!overlay) return null;
 
   return (
@@ -83,14 +127,15 @@ export default function TimelineVideoOverlay({
       </div>
       <div style={{ marginTop: 12 }}>
         <video
+          ref={videoRefCallback}
           src={overlay.url}
           controls
           playsInline
-          preload="metadata"
-          autoPlay={overlay.autoPlay}
+          preload="auto"
           muted={overlay.muted}
           loop={overlay.loop}
           poster={overlay.posterUrl}
+          onLoadedData={handleLoadedData}
           onEnded={onEnded}
           onError={onError}
           style={{

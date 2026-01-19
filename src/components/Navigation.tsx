@@ -6,9 +6,20 @@ import { useQuest } from '@/context/QuestContext';
 
 export default function Navigation() {
     const pathname = usePathname();
-    const { progress } = useQuest();
+    const { progress, runtime } = useQuest();
 
     const isActive = (path: string) => pathname === path;
+
+    const handleReset = async () => {
+        if (!runtime) return;
+        if (confirm("Are you sure you want to reset your progress? This cannot be undone.")) {
+            const success = await runtime.startOrJoin({ reset: true });
+            // Clear local progress as well
+            localStorage.removeItem('quest_progress');
+            // Reload to ensure fresh state
+            window.location.reload();
+        }
+    };
 
     return (
         <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 dark:bg-zinc-900 dark:border-zinc-800 z-50">
@@ -35,6 +46,13 @@ export default function Navigation() {
                         Puzzle {progress?.collectedPieces.length > 0 && `(${progress.collectedPieces.length})`}
                     </span>
                 </Link>
+
+                <button
+                    onClick={handleReset}
+                    className="flex flex-col items-center justify-center w-full h-full transition-colors text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"
+                >
+                    <span className="text-sm font-medium">Reset</span>
+                </button>
             </div>
         </nav>
     );

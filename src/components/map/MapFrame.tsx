@@ -4,7 +4,7 @@ export const MapFrame = () => {
     return (
         <>
             {/* Top Title */}
-            <div style={MAP_TITLE_STYLE} aria-hidden="true">{MAP_TITLE}</div>
+            <div className="map-title-top" style={MAP_TITLE_STYLE} aria-hidden="true">{MAP_TITLE}</div>
 
             {/* Map Border Frame */}
             <div style={{
@@ -53,21 +53,19 @@ export const MapFrame = () => {
             }} />
 
             {/* Bottom Quest Title */}
-            <div style={{
-                position: 'absolute',
-                bottom: '12px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                zIndex: 3000,
-                padding: '6px 20px',
-                background: 'rgba(26, 21, 16, 0.9)',
-                border: `1px solid ${COLORS.gold}`,
-                boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
-                pointerEvents: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px'
-            }}>
+            <div
+                className="map-title-bottom-container"
+                style={{
+                    padding: '6px 20px',
+                    background: 'rgba(26, 21, 16, 0.9)',
+                    border: `1px solid ${COLORS.gold}`,
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.4)',
+                    pointerEvents: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px'
+                }}
+            >
                 <img
                     src="https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251218-105300-ec332c78.png/public"
                     alt="Dossier"
