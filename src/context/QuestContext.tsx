@@ -50,6 +50,24 @@ export function QuestProvider({ data, children }: QuestProviderProps) {
     const normalizedData = React.useMemo(() => normalizeQuestData(data), [data]);
     const teamSync = useTeamSync();
 
+    const persistedSessionId = React.useMemo(() => {
+        if (typeof window === 'undefined') return null;
+        try {
+            return sessionStorage.getItem('quest_sessionId');
+        } catch {
+            return null;
+        }
+    }, []);
+
+    React.useEffect(() => {
+        const sid = teamSync.session?.sessionId;
+        if (!sid) return;
+        try {
+            sessionStorage.setItem('quest_sessionId', sid);
+        } catch {
+            // ignore
+        }
+    }, [teamSync.session?.sessionId]);
 
     // Initialize Runtime globally so it persists across page navigations
 
@@ -60,7 +78,9 @@ export function QuestProvider({ data, children }: QuestProviderProps) {
         questVersion: normalizedData.questVersion ?? 'v1',
         playerId: getOrCreateDeviceId(), // Use unique device ID
         teamCode: teamSync.teamCode,
-        sessionId: teamSync.session?.sessionId, // Use user-specific session ID from TeamSync
+        // Prefer TeamSync sessionId, but fallback to persisted sessionId to avoid
+        // silently switching runtime sessions while TeamSync is still initializing.
+        sessionId: teamSync.session?.sessionId ?? persistedSessionId,
         autoStart: false,
         pollIntervalMs: teamSync.connectionStatus === 'connected' ? 0 : 10_000
     });

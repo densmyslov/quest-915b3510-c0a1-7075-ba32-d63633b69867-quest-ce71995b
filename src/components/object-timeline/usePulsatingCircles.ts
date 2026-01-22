@@ -1,6 +1,6 @@
 'use client';
 
-import { Circle, type Map as LeafletMap } from 'leaflet';
+import { Circle, LayerGroup, type Map as LeafletMap } from 'leaflet';
 import { useCallback, useEffect, useRef, type MutableRefObject } from 'react';
 import type { QuestObject } from '@/types/quest';
 import type { PulsatingCircleEffect, PulsatingCircleSource } from './types';
@@ -35,39 +35,57 @@ export function usePulsatingCircles({
   calculateDistance
 }: UsePulsatingCirclesParams) {
   const pulsatingCirclesRef = useRef<Map<string, CircleData>>(new Map());
-  const animationIntervalRef = useRef<number | null>(null);
-  const animationIntervalMsRef = useRef<number | null>(null);
+  const rafIdRef = useRef<number | null>(null);
+  const lastTickRef = useRef<number>(0);
+  const tickRef = useRef<(timestamp: number) => void>(() => {});
 
-  const restartTickRef = useRef<() => void>(() => { });
+  // Dedicated layer for pulses (vectors live in overlay pane)
+  const pulseLayerRef = useRef<LayerGroup | null>(null);
 
-  const restartPulsatingInterval = useCallback(() => {
-    const circles = pulsatingCirclesRef.current;
-    const speeds = Array.from(circles.values()).map((c) => c.effect.speed ?? 100);
-    const nextMs = speeds.length ? Math.max(16, Math.min(...speeds)) : null;
+  // If unmounted, clean up leaflet layers + RAF
+  useEffect(() => {
+    return () => {
+      pulsatingCirclesRef.current.forEach(({ circle }) => circle.remove());
+      pulsatingCirclesRef.current.clear();
 
-    if (nextMs === null) {
-      if (animationIntervalRef.current) {
-        window.clearInterval(animationIntervalRef.current);
-        animationIntervalRef.current = null;
+      if (pulseLayerRef.current) {
+        pulseLayerRef.current.clearLayers();
+        pulseLayerRef.current.remove();
+        pulseLayerRef.current = null;
       }
-      animationIntervalMsRef.current = null;
-      return;
+
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, []);
+
+  const ensurePulseLayer = useCallback((): LayerGroup | null => {
+    const map = mapRef.current;
+    if (!map) return null;
+
+    if (!pulseLayerRef.current) {
+      pulseLayerRef.current = new LayerGroup();
+      pulseLayerRef.current.addTo(map);
+    } else if (!map.hasLayer(pulseLayerRef.current)) {
+      pulseLayerRef.current.addTo(map);
     }
 
-    if (animationIntervalRef.current && animationIntervalMsRef.current === nextMs) {
-      return;
-    }
+    return pulseLayerRef.current;
+  }, [mapRef]);
 
-    if (animationIntervalRef.current) {
-      window.clearInterval(animationIntervalRef.current);
-      animationIntervalRef.current = null;
-    }
+  const tick = useCallback(
+    (timestamp: number) => {
+      // ~30fps throttle (good enough and cheaper than 60fps)
+      if (timestamp - lastTickRef.current < 33) {
+        rafIdRef.current = requestAnimationFrame((ts) => tickRef.current(ts));
+        return;
+      }
+      lastTickRef.current = timestamp;
 
-    animationIntervalMsRef.current = nextMs;
-    animationIntervalRef.current = window.setInterval(() => {
       const now = Date.now();
       const userLoc = userLocationRef.current;
-
       const toRemove: string[] = [];
 
       pulsatingCirclesRef.current.forEach((circleData, objId) => {
@@ -78,7 +96,7 @@ export function usePulsatingCircles({
 
         const { circle, growing, currentRadius, effect, center } = circleData;
 
-        // Calculate proximity for dynamic effects.
+        // proximity-driven intensity
         let proximity = 0;
         if (userLoc) {
           const [objLat, objLng] = center;
@@ -88,12 +106,11 @@ export function usePulsatingCircles({
           proximity = Math.max(0, Math.min(1, 1 - distance / proximityDistance));
         }
 
-        // Adjust animation speed and opacity based on proximity.
-        const step = 2 * (1 + proximity * 2); // Up to 3x faster near center.
+        const step = 2 * (1 + proximity * 2); // 1x..3x
         const targetOpacity = 0.3 + 0.4 * proximity;
+
         circle.setStyle({ fillOpacity: targetOpacity, opacity: targetOpacity });
 
-        // Update radius (grow/shrink).
         let newRadius = currentRadius;
         let newGrowing = growing;
 
@@ -112,55 +129,76 @@ export function usePulsatingCircles({
         }
 
         circle.setRadius(newRadius);
-        pulsatingCirclesRef.current.set(objId, {
-          ...circleData,
-          growing: newGrowing,
-          currentRadius: newRadius
-        });
+
+        circleData.growing = newGrowing;
+        circleData.currentRadius = newRadius;
       });
 
       if (toRemove.length) {
         toRemove.forEach((objId) => {
           const entry = pulsatingCirclesRef.current.get(objId);
-          if (entry) {
-            entry?.circle?.remove?.();
-            pulsatingCirclesRef.current.delete(objId);
-          }
+          if (!entry) return;
+          entry.circle.remove(); // removes from any layer group
+          pulsatingCirclesRef.current.delete(objId);
         });
-        restartTickRef.current();
       }
-    }, nextMs);
-  }, [calculateDistance, userLocationRef]);
+
+      if (pulsatingCirclesRef.current.size > 0) {
+        rafIdRef.current = requestAnimationFrame((ts) => tickRef.current(ts));
+      } else {
+        rafIdRef.current = null;
+      }
+    },
+    [calculateDistance, userLocationRef]
+  );
 
   useEffect(() => {
-    restartTickRef.current = restartPulsatingInterval;
-  }, [restartPulsatingInterval]);
+    tickRef.current = tick;
+  }, [tick]);
+
+  const startAnimation = useCallback(() => {
+    if (!rafIdRef.current) {
+      lastTickRef.current = performance.now();
+      rafIdRef.current = requestAnimationFrame((ts) => tickRef.current(ts));
+    }
+  }, []);
 
   const addOrUpdatePulsatingCircle = useCallback(
     (params: AddOrUpdateParams) => {
-      const map = mapRef.current;
-      if (!map) return;
+      const layer = ensurePulseLayer();
+      if (!layer) return;
+
+      const expiresAt =
+        params.durationMs && params.durationMs > 0 ? Date.now() + params.durationMs : null;
 
       const existing = pulsatingCirclesRef.current.get(params.objectId);
-      const expiresAt = params.durationMs && params.durationMs > 0 ? Date.now() + params.durationMs : null;
 
       if (existing) {
-        // Avoid overriding a design-time pulsating effect with a timeline one unless it's also from timeline.
-        if (existing.source === 'object' && params.source === 'timeline') {
-          return;
+        // Prevent timeline pulse from overwriting an object-defined pulse
+        if (existing.source === 'object' && params.source === 'timeline') return;
+
+        if (params.source === 'timeline') {
+          // retrigger should "pop" from min radius
+          existing.growing = true;
+          existing.currentRadius = params.effect.minRadius;
+          existing.circle.setRadius(params.effect.minRadius);
+          existing.circle.setStyle({
+            fillOpacity: 0.3,
+            opacity: 0.3
+          });
         }
 
         existing.circle.setStyle({ color: params.effect.color, fillColor: params.effect.color });
-        existing.circle.setRadius(params.effect.minRadius);
-        pulsatingCirclesRef.current.set(params.objectId, {
-          ...existing,
-          center: params.center,
-          effect: params.effect,
-          source: params.source,
-          expiresAt
-        });
-        if (!map.hasLayer(existing.circle)) existing.circle.addTo(map);
-        restartPulsatingInterval();
+        existing.circle.setLatLng(params.center);
+
+        existing.center = params.center;
+        existing.effect = params.effect;
+        existing.source = params.source;
+        existing.expiresAt = expiresAt;
+
+        if (!layer.hasLayer(existing.circle)) layer.addLayer(existing.circle);
+
+        startAnimation();
         return;
       }
 
@@ -168,9 +206,12 @@ export function usePulsatingCircles({
         color: params.effect.color,
         fillColor: params.effect.color,
         fillOpacity: 0.3,
+        opacity: 0.3,
         radius: params.effect.minRadius,
         weight: 2
-      }).addTo(map);
+      });
+
+      layer.addLayer(circle);
 
       pulsatingCirclesRef.current.set(params.objectId, {
         circle,
@@ -182,31 +223,28 @@ export function usePulsatingCircles({
         expiresAt
       });
 
-      restartPulsatingInterval();
+      startAnimation();
     },
-    [mapRef, restartPulsatingInterval]
+    [ensurePulseLayer, startAnimation]
   );
 
-  const removeTimelinePulsatingCircle = useCallback(
-    (objectId: string) => {
-      const entry = pulsatingCirclesRef.current.get(objectId);
-      if (!entry) return;
-      if (entry.source !== 'timeline') return;
-      entry?.circle?.remove?.();
-      pulsatingCirclesRef.current.delete(objectId);
-      restartPulsatingInterval();
-    },
-    [restartPulsatingInterval]
-  );
+  const removeTimelinePulsatingCircle = useCallback((objectId: string) => {
+    const entry = pulsatingCirclesRef.current.get(objectId);
+    if (!entry) return;
+    if (entry.source !== 'timeline') return;
+
+    entry.circle.remove();
+    pulsatingCirclesRef.current.delete(objectId);
+  }, []);
 
   const clearPulsatingCircles = useCallback(() => {
-    if (animationIntervalRef.current) {
-      window.clearInterval(animationIntervalRef.current);
-      animationIntervalRef.current = null;
-    }
-    animationIntervalMsRef.current = null;
-    pulsatingCirclesRef.current.forEach(({ circle }) => circle?.remove?.());
+    pulsatingCirclesRef.current.forEach(({ circle }) => circle.remove());
     pulsatingCirclesRef.current.clear();
+
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+    }
   }, []);
 
   const syncObjectPulsatingCircles = useCallback(
@@ -215,43 +253,93 @@ export function usePulsatingCircles({
       getValidCoordinates: (obj: QuestObject) => [number, number] | null,
       normalizeEffect: (effect: any) => PulsatingCircleEffect
     ) => {
-      clearPulsatingCircles();
+      const layer = ensurePulseLayer();
+      if (!layer) return;
+
+      // Remove ONLY object-sourced circles; keep timeline pulses alive
+      for (const [objId, entry] of pulsatingCirclesRef.current.entries()) {
+        if (entry.source === 'object') {
+          entry.circle.remove();
+          pulsatingCirclesRef.current.delete(objId);
+        }
+      }
 
       const objectsWithEffect = objects.filter((obj: any) => obj.pulsating_effect?.enabled);
-
       if (!objectsWithEffect.length) return;
 
-      objectsWithEffect.forEach((obj) => {
+      objectsWithEffect.forEach((obj: any) => {
         const coords = getValidCoordinates(obj);
         if (!coords) return;
 
-        const effect = normalizeEffect((obj as any).pulsating_effect);
-        addOrUpdatePulsatingCircle({
-          objectId: obj.id,
+        const effect = normalizeEffect(obj.pulsating_effect);
+
+        const key = String(obj.id);
+        const existing = pulsatingCirclesRef.current.get(key);
+
+        if (existing) {
+          if (existing.source === 'timeline') {
+            existing.circle.remove();
+            pulsatingCirclesRef.current.delete(key);
+          } else {
+            return;
+          }
+        }
+
+        const circle = new Circle(coords, {
+          color: effect.color,
+          fillColor: effect.color,
+          fillOpacity: 0.3,
+          opacity: 0.3,
+          radius: effect.minRadius,
+          weight: 2
+        });
+
+        layer.addLayer(circle);
+
+        pulsatingCirclesRef.current.set(key, {
+          circle,
+          growing: true,
+          currentRadius: effect.minRadius,
           center: coords,
           effect,
-          source: 'object'
+          source: 'object',
+          expiresAt: null
         });
       });
+
+      if (pulsatingCirclesRef.current.size > 0) startAnimation();
     },
-    [addOrUpdatePulsatingCircle, clearPulsatingCircles]
+    [ensurePulseLayer, startAnimation]
   );
 
+  const getObjectPulseIds = useCallback(() => {
+    const ids: string[] = [];
+    pulsatingCirclesRef.current.forEach((entry, id) => {
+      if (entry.source === 'object') ids.push(id);
+    });
+    return ids;
+  }, []);
+
+  /**
+   * Visibility semantics (IMPORTANT):
+   * - visibleIds === null => HIDE ALL pulses
+   * - visibleIds is a Set => show only those ids
+   */
   const setPulsatingVisibility = useCallback(
     (visibleIds: Set<string> | null) => {
-      const map = mapRef.current;
-      if (!map) return;
+      const layer = ensurePulseLayer();
+      if (!layer) return;
 
       pulsatingCirclesRef.current.forEach(({ circle }, objId) => {
-        const shouldShow = !visibleIds || visibleIds.has(objId);
+        const shouldShow = visibleIds !== null && visibleIds.has(objId);
         if (shouldShow) {
-          if (!map.hasLayer(circle)) circle.addTo(map);
-        } else if (map.hasLayer(circle)) {
-          circle?.remove?.();
+          if (!layer.hasLayer(circle)) layer.addLayer(circle);
+        } else {
+          if (layer.hasLayer(circle)) layer.removeLayer(circle);
         }
       });
     },
-    [mapRef]
+    [ensurePulseLayer]
   );
 
   return {
@@ -259,6 +347,7 @@ export function usePulsatingCircles({
     removeTimelinePulsatingCircle,
     clearPulsatingCircles,
     syncObjectPulsatingCircles,
+    getObjectPulseIds,
     setPulsatingVisibility
   };
 }

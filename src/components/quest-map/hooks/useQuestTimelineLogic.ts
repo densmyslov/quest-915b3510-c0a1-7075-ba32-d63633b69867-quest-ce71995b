@@ -5,8 +5,8 @@ import { useArrivalSimulation } from '@/hooks/useArrivalSimulation';
 import { usePulsatingCircles } from '@/components/object-timeline/usePulsatingCircles';
 import { useQuestAudio } from '@/context/QuestAudioContext';
 import { normalizeMediaTimeline } from '@/lib/mediaTimeline';
-import { makeTimelineItemNodeId } from '@/runtime-core/compileQuest';
-import { getValidCoordinates, calculateDistance, normalizeEffect } from '../utils/mapUtils';
+import { makeTimelineItemNodeId, sanitizeIdPart } from '@/runtime-core/compileQuest';
+import { getValidCoordinates, calculateDistance, normalizeEffect, isStartObject } from '../utils/mapUtils';
 
 type UseQuestTimelineLogicProps = {
     data: any;
@@ -64,6 +64,7 @@ export function useQuestTimelineLogic({
         removeTimelinePulsatingCircle,
         clearPulsatingCircles,
         syncObjectPulsatingCircles,
+        getObjectPulseIds,
         setPulsatingVisibility
     } = usePulsatingCircles({
         mapRef: mapInstanceRef,
@@ -108,6 +109,9 @@ export function useQuestTimelineLogic({
         timelineActionOverlay,
         completeTimelineAction,
         cancelTimelineAction,
+        timelineArOverlay,
+        completeTimelineAr,
+        cancelTimelineAr,
         timelineTextOverlay,
         closeTimelineText,
         timelineVideoOverlay,
@@ -143,7 +147,14 @@ export function useQuestTimelineLogic({
     });
 
     // Resume Logic
-    const currentObjectId = safeRuntime.snapshot?.players?.[currentSessionId || '']?.currentObjectId;
+    const currentPlayerId = safeRuntime.snapshot?.me?.playerId ?? null;
+    const currentObjectId = currentPlayerId
+        ? (safeRuntime.snapshot?.players?.[currentPlayerId]?.currentObjectId ?? null)
+        : null;
+    const hasArrivedAtCurrentObject = useMemo(() => {
+        if (!currentObjectId) return false;
+        return !!safeRuntime.snapshot?.objects?.[currentObjectId]?.arrivedAt;
+    }, [currentObjectId, safeRuntime.snapshot?.objects]);
     const isCurrentObjectCompleted = useMemo(
         () => !!currentObjectId && (safeRuntime.completedObjects?.has(currentObjectId) || false),
         [currentObjectId, safeRuntime.completedObjects]
@@ -154,11 +165,32 @@ export function useQuestTimelineLogic({
         runObjectTimelineRef.current = runObjectTimeline;
     }, [runObjectTimeline]);
 
+    const timelineStartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    // Cleanup timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (timelineStartTimeoutRef.current) clearTimeout(timelineStartTimeoutRef.current);
+        };
+    }, []);
+
     // Resume timeline useEffect
     useEffect(() => {
-        if (!currentSessionId || !currentObjectId) return;
+        if (!currentSessionId || !currentPlayerId || !currentObjectId) return;
         if (!modeConfirmed || !mapMode) return;
         if (!timelineGateRef.current.gestureBlessed || timelineGateRef.current.unlocking) return;
+
+        console.log('[Timeline] Resume check', {
+            mapMode,
+            hasArrived: hasArrivedAtCurrentObject,
+            currentObjectId,
+            lastResumed: lastResumedObjectRef.current,
+            isCompleted: isCurrentObjectCompleted
+        });
+
+        // Play mode: only autoplay timeline after GPS arrival (OBJECT_ARRIVE).
+        // Steps mode intentionally bypasses GPS gating.
+        if (mapMode === 'play' && !hasArrivedAtCurrentObject) return;
 
         // Don't strictly require definition - timelineNodes is optional and will use fallback reconstruction
         // This matches the behavior of Steps mode which works without this check
@@ -175,9 +207,13 @@ export function useQuestTimelineLogic({
         });
 
         lastResumedObjectRef.current = currentObjectId;
-        void runObjectTimelineRef.current(currentObj, { reset: forceResetNextObjectRef.current });
+
+        const shouldReset = forceResetNextObjectRef.current;
         forceResetNextObjectRef.current = false;
-    }, [currentSessionId, currentObjectId, isCurrentObjectCompleted, objectsById, safeRuntime.definition, mapMode, modeConfirmed, timelineGateRef]);
+
+        void runObjectTimelineRef.current(currentObj, { reset: shouldReset });
+
+    }, [currentSessionId, currentPlayerId, currentObjectId, hasArrivedAtCurrentObject, isCurrentObjectCompleted, objectsById, safeRuntime.definition, mapMode, modeConfirmed, timelineGateRef]);
 
     // Cleanup resume ref when puzzle completed
     useEffect(() => {
@@ -198,6 +234,11 @@ export function useQuestTimelineLogic({
             });
             lastResumedObjectRef.current = null;
             prevCurrentObjectIdRef.current = currentObjectId;
+            // Also clear any pending start for the previous object
+            if (timelineStartTimeoutRef.current) {
+                clearTimeout(timelineStartTimeoutRef.current);
+                timelineStartTimeoutRef.current = null;
+            }
         }
     }, [currentObjectId]);
 
@@ -212,10 +253,37 @@ export function useQuestTimelineLogic({
             setTimeout(() => setNotification(null), message.includes('completato') ? 4000 : 5000);
         },
         playEffectAudio,
-        onArrived: (obj) => {
+        onArrived: async (obj) => {
             if (!mapMode) return;
-            void safeRuntime.arriveAtObject(obj.id);
-            void runObjectTimeline(obj);
+
+            // In Play mode, only "arrive" (unlock timeline) for the CURRENT runtime object.
+            // Otherwise approaching future/side objects would set `arrivedAt` early and break
+            // GPS-gated progression when the runtime later advances `currentObjectId`.
+            if (mapMode === 'play' && currentObjectId && obj.id !== currentObjectId) {
+                return;
+            }
+
+            try {
+                await safeRuntime.arriveAtObject(obj.id);
+            } catch (err) {
+                console.warn('[Timeline] arriveAtObject failed', { objectId: obj.id, err });
+                return;
+            }
+
+            // Timeline autoplay is handled by the resume effect (Play mode gated by `arrivedAt`).
+            // Steps mode can still start immediately for simulated arrivals.
+            if (mapMode === 'steps') {
+                void runObjectTimelineRef.current(obj, { reset: true });
+            } else if (isStartObject(obj)) {
+                // For start objects, we want to complete them immediately upon arrival
+                // so the user doesn't have to interact with the timeline if it's just a "Go here" start.
+                const endNodeId = `tl_${sanitizeIdPart(obj.id)}__end`;
+                console.log('[Timeline] Auto-completing start object', { objectId: obj.id, endNodeId });
+                void safeRuntime.completeNode(endNodeId).then(async () => {
+                    // Force refresh to update visibility of next objects
+                    await safeRuntime.refresh();
+                });
+            }
         }
     });
 
@@ -266,6 +334,7 @@ export function useQuestTimelineLogic({
         timelineState: {
             stepsTimelinePanel,
             timelineActionOverlay,
+            timelineArOverlay,
             timelineTextOverlay,
             timelineVideoOverlay,
             timelineChatOverlay,
@@ -276,6 +345,8 @@ export function useQuestTimelineLogic({
         timelineHandlers: {
             completeTimelineAction,
             cancelTimelineAction,
+            completeTimelineAr,
+            cancelTimelineAr,
             closeTimelineText,
             closeTimelineVideo,
             closeTimelineChat,
@@ -295,6 +366,7 @@ export function useQuestTimelineLogic({
             removeTimelinePulsatingCircle,
             clearPulsatingCircles,
             syncObjectPulsatingCircles,
+            getObjectPulseIds,
             setPulsatingVisibility
         },
 

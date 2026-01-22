@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
-import QuestMapOverlay from '@/components/QuestMapOverlay';
-import MapOverlays from '@/components/map/MapOverlays';
-import { CompassControl } from '@/components/map/CompassControl';
-import { COLORS } from '@/components/map/MapStyles';
+import QuestMapOverlay from './QuestMapOverlay';
+import MapOverlays from './MapOverlays';
+import { CompassControl } from '../components/CompassControl';
+import { COLORS } from '../components/MapStyles';
 
 const PuzzleClientOverlay = dynamic(() => import('@/app/puzzle/[id]/PuzzleClient'), {
     ssr: false,
@@ -29,9 +29,9 @@ type QuestUIOverlaysProps = {
     timelineHandlers: any; // closeTimelineText, etc.
     audioState: any; // audioCurrentTime, etc.
     audioControls: any; // cycleEffectPlaybackRate, etc.
+    gpsEnabled: boolean;
     puzzleCloseConfirmation: boolean;
     setPuzzleCloseConfirmation: React.Dispatch<React.SetStateAction<boolean>>;
-    gpsEnabled: boolean;
     toggleGPS: () => void;
     heading: number | null;
     isPlayMode: boolean;
@@ -58,13 +58,13 @@ export function QuestUIOverlays({
     timelineHandlers,
     audioState,
     audioControls,
-    puzzleCloseConfirmation,
-    setPuzzleCloseConfirmation,
     gpsEnabled,
     toggleGPS,
     heading,
     isPlayMode,
-    stepsMode
+    stepsMode,
+    puzzleCloseConfirmation,
+    setPuzzleCloseConfirmation
 }: QuestUIOverlaysProps) {
 
     return (
@@ -158,6 +158,10 @@ export function QuestUIOverlays({
                 timelineActionOverlay={timelineState.timelineActionOverlay}
                 completeTimelineAction={timelineHandlers.completeTimelineAction}
                 cancelTimelineAction={timelineHandlers.cancelTimelineAction}
+
+                timelineArOverlay={timelineState.timelineArOverlay}
+                completeTimelineAr={timelineHandlers.completeTimelineAr}
+                cancelTimelineAr={timelineHandlers.cancelTimelineAr}
 
                 timelineTextOverlay={timelineState.timelineTextOverlay}
                 closeTimelineText={timelineHandlers.closeTimelineText}

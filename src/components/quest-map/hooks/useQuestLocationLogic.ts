@@ -2,14 +2,12 @@ import { useState, useRef, useMemo, useEffect, useCallback } from 'react';
 import { useProximityTracker, QuestStop } from '@/hooks/useProximityTracker';
 import { formatLatLng } from '@/utils/coordinates';
 import { useQuestAudio } from '@/context/QuestAudioContext';
-import { getValidCoordinates, getItineraryNumber, isStartObject } from '../utils/mapUtils';
+import { calculateDistance, getValidCoordinates, getItineraryNumber, isStartObject } from '../utils/mapUtils';
 
 type UseQuestLocationLogicProps = {
     data: any;
-    visibleObjects: any[];
     objectsById: Map<string, any>;
     safeRuntime: any;
-    currentSessionId: string | null;
     isPlayMode: boolean;
     gpsEnabled: boolean;
     setGpsEnabled: (enabled: boolean) => void;
@@ -26,14 +24,13 @@ type UseQuestLocationLogicProps = {
     stepsMode: boolean;
     teamSync: any;
     setNotification: (msg: string | null) => void;
+    stops: QuestStop[];
 };
 
 export function useQuestLocationLogic({
     data,
-    visibleObjects,
     objectsById,
     safeRuntime,
-    currentSessionId,
     isPlayMode,
     gpsEnabled,
     setGpsEnabled,
@@ -49,7 +46,8 @@ export function useQuestLocationLogic({
     stopEffectAudio,
     stepsMode,
     teamSync,
-    setNotification
+    setNotification,
+    stops
 }: UseQuestLocationLogicProps) {
     const questAudio = useQuestAudio();
     const [heading, setHeading] = useState<number | null>(null);
@@ -157,18 +155,8 @@ export function useQuestLocationLogic({
     }, [setGpsEnabled, setNotification]);
 
 
-    const stops: QuestStop[] = useMemo(() => {
-        if (!visibleObjects) return [];
-        return visibleObjects.map((obj) => {
-            const coords = getValidCoordinates(obj);
-            return {
-                id: obj.id,
-                name: obj.name,
-                coordinates: coords ? formatLatLng(coords) : undefined,
-                triggerRadius: obj.audio_effect?.triggerRadius || obj.triggerRadius || 20
-            };
-        });
-    }, [visibleObjects]);
+    // Stops is now passed as a prop from useQuestMarkers
+    // const stops: QuestStop[] = useMemo... (Removed)
 
     // Proximity Tracker
     const {
@@ -200,6 +188,68 @@ export function useQuestLocationLogic({
         userLocationRef.current = userLocation;
     }, [userLocation]);
 
+    // If the runtime advances `currentObjectId` while the player is already within the next
+    // object's trigger radius, we may not get an immediate geolocation update and thus miss
+    // the "enter zone" event. This effect checks that transition and triggers arrival once.
+    const currentPlayerId = safeRuntime.snapshot?.me?.playerId ?? null;
+    const currentObjectId = currentPlayerId
+        ? (safeRuntime.snapshot?.players?.[currentPlayerId]?.currentObjectId ?? null)
+        : null;
+    const lastAutoArriveObjectIdRef = useRef<string | null>(null);
+
+    useEffect(() => {
+        if (!isPlayMode) return;
+        if (!currentObjectId) return;
+
+        if (lastAutoArriveObjectIdRef.current === currentObjectId) return;
+
+        console.log('[LocationLogic] Checking arrival for new object', {
+            currentObjectId,
+            gpsEnabled: gpsEnabled,
+            hasTrackerPosition: !!trackerPosition
+        });
+
+        const obj = objectsById.get(currentObjectId);
+        if (!obj) return;
+
+        const objectState = safeRuntime.snapshot?.objects?.[obj.id];
+        if (objectState?.arrivedAt) {
+            lastAutoArriveObjectIdRef.current = currentObjectId;
+            return;
+        }
+
+        const coords = getValidCoordinates(obj);
+        // Some objects are not location-gated (no coordinates). In Play mode, we still need to
+        // trigger `/runtime/object/arrive` so their timeline can run (e.g. knockknock actions).
+        if (!coords) {
+            lastAutoArriveObjectIdRef.current = currentObjectId;
+            handleObjectArrival(obj, 0, false);
+            return;
+        }
+
+        if (!gpsEnabled) return;
+        if (!trackerPosition) return;
+
+        const radius = obj.audio_effect?.triggerRadius || obj.triggerRadius || 20;
+        const distance = calculateDistance(trackerPosition.latitude, trackerPosition.longitude, coords[0], coords[1]);
+
+        if (distance <= radius) {
+            console.log('[LocationLogic] Auto-arriving at object', {
+                objectId: currentObjectId,
+                distance,
+                radius
+            });
+            lastAutoArriveObjectIdRef.current = currentObjectId;
+            handleObjectArrival(obj, distance, false);
+        } else {
+            console.log('[LocationLogic] Near object but outside radius', {
+                objectId: currentObjectId,
+                distance,
+                radius,
+                coords: formatLatLng(coords)
+            });
+        }
+    }, [calculateDistance, currentObjectId, gpsEnabled, handleObjectArrival, isPlayMode, objectsById, safeRuntime.snapshot, trackerPosition]);
 
     // Sync Location to Team
     useEffect(() => {

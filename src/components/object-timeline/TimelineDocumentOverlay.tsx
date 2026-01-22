@@ -14,6 +14,7 @@ export default function TimelineDocumentOverlay({
     palette,
 }: TimelineDocumentOverlayProps) {
     const [isClosing, setIsClosing] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     // Debug: Log when document overlay mounts
     useEffect(() => {
@@ -43,14 +44,14 @@ export default function TimelineDocumentOverlay({
     return (
         <div className="fixed inset-0 z-[5300] flex items-center justify-center bg-black/80 backdrop-blur-sm">
             <div
-                className={`relative max-w-lg w-full bg-white rounded-lg shadow-2xl overflow-hidden transition-all duration-500 ease-in-out ${isClosing ? 'scale-0 translate-y-[40vh] translate-x-[40vw] opacity-0 rotate-12' : 'scale-100 opacity-100'
+                className={`relative max-w-lg w-full max-h-[90vh] flex flex-col bg-white rounded-lg shadow-2xl overflow-hidden transition-all duration-500 ease-in-out ${isClosing ? 'scale-0 translate-y-[40vh] translate-x-[40vw] opacity-0 rotate-12' : 'scale-100 opacity-100'
                     }`}
                 style={{
                     backgroundColor: palette?.parchment ?? '#f5f5dc',
                     color: '#333'
                 }}
             >
-                <div className="flex justify-between items-center p-4 border-b border-gray-200" style={{ borderColor: palette?.gold ?? '#daa520' }}>
+                <div className="flex justify-between items-center p-4 border-b border-gray-200 shrink-0" style={{ borderColor: palette?.gold ?? '#daa520' }}>
                     <h3 className="text-lg font-bold font-serif">{overlay.title || 'Document'}</h3>
                     <button
                         onClick={handleClose}
@@ -62,14 +63,42 @@ export default function TimelineDocumentOverlay({
                     </button>
                 </div>
 
-                <div className="p-6 flex flex-col items-center">
+                <div className="p-6 flex flex-col items-center overflow-y-auto flex-1">
                     {overlay.media_url && (
-                        <div className="mb-6 w-full relative aspect-[3/4] shadow-md rotate-1 bg-white p-2">
+                        <div
+                            className="mb-6 w-full relative aspect-[3/4] shadow-md rotate-1 bg-white p-2 cursor-zoom-in transition-transform hover:scale-[1.02]"
+                            onClick={() => setIsExpanded(true)}
+                        >
                             <img
                                 src={overlay.media_url}
                                 alt="Document"
                                 className="w-full h-full object-cover"
                             />
+                        </div>
+                    )}
+
+                    {/* Full Screen Image Overlay */}
+                    {isExpanded && overlay.media_url && (
+                        <div
+                            className="fixed inset-0 z-[6000] flex items-center justify-center bg-black/90 backdrop-blur-md cursor-zoom-out animate-in fade-in duration-200"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsExpanded(false);
+                            }}
+                        >
+                            <img
+                                src={overlay.media_url}
+                                alt="Document Full Size"
+                                className="max-w-[95vw] max-h-[95vh] object-contain shadow-2xl animate-in zoom-in-95 duration-300"
+                            />
+                            <button
+                                className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
+                                onClick={() => setIsExpanded(false)}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
                         </div>
                     )}
 
@@ -80,7 +109,7 @@ export default function TimelineDocumentOverlay({
                     )}
                 </div>
 
-                <div className="p-4 border-t border-gray-200 flex justify-center" style={{ borderColor: palette?.gold ?? '#daa520' }}>
+                <div className="p-4 border-t border-gray-200 flex justify-center shrink-0" style={{ borderColor: palette?.gold ?? '#daa520' }}>
                     <button
                         onClick={handleClose}
                         className="px-6 py-2 rounded-full font-bold text-white shadow-lg transform transition hover:scale-105 active:scale-95"

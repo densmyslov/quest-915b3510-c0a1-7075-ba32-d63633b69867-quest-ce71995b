@@ -1,7 +1,7 @@
 import React from "react";
 
 const FONT_CORMORANT_GARAMOND_IMPORT_SRC =
-    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap";
+  "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap";
 
 /**
  * Set these to your real image paths.
@@ -12,77 +12,81 @@ const HERO_IMAGE_PORTRAIT = "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/cl
 const HERO_IMAGE_LANDSCAPE = "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260114-073936-1f80b26f.png/public";
 
 interface MissionBriefProps {
-    onExit: () => void;
-    yearText?: string;
+  onExit: () => void;
+  yearText?: string;
 }
 
 export default function MissionBrief({
-    onExit,
-    yearText = "1926",
+  onExit,
+  yearText = new Date().getFullYear().toString(),
 }: MissionBriefProps) {
-    return (
-        <div className="missionBriefRoot">
-            {/* Background layers */}
-            <div className="missionBriefBg missionBriefBg--stars" />
-            <div className="missionBriefBg missionBriefBg--vignette" />
-            <div className="missionBriefBg missionBriefBg--noise" />
-            <div className="missionBriefBg missionBriefBg--twinkle" />
+  const currentMonth = new Date().toLocaleString("it-IT", { month: "long" });
 
-            <div className="missionBriefScroll">
-                <div className="missionBriefWrap">
-                    {/* Top ornament */}
-                    <div className="missionBriefOrnament">
-                        <div className="missionBriefOrnamentLine" />
-                        <div className="missionBriefOrnamentDot" />
-                        <div className="missionBriefOrnamentLine" />
-                    </div>
+  return (
+    <div className="missionBriefRoot">
+      {/* Background layers */}
+      <div className="missionBriefBg missionBriefBg--stars" />
+      <div className="missionBriefBg missionBriefBg--vignette" />
+      <div className="missionBriefBg missionBriefBg--noise" />
+      <div className="missionBriefBg missionBriefBg--twinkle" />
 
-                    {/* Title */}
-                    <div className="missionBriefYear">{yearText}</div>
+      <div className="missionBriefScroll">
+        <div className="missionBriefWrap">
+          {/* Top ornament */}
+          <div className="missionBriefOrnament">
+            <div className="missionBriefOrnamentLine" />
+            <div className="missionBriefOrnamentDot" />
+            <div className="missionBriefOrnamentLine" />
+          </div>
 
-                    {/* Hero frame */}
-                    <div className="missionBriefFrameOuter">
-                        <div className="missionBriefFrameInner">
-                            <div className="missionBriefHero">
-                                {/*
+          {/* Title */}
+          <div className="missionBriefYear">{yearText}</div>
+
+          {/* Hero frame */}
+          <div className="missionBriefFrameOuter">
+            <div className="missionBriefFrameInner">
+              <div className="missionBriefHero">
+                {/*
                   Responsive image selection (no JS):
                   - Portrait on small screens
                   - Landscape on larger screens
                 */}
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={HERO_IMAGE_LANDSCAPE}
-                                    alt="Porta di Prada"
-                                    className="missionBriefHeroImg"
-                                    srcSet={`${HERO_IMAGE_PORTRAIT} 768w, ${HERO_IMAGE_LANDSCAPE} 1400w`}
-                                    sizes="(max-width: 520px) 92vw, (max-width: 860px) 94vw, 1000px"
-                                    onError={(e) => {
-                                        // Keep the frame even if the image fails.
-                                        (e.currentTarget as HTMLImageElement).style.display = "none";
-                                    }}
-                                />
-                                <div className="missionBriefHeroGlow" />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Copy */}
-                    <div className="missionBriefCopy">
-                        Avete due ore per trovare l’uomo <br />
-                        scomparso attraverso la{" "}
-                        <span className="missionBriefEmphasis">Porta di Prada</span>, <br />
-                        la “porta verso l’aldilà”. <br />
-                        Agite in fretta, il tempo è essenziale.
-                    </div>
-
-                    {/* CTA */}
-                    <button className="missionBriefCta" onClick={onExit}>
-                        Cerca il punto di concentrazione energetica
-                    </button>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={HERO_IMAGE_LANDSCAPE}
+                  alt="Porta di Prada"
+                  className="missionBriefHeroImg"
+                  srcSet={`${HERO_IMAGE_PORTRAIT} 768w, ${HERO_IMAGE_LANDSCAPE} 1400w`}
+                  sizes="(max-width: 520px) 92vw, (max-width: 860px) 94vw, 1000px"
+                  onError={(e) => {
+                    // Keep the frame even if the image fails.
+                    (e.currentTarget as HTMLImageElement).style.display = "none";
+                  }}
+                />
+                <div className="missionBriefHeroGlow" />
+              </div>
             </div>
+          </div>
 
-            <style>{`
+          {/* Copy */}
+          <div className="missionBriefCopy">
+            Siete arrivati a {currentMonth} del 1926. Avete solo due ore prima che il portale si richiuda.
+            Il nostro sistema ha rilevato potenti fluttuazioni energetiche nell’area di Esino Lario, che sembrano essere la causa dell’apertura del portale.
+            Qualcuno tra gli abitanti della città si trova in grave pericolo.
+            Disperato, ha attraversato la cosiddetta <span className="missionBriefEmphasis">Porta di Prada</span> — “le porte verso l’aldilà”,
+            un’arca carsica, e forse il sistema vi aiuterà a entrare in contatto con lui.
+            Trovate il punto di massima concentrazione energetica.
+            Di solito questo è legato al fatto che nelle vicinanze si stia verificando un’emozione molto intensa.
+          </div>
+
+          {/* CTA */}
+          <button className="missionBriefCta" onClick={onExit}>
+            Cerca il punto di concentrazione energetica
+          </button>
+        </div>
+      </div>
+
+      <style>{`
         @import url('${FONT_CORMORANT_GARAMOND_IMPORT_SRC}');
 
         .missionBriefRoot{
@@ -147,7 +151,7 @@ export default function MissionBrief({
           display:flex;
           align-items:center;
           justify-content:center;
-          padding: 32px 18px 36px;
+          padding: 16px 16px;
         }
 
         .missionBriefWrap{
@@ -156,8 +160,8 @@ export default function MissionBrief({
           display:flex;
           flex-direction:column;
           align-items:center;
-          gap: 18px;
-          padding-bottom: 18px;
+          gap: 10px;
+          padding-bottom: 10px;
         }
 
         .missionBriefOrnament{
@@ -192,9 +196,9 @@ export default function MissionBrief({
           text-shadow:
             0 0 24px rgba(255, 215, 0, 0.28),
             0 0 64px rgba(138, 43, 226, 0.22);
-          font-size: clamp(44px, 7vw, 78px);
+          font-size: clamp(32px, 5vw, 56px);
           line-height: 1;
-          margin-top: 2px;
+          margin-top: 0px;
         }
 
         .missionBriefFrameOuter{
@@ -267,10 +271,10 @@ export default function MissionBrief({
         .missionBriefCopy{
           max-width: 780px;
           color: rgba(232,232,240,0.92);
-          font-size: clamp(18px, 2.5vw, 24px);
-          line-height: 1.55;
+          font-size: clamp(15px, 2vw, 20px);
+          line-height: 1.35;
           text-shadow: 0 2px 10px rgba(0,0,0,0.60);
-          margin-top: 6px;
+          margin-top: 4px;
           padding: 0 8px;
         }
 
@@ -284,8 +288,8 @@ export default function MissionBrief({
           appearance:none;
           border: 1px solid rgba(180, 120, 255, 0.42);
           color: rgba(255,255,255,0.95);
-          font-size: clamp(16px, 2.1vw, 20px);
-          padding: 14px 26px;
+          font-size: clamp(15px, 2vw, 18px);
+          padding: 10px 22px;
           border-radius: 999px;
           background:
             radial-gradient(120% 160% at 30% 20%, rgba(150, 90, 255, 0.35), transparent 55%),
@@ -314,6 +318,6 @@ export default function MissionBrief({
           outline-offset: 3px;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }

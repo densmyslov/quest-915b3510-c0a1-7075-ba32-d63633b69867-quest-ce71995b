@@ -80,6 +80,8 @@ makeTimelineItemNodeId(objectId, itemKey)
 
 Authoritative runtime state is held per **session** in DynamoDB:
 
+> Note: DynamoDB `M` (map) attributes are unordered. The key order you see in the AWS console for `nodesByPlayer` (or `objectsByPlayer`) is not the execution order. Execution order is defined by the compiled graph edges (`outNodeIds` / `successOutNodeIds` / `failureOutNodeIds`) and timestamps like `completedAt`.
+
 #### Session State
 ```typescript
 {
@@ -189,6 +191,11 @@ Validates an uploaded image against a target reference image using the VLM image
 2. Validate **Match**: `is_match === true` (and optionally `probability >= minProbability`)
 3. Validate **Distance** (if coords provided): `distance(player, target) < maxDistanceMeters`
 4. Outcome is `success` only if **ALL** checks pass.
+
+**Additional input mode (used by `ar` timeline match gate):**
+`POST /api/v1/match-vlm` also supports:
+- `query_image_base64`: base64 (no header) or `data:image/...;base64,...`
+- `target_image_url`: HTTPS URL
 
 #### Knock Action (`knock`)
 Validates a rhythmic pattern of taps/knocks.

@@ -59,6 +59,18 @@ export type TimelineDocumentOverlayState = {
   itemKey?: string;
 };
 
+export type TimelineArOverlayState = {
+  title: string;
+  config: {
+    task_prompt: '<OD>' | '<REFERRING_EXPRESSION_SEGMENTATION>';
+    text_input?: string;
+    overlay?: string; // "light" | "smoke" | "flashlight" | "none"
+    origin?: 'top' | 'center';
+    match_target_image_url?: string;
+    match_target_image_key?: string;
+  };
+};
+
 export type PulsatingCircleEffect = {
   minRadius: number;
   maxRadius: number;

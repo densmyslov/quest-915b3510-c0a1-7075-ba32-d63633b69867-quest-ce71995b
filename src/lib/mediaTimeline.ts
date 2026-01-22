@@ -38,26 +38,20 @@ function getRawTimeline(obj: QuestObject): MediaTimeline | null {
 }
 
 export function normalizeMediaTimeline(obj: QuestObject, timelineNodes?: Record<string, any>): NormalizedMediaTimeline | null {
-  let raw = getRawTimeline(obj);
+  // Revert 543f13f behavior: prefer the authored per-object mediaTimeline when present.
+  // Only reconstruct from compiled timelineNodes when the object has no mediaTimeline.
+  let raw = getRawTimeline(obj) as { version: number; items: any[] } | null;
 
-  // If object doesn't have mediaTimeline but we have timelineNodes, reconstruct it
   if (!raw && timelineNodes && obj.id) {
-    console.log('[normalizeMediaTimeline] Object has no mediaTimeline, reconstructing from timelineNodes', {
-      objectId: obj.id,
-      hasTimelineNodes: !!timelineNodes,
-      timelineNodeCount: timelineNodes ? Object.keys(timelineNodes).length : 0
-    });
     raw = reconstructMediaTimelineFromNodes(obj.id, timelineNodes);
     if (raw) {
-      console.log('[normalizeMediaTimeline] Successfully reconstructed timeline', {
+      console.log('[normalizeMediaTimeline] Reconstructed timeline from timelineNodes (fallback)', {
         objectId: obj.id,
         itemCount: raw.items.length,
         itemTypes: raw.items.map((item: any) => item.type)
       });
     } else {
-      console.warn('[normalizeMediaTimeline] Failed to reconstruct timeline from timelineNodes', {
-        objectId: obj.id
-      });
+      console.warn('[normalizeMediaTimeline] Failed to reconstruct timeline from timelineNodes', { objectId: obj.id });
     }
   }
 
@@ -84,7 +78,7 @@ export function normalizeMediaTimeline(obj: QuestObject, timelineNodes?: Record<
       let blocking = typeof item.blocking === 'boolean' ? item.blocking : defaultBlocking;
 
       // Enforce invariants: puzzles/chats/actions always block; background audio never blocks.
-      if (type === 'puzzle' || type === 'chat' || type === 'action') {
+      if (type === 'puzzle' || type === 'chat' || type === 'action' || type === 'ar') {
         blocking = true;
       } else if ((type === 'audio' || type === 'streaming_text_audio') && role === 'background') {
         blocking = false;
@@ -221,12 +215,26 @@ export function reconstructMediaTimelineFromNodes(
         effectKind: node.payload?.effect,
         params: node.payload?.params,
       });
+    } else if (node.type === 'ar') {
+      Object.assign(item, {
+        ar: {
+          task_prompt: node.payload?.task_prompt ?? node.payload?.taskPrompt,
+          text_input: node.payload?.text_input ?? node.payload?.textInput,
+          overlay: node.payload?.overlay ?? node.payload?.overlayName,
+          origin: node.payload?.origin ?? node.payload?.overlayOrigin,
+          match_target_image_url: node.payload?.match_target_image_url ?? node.payload?.matchTargetImageUrl,
+          match_target_image_key: node.payload?.match_target_image_key ?? node.payload?.matchTargetImageKey,
+        },
+      });
     }
 
     items.push(item);
 
     // Move to next node
-    currentNodeIds = node.outNodeIds || node.successOutNodeIds || [];
+    const outNodeIds = Array.isArray(node.outNodeIds) ? node.outNodeIds : null;
+    const successOutNodeIds = Array.isArray(node.successOutNodeIds) ? node.successOutNodeIds : null;
+    currentNodeIds =
+      outNodeIds && outNodeIds.length ? outNodeIds : successOutNodeIds && successOutNodeIds.length ? successOutNodeIds : [];
   }
 
   return { version: 1, items };

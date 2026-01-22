@@ -1,4 +1,4 @@
-import { COLORS } from '@/components/map/MapStyles';
+import { COLORS } from '../components/MapStyles';
 import { parseLatLng } from '@/utils/coordinates';
 
 export const normalizeObjectImages = (obj: any): Array<{ url: string; thumbnailUrl?: string }> => {

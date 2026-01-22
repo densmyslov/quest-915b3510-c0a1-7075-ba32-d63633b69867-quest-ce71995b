@@ -16,7 +16,29 @@ Timeline nodes are keyed by `nodeId` in `timelineNodes`:
 
 Supported node types (compiler + runtime):
 
-- `state`, `text`, `chat`, `audio`, `video`, `image`, `puzzle`, `action`, `effect`
+- `state`, `text`, `chat`, `audio`, `video`, `image`, `ar`, `puzzle`, `action`, `effect`
+
+## AR timeline item (`type: "ar"`)
+The template supports an `ar` timeline item that:
+1. Captures a player photo (camera)
+2. (Optional) Calls `POST /api/v1/match-vlm` to verify the photo matches a target image
+3. Calls `POST /api/v1/ar/analyze` (Florence-2) and renders the selected overlay effect on the detected region
+
+### Configuration (from quest-platform dashboard)
+`mediaTimeline.items[].ar`:
+```json
+{
+  "task_prompt": "<REFERRING_EXPRESSION_SEGMENTATION>",
+  "text_input": "red car",
+  "overlay": "smoke",
+  "origin": "top",
+  "match_target_image_key": "clients/<client>/<quest>/images/base-images/.../image.webp",
+  "match_target_image_url": "https://..."
+}
+```
+
+Behavior:
+- If the match gate is configured and returns `NO`, the player sees: `Giev it another try` and can retry.
 
 ## Client responsibilities
 

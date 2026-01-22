@@ -123,47 +123,21 @@ export function useTimelineAudio(params: {
         return;
       }
 
-      const shouldForceBlockingBecauseNextItemExists = (() => {
-        if ((item as any).blocking) return false;
-        const next = timelineItems[idx + 1];
-        if (!next || next.enabled === false) return false;
-        return true;
-      })();
+      if (item.type === 'audio') {
+        // Never block the timeline loop on effect audio.
+        // The runtime progression depends on the client POSTing nodeComplete; hanging here breaks object transitions.
+        playEffectAudio({
+          url,
+          objectName,
+          objectId,
+          loop: (item as any).loop,
+          volume: (item as any).volume,
+        });
+        return;
+      }
 
-      console.log('[useObjectTimeline] Audio blocking check', {
-        itemBlocking: (item as any).blocking,
-        shouldForceBlocking: shouldForceBlockingBecauseNextItemExists,
-        nextItem: timelineItems[idx + 1]?.type,
-      });
-
-      if ((item as any).blocking || shouldForceBlockingBecauseNextItemExists) {
-        if (item.type === 'audio') {
-          console.log('[useObjectTimeline] Playing blocking effect audio', { url });
-          try {
-            await Promise.race([
-              playEffectAudioBlocking({
-                url,
-                objectName,
-                objectId,
-                volume: (item as any).volume,
-                loop: false,
-              }),
-              new Promise<void>((_, reject) => setTimeout(() => reject(new Error('Audio playback timeout')), 30000)),
-            ]);
-            console.log('[useObjectTimeline] Blocking effect audio completed', { key: item.key });
-          } catch (err: any) {
-            console.warn('[useObjectTimeline] Blocking effect audio failed or timed out, completing anyway', {
-              key: item.key,
-              err,
-              message: err?.message,
-              name: err?.name,
-              url,
-              timestamp: new Date().toISOString(),
-            });
-          }
-          return;
-        }
-
+      const shouldBlock = (item as any).blocking === true;
+      if (shouldBlock) {
         const { mode, seconds } = getTextDisplayConfig(item);
         const transcription = getTimelineAudioTranscription(item);
         if (debugEnabled) {
@@ -180,31 +154,24 @@ export function useTimelineAudio(params: {
 
         console.log('[useObjectTimeline] Playing blocking streaming_text_audio', { url });
         try {
-          await playAudioBlocking({
-            url,
-            objectName,
-            objectId,
-            transcription: transcription ?? null,
-            loop: false,
-            volume: (item as any).volume,
-            panelAutoCloseAfterEndedMs: mode === 'seconds' ? seconds * 1000 : null,
-          });
+          await Promise.race([
+            playAudioBlocking({
+              url,
+              objectName,
+              objectId,
+              transcription: transcription ?? null,
+              loop: false,
+              volume: (item as any).volume,
+              panelAutoCloseAfterEndedMs: mode === 'seconds' ? seconds * 1000 : null,
+            }),
+            new Promise<void>((_, reject) =>
+              setTimeout(() => reject(new Error('streaming_text_audio playback timeout')), 5 * 60 * 1000)
+            ),
+          ]);
           console.log('[useObjectTimeline] Blocking streaming_text_audio completed', { key: item.key });
         } catch (err: any) {
           console.warn('[useObjectTimeline] Blocking streaming_text_audio failed or timed out, completing anyway', { key: item.key, err });
         }
-
-        return;
-      }
-
-      if (item.type === 'audio') {
-        playEffectAudio({
-          url,
-          objectName,
-          objectId,
-          loop: (item as any).loop,
-          volume: (item as any).volume,
-        });
         return;
       }
 

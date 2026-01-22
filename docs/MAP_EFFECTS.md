@@ -133,28 +133,62 @@ Setting an object's itinerary `number` to `0` is useful for:
 
 ### Description
 
-Animated concentric circles that pulse outward from active markers, creating a glowing effect to draw attention to triggered locations.
 
-### Implementation
+### Types of Pulsating Effects
 
-Located in [QuestMap.tsx:613-616](../quest-app-template/src/components/QuestMap.tsx#L613-L616):
+The system implements three distinct types of pulsating effects:
 
-```css
-@keyframes questPulse {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-}
-```
+1. **Marker Pulse (CSS)**:
+   - **Target**: The `current` active object marker.
+   - **Visual**: A continuous "heartbeat" animation on the marker icon itself, turning it red/gold.
+   - **Implementation**: pure CSS animations (`questPulse`, `questRedPulse`) inside `createVintageIcon`.
 
-Applied to active markers in [QuestMap.tsx:72](../quest-app-template/src/components/QuestMap.tsx#L72):
+2. **Transient Pulse (Map Layer)**:
+   - **Target**: Newly activated object.
+   - **Visual**: A large, fast-expanding Cyan circle that appears for 3 seconds.
+   - **Trigger**: Fires automatically when `currentObjectId` changes.
+   - **Purpose**: To "pop" the new objective location to the user.
+
+3. **Object-Configured Pulse (Map Layer)**:
+   - **Target**: Specific objects with `pulsating_effect.enabled = true`.
+   - **Visual**: Persistent pulsating circles with customizable color, radius, and speed.
+   - **Implementation**: Managed by `usePulsatingCircles` hook, rendered as Leaflet `Circle` elements.
+
+### Implementation Details
+
+#### CSS Pulse (Marker)
+Located in `MapStyles.ts`, the `createVintageIcon` function applies the animation:
 
 ```typescript
-${type === 'active' || type === 'activeSecondary' ?
-  `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-   width:50px;height:50px;border:2px solid #FFD700;border-radius:50%;
-   animation:questPulse 2s ease-out infinite;pointer-events:none;"></div>`
-  : ''}
+const flashAnimation = isActive ? 'animation:questRedPulse 2s ease-in-out infinite;' : '';
+// ...
+<div style="...${flashAnimation}...">
+    ${isActive ? `<div style="...animation:questPulse 2s ease-out infinite..."></div>` : ''}
+</div>
 ```
+
+#### Map Layer Pulse (Transient & Configured)
+Managed by `usePulsatingCircles.ts` hook:
+- Uses `requestAnimationFrame` for smooth 60fps animation.
+- Manages a dedicated `LayerGroup` for circles.
+- Handles separate sources (`'timeline'` vs `'object'`) to prevent conflicts.
+
+```typescript
+// Example: Transient Pulse
+addOrUpdatePulsatingCircle({
+    objectId: currentObjectId,
+    center: coords,
+    effect: {
+        color: '#00FFFF', // Cyan
+        minRadius: 10,
+        maxRadius: 30,
+        speed: 60
+    },
+    source: 'timeline',
+    durationMs: 3000
+});
+```
+
 
 ### Configuration
 
@@ -193,18 +227,33 @@ Settings are persisted in `localStorage` as `map_effects_settings` and trigger a
 
 Five marker variants with distinct visual styles:
 
-1. **Location** - Standard object marker (brown with golden border)
-2. **Location Secondary** - Secondary object marker (darker brown)
-3. **Player** - User's current position (blue with golden border)
-4. **Active** - Triggered location (burgundy with golden glow)
-5. **Active Secondary** - Triggered secondary location
+
+1. **Location** - Standard future object (Brown bg, Gold border).
+2. **Location Secondary** - Standard past/completed object (Darker Brown).
+3. **Player** - User's current position (Google Maps styled blue pin).
+4. **Active** - Current objective (Burgundy with Red/Gold pulse).
+5. **Active Secondary** - Alternative active style.
+6. **Special** - A unique animated GIF marker (e.g., a hand pointing) for special story moments.
+
+### Object Status Logic
+
+The `QuestMarkersLayer` component determines which marker type to use based on the object's runtime state:
+
+1. **Special**: If `isSpecial` flag is true or matching a special itinerary number.
+   - Renders `SPECIAL_OBJECT_MARKER_ICON`.
+2. **Current**: If `safeRuntime.snapshot.me.currentObjectId` matches the object.
+   - Renders `Active` variant with CSS Pulse.
+3. **Past**: If object is in `safeRuntime.completedObjects`.
+   - Renders `Location Secondary` (completed look).
+4. **Future**: All other visible objects.
+   - Renders `Location` (standard look).
 
 ### Visual Features
 
-Implemented in [QuestMap.tsx:33-66](../quest-app-template/src/components/QuestMap.tsx#L33-L66):
+Implemented in [MapStyles.ts](../quest-app-template/src/components/quest-map/components/MapStyles.ts):
 
-- **SVG Pin Shape** - Custom teardrop-shaped pins
-- **Gradient Fills** - `linearGradient` with three color stops
+- **SVG Pins**: Generated via `createMarkerSVG`.
+- **Gradient Fills**: Linear gradients for depth.
 - **Drop Shadows** - `feDropShadow` filters with dual layers:
   - Black shadow for depth (3px blur)
   - Colored glow for mystical effect (1px blur)

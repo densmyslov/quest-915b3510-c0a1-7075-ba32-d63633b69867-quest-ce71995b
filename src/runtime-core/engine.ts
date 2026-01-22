@@ -337,7 +337,7 @@ function unlockOutgoingForOutcome(params: {
 }) {
   const { def, session, playerId, node, outcome, deltas } = params;
   if (node.type === 'puzzle' || node.type === 'action') {
-    const outs = outcome === 'fail' ? node.failureOutNodeIds ?? [] : node.successOutNodeIds;
+    const outs = outcome === 'fail' || outcome === 'failure' ? node.failureOutNodeIds ?? [] : node.successOutNodeIds;
     for (const outId of outs) unlockNode(session, playerId, outId, deltas);
     autoAdvanceStateNodes({ def, session, playerIds: [playerId], startingNodeIds: outs, deltas });
     return;

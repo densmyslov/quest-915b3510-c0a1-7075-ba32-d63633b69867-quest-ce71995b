@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Map as LeafletMap, Marker } from 'leaflet';
-import { COLORS, createVintageIcon } from '@/components/map/MapStyles';
+import { COLORS, createVintageIcon } from '../components/MapStyles';
 
 type UserLocationLayerProps = {
     map: LeafletMap | null;

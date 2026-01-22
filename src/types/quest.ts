@@ -36,6 +36,7 @@ export type MediaTimelineItemType =
   | 'audio'
   | 'streaming_text_audio'
   | 'video'
+  | 'ar'
   | 'effect'
   | 'puzzle'
   | 'action'
@@ -95,6 +96,29 @@ export interface MediaTimelineVideoItem extends MediaTimelineItemBase {
   posterUrl?: string;
 }
 
+export type FlorenceTaskPrompt = '<OD>' | '<REFERRING_EXPRESSION_SEGMENTATION>';
+export type ArOverlayOrigin = 'top' | 'center';
+
+export interface MediaTimelineArItem extends MediaTimelineItemBase {
+  type: 'ar';
+  ar?: {
+    task_prompt?: FlorenceTaskPrompt;
+    text_input?: string;
+    overlay?: string; // e.g. "light" | "smoke" | "flashlight" | "none"
+    origin?: ArOverlayOrigin; // "top" | "center"
+    match_target_image_url?: string;
+    match_target_image_key?: string;
+  };
+
+  // Legacy / alternate shapes (kept for tolerance)
+  task_prompt?: FlorenceTaskPrompt;
+  text_input?: string;
+  overlay?: string;
+  origin?: ArOverlayOrigin;
+  match_target_image_url?: string;
+  match_target_image_key?: string;
+}
+
 export interface MediaTimelineEffectItem extends MediaTimelineItemBase {
   type: 'effect';
   effectType?: string;
@@ -149,6 +173,7 @@ export interface MediaTimelineDocumentItem extends MediaTimelineItemBase {
 export type MediaTimelineItem =
   | MediaTimelineAudioItem
   | MediaTimelineVideoItem
+  | MediaTimelineArItem
   | MediaTimelineEffectItem
   | MediaTimelinePuzzleItem
   | MediaTimelineActionItem

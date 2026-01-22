@@ -8,14 +8,15 @@ import { useDebugLog } from '@/context/DebugLogContext';
 import { getSoloTeamStartedAt, isSoloTeamSession } from '@/lib/soloTeam';
 import { isQuestDebugEnabled } from '@/lib/debugFlags';
 
-import { MapFrame } from '@/components/map/MapFrame';
-import { COLORS } from '@/components/map/MapStyles';
+import { MapFrame } from './components/MapFrame';
+import { COLORS } from './components/MapStyles';
 import { RuntimeDebugOverlay } from '@/components/RuntimeDebugOverlay';
 
 import { useQuestMapState } from './hooks/useQuestMapState';
 import { useMapInitialization } from './hooks/useMapInitialization';
 import { useQuestTimelineLogic } from './hooks/useQuestTimelineLogic';
 import { useQuestLocationLogic } from './hooks/useQuestLocationLogic';
+import { useQuestMarkers } from './hooks/useQuestMarkers';
 import { QuestMarkersLayer } from './layers/QuestMarkersLayer';
 import { UserLocationLayer } from './layers/UserLocationLayer';
 import { QuestUIOverlays } from './overlays/QuestUIOverlays';
@@ -79,59 +80,21 @@ export default function QuestMap() {
     const isPlayMode = mapMode === 'play';
     const stepsMode = mapMode === 'steps';
 
-    // --- Data ---
-    const objectsById = useMemo(() => {
-        return new Map((data?.objects ?? []).map((obj: any) => [obj.id, obj]));
-    }, [data]);
+    // --- Refactoring: Use Quest Markers Hook ---
+    const {
+        objectsById,
+        visibleObjects,
+        startObjectIds,
+        stops
+    } = useQuestMarkers({
+        data,
+        safeRuntime,
+        stepsMode
+    }); // Returns { visibleObjects: any[], startObjectIds: Set<string>, stops: QuestStop[], objectsById: Map<string, any> }
 
     const visibleObjectIds = useMemo(() => {
-        const ids = safeRuntime.snapshot?.me?.visibleObjectIds ?? [];
-        return ids.map((id: any) => String(id));
-    }, [safeRuntime.snapshot]);
-
-    const visibleObjects = useMemo(() => {
-        if (!data?.objects) return [];
-        // Sort objects by itinerary number
-        const sortedObjects = [...data.objects].sort((a: any, b: any) => {
-            const aNum = getItineraryNumber(a) ?? 0;
-            const bNum = getItineraryNumber(b) ?? 0;
-            return aNum - bNum;
-        });
-
-        const currentPlayerId = safeRuntime.snapshot?.me?.playerId ?? null;
-        const currentObjectId =
-            currentPlayerId ? (safeRuntime.snapshot?.players?.[currentPlayerId]?.currentObjectId ?? null) : null;
-
-        if (stepsMode) {
-            const completedIds = safeRuntime.completedObjects ?? new Set<string>();
-            return sortedObjects.filter((obj: any) =>
-                completedIds.has(obj.id) || (!!currentObjectId && obj.id === currentObjectId)
-            );
-        }
-
-        // In Play mode, only show objects that are explicitly visible in the runtime snapshot
-        const visibleIds = new Set(visibleObjectIds);
-        const filtered = sortedObjects.filter((obj: any) => visibleIds.has(String(obj.id)));
-
-        // Backward-compatible fallback: if the runtime doesn't provide visibility yet,
-        // at least show the start object (or first object) so markers don't fully disappear.
-        if (filtered.length === 0) {
-            const fallbackStart = sortedObjects.find((obj: any) => isStartObject(obj)) ?? sortedObjects[0];
-            return fallbackStart ? [fallbackStart] : [];
-        }
-
-        return filtered;
-    }, [data?.objects, visibleObjectIds, stepsMode, safeRuntime.completedObjects, safeRuntime.snapshot]);
-
-    // --- Initialization ---
-    const startObjectIds = useMemo(() => {
-        if (!data) return new Set<string>();
-        const explicit = data.objects
-            .filter((obj: any) => isStartObject(obj) && !!getValidCoordinates(obj))
-            .map((obj: any) => obj.id)
-            .filter((id: any): id is string => typeof id === 'string' && id.length > 0);
-        return new Set(explicit);
-    }, [data]);
+        return visibleObjects.map(obj => String(obj.id));
+    }, [visibleObjects]);
 
     // We need userLocation for initialization if start objects are missing,
     // but userLocation comes from Logic which depends on hooks.
@@ -167,12 +130,20 @@ export default function QuestMap() {
         timelineGateRef
     });
 
+    useEffect(() => {
+        // Show object-defined pulses only for currently visible objects
+        const visibleIds = new Set(visibleObjects.map(o => String(o?.id)));
+        const objPulseIds = timelineLogic.pulsating.getObjectPulseIds
+            ? timelineLogic.pulsating.getObjectPulseIds()
+            : [];
+        const shouldShow = new Set(objPulseIds.filter(id => visibleIds.has(id)));
+        timelineLogic.pulsating.setPulsatingVisibility(shouldShow);
+    }, [visibleObjects, timelineLogic.pulsating]);
+
     const locationLogic = useQuestLocationLogic({
         data,
-        visibleObjects,
         objectsById,
         safeRuntime,
-        currentSessionId,
         isPlayMode,
         gpsEnabled,
         setGpsEnabled,
@@ -188,7 +159,9 @@ export default function QuestMap() {
         stopEffectAudio: timelineLogic.audioControls.stopEffectAudio,
         stepsMode,
         teamSync,
-        setNotification
+        setNotification,
+        // Pass stops from useQuestMarkers hook
+        stops
     });
 
     // Sync user location ref for other components to access the latest
@@ -203,6 +176,55 @@ export default function QuestMap() {
 
         timelineGateRef.current.gestureBlessed = true;
         setModeConfirmed(true);
+
+        // --- NEW: Force Zoom 17 & Center ---
+        const map = mapInit.mapInstanceRef.current;
+        if (map) {
+            let targetCenter: [number, number] | null = null;
+
+            if (mode === 'steps') {
+                // In Steps Mode, we reset to step 0. Find that object.
+                // We use 'data.objects' directly or 'objectsById'.
+                const stepZeroObj = data?.objects?.find((obj: any) => getItineraryNumber(obj) === 0);
+                if (stepZeroObj) {
+                    targetCenter = getValidCoordinates(stepZeroObj);
+                } else {
+                    // Fallback to any start object
+                    const startObj = data?.objects?.find((obj: any) => isStartObject(obj));
+                    if (startObj) {
+                        targetCenter = getValidCoordinates(startObj);
+                    }
+                }
+            } else {
+                // Play Mode
+                // 1. Try User Location (if we have it cached from a previous session or instant fix)
+                if (userLocationRef.current) {
+                    targetCenter = userLocationRef.current;
+                } else {
+                    // 2. Try Current Object from Runtime
+                    const currentPlayerId = safeRuntime.snapshot?.me?.playerId ?? null;
+                    const currentObjectId = currentPlayerId
+                        ? (safeRuntime.snapshot?.players?.[currentPlayerId]?.currentObjectId ?? null)
+                        : null;
+                    if (currentObjectId) {
+                        const obj = objectsById.get(currentObjectId);
+                        if (obj) targetCenter = getValidCoordinates(obj);
+                    }
+
+                    // 3. Fallback to Start Object
+                    if (!targetCenter) {
+                        const startObj = data?.objects?.find((obj: any) => isStartObject(obj));
+                        if (startObj) targetCenter = getValidCoordinates(startObj);
+                    }
+                }
+            }
+
+            if (targetCenter) {
+                console.log('[QuestMap] Setting view to zoom 17', { mode, targetCenter });
+                map.setView(targetCenter, 17, { animate: true });
+            }
+        }
+        // -----------------------------------
 
         if (!timelineGateRef.current.unlocking) {
             timelineGateRef.current.unlocking = true;
@@ -224,11 +246,17 @@ export default function QuestMap() {
                     }
                 } catch { }
 
-                const currentObjectId = safeRuntime.snapshot?.players?.[currentSessionId || '']?.currentObjectId;
+                const currentPlayerId = safeRuntime.snapshot?.me?.playerId ?? null;
+                const currentObjectId = currentPlayerId
+                    ? (safeRuntime.snapshot?.players?.[currentPlayerId]?.currentObjectId ?? null)
+                    : null;
                 const currentObj = objectsById.get(currentObjectId || '');
                 const isCurrentObjectCompleted = !!currentObjectId && (safeRuntime.completedObjects?.has(currentObjectId) || false);
+                const hasArrivedAtCurrentObject = !!(currentObjectId && safeRuntime.snapshot?.objects?.[currentObjectId]?.arrivedAt);
 
-                if (currentObj && !isCurrentObjectCompleted) {
+                // In Play mode, only start the timeline after GPS arrival (OBJECT_ARRIVE).
+                // Steps mode intentionally bypasses this.
+                if (currentObj && !isCurrentObjectCompleted && (mode === 'steps' || hasArrivedAtCurrentObject)) {
                     timelineLogic.lastResumedObjectRef.current = currentObj.id;
                     void timelineLogic.timelineHandlers.runObjectTimeline(currentObj);
                 }
@@ -243,7 +271,7 @@ export default function QuestMap() {
             setGpsEnabled(false);
             setCurrentItineraryStep(0);
         }
-    }, [timelineLogic, safeRuntime, currentSessionId, objectsById, runtime, setMapMode, setGpsEnabled, setCurrentItineraryStep, setNotification, setModeConfirmed]);
+    }, [timelineLogic, safeRuntime, currentSessionId, objectsById, runtime, setMapMode, setGpsEnabled, setCurrentItineraryStep, setNotification, setModeConfirmed, data, mapInit.mapInstanceRef]);
 
 
     // Distribution Ref for Popups
@@ -391,6 +419,9 @@ export default function QuestMap() {
                 getItineraryNumber={getItineraryNumber}
                 isStartObject={isStartObject}
                 distributionRef={distributionRef}
+                addOrUpdatePulsatingCircle={timelineLogic.pulsating.addOrUpdatePulsatingCircle}
+                removeTimelinePulsatingCircle={timelineLogic.pulsating.removeTimelinePulsatingCircle}
+                getObjectPulseIds={timelineLogic.pulsating.getObjectPulseIds}
                 setPulsatingVisibility={timelineLogic.pulsating.setPulsatingVisibility}
             />
 

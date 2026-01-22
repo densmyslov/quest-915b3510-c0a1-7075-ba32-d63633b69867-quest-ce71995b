@@ -95,7 +95,7 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
     questId,
     questVersion,
     playerId,
-    teamCode,
+    teamCode, // eslint-disable-line @typescript-eslint/no-unused-vars
     sessionId, // Destructure new param
     playerName: playerNameProp,
     autoStart = true,
@@ -113,9 +113,19 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
     return null;
   }, [sessionId, playerId]);
 
+  const [storedPlayerName, setStoredPlayerName] = useState<string | null>(() => readPlayerNameFromStorage());
+
+  useEffect(() => {
+    const handler = () => {
+      setStoredPlayerName(readPlayerNameFromStorage());
+    };
+    window.addEventListener('quest_session_changed', handler);
+    return () => window.removeEventListener('quest_session_changed', handler);
+  }, []);
+
   const playerName = useMemo(() => {
-    return playerNameProp ?? readPlayerNameFromStorage() ?? (playerId ? `Player-${playerId.slice(0, 8)}` : null);
-  }, [playerId, playerNameProp]);
+    return playerNameProp ?? storedPlayerName ?? (playerId ? `Player-${playerId.slice(0, 8)}` : null);
+  }, [playerId, playerNameProp, storedPlayerName]);
 
   const [definition, setDefinition] = useState<CompiledQuestDefinition | null>(null);
   const [snapshot, setSnapshot] = useState<RuntimeSnapshot | null>(null);
@@ -123,6 +133,12 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [hasStarted, setHasStarted] = useState<boolean>(false);
+
+  const loadedDefinitionKeyRef = useRef<string | null>(null);
+  const loadDefinitionInFlightRef = useRef<Promise<void> | null>(null);
+  const startedSessionKeyRef = useRef<string | null>(null);
+  const startOrJoinInFlightRef = useRef<Promise<void> | null>(null);
+  const startOrJoinInFlightKeyRef = useRef<string | null>(null);
 
   const puzzleNodeIdByKey = useMemo(() => {
     const map = new Map<string, string>();
@@ -173,23 +189,49 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
 
   const loadDefinition = useCallback(async () => {
     if (!questId) return;
+    const definitionKey = `${questId}:${questVersion}`;
+    if (definition && loadedDefinitionKeyRef.current === definitionKey) return;
+    if (loadDefinitionInFlightRef.current) {
+      await loadDefinitionInFlightRef.current;
+      return;
+    }
     const url = `/api/runtime/compiled?questId=${encodeURIComponent(questId)}&questVersion=${encodeURIComponent(questVersion)}`;
-    const res = await getJson<{ success: boolean; definition?: CompiledQuestDefinition; error?: string }>(url);
-    if (!res.ok) {
-      setError(res.error);
-      return;
+    const p = (async () => {
+      const res = await getJson<{ success: boolean; definition?: CompiledQuestDefinition; error?: string }>(url);
+      if (!res.ok) {
+        setError(res.error);
+        return;
+      }
+      if (!res.data.success || !res.data.definition) {
+        setError(res.data.error ?? 'Failed to load compiled definition');
+        return;
+      }
+      setDefinition(res.data.definition);
+      loadedDefinitionKeyRef.current = definitionKey;
+    })();
+
+    loadDefinitionInFlightRef.current = p;
+    try {
+      await p;
+    } finally {
+      loadDefinitionInFlightRef.current = null;
     }
-    if (!res.data.success || !res.data.definition) {
-      setError(res.data.error ?? 'Failed to load compiled definition');
-      return;
-    }
-    setDefinition(res.data.definition);
-  }, [questId, questVersion]);
+  }, [definition, questId, questVersion]);
 
   const startOrJoin = useCallback(async (options?: { reset?: boolean }) => {
     if (!questId || !runtimeSessionId || !playerId || !playerName) return;
+
+    const sessionKey = `${questId}:${questVersion}:${runtimeSessionId}:${playerId}`;
+    if (!options?.reset) {
+      if (hasStarted && startedSessionKeyRef.current === sessionKey && snapshot && definition) return;
+      if (startOrJoinInFlightRef.current && startOrJoinInFlightKeyRef.current === sessionKey) {
+        await startOrJoinInFlightRef.current;
+        return;
+      }
+    }
+
     setLoading(true);
-    try {
+    const p = (async () => {
       await loadDefinition();
       const res = await postJson<{
         success: boolean;
@@ -219,13 +261,29 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
       if (Array.isArray(res.data.deltas)) setDeltas(res.data.deltas);
       setError(null);
       setHasStarted(true);
+      startedSessionKeyRef.current = sessionKey;
+    })();
+
+    startOrJoinInFlightRef.current = p;
+    startOrJoinInFlightKeyRef.current = sessionKey;
+    try {
+      await p;
     } finally {
+      if (startOrJoinInFlightRef.current === p) {
+        startOrJoinInFlightRef.current = null;
+        startOrJoinInFlightKeyRef.current = null;
+      }
       setLoading(false);
     }
-  }, [loadDefinition, playerId, playerName, questId, questVersion, runtimeSessionId]);
+  }, [definition, hasStarted, loadDefinition, playerId, playerName, questId, questVersion, runtimeSessionId, snapshot]);
 
   useEffect(() => {
     setHasStarted(false);
+    startedSessionKeyRef.current = null;
+    startOrJoinInFlightRef.current = null;
+    startOrJoinInFlightKeyRef.current = null;
+    loadDefinitionInFlightRef.current = null;
+    loadedDefinitionKeyRef.current = null;
   }, [playerId, questId, questVersion, runtimeSessionId]);
 
   const arriveAtObject = useCallback(
@@ -395,7 +453,6 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
   const pollRef = useRef<number | null>(null);
   const lastPollKey = `${runtimeSessionId ?? 'none'}:${playerId ?? 'none'}`;
   const lastPollKeyRef = useRef(lastPollKey);
-  const startedSessionKeyRef = useRef<string | null>(null);
 
   useEffect(() => {
     const changed = lastPollKeyRef.current !== lastPollKey;

@@ -649,6 +649,8 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
         } catch {
             onNotification('Audio non disponibile');
             setTimeout(() => onNotification(null), 4000);
+            resolveBlockingAudio();
+            resolveAudioPanelClose();
             return;
         }
 
@@ -691,6 +693,10 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
                         }, 150);
                         return;
                     }
+
+                    // If we can't/shouldn't retry, don't leave blocking callers hanging.
+                    resolveBlockingAudio();
+                    resolveAudioPanelClose();
                 }
                 if (e?.name === 'NotAllowedError') {
                     pendingNarrationAudioRef.current = {
@@ -705,12 +711,20 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
                     onNotification('Audio bloccato: tocca Play/Steps, Attiva Bussola o la mappa per abilitare l\'audio');
                     audioUnlockedRef.current = false;
                     setTimeout(() => onNotification(null), 4000);
+                    resolveBlockingAudio();
+                    resolveAudioPanelClose();
                 } else if (e?.name === 'NotSupportedError') {
                     onNotification('Audio non supportato o non disponibile');
                     setTimeout(() => onNotification(null), 4000);
+                    resolveBlockingAudio();
+                    resolveAudioPanelClose();
+                } else {
+                    // Unknown playback failure; avoid deadlocking blocking timeline steps.
+                    resolveBlockingAudio();
+                    resolveAudioPanelClose();
                 }
             });
-    }, [activeAudio, onNotification]);
+    }, [activeAudio, onNotification, resolveAudioPanelClose, resolveBlockingAudio]);
 
 
     return {

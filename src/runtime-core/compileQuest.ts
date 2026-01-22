@@ -4,6 +4,7 @@ import type { QuestObject } from '@/types/quest';
 import type { Transcription } from '@/types/transcription';
 import type {
   ActionNode,
+  ArNode,
   AudioNode,
   ChatNode,
   CompiledQuestDefinition,
@@ -166,6 +167,65 @@ function readActionParams(item: any): Record<string, unknown> {
   return isRecord(params) ? (params as Record<string, unknown>) : {};
 }
 
+function readArConfig(item: any): {
+  task_prompt: '<OD>' | '<REFERRING_EXPRESSION_SEGMENTATION>';
+  text_input?: string;
+  overlay?: string;
+  origin?: 'top' | 'center';
+  match_target_image_url?: string;
+  match_target_image_key?: string;
+} {
+  const cfg = isRecord(item?.ar) ? (item.ar as Record<string, unknown>) : {};
+
+  const taskRaw =
+    cfg.task_prompt ??
+    (cfg as any).taskPrompt ??
+    item?.task_prompt ??
+    item?.taskPrompt ??
+    '<REFERRING_EXPRESSION_SEGMENTATION>';
+  const taskPrompt =
+    taskRaw === '<OD>' || taskRaw === '<REFERRING_EXPRESSION_SEGMENTATION>'
+      ? taskRaw
+      : '<REFERRING_EXPRESSION_SEGMENTATION>';
+
+  const textRaw = cfg.text_input ?? (cfg as any).textInput ?? item?.text_input ?? item?.textInput;
+  const textInput = typeof textRaw === 'string' && textRaw.trim().length ? textRaw : undefined;
+
+  const overlayRaw = cfg.overlay ?? (cfg as any).overlayName ?? item?.overlay ?? item?.overlayName;
+  const overlay = typeof overlayRaw === 'string' && overlayRaw.trim().length ? overlayRaw.trim() : undefined;
+
+  const originRaw = cfg.origin ?? (cfg as any).overlayOrigin ?? item?.origin ?? item?.overlayOrigin;
+  const origin =
+    originRaw === 'center' || originRaw === 'top'
+      ? (originRaw as 'top' | 'center')
+      : undefined;
+
+  const matchUrlRaw =
+    cfg.match_target_image_url ??
+    (cfg as any).matchTargetImageUrl ??
+    item?.match_target_image_url ??
+    item?.matchTargetImageUrl;
+  const match_target_image_url =
+    typeof matchUrlRaw === 'string' && matchUrlRaw.trim().length ? matchUrlRaw.trim() : undefined;
+
+  const matchKeyRaw =
+    cfg.match_target_image_key ??
+    (cfg as any).matchTargetImageKey ??
+    item?.match_target_image_key ??
+    item?.matchTargetImageKey;
+  const match_target_image_key =
+    typeof matchKeyRaw === 'string' && matchKeyRaw.trim().length ? matchKeyRaw.trim() : undefined;
+
+  return {
+    task_prompt: taskPrompt,
+    text_input: textInput,
+    overlay,
+    origin,
+    match_target_image_url,
+    match_target_image_key,
+  };
+}
+
 
 export type CompileQuestOptions = {
   questId: string;
@@ -194,6 +254,40 @@ export function compileQuestFromObjects(objects: QuestObject[], options: Compile
 
   const objectsMap: Record<ObjectId, ObjectDef> = {};
   const timelineNodes: Record<NodeId, TimelineNode> = {};
+
+  function ensureLinearTimelineAdjacency(params: {
+    objectId: ObjectId;
+    startNodeId: NodeId;
+    endNodeId: NodeId;
+    itemNodeIds: NodeId[];
+  }) {
+    const { objectId, startNodeId, endNodeId, itemNodeIds } = params;
+
+    const startNode = timelineNodes[startNodeId] as any;
+    if (startNode && startNode.type === 'state' && startNode.stateKind === 'start') {
+      const desired = itemNodeIds.length ? [itemNodeIds[0]] : [endNodeId];
+      if (!Array.isArray(startNode.outNodeIds) || startNode.outNodeIds.length === 0) {
+        startNode.outNodeIds = desired;
+      }
+    }
+
+    for (let idx = 0; idx < itemNodeIds.length; idx++) {
+      const nodeId = itemNodeIds[idx];
+      const nextNodeId = itemNodeIds[idx + 1] ?? endNodeId;
+      const node = timelineNodes[nodeId] as any;
+      if (!node || node.objectId !== objectId) continue;
+
+      if (node.type === 'puzzle' || node.type === 'action') {
+        if (!Array.isArray(node.successOutNodeIds) || node.successOutNodeIds.length === 0) {
+          node.successOutNodeIds = [nextNodeId];
+        }
+      } else {
+        if (!Array.isArray(node.outNodeIds) || node.outNodeIds.length === 0) {
+          node.outNodeIds = [nextNodeId];
+        }
+      }
+    }
+  }
 
   for (let i = 0; i < sorted.length; i++) {
     const obj = sorted[i];
@@ -369,8 +463,30 @@ export function compileQuestFromObjects(objects: QuestObject[], options: Compile
         continue;
       }
 
+      if (type === 'ar') {
+        const ar = readArConfig(item);
+        const node: ArNode = {
+          ...common,
+          type: 'ar',
+          payload: {
+            task_prompt: ar.task_prompt,
+            text_input: ar.text_input,
+            overlay: ar.overlay,
+            origin: ar.origin,
+            match_target_image_url: ar.match_target_image_url,
+            match_target_image_key: ar.match_target_image_key,
+          },
+          outNodeIds: [nextNodeId],
+        };
+        timelineNodes[nodeId] = node;
+        continue;
+      }
+
       throw new Error(`Unsupported timeline item type "${type}" for ${objectId} item ${item.key}`);
     }
+
+    // Defensive: ensure no linear chain node is left without an outgoing edge.
+    ensureLinearTimelineAdjacency({ objectId, startNodeId, endNodeId, itemNodeIds });
   }
 
   const compiled: CompiledQuestDefinition = {

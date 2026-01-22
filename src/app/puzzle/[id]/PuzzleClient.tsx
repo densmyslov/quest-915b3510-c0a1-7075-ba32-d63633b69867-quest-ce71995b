@@ -111,34 +111,11 @@ export default function PuzzleClient(props: PuzzleClientProps) {
 
     // Initialize quest session on mount
     React.useEffect(() => {
-        const initSession = async () => {
-            if (!sessionId || !data?.quest?.id) return;
-
-            try {
-                // Start quest session if not already started
-                // Use Lambda Endpoint: /runtime/session/start
-                const baseUrl = process.env.NEXT_PUBLIC_RUNTIME_API_URL || '';
-                await fetch(`${baseUrl}/runtime/session/start`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        sessionId,
-                        questId: data.quest.id,
-                        teamCode: teamSync.teamCode || undefined,
-                        playerId: sessionId, // Assuming solo/same mode
-                        playerName: typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('quest_playerName') || 'Player' : 'Player',
-                        questVersion: 'v1',
-                        eventId: `start:${sessionId}`,
-                        dedupeKey: `start:${sessionId}`
-                    })
-                });
-            } catch (error) {
-                console.error('Failed to initialize quest session:', error);
-            }
-        };
-
-        initSession();
-    }, [sessionId, data?.quest?.id, teamSync.teamCode]);
+        if (!runtime) return;
+        if (isTeamMode && !sessionId) return;
+        if (runtime.snapshot) return;
+        void runtime.startOrJoin();
+    }, [isTeamMode, runtime, sessionId]);
 
     React.useEffect(() => {
         if (!data) {
@@ -240,7 +217,7 @@ export default function PuzzleClient(props: PuzzleClientProps) {
 
     // Handler for complete
     const handlePuzzleComplete = React.useCallback(async () => {
-        if (isSubmitting || !sessionId || !runtime || !puzzle) return;
+        if (isSubmitting || !runtime?.sessionId || !puzzle) return;
 
         // Extract points from puzzle data (fallback to 100 if not specified)
         const points = (puzzle as any).points || puzzleData?.points || 100;

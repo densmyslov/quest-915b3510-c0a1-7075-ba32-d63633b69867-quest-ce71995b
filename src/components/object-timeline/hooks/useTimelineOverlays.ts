@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import type {
     TimelineActionOverlayState,
+    TimelineArOverlayState,
     TimelineChatOverlayState,
     TimelineDocumentOverlayState,
     TimelineTextOverlayState,
@@ -9,9 +10,10 @@ import type {
 
 type UseTimelineOverlaysParams = {
     completeRuntimeNode: (objectId: string, itemKey: string) => Promise<boolean>;
+    onPuzzleComplete?: (puzzleId: string, objectId: string) => Promise<void>;
 };
 
-export function useTimelineOverlays({ completeRuntimeNode }: UseTimelineOverlaysParams) {
+export function useTimelineOverlays({ completeRuntimeNode, onPuzzleComplete }: UseTimelineOverlaysParams) {
     // #region State & Refs
     const [timelinePuzzleOverlay, setTimelinePuzzleOverlay] = useState<{ puzzleId: string; objectId: string; itemKey?: string } | null>(null);
 
@@ -25,6 +27,7 @@ export function useTimelineOverlays({ completeRuntimeNode }: UseTimelineOverlays
     const [timelineVideoOverlay, setTimelineVideoOverlay] = useState<TimelineVideoOverlayState | null>(null);
     const [timelineActionOverlay, setTimelineActionOverlay] = useState<TimelineActionOverlayState | null>(null);
     const [timelineChatOverlay, setTimelineChatOverlay] = useState<TimelineChatOverlayState | null>(null);
+    const [timelineArOverlay, setTimelineArOverlay] = useState<TimelineArOverlayState | null>(null);
 
     const [timelineDocumentOverlay, _setTimelineDocumentOverlay] = useState<TimelineDocumentOverlayState | null>(null);
     const timelineDocumentOverlayRef = useRef<TimelineDocumentOverlayState | null>(null);
@@ -39,6 +42,7 @@ export function useTimelineOverlays({ completeRuntimeNode }: UseTimelineOverlays
     const timelineVideoResolveRef = useRef<(() => void) | null>(null);
     const timelineChatResolveRef = useRef<(() => void) | null>(null);
     const timelineActionResolveRef = useRef<((evidence: Record<string, unknown>) => void) | null>(null);
+    const timelineArResolveRef = useRef<((evidence: Record<string, unknown>) => void) | null>(null);
     // #endregion
 
     // #region Text Overlay Handlers
@@ -302,6 +306,43 @@ export function useTimelineOverlays({ completeRuntimeNode }: UseTimelineOverlays
     );
     // #endregion
 
+    // #region AR Overlay Handlers
+    const resolveTimelineAr = useCallback((evidence: Record<string, unknown>) => {
+        const resolve = timelineArResolveRef.current;
+        timelineArResolveRef.current = null;
+        if (resolve) {
+            try {
+                resolve(evidence);
+            } catch {
+                // ignore
+            }
+        }
+    }, []);
+
+    const completeTimelineAr = useCallback(
+        (evidence: Record<string, unknown>) => {
+            setTimelineArOverlay(null);
+            resolveTimelineAr(evidence);
+        },
+        [resolveTimelineAr]
+    );
+
+    const cancelTimelineAr = useCallback(() => {
+        completeTimelineAr({ __cancelled: true });
+    }, [completeTimelineAr]);
+
+    const showTimelineAr = useCallback(
+        async (params: TimelineArOverlayState) => {
+            cancelTimelineAr();
+            return await new Promise<Record<string, unknown>>((resolve) => {
+                timelineArResolveRef.current = resolve;
+                setTimelineArOverlay(params);
+            });
+        },
+        [cancelTimelineAr]
+    );
+    // #endregion
+
     // #region Document Overlay Handlers
     const resolveTimelineDocument = useCallback(() => {
         const resolve = timelineDocumentResolveRef.current;
@@ -374,12 +415,13 @@ export function useTimelineOverlays({ completeRuntimeNode }: UseTimelineOverlays
     }, []);
 
     const completeTimelinePuzzle = useCallback(
-        (points: number) => {
-            // Note: Actual logic usually handled via questRuntime submitPuzzleSuccess
-            // This just clears UI
+        async () => {
+            if (timelinePuzzleOverlay && onPuzzleComplete) {
+                await onPuzzleComplete(timelinePuzzleOverlay.puzzleId, timelinePuzzleOverlay.objectId);
+            }
             setTimelinePuzzleOverlay(null);
         },
-        []
+        [timelinePuzzleOverlay, onPuzzleComplete]
     );
     // #endregion
 
@@ -389,6 +431,7 @@ export function useTimelineOverlays({ completeRuntimeNode }: UseTimelineOverlays
         timelineVideoOverlay,
         timelineChatOverlay,
         timelineActionOverlay,
+        timelineArOverlay,
         timelineDocumentOverlay,
         timelinePuzzleOverlay,
         setTimelinePuzzleOverlay,
@@ -403,6 +446,9 @@ export function useTimelineOverlays({ completeRuntimeNode }: UseTimelineOverlays
         showTimelineAction,
         completeTimelineAction,
         cancelTimelineAction,
+        showTimelineAr,
+        completeTimelineAr,
+        cancelTimelineAr,
         showTimelineDocument,
         closeTimelineDocument,
         closeTimelinePuzzle,

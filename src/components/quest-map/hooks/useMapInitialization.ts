@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Map as LeafletMap, TileLayer, LayerGroup } from 'leaflet';
-import { OSM_TILE_URL, OSM_ATTRIBUTION, OSM_MAX_NATIVE_ZOOM, OSM_MAX_ZOOM } from '@/components/map/MapAssets';
+import { OSM_TILE_URL, OSM_ATTRIBUTION, OSM_MAX_NATIVE_ZOOM, OSM_MAX_ZOOM } from '../components/MapAssets';
+import { MapFrame } from '../components/MapFrame';
+import { COLORS } from '../components/MapStyles';
 import { getValidCoordinates, isStartObject } from '../utils/mapUtils';
 
 type UseMapInitializationProps = {
@@ -112,10 +114,14 @@ export function useMapInitialization({
 
             if (startObjectCoords) {
                 center = startObjectCoords;
-                zoom = 16;
+                zoom = 17;
             } else if (userLocation) {
                 center = userLocation;
-                zoom = 15;
+                zoom = 17;
+            } else if (visibleObjects.length > 0 && !!getValidCoordinates(visibleObjects[0])) {
+                // Fallback to the first available object if we have no start object and no user location
+                center = getValidCoordinates(visibleObjects[0]);
+                zoom = 17;
             }
         }
 
@@ -123,9 +129,9 @@ export function useMapInitialization({
             map.setView(center, zoom, { animate: false });
             initialZoomSet.current = true;
         } else if (visibleObjects.length > 0) {
-            // Fit bounds if no specific start point
-            // But we need to convert objects to bounds.
-            // ...
+            // Unlikely to reach here if the above fallback works, but safe to keep bounds logic just in case
+            // or we could just remove it if we trust the fallback.
+            // Let's leave it but it might not be hit often.
         }
 
     }, [mapUniqueId, userLocation, visibleObjects, startObjectIds]);

@@ -72,6 +72,7 @@ export type TimelineNodeType =
   | 'audio'
   | 'video'
   | 'image'
+  | 'ar'
   | 'puzzle'
   | 'action'
   | 'effect';
@@ -159,6 +160,19 @@ export type ImageNode = TimelineNodeCommon &
     };
   };
 
+export type ArNode = TimelineNodeCommon &
+  AdjacencyLinear & {
+    type: 'ar';
+    payload: {
+      task_prompt: string;
+      text_input?: string;
+      overlay?: string;
+      origin?: 'top' | 'center';
+      match_target_image_url?: string;
+      match_target_image_key?: string;
+    };
+  };
+
 export type PuzzleNode = TimelineNodeCommon &
   AdjacencyBranching & {
     type: 'puzzle';
@@ -194,7 +208,17 @@ export type EffectNode = TimelineNodeCommon &
     };
   };
 
-export type TimelineNode = StateNode | TextNode | ChatNode | AudioNode | VideoNode | ImageNode | PuzzleNode | ActionNode | EffectNode;
+export type TimelineNode =
+  | StateNode
+  | TextNode
+  | ChatNode
+  | AudioNode
+  | VideoNode
+  | ImageNode
+  | ArNode
+  | PuzzleNode
+  | ActionNode
+  | EffectNode;
 
 export type CompiledQuestDefinition = {
   schemaVersion: CompiledSchemaVersion;

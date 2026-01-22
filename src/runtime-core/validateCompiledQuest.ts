@@ -57,6 +57,22 @@ function getOutgoingNodeIds(node: TimelineNode): NodeId[] {
   return node.outNodeIds;
 }
 
+function computeReachableFrom(def: CompiledQuestDefinition, startNodeId: NodeId): Set<NodeId> {
+  const reachable = new Set<NodeId>();
+  const queue: NodeId[] = [startNodeId];
+  while (queue.length) {
+    const nodeId = queue.shift()!;
+    if (reachable.has(nodeId)) continue;
+    reachable.add(nodeId);
+    const node = def.timelineNodes[nodeId];
+    if (!node) continue;
+    for (const out of getOutgoingNodeIds(node)) {
+      if (!reachable.has(out)) queue.push(out);
+    }
+  }
+  return reachable;
+}
+
 export function validateCompiledQuestDefinition(def: unknown): CompiledQuestValidationError[] {
   const errors: CompiledQuestValidationError[] = [];
 
@@ -181,6 +197,30 @@ export function validateCompiledQuestDefinition(def: unknown): CompiledQuestVali
     if (node.type === 'state' && (node as any).stateKind === 'end') {
       const outs = getOutgoingNodeIds(node);
       if (outs.length !== 0) push(errors, `${adjacencyPath}.outNodeIds`, 'state:end must have no outgoing nodeIds');
+    }
+
+    // For start nodes, require at least one outgoing nodeId (usually first item or __end).
+    if (node.type === 'state' && (node as any).stateKind === 'start') {
+      const outs = getOutgoingNodeIds(node);
+      if (outs.length === 0) push(errors, `${adjacencyPath}.outNodeIds`, 'state:start must have at least 1 outgoing nodeId');
+    }
+  }
+
+  // Reachability: ensure each object's __end is reachable from its __start.
+  for (const objectId of Object.keys(typed.objects) as ObjectId[]) {
+    const startNodeId = `tl_${objectId}__start` as NodeId;
+    const endNodeId = `tl_${objectId}__end` as NodeId;
+    const startNode = typed.timelineNodes[startNodeId];
+    const endNode = typed.timelineNodes[endNodeId];
+    if (!startNode || !endNode) continue;
+
+    const reachable = computeReachableFrom(typed, startNodeId);
+    if (!reachable.has(endNodeId)) {
+      push(
+        errors,
+        `objects.${objectId}.entryNodeId`,
+        `state:end node is not reachable from entryNodeId (${startNodeId} -> ${endNodeId})`,
+      );
     }
   }
 

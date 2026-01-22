@@ -6,7 +6,8 @@ export type RuntimePlayerStatus = 'active' | 'left' | 'inactive';
 export type RuntimeObjectLifecycle = 'HIDDEN' | 'AVAILABLE' | 'ARRIVED' | 'COMPLETED';
 
 export type RuntimeNodeStatus = 'locked' | 'unlocked' | 'completed';
-export type RuntimeNodeOutcome = 'success' | 'fail';
+// Backend APIs may return "failure" while some client code historically used "fail".
+export type RuntimeNodeOutcome = 'success' | 'fail' | 'failure';
 
 export type RuntimePlayer = {
   playerId: string;
