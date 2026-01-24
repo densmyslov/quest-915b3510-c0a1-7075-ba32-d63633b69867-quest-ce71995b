@@ -70,13 +70,7 @@ export default function MissionBrief({
 
           {/* Copy */}
           <div className="missionBriefCopy">
-            Siete arrivati a {currentMonth} del 1926. Avete solo due ore prima che il portale si richiuda.
-            Il nostro sistema ha rilevato potenti fluttuazioni energetiche nell’area di Esino Lario, che sembrano essere la causa dell’apertura del portale.
-            Qualcuno tra gli abitanti della città si trova in grave pericolo.
-            Disperato, ha attraversato la cosiddetta <span className="missionBriefEmphasis">Porta di Prada</span> — “le porte verso l’aldilà”,
-            un’arca carsica, e forse il sistema vi aiuterà a entrare in contatto con lui.
-            Trovate il punto di massima concentrazione energetica.
-            Di solito questo è legato al fatto che nelle vicinanze si stia verificando un’emozione molto intensa.
+            Il nostro sistema ha rilevato <strong>potenti fluttuazioni energetiche nell’area di Esino Lario</strong>, che sembrano essere la causa dell’apertura del portale in corrispondenza della <span className="missionBriefEmphasis">Porta di Prada</span> - un arco carsico che nella tradizione popolare viene chiamato <strong>“la porta verso l’aldilà”</strong>. Qualcuno tra gli abitanti del paese si trova in <strong>grave pericolo</strong>. Disperato, ha attraversato il portale. Se anche voi lo attraversate forse il sistema vi aiuterà ad entrare in contatto con lui. Avete solo <strong>due ore</strong> prima che il portale si richiuda. Trovate <strong>il punto di massima concentrazione energetica</strong>.
           </div>
 
           {/* CTA */}

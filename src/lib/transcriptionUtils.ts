@@ -13,11 +13,35 @@ import type {
 /**
  * Normalize a time value (convert DynamoDB Decimal to number)
  */
-export function normalizeTime(time: number | { toNumber?: () => number }): number {
-    if (typeof time === 'object' && time !== null && 'toNumber' in time && typeof time.toNumber === 'function') {
-        return time.toNumber();
+export function normalizeTime(time: unknown): number {
+    if (typeof time === 'number') return time;
+    if (typeof time === 'string') return Number(time);
+
+    if (typeof time === 'object' && time !== null) {
+        const obj: any = time as any;
+
+        // DynamoDB Decimal (via dynamodb-toolbox / DocumentClient wrappers).
+        if (typeof obj.toNumber === 'function') {
+            try {
+                return obj.toNumber();
+            } catch {
+                // fall through
+            }
+        }
+
+        // Mongo / Extended JSON.
+        if (typeof obj.$numberDecimal === 'string') return Number(obj.$numberDecimal);
+
+        // DynamoDB AttributeValue shapes.
+        if (typeof obj.N === 'string') return Number(obj.N);
+        if (typeof obj.n === 'string') return Number(obj.n);
+
+        // Generic wrappers.
+        if (typeof obj.value === 'number') return obj.value;
+        if (typeof obj.value === 'string') return Number(obj.value);
     }
-    return Number(time);
+
+    return Number(time as any);
 }
 
 /**

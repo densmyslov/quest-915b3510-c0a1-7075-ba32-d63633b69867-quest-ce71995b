@@ -16,6 +16,8 @@ type QuestAudioContextValue = {
   unlockBackgroundAudio: () => Promise<boolean>;
   playBackgroundAudio: (params: PlayBackgroundParams) => Promise<void>;
   stopBackgroundAudio: () => void;
+  duration: number;
+  currentTime: number;
 };
 
 const QuestAudioContext = createContext<QuestAudioContextValue | null>(null);
@@ -66,11 +68,16 @@ export function QuestAudioProvider({ children }: { children: React.ReactNode }) 
   const [isBackgroundPlaying, setIsBackgroundPlaying] = useState(false);
   const [isBackgroundLocked, setIsBackgroundLocked] = useState(false);
 
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+
   const stopBackgroundAudio = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) {
       setBackgroundUrl(null);
       setIsBackgroundPlaying(false);
+      setDuration(0);
+      setCurrentTime(0);
       return;
     }
 
@@ -86,6 +93,8 @@ export function QuestAudioProvider({ children }: { children: React.ReactNode }) 
     pendingRef.current = null;
     setBackgroundUrl(null);
     setIsBackgroundPlaying(false);
+    setDuration(0);
+    setCurrentTime(0);
   }, []);
 
   const playBackgroundAudio = useCallback(async (params: PlayBackgroundParams) => {
@@ -212,6 +221,7 @@ export function QuestAudioProvider({ children }: { children: React.ReactNode }) 
           audio.removeEventListener('loadedmetadata', onLoaded);
           audio.removeEventListener('error', onError);
           console.log('[QuestAudio] Metadata loaded, duration:', audio.duration);
+          setDuration(audio.duration || 0); // Update duration
           resolve();
         };
 
@@ -233,6 +243,7 @@ export function QuestAudioProvider({ children }: { children: React.ReactNode }) 
 
         if (audio.readyState >= 1) { // HAVE_METADATA
           console.log('[QuestAudio] Metadata already loaded');
+          setDuration(audio.duration || 0);
           clearTimeout(timeout);
           resolve();
         } else {
@@ -424,6 +435,8 @@ export function QuestAudioProvider({ children }: { children: React.ReactNode }) 
       unlockBackgroundAudio,
       playBackgroundAudio,
       stopBackgroundAudio,
+      duration,
+      currentTime,
     }),
     [
       isBackgroundLocked,
@@ -432,6 +445,8 @@ export function QuestAudioProvider({ children }: { children: React.ReactNode }) 
       unlockBackgroundAudio,
       playBackgroundAudio,
       stopBackgroundAudio,
+      duration,
+      currentTime,
     ],
   );
 
@@ -446,6 +461,8 @@ export function QuestAudioProvider({ children }: { children: React.ReactNode }) 
         onPlay={() => setIsBackgroundPlaying(true)}
         onPause={() => setIsBackgroundPlaying(false)}
         onEnded={() => setIsBackgroundPlaying(false)}
+        onTimeUpdate={(e) => setCurrentTime((e.target as HTMLAudioElement).currentTime)}
+        onDurationChange={(e) => setDuration((e.target as HTMLAudioElement).duration || 0)}
       />
       {children}
     </QuestAudioContext.Provider>

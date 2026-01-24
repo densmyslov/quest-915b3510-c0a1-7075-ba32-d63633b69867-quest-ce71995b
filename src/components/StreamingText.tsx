@@ -64,11 +64,18 @@ export function StreamingText({
         const rawStarts = transcription.words.map((w) => normalizeTime(w.start));
         const rawEnds = transcription.words.map((w) => normalizeTime(w.end));
 
-        // Validation: Check if we have valid timestamps.
-        // If max end time is 0 (or very close to 0), and we have a valid audioDuration,
-        // we should fallback to interpolation.
-        const maxEnd = Math.max(...rawEnds);
-        const hasValidTimestamps = maxEnd > 0.1; // Threshold: at least 100ms
+        // Validation: Check if we have usable timestamps.
+        // If timestamps are missing/unparseable (NaN) or effectively all-zero, and we have a
+        // valid audioDuration, we fallback to interpolation.
+        const finiteEnds = rawEnds.filter((n) => Number.isFinite(n));
+        const maxEnd = finiteEnds.length ? Math.max(...finiteEnds) : 0;
+        const timedCount = rawStarts.reduce((acc, start, i) => {
+            const end = rawEnds[i];
+            if (!Number.isFinite(start) || !Number.isFinite(end)) return acc;
+            return acc + (end - start > 0.01 ? 1 : 0);
+        }, 0);
+
+        const hasValidTimestamps = timedCount > 0 && maxEnd > 0.1; // at least 10ms span + 100ms max
 
         if (!hasValidTimestamps && audioDuration && audioDuration > 0) {
             // Interpolate!

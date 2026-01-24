@@ -1,7 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useQuestData } from '@/context/QuestContext';
+import { useQuestAudio } from '@/context/QuestAudioContext';
 import Navigation from '@/components/Navigation';
 
 const QuestMap = dynamic(() => import('@/components/quest-map/QuestMap'), {
@@ -11,10 +13,22 @@ const QuestMap = dynamic(() => import('@/components/quest-map/QuestMap'), {
 
 export default function MapPage() {
     const data = useQuestData();
+    const { stopBackgroundAudio } = useQuestAudio();
+
+    useEffect(() => {
+        stopBackgroundAudio();
+    }, [stopBackgroundAudio]);
 
     if (!data) {
-        console.log('[MapPage] No data, returning null');
-        return null;
+        console.error('[MapPage] No data found in context');
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-black text-white">
+                <div className="text-center p-4">
+                    <h1 className="text-xl font-bold text-red-500 mb-2">Error Loading Quest</h1>
+                    <p>Quest data could not be loaded.</p>
+                </div>
+            </div>
+        );
     }
     console.log('[MapPage] Rendering QuestMap');
 

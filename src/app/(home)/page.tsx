@@ -9,14 +9,14 @@ import { useQuestAudio } from '@/context/QuestAudioContext';
 import Script from 'next/script';
 import RegistrationView from '../../components/RegistrationView';
 import { ANCESTORS, getAncestor } from './ancestors';
-import MissionBrief from './MissionBrief';
-import Intro from './Intro';
+import Introduction from './Introduction';
 
 // Configuration
+// Force rebuild to clear cache - 2026-01-23T07:00:00Z
 const VIDEO_ID = '5927e58c7d91e46b39f8b3a80fbaa363';
 const VIDEO_2_ID = '5cfadee7a3c914547ac08a0d73677ec6';
 const STREAMING_AUDIO_URL =
-  'https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260107-144449-cb354a4c.mp3';
+  'https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260123-014953-0a06e271.mp3';
 const SILENT_AUDIO_URL = '/audio/silence.mp3'; // Hosted silence file for Safari unlock
 const CUSTOMER_CODE = 'customer-yshabc4ttf2nlnnu';
 
@@ -67,14 +67,14 @@ declare global {
   }
 }
 
-type PageState = 'INITIAL_IMAGE' | 'SPLASH' | 'VIDEO' | 'REGISTRATION' | 'TRANSITION_VIDEO' | 'INTRO' | 'MISSION_BRIEF';
+type PageState = 'INITIAL_IMAGE' | 'SPLASH' | 'VIDEO' | 'REGISTRATION' | 'INTRO';
 
 export default function LandingPage() {
   const { data } = useQuest();
   const router = useRouter();
   const { createSession, createTeam, joinTeam } = useQuestSession();
   const teamSync = useTeamSync();
-  const { unlockBackgroundAudio, playBackgroundAudio, stopBackgroundAudio } = useQuestAudio();
+  const { unlockBackgroundAudio, playBackgroundAudio, stopBackgroundAudio, isBackgroundLocked, isBackgroundPlaying } = useQuestAudio();
 
   const [state, setState] = useState<PageState>('INITIAL_IMAGE');
   const [playerName, setPlayerName] = useState('');
@@ -91,23 +91,14 @@ export default function LandingPage() {
   const [isTeam, setIsTeam] = useState(false);
   const [teamSize, setTeamSize] = useState('2');
   const [accessCode, setAccessCode] = useState('');
-  const [hasCode, setHasCode] = useState(false);
+  // const [hasCode, setHasCode] = useState(false);
 
-  // Intro Logic
-  const [introText, setIntroText] = useState('');
-  const [ancestorData, setAncestorData] = useState({ name: '', year: '' });
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const video2IframeRef = useRef<HTMLIFrameElement>(null);
 
   // Video State
   const [isSdkLoaded, setIsSdkLoaded] = useState(false);
-  // Track if Video 2 is loaded
-  const [isVideo2SdkReady, setIsVideo2SdkReady] = useState(false);
   const videoPlayerRef = useRef<ReturnType<NonNullable<typeof window.Stream>> | null>(null);
-  const transitionVideoPlayerRef = useRef<ReturnType<NonNullable<typeof window.Stream>> | null>(null);
   const [videoSoundEnabled, setVideoSoundEnabled] = useState(false);
-  const [transitionVideoSoundEnabled, setTransitionVideoSoundEnabled] = useState(false);
-  const transitionSoundAutoAttemptedRef = useRef(false);
 
   const clearIntroImageTimeout = (timeoutRef: React.MutableRefObject<number | null>) => {
     if (!timeoutRef.current) return;
@@ -127,17 +118,12 @@ export default function LandingPage() {
     }, INITIAL_IMAGE_FADE_MS);
   };
 
-  const enableSoundForVideo = (which: 'intro' | 'transition') => {
-    const iframe = which === 'transition' ? video2IframeRef.current : iframeRef.current;
+  const enableSoundForVideo = () => {
+    const iframe = iframeRef.current;
     if (!iframe || !window.Stream) return;
 
-    const player =
-      which === 'transition'
-        ? (transitionVideoPlayerRef.current ?? window.Stream(iframe))
-        : (videoPlayerRef.current ?? window.Stream(iframe));
-
-    if (which === 'transition') transitionVideoPlayerRef.current = player;
-    else videoPlayerRef.current = player;
+    const player = videoPlayerRef.current ?? window.Stream(iframe);
+    videoPlayerRef.current = player;
 
     // NOTE: keep this synchronous; awaiting anything before `play()` can lose the user activation
     // needed for unmuted playback on iOS/Safari.
@@ -155,7 +141,7 @@ export default function LandingPage() {
       // ignore
     }
     try {
-      player.volume = 1;
+      player.volume = 0.5;
     } catch {
       // ignore
     }
@@ -170,33 +156,19 @@ export default function LandingPage() {
               return false;
             }
           })();
-          if (which === 'transition') setTransitionVideoSoundEnabled(isUnmuted);
-          else setVideoSoundEnabled(isUnmuted);
+          setVideoSoundEnabled(isUnmuted);
         }, 50);
       },
       () => {
-        if (which === 'transition') setTransitionVideoSoundEnabled(false);
-        else setVideoSoundEnabled(false);
+        setVideoSoundEnabled(false);
       },
     );
   };
 
   useEffect(() => {
     if (state === 'VIDEO') setVideoSoundEnabled(false);
-    if (state === 'TRANSITION_VIDEO') {
-      setTransitionVideoSoundEnabled(false);
-      transitionSoundAutoAttemptedRef.current = false;
-    }
   }, [state]);
 
-  useEffect(() => {
-    if (state !== 'TRANSITION_VIDEO') return;
-    if (!isVideo2SdkReady) return;
-    if (transitionVideoSoundEnabled) return;
-    if (transitionSoundAutoAttemptedRef.current) return;
-    transitionSoundAutoAttemptedRef.current = true;
-    window.setTimeout(() => enableSoundForVideo('transition'), 0);
-  }, [state, isVideo2SdkReady, transitionVideoSoundEnabled]);
 
   // --- PHASE 0: INITIAL IMAGE ---
   useEffect(() => {
@@ -237,20 +209,9 @@ export default function LandingPage() {
     }
   }, [state]);
 
-  // Fallback for Transition Video
-  useEffect(() => {
-    if (state === 'TRANSITION_VIDEO') {
-      const timer = setTimeout(() => {
-        handleVideo2Ended();
-      }, 15000); // Reduce to 15s fallback (was 3m)
-      return () => clearTimeout(timer);
-    }
-  }, [state]);
-
   // Handle SDK Load
   const handleSdkLoad = () => {
     setIsSdkLoaded(true);
-    setIsVideo2SdkReady(true);
   };
 
   // Attach Listener for Main Video
@@ -295,47 +256,6 @@ export default function LandingPage() {
     }
   }, [state, isSdkLoaded]);
 
-  // Attach Listener for Transition Video
-  useEffect(() => {
-    if (state === 'TRANSITION_VIDEO' && isVideo2SdkReady && video2IframeRef.current && window.Stream) {
-      try {
-        const player = window.Stream(video2IframeRef.current);
-        transitionVideoPlayerRef.current = player;
-
-        const onEnded = () => {
-          handleVideo2Ended();
-        };
-
-        const onError = (e?: any) => {
-          console.error('[page.tsx] Transition video error:', e);
-          // Fallback to Intro so we don't hang
-          handleVideo2Ended();
-        };
-
-        player.addEventListener('ended', onEnded);
-        player.addEventListener('error', onError);
-
-        player.play().catch(e => {
-          console.warn('[page.tsx] Transition auto-play failed:', e);
-        });
-
-        return () => {
-          try {
-            player.removeEventListener?.('ended', onEnded);
-            player.removeEventListener?.('error', onError);
-          } catch { }
-        };
-      } catch (e) {
-        console.error('[page.tsx] Stream SDK init failed for transition', e);
-        handleVideo2Ended();
-      }
-    }
-  }, [state, isVideo2SdkReady]);
-
-
-
-  // --- TYPEWRITER ---
-
 
   // --- HANDLERS ---
   const handleVideoEnded = () => {
@@ -346,90 +266,14 @@ export default function LandingPage() {
     }, 3000);
   };
 
-  const handleVideo2Ended = () => {
-    setState('INTRO');
-    // setIsTyping(true); // Moved to Intro component
-  };
 
   // Hook to handle INTRO state and ensure audio is playing
-  const { isBackgroundPlaying, isBackgroundLocked } = useQuestAudio();
-  useEffect(() => {
-    if (state === 'INTRO') {
-      console.log('[page.tsx] INTRO state - ramping up audio to volume 50');
+  // MOVED TO: Introduction.tsx
 
-      // Ensure audio is playing if it stopped or was missed
-      if (!isBackgroundPlaying && !isBackgroundLocked) {
-        console.log('[page.tsx] Intro check: Audio not playing, forcing play');
-        void playBackgroundAudio({
-          url: STREAMING_AUDIO_URL,
-          loop: true,
-          volume: 50,
-          continueIfAlreadyPlaying: true,
-        }).catch(e => console.warn('[page.tsx] Intro audio force play failed', e));
-      } else {
-        void playBackgroundAudio({
-          url: STREAMING_AUDIO_URL,
-          loop: true,
-          volume: 50,
-          continueIfAlreadyPlaying: true,
-        });
-      }
-    } else if (state === 'MISSION_BRIEF') {
-      console.log('[page.tsx] MISSION_BRIEF state - stopping background audio');
-      stopBackgroundAudio();
-    }
-  }, [state, playBackgroundAudio, stopBackgroundAudio, isBackgroundPlaying, isBackgroundLocked]);
 
-  const handleStartAdventure = (nameOverride?: string) => {
-    const finalName = nameOverride || playerName;
-    if (!finalName.trim()) return;
-
-    // Split Full Name to get First Name (assuming "First Last" or just "First")
-    // If only one name is provided, treat it as First Name.
-    const nameParts = finalName.trim().split(' ');
-    // We assume the user enters "FirstName Surname" or just "FirstName".
-    // The prompt implies the user *indicated* a surname at registration, or we treat the whole input as their name?
-    // "surname Viglienghi (the surname the player indicates at registration)"
-    // So if I register as "Denis", my surname is "Denis"? Or should I ask for First and Last?
-    // The current UI likely has one field "Name". Let's assume the last part is the surname if multiple parts,
-    // or the whole thing is the surname if one part?
-    // "Gentile Denis (nome) Nasazzi (cognome antenato)..."
-    // "il suo antenato cambiò il cognome originale con quello che lei ha indicato..."
-
-    const userFirstName = nameParts[0];
-    const userSurname = nameParts.length > 1 ? nameParts.slice(1).join(' ') : finalName;
-
-    // Determine Ancestor
-    // If solo, I am inevitable index 0 -> Nasazzi.
-    // If team, check context.
-    let ancestor = ANCESTORS[0]; // Default
-    if (teamSync.team && teamSync.session) {
-      ancestor = getAncestor(teamSync.session.sessionId, teamSync.team.members);
-    } else {
-      // Solo mode or before sync: We are effectively the "first" and only one known so far.
-      // If we are in 'solo' mode, use index 0.
-      ancestor = ANCESTORS[0];
-    }
-
-    setAncestorData({ name: ancestor.name, year: ancestor.year }); // Keep state sync if needed for other things, though we use local var now.
-
-    const text = `Gentile ${userFirstName} ${ancestor.name} (${userSurname}),
-
-Le è stato concesso l'accesso a un portale temporale unico — un fenomeno rarissimo scoperto dai ricercatori del Museo delle Grigne durante l'esplorazione delle grotte carsiche del sistema Releccio (la seconda per profondità in Italia).
-In una zona della grotta chiamata "Porta di Prada" si è verificato un potente picco energetico, probabilmente causato da una forte ondata emotiva, cosa che apparentemente sta accadendo nelle ultime ore.
-È sorprendente notare che, secondo le leggende locali, la Porta di Prada era considerata un passaggio verso il mondo sotterraneo. E sembra che non fosse solo una leggenda.
-
-Questo portale si attiva solo per coloro le cui radici sono legate a Esino Lario.
-
-I nostri sistemi hanno stabilito che lei è un discendente di Daniela ${ancestor.name}, che nel ${ancestor.year} fuggì in ${ancestor.country} per scappare dalla ${ancestor.occupation}, contro la quale aveva cercato di combattere a lungo.
-
-Temendo ulteriori persecuzioni, il suo antenato cambiò il proprio cognome originale ${ancestor.name} con quello che lei ha indicato al momento della registrazione (${userSurname}).
-
-Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità — di attraversare il portale temporale e trasportarsi nel 1926 per prevenire una tragedia che avrebbe potuto portare alla scomparsa del villaggio di Esino Lario.`;
-
-    setIntroText(text);
-    // Transition to Video 2 instead of straight to INTRO
-    setState('TRANSITION_VIDEO');
+  const handleStartAdventure = async (nameOverride?: string) => {
+    // Just switch state, Introduction component handles logic
+    setState('INTRO');
   };
 
   const startedRef = useRef(false);
@@ -439,7 +283,7 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
     if (!teamSync.session || !teamSync.team) return;
     if (!teamSync.team.startedAt) return;
     startedRef.current = true;
-    handleStartAdventure(teamSync.session.playerName);
+    handleStartAdventure();
   }, [state, teamSync.session, teamSync.team]);
 
   const handleRegistrationComplete = async (name: string, mode: 'solo' | 'team', code?: string, action?: 'create' | 'join') => {
@@ -475,11 +319,11 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
         await new Promise(resolve => setTimeout(resolve, 100));
 
         // Now switch to the actual background music at audible volume
-        console.log('[page.tsx] Switching to background music at volume 10');
+        console.log('[page.tsx] Switching to background music at volume 100');
         await playBackgroundAudio({
           url: STREAMING_AUDIO_URL,
           loop: true,
-          volume: 10, // Higher initial volume forces Safari to load metadata
+          volume: 100, // Higher initial volume forces Safari to load metadata
           continueIfAlreadyPlaying: false,
         });
         console.log('[page.tsx] Background music started');
@@ -489,11 +333,11 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
     } else {
       // Non-Safari: Direct playback at audible volume
       try {
-        console.log('[page.tsx] Non-Safari - starting background music directly at volume 10');
+        console.log('[page.tsx] Non-Safari - starting background music directly at volume 100');
         await playBackgroundAudio({
           url: STREAMING_AUDIO_URL,
           loop: true,
-          volume: 10, // Higher initial volume ensures proper loading
+          volume: 100, // Higher initial volume ensures proper loading
           continueIfAlreadyPlaying: false,
         });
         console.log('[page.tsx] Background music started');
@@ -550,10 +394,10 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
     return team.teamCode;
   };
 
-  const skipIntro = () => {
-    router.push('/map');
-  };
-  // The skipIntro function is no longer used as the INTRO button now transitions to MISSION_BRIEF
+  // const skipIntro = () => {
+  //   router.push('/map');
+  // };
+  // The skipIntro function is no longer used as the INTRO button now routes directly to /map
   // const skipIntro = () => {
   //   router.push('/map');
   // };
@@ -564,24 +408,14 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
 
   if (state === 'INTRO') {
     return (
-      <Intro
-        introText={introText}
+      <Introduction
+        playerName={playerName}
         onComplete={() => {
-          unlockBackgroundAudio().catch(() => { });
-          setState('MISSION_BRIEF');
-        }}
-        unlockAudio={unlockBackgroundAudio}
-      />
-    );
-  }
-
-  if (state === 'MISSION_BRIEF') {
-    return (
-      <MissionBrief
-        onExit={() => {
           unlockBackgroundAudio().catch(() => { });
           router.push('/map');
         }}
+        unlockAudio={unlockBackgroundAudio}
+        audioUrl={STREAMING_AUDIO_URL}
       />
     );
   }
@@ -635,7 +469,7 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
       )}
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/40 z-10 transition-opacity duration-1000 pointer-events-none" style={{ opacity: state === 'VIDEO' || state === 'TRANSITION_VIDEO' ? 0.3 : 0.7 }} />
+      <div className="absolute inset-0 bg-black/40 z-10 transition-opacity duration-1000 pointer-events-none" style={{ opacity: state === 'VIDEO' ? 0.3 : 0.7 }} />
 
       {/* TITLE OVERLAY */}
       {(state === 'SPLASH' || state === 'VIDEO' || state === 'REGISTRATION') && (
@@ -662,40 +496,12 @@ Ora le viene offerta l'opportunità — e allo stesso tempo la responsabilità �
         </div>
       )}
 
-      {/* VIDEO 2 (Transition) */}
-      {state === 'TRANSITION_VIDEO' && (
-        <div className="absolute inset-0 z-[60] flex items-center justify-center bg-black animate-fade-in">
-          <iframe
-            ref={video2IframeRef}
-            src={buildStreamIframeSrc(VIDEO_2_ID, { muted: false })}
-            className="border-none w-full h-full object-cover"
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-            allowFullScreen={true}
-          ></iframe>
-          {!transitionVideoSoundEnabled && (
-            <button
-              onClick={() => void enableSoundForVideo('transition')}
-              className="absolute bottom-12 left-8 z-[70] bg-white/10 hover:bg-white/20 backdrop-blur-md text-white/80 px-4 py-2 rounded-full text-sm font-medium transition-all border border-white/10 hover:scale-105 active:scale-95"
-            >
-              Enable Sound
-            </button>
-          )}
-          {/* Skip Video 2 */}
-          <button
-            onClick={handleVideo2Ended}
-            className="absolute bottom-12 right-8 z-[70] bg-white/10 hover:bg-white/20 backdrop-blur-md text-white/80 px-4 py-2 rounded-full text-sm font-medium transition-all border border-white/10 hover:scale-105 active:scale-95"
-          >
-            Skip →
-          </button>
-        </div>
-      )}
-
       {/* Skip Video 1 Button */}
       {state === 'VIDEO' && (
         <>
           {!videoSoundEnabled && (
             <button
-              onClick={() => void enableSoundForVideo('intro')}
+              onClick={() => void enableSoundForVideo()}
               className="absolute bottom-12 left-8 z-[60] bg-white/10 hover:bg-white/20 backdrop-blur-md text-white/80 px-4 py-2 rounded-full text-sm font-medium transition-all border border-white/10 hover:scale-105 active:scale-95"
             >
               Enable Sound

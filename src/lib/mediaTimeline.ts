@@ -38,20 +38,30 @@ function getRawTimeline(obj: QuestObject): MediaTimeline | null {
 }
 
 export function normalizeMediaTimeline(obj: QuestObject, timelineNodes?: Record<string, any>): NormalizedMediaTimeline | null {
-  // Revert 543f13f behavior: prefer the authored per-object mediaTimeline when present.
-  // Only reconstruct from compiled timelineNodes when the object has no mediaTimeline.
-  let raw = getRawTimeline(obj) as { version: number; items: any[] } | null;
+  // Prioritize the compiled timelineNodes (Runtime Source of Truth) over the local quest.json.
+  // This ensures the client executes the exact graph expected by the server, avoiding blocked node errors.
+  let raw: { version: number; items: any[] } | null = null;
 
-  if (!raw && timelineNodes && obj.id) {
+  if (timelineNodes && obj.id) {
     raw = reconstructMediaTimelineFromNodes(obj.id, timelineNodes);
     if (raw) {
-      console.log('[normalizeMediaTimeline] Reconstructed timeline from timelineNodes (fallback)', {
+      console.log('[normalizeMediaTimeline] Reconstructed timeline from timelineNodes (Runtime)', {
         objectId: obj.id,
-        itemCount: raw.items.length,
-        itemTypes: raw.items.map((item: any) => item.type)
+        itemCount: raw.items.length
       });
     } else {
-      console.warn('[normalizeMediaTimeline] Failed to reconstruct timeline from timelineNodes', { objectId: obj.id });
+      // Fallback or just log warning? Reconstruct returns null if start node missing.
+      // We'll proceed to getRawTimeline below if null.
+    }
+  }
+
+  if (!raw) {
+    raw = getRawTimeline(obj) as { version: number; items: any[] } | null;
+    if (raw) {
+      // Only log if we fell back (and had an ID which implies we might have wanted runtime)
+      if (timelineNodes && obj.id) {
+        console.log('[normalizeMediaTimeline] Falling back to local data/quest.json definition', { objectId: obj.id });
+      }
     }
   }
 
@@ -159,11 +169,19 @@ export function reconstructMediaTimelineFromNodes(
     const keyMatch = nodeId.match(/:([^:]+)$/);
     const itemKey = keyMatch ? keyMatch[1] : nodeId;
 
+    const resolvedType = (() => {
+      if (node.type !== 'audio') return node.type;
+      const kind = (node as any).payload?.audioKind;
+      const hasTranscription = !!(node as any).payload?.transcription;
+      if (kind === 'narration' || hasTranscription) return 'streaming_text_audio';
+      return 'audio';
+    })();
+
     // Convert timeline node to media timeline item format
     const item: any = {
       id: itemKey,
       key: itemKey,
-      type: node.type,
+      type: resolvedType,
       blocking: node.blocking !== false,
       enabled: true,
       order: items.length,
@@ -174,10 +192,14 @@ export function reconstructMediaTimelineFromNodes(
       Object.assign(item, {
         media_url: node.payload?.audioUrl,
         mediaUrl: node.payload?.audioUrl,
+        audioKind: node.payload?.audioKind,
         role: node.payload?.role || 'normal',
         autoplay: node.payload?.autoplay,
         loop: node.payload?.loop,
         transcription: node.payload?.transcription,
+        // Pass through raw data just in case
+        transcription_data: node.payload?.transcription_data,
+        transcriptionData: node.payload?.transcriptionData,
       });
     } else if (node.type === 'video') {
       Object.assign(item, {

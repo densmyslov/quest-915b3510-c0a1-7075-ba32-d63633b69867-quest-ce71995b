@@ -26,32 +26,37 @@ export default function TimelineVideoOverlay({
 }: TimelineVideoOverlayProps) {
   const playAttemptedRef = useRef(false);
   const currentUrlRef = useRef<string | null>(null);
+  const shouldAutoPlay = overlay?.autoPlay !== false;
 
   const attemptAutoplay = useCallback(async (video: HTMLVideoElement) => {
-    if (!overlay?.autoPlay) return;
+    if (!overlay || !shouldAutoPlay) return;
     if (playAttemptedRef.current && currentUrlRef.current === overlay.url) return;
 
     playAttemptedRef.current = true;
     currentUrlRef.current = overlay.url;
 
     try {
-      await video.play();
-    } catch {
-      // Autoplay was blocked - retry with muted
+      // Ensure muted before the first play attempt for maximum autoplay compatibility.
+      // Users can unmute via controls if desired.
       if (!video.muted) {
         video.muted = true;
-        try {
-          await video.play();
-        } catch {
-          // Still failed, user will need to click play
-        }
+      }
+      await video.play();
+    } catch {
+      // Still failed, user will need to click play.
+      // (Some browsers require a user gesture even when muted.)
+      try {
+        if (!video.muted) video.muted = true;
+        await video.play();
+      } catch {
+        // ignore
       }
     }
-  }, [overlay]);
+  }, [overlay, shouldAutoPlay]);
 
   // Ref callback: called when video element mounts
   const videoRefCallback = useCallback((video: HTMLVideoElement | null) => {
-    if (!video || !overlay?.autoPlay) return;
+    if (!video || !overlay || !shouldAutoPlay) return;
 
     // Reset play attempt tracker when URL changes
     if (currentUrlRef.current !== overlay.url) {
@@ -62,13 +67,14 @@ export default function TimelineVideoOverlay({
     if (video.readyState >= 3) {
       void attemptAutoplay(video);
     }
-  }, [overlay, attemptAutoplay]);
+  }, [overlay, attemptAutoplay, shouldAutoPlay]);
 
   const handleLoadedData = useCallback((event: SyntheticEvent<HTMLVideoElement>) => {
     void attemptAutoplay(event.currentTarget);
   }, [attemptAutoplay]);
 
   if (!overlay) return null;
+  const videoMuted = typeof overlay.muted === 'boolean' ? overlay.muted : shouldAutoPlay;
 
   return (
     <div
@@ -129,10 +135,11 @@ export default function TimelineVideoOverlay({
         <video
           ref={videoRefCallback}
           src={overlay.url}
+          autoPlay={shouldAutoPlay}
           controls
           playsInline
           preload="auto"
-          muted={overlay.muted}
+          muted={videoMuted}
           loop={overlay.loop}
           poster={overlay.posterUrl}
           onLoadedData={handleLoadedData}

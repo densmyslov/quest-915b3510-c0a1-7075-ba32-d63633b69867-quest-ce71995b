@@ -110,7 +110,8 @@ export function useObjectTimeline({
     // resumeAttemptedRef is managed in execution context roughly, but let's check
     // Actually, resumeAttemptedRef was local. We need it.
     computeRuntimeTimelineProgress,
-    completeRuntimeNode
+    completeRuntimeNode,
+    retryObjectRef
   } = useTimelineLogic({ questRuntime, stepsMode });
 
   // Note: resumeAttemptedRef was not exported from useTimelineLogic.
@@ -248,6 +249,21 @@ export function useObjectTimeline({
     if (!obj) return;
     void runObjectTimeline(obj);
   }, [objectsById, questRuntime.completedPuzzles, runObjectTimeline, timelineUi, stepsMode, snapshotRef]);
+
+  // 6.b. Sync Error Recovery (Retry after Refresh)
+  useEffect(() => {
+    if (retryObjectRef.current && snapshotRef.current) {
+      const objId = retryObjectRef.current;
+      console.log('[useObjectTimeline] Retrying execution after sync refresh', { objId });
+      retryObjectRef.current = null; // Clear flag
+      const obj = objectsById.get(objId);
+      if (obj) {
+        // Force clear running state to allow retry to proceed (bypass "already running" guard)
+        timelineRunRef.current = null;
+        void runObjectTimeline(obj);
+      }
+    }
+  }, [questRuntime.snapshot?.version, objectsById, runObjectTimeline, retryObjectRef]);
 
   // 7. Steps Mode
   const { stepsTimelinePanel, openTimelineItem, skipTimelineItem } = useStepsMode({

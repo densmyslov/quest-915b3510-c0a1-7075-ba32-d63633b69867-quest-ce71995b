@@ -124,8 +124,33 @@ export function useTimelineAudio(params: {
       }
 
       if (item.type === 'audio') {
-        // Never block the timeline loop on effect audio.
-        // The runtime progression depends on the client POSTing nodeComplete; hanging here breaks object transitions.
+        // Default to blocking unless explicitly set to false
+        // This ensures server-side blocking nodes are respected
+        const shouldBlockEffect = (item as any).blocking !== false;
+        if (shouldBlockEffect) {
+          // Respect blocking flag for effect audio - wait for playback to complete
+          console.log('[useObjectTimeline] Playing blocking effect audio', { url, key: item.key });
+          try {
+            await Promise.race([
+              playEffectAudioBlocking({
+                url,
+                objectName,
+                objectId,
+                loop: false,
+                volume: (item as any).volume,
+              }),
+              new Promise<void>((_, reject) =>
+                setTimeout(() => reject(new Error('effect audio playback timeout')), 5 * 60 * 1000)
+              ),
+            ]);
+            console.log('[useObjectTimeline] Blocking effect audio completed', { key: item.key });
+          } catch (err: any) {
+            console.warn('[useObjectTimeline] Blocking effect audio failed or timed out', { key: item.key, err });
+          }
+          return;
+        }
+
+        // Non-blocking effect audio - fire and forget
         playEffectAudio({
           url,
           objectName,

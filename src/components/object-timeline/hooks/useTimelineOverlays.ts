@@ -170,7 +170,8 @@ export function useTimelineOverlays({ completeRuntimeNode, onPuzzleComplete }: U
             closeTimelineVideo();
             const title = params.title ?? 'Video';
             const autoPlay = typeof params.autoPlay === 'boolean' ? params.autoPlay : true;
-            const muted = typeof params.muted === 'boolean' ? params.muted : false;
+            // Default to muted when autoplaying to satisfy browser autoplay policies.
+            const muted = typeof params.muted === 'boolean' ? params.muted : autoPlay;
             const loop = typeof params.loop === 'boolean' ? params.loop : false;
             const posterUrl = typeof params.posterUrl === 'string' ? params.posterUrl : undefined;
 

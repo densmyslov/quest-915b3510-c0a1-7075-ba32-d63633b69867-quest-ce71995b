@@ -5,142 +5,10 @@
   "publishedAt": "1970-01-01T00:00:00.000Z",
   "metadata": {
     "id": "quest-74b36181",
-    "name": "Sample Quest",
-    "description": "This is a sample quest for the template.",
-    "audioUrl": null
+    "version": "v1",
+    "teamTravelMode": "co-located"
   },
-  "map": {
-    "center": {
-      "lat": 51.505,
-      "lng": -0.09
-    },
-    "zoom": 13,
-    "style": "mapbox://styles/mapbox/streets-v11"
-  },
-  "puzzles": {
-    "fontana_fesa_puzzle": {
-      "id": "fontana_fesa_puzzle",
-      "quest_id": "sample-quest",
-      "name": "Fontana Fesa Mosaic",
-      "photo_url": "/puzzle/board.jpg",
-      "boardImage": "/puzzle/board.jpg",
-      "status": "active",
-      "createdAt": "2023-01-01T00:00:00Z",
-      "pieces": [
-        {
-          "id": "piece_1",
-          "image": "/puzzle/piece_1.png",
-          "targetX": 100,
-          "targetY": 100,
-          "unlocked": true
-        },
-        {
-          "id": "piece_2",
-          "image": "/puzzle/piece_2.png",
-          "targetX": 300,
-          "targetY": 100,
-          "unlocked": false
-        },
-        {
-          "id": "piece_3",
-          "image": "/puzzle/piece_3.png",
-          "targetX": 100,
-          "targetY": 300,
-          "unlocked": false
-        }
-      ],
-      "locationTriggers": [
-        {
-          "locationId": "loc_piece_2",
-          "pieceId": "piece_2",
-          "lat": 51.505,
-          "lng": -0.091,
-          "unlockMessage": "You found a piece near the center!"
-        },
-        {
-          "locationId": "loc_piece_3",
-          "pieceId": "piece_3",
-          "lat": 51.505,
-          "lng": -0.089,
-          "unlockMessage": "Another piece unlocked!"
-        }
-      ]
-    },
-    "witch_knot_demo": {
-      "id": "witch_knot_demo",
-      "quest_id": "sample-quest",
-      "name": "Witch Knot Demo",
-      "type": "witch_knot",
-      "status": "active",
-      "createdAt": "2023-01-01T00:00:00Z",
-      "data": {
-        "doorImageUrl": "/puzzle/board.jpg",
-        "studs": [
-          {
-            "x": 0.5,
-            "y": 0.2
-          },
-          {
-            "x": 0.8,
-            "y": 0.8
-          },
-          {
-            "x": 0.2,
-            "y": 0.8
-          }
-        ],
-        "patterns": [
-          {
-            "name": "Triangle",
-            "color": "#ff0000",
-            "points": [
-              0,
-              1,
-              2,
-              0
-            ]
-          }
-        ]
-      }
-    },
-    "witch_knot_simple_demo": {
-      "id": "witch_knot_simple_demo",
-      "quest_id": "sample-quest",
-      "name": "Witch Knot Simple Demo",
-      "type": "witch_knot_simple",
-      "status": "active",
-      "createdAt": "2023-01-01T00:00:00Z",
-      "data": {
-        "originalImageUrl": "/puzzle/board.jpg",
-        "studs": [
-          {
-            "x": 100,
-            "y": 100
-          },
-          {
-            "x": 300,
-            "y": 100
-          },
-          {
-            "x": 200,
-            "y": 300
-          }
-        ],
-        "patterns": [
-          {
-            "name": "Simple Triangle",
-            "color": "#00ff00",
-            "points": [
-              0,
-              1,
-              2,
-              0
-            ]
-          }
-        ]
-      }
-    }
-  },
+  "puzzles": {},
   "policies": {
     "objectVisibility": {
       "mode": "sliding_window",
@@ -148,96 +16,1444 @@
       "includeCompletedInWindow": true
     },
     "timeline": {
-      "defaultBlocking": true,
-      "defaultRepeatPolicy": "once_per_object"
+      "defaultBlocking": true
     }
   },
   "start": {
-    "objectId": "obj-1"
+    "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb"
   },
   "end": {
-    "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7"
+    "objectId": "1773f78d-7c8f-457d-9df0-f5ce0c1f9159"
   },
   "objects": {
-    "obj-1": {
-      "title": "Sample Object",
-      "entryNodeId": "tl_obj-1__start",
+    "3af91ac6-3000-404a-941f-8d03085a51eb": {
+      "title": "Kitchen",
+      "entryNodeId": "tl_3af91ac6-3000-404a-941f-8d03085a51eb__start",
       "objectGates": {
         "type": "none"
       },
       "outObjectIds": [
-        "ebd335c2-6d19-4391-bb3b-ead77291aed7"
+        "faf6aa45-1fd8-4460-8bdb-556e2042005c"
       ],
       "coordinates": {
-        "lat": 51.505,
-        "lng": -0.09
+        "lat": 45.9962,
+        "lng": 9.3665
       }
     },
-    "ebd335c2-6d19-4391-bb3b-ead77291aed7": {
-      "title": "Fontana Fesa",
-      "entryNodeId": "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__start",
+    "faf6aa45-1fd8-4460-8bdb-556e2042005c": {
+      "title": "Leaning Tower",
+      "entryNodeId": "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c__start",
+      "objectGates": {
+        "type": "none"
+      },
+      "outObjectIds": [
+        "1773f78d-7c8f-457d-9df0-f5ce0c1f9159"
+      ],
+      "coordinates": {
+        "lat": 45.9962,
+        "lng": 9.3665
+      }
+    },
+    "1773f78d-7c8f-457d-9df0-f5ce0c1f9159": {
+      "title": "Fino Vino",
+      "entryNodeId": "tl_1773f78d-7c8f-457d-9df0-f5ce0c1f9159__start",
       "objectGates": {
         "type": "none"
       },
       "outObjectIds": [],
       "coordinates": {
-        "lat": 51.505,
-        "lng": -0.092
+        "lat": 45.9962,
+        "lng": 9.3665
       }
     }
   },
   "timelineNodes": {
-    "tl_obj-1__start": {
-      "objectId": "obj-1",
+    "tl_3af91ac6-3000-404a-941f-8d03085a51eb__start": {
+      "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb",
       "type": "state",
       "stateKind": "start",
       "blocking": false,
-      "repeatPolicy": "always",
       "payload": {},
       "outNodeIds": [
-        "tl_obj-1:audio:0"
+        "tl_3af91ac6-3000-404a-941f-8d03085a51eb:6e93384f-e90d-4d3b-bfc5-968846569ca1"
       ]
     },
-    "tl_obj-1__end": {
-      "objectId": "obj-1",
+    "tl_3af91ac6-3000-404a-941f-8d03085a51eb__end": {
+      "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb",
       "type": "state",
       "stateKind": "end",
       "blocking": false,
-      "repeatPolicy": "always",
       "payload": {},
       "outNodeIds": []
     },
-    "tl_obj-1:audio:0": {
-      "objectId": "obj-1",
-      "blocking": false,
-      "repeatPolicy": "on_each_arrival",
+    "tl_3af91ac6-3000-404a-941f-8d03085a51eb:6e93384f-e90d-4d3b-bfc5-968846569ca1": {
+      "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb",
+      "blocking": true,
       "type": "audio",
       "payload": {
-        "audioUrl": "https://example.com/audio.mp3",
+        "audioUrl": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260123-014953-0a06e271.mp3",
         "audioKind": "audio",
-        "role": "normal"
+        "role": "normal",
+        "loop": false
       },
       "outNodeIds": [
-        "tl_obj-1__end"
+        "tl_3af91ac6-3000-404a-941f-8d03085a51eb:7f0988f8-75b2-49de-9cdf-41ca49119a9d"
       ]
     },
-    "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__start": {
-      "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7",
+    "tl_3af91ac6-3000-404a-941f-8d03085a51eb:7f0988f8-75b2-49de-9cdf-41ca49119a9d": {
+      "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb",
+      "blocking": true,
+      "type": "audio",
+      "payload": {
+        "audioUrl": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260123-014953-0a06e271.mp3",
+        "audioKind": "narration",
+        "role": "normal",
+        "loop": false,
+        "transcription": {
+          "words": [
+            {
+              "word": "Mi",
+              "start": 0.02,
+              "end": 0.2
+            },
+            {
+              "word": "chiamo",
+              "start": 0.2,
+              "end": 0.38
+            },
+            {
+              "word": "Pasqualin,",
+              "start": 0.38,
+              "end": 1.62
+            },
+            {
+              "word": "amo",
+              "start": 1.62,
+              "end": 1.72
+            },
+            {
+              "word": "una",
+              "start": 1.72,
+              "end": 1.9
+            },
+            {
+              "word": "ragazza",
+              "start": 1.9,
+              "end": 2.3
+            },
+            {
+              "word": "di",
+              "start": 2.3,
+              "end": 2.44
+            },
+            {
+              "word": "nome",
+              "start": 2.44,
+              "end": 2.62
+            },
+            {
+              "word": "Gitt",
+              "start": 2.62,
+              "end": 2.9
+            },
+            {
+              "word": "e",
+              "start": 2.9,
+              "end": 3.2
+            },
+            {
+              "word": "voglio",
+              "start": 3.2,
+              "end": 3.48
+            },
+            {
+              "word": "sposarla,",
+              "start": 3.48,
+              "end": 4.36
+            },
+            {
+              "word": "ma",
+              "start": 4.36,
+              "end": 5
+            },
+            {
+              "word": "lei",
+              "start": 5,
+              "end": 5.16
+            },
+            {
+              "word": "viene",
+              "start": 5.16,
+              "end": 5.34
+            },
+            {
+              "word": "dall'altra",
+              "start": 5.34,
+              "end": 5.74
+            },
+            {
+              "word": "del",
+              "start": 5.56,
+              "end": 6.22
+            },
+            {
+              "word": "parte",
+              "start": 5.74,
+              "end": 6.02
+            },
+            {
+              "word": "paese",
+              "start": 6.22,
+              "end": 6.66
+            },
+            {
+              "word": "e",
+              "start": 6.66,
+              "end": 7.1
+            },
+            {
+              "word": "per",
+              "start": 7.1,
+              "end": 7.28
+            },
+            {
+              "word": "i",
+              "start": 7.28,
+              "end": 7.34
+            },
+            {
+              "word": "nostri",
+              "start": 7.34,
+              "end": 7.64
+            },
+            {
+              "word": "genitori,",
+              "start": 7.64,
+              "end": 8.42
+            },
+            {
+              "word": "per",
+              "start": 8.42,
+              "end": 8.54
+            },
+            {
+              "word": "i",
+              "start": 8.54,
+              "end": 8.6
+            },
+            {
+              "word": "vicini,",
+              "start": 8.6,
+              "end": 9.6
+            },
+            {
+              "word": "per",
+              "start": 9.6,
+              "end": 9.76
+            },
+            {
+              "word": "tutta",
+              "start": 9.76,
+              "end": 10.1
+            },
+            {
+              "word": "Esino Lario,",
+              "start": 10.1,
+              "end": 11.5
+            },
+            {
+              "word": "questo",
+              "start": 11.5,
+              "end": 11.68
+            },
+            {
+              "word": "suona",
+              "start": 11.68,
+              "end": 11.94
+            },
+            {
+              "word": "come",
+              "start": 11.94,
+              "end": 12.18
+            },
+            {
+              "word": "una",
+              "start": 12.18,
+              "end": 12.38
+            },
+            {
+              "word": "follia.",
+              "start": 12.38,
+              "end": 12.96
+            },
+            {
+              "word": "Il",
+              "start": 13.92,
+              "end": 14.06
+            },
+            {
+              "word": "paese",
+              "start": 14.06,
+              "end": 14.4
+            },
+            {
+              "word": "è",
+              "start": 14.4,
+              "end": 14.52
+            },
+            {
+              "word": "diviso",
+              "start": 14.52,
+              "end": 14.84
+            },
+            {
+              "word": "da",
+              "start": 14.84,
+              "end": 15.02
+            },
+            {
+              "word": "molto",
+              "start": 15.02,
+              "end": 15.22
+            },
+            {
+              "word": "tempo",
+              "start": 15.22,
+              "end": 15.6
+            },
+            {
+              "word": "in",
+              "start": 15.6,
+              "end": 15.76
+            },
+            {
+              "word": "due",
+              "start": 15.76,
+              "end": 15.9
+            },
+            {
+              "word": "parti",
+              "start": 15.9,
+              "end": 16.22
+            },
+            {
+              "word": "che",
+              "start": 16.22,
+              "end": 16.38
+            },
+            {
+              "word": "si",
+              "start": 16.38,
+              "end": 16.56
+            },
+            {
+              "word": "odiano,",
+              "start": 16.56,
+              "end": 16.94
+            },
+            {
+              "word": "e",
+              "start": 16.94,
+              "end": 17.5
+            },
+            {
+              "word": "ognuna",
+              "start": 17.5,
+              "end": 17.74
+            },
+            {
+              "word": "è",
+              "start": 17.74,
+              "end": 17.84
+            },
+            {
+              "word": "convinta",
+              "start": 17.84,
+              "end": 18.26
+            },
+            {
+              "word": "che",
+              "start": 18.26,
+              "end": 18.42
+            },
+            {
+              "word": "non",
+              "start": 18.3,
+              "end": 18.96
+            },
+            {
+              "word": "la",
+              "start": 18.42,
+              "end": 18.56
+            },
+            {
+              "word": "pace",
+              "start": 18.56,
+              "end": 18.76
+            },
+            {
+              "word": "sarà",
+              "start": 18.96,
+              "end": 19.18
+            },
+            {
+              "word": "mai",
+              "start": 19.18,
+              "end": 19.36
+            },
+            {
+              "word": "possibile.",
+              "start": 19.36,
+              "end": 19.9
+            },
+            {
+              "word": "I",
+              "start": 19.9,
+              "end": 21.32
+            },
+            {
+              "word": "genitori",
+              "start": 21.32,
+              "end": 21.74
+            },
+            {
+              "word": "di",
+              "start": 21.74,
+              "end": 21.86
+            },
+            {
+              "word": "Gitt",
+              "start": 21.86,
+              "end": 22.14
+            },
+            {
+              "word": "vogliono",
+              "start": 22.14,
+              "end": 22.56
+            },
+            {
+              "word": "darla",
+              "start": 22.56,
+              "end": 22.88
+            },
+            {
+              "word": "in",
+              "start": 22.88,
+              "end": 23.02
+            },
+            {
+              "word": "sposa",
+              "start": 23.02,
+              "end": 23.32
+            },
+            {
+              "word": "a",
+              "start": 23.32,
+              "end": 23.48
+            },
+            {
+              "word": "un",
+              "start": 23.48,
+              "end": 23.56
+            },
+            {
+              "word": "uomo",
+              "start": 23.56,
+              "end": 23.76
+            },
+            {
+              "word": "della",
+              "start": 23.76,
+              "end": 24
+            },
+            {
+              "word": "sua",
+              "start": 24,
+              "end": 24.16
+            },
+            {
+              "word": "parte,",
+              "start": 24.16,
+              "end": 25
+            },
+            {
+              "word": "ma",
+              "start": 25.06,
+              "end": 25.18
+            },
+            {
+              "word": "lei",
+              "start": 25.18,
+              "end": 25.38
+            },
+            {
+              "word": "ama",
+              "start": 25.38,
+              "end": 25.52
+            },
+            {
+              "word": "solo",
+              "start": 25.52,
+              "end": 25.86
+            },
+            {
+              "word": "me.",
+              "start": 25.86,
+              "end": 26.04
+            },
+            {
+              "word": "Oggi",
+              "start": 26.04,
+              "end": 27.16
+            },
+            {
+              "word": "l'hanno",
+              "start": 27.16,
+              "end": 27.42
+            },
+            {
+              "word": "chiusa",
+              "start": 27.42,
+              "end": 27.68
+            },
+            {
+              "word": "in",
+              "start": 27.68,
+              "end": 27.82
+            },
+            {
+              "word": "casa",
+              "start": 27.82,
+              "end": 28.12
+            },
+            {
+              "word": "e",
+              "start": 28.12,
+              "end": 28.64
+            },
+            {
+              "word": "non",
+              "start": 28.64,
+              "end": 28.74
+            },
+            {
+              "word": "la",
+              "start": 28.74,
+              "end": 28.86
+            },
+            {
+              "word": "lasceranno",
+              "start": 28.86,
+              "end": 29.26
+            },
+            {
+              "word": "uscire",
+              "start": 29.26,
+              "end": 29.62
+            },
+            {
+              "word": "fino",
+              "start": 29.62,
+              "end": 29.88
+            },
+            {
+              "word": "al",
+              "start": 29.88,
+              "end": 30.02
+            },
+            {
+              "word": "matrimonio.",
+              "start": 30.02,
+              "end": 30.62
+            },
+            {
+              "word": "E,",
+              "start": 30.62,
+              "end": 31.46
+            },
+            {
+              "word": "ahimè,",
+              "start": 31.32,
+              "end": 31.76
+            },
+            {
+              "word": "il",
+              "start": 31.76,
+              "end": 32.46
+            },
+            {
+              "word": "matrimonio",
+              "start": 32.46,
+              "end": 33
+            },
+            {
+              "word": "è",
+              "start": 33,
+              "end": 33.14
+            },
+            {
+              "word": "domani.",
+              "start": 33.14,
+              "end": 33.62
+            },
+            {
+              "word": "Se",
+              "start": 33.62,
+              "end": 34.92
+            },
+            {
+              "word": "non",
+              "start": 34.92,
+              "end": 35.08
+            },
+            {
+              "word": "ci",
+              "start": 35.08,
+              "end": 35.18
+            },
+            {
+              "word": "aiutate,",
+              "start": 35.18,
+              "end": 35.66
+            },
+            {
+              "word": "saremo",
+              "start": 35.66,
+              "end": 36.16
+            },
+            {
+              "word": "separati",
+              "start": 36.16,
+              "end": 36.58
+            },
+            {
+              "word": "per",
+              "start": 36.58,
+              "end": 36.76
+            },
+            {
+              "word": "sempre.",
+              "start": 36.76,
+              "end": 37.18
+            },
+            {
+              "word": "Tutta",
+              "start": 37.18,
+              "end": 38.18
+            },
+            {
+              "word": "la",
+              "start": 38.18,
+              "end": 38.32
+            },
+            {
+              "word": "nostra",
+              "start": 38.32,
+              "end": 38.54
+            },
+            {
+              "word": "speranza",
+              "start": 38.54,
+              "end": 39.06
+            },
+            {
+              "word": "è",
+              "start": 38.58,
+              "end": 39.26
+            },
+            {
+              "word": "in",
+              "start": 39.26,
+              "end": 39.36
+            },
+            {
+              "word": "voi.",
+              "start": 39.36,
+              "end": 39.62
+            },
+            {
+              "word": "Ora",
+              "start": 39.62,
+              "end": 40.88
+            },
+            {
+              "word": "la",
+              "start": 40.88,
+              "end": 41.04
+            },
+            {
+              "word": "cosa",
+              "start": 41.04,
+              "end": 41.2
+            },
+            {
+              "word": "più",
+              "start": 41.2,
+              "end": 41.34
+            },
+            {
+              "word": "importante:",
+              "start": 41.34,
+              "end": 41.94
+            },
+            {
+              "word": "Gitt",
+              "start": 41.94,
+              "end": 42.98
+            },
+            {
+              "word": "ha",
+              "start": 42.98,
+              "end": 43.1
+            },
+            {
+              "word": "trovato",
+              "start": 43.1,
+              "end": 43.42
+            },
+            {
+              "word": "negli",
+              "start": 43.42,
+              "end": 43.64
+            },
+            {
+              "word": "archivi",
+              "start": 43.64,
+              "end": 43.94
+            },
+            {
+              "word": "antichi",
+              "start": 43.94,
+              "end": 44.34
+            },
+            {
+              "word": "alcuni",
+              "start": 44.34,
+              "end": 44.68
+            },
+            {
+              "word": "documenti",
+              "start": 44.68,
+              "end": 45.2
+            },
+            {
+              "word": "che",
+              "start": 44.76,
+              "end": 45.4
+            },
+            {
+              "word": "potrebbero",
+              "start": 45.4,
+              "end": 45.82
+            },
+            {
+              "word": "dimostrare",
+              "start": 45.82,
+              "end": 46.38
+            },
+            {
+              "word": "che",
+              "start": 46.38,
+              "end": 46.6
+            },
+            {
+              "word": "la",
+              "start": 46.6,
+              "end": 46.7
+            },
+            {
+              "word": "storia",
+              "start": 46.7,
+              "end": 47.06
+            },
+            {
+              "word": "della",
+              "start": 47.06,
+              "end": 47.4
+            },
+            {
+              "word": "eterna",
+              "start": 47.4,
+              "end": 47.9
+            },
+            {
+              "word": "divisione",
+              "start": 47.9,
+              "end": 48.48
+            },
+            {
+              "word": "di",
+              "start": 48.48,
+              "end": 48.6
+            },
+            {
+              "word": "Esino Lario",
+              "start": 48.6,
+              "end": 49.18
+            },
+            {
+              "word": "in",
+              "start": 49.18,
+              "end": 49.34
+            },
+            {
+              "word": "due",
+              "start": 49.34,
+              "end": 49.46
+            },
+            {
+              "word": "parti",
+              "start": 49.46,
+              "end": 49.82
+            },
+            {
+              "word": "è",
+              "start": 49.82,
+              "end": 50.2
+            },
+            {
+              "word": "stata",
+              "start": 50.22,
+              "end": 50.36
+            },
+            {
+              "word": "inventata.",
+              "start": 50.36,
+              "end": 51.02
+            },
+            {
+              "word": "Se",
+              "start": 51.02,
+              "end": 52
+            },
+            {
+              "word": "fosse",
+              "start": 52,
+              "end": 52.3
+            },
+            {
+              "word": "così,",
+              "start": 52.3,
+              "end": 52.62
+            },
+            {
+              "word": "potremmo",
+              "start": 52.62,
+              "end": 53.48
+            },
+            {
+              "word": "ristabilire",
+              "start": 53.48,
+              "end": 54.02
+            },
+            {
+              "word": "la",
+              "start": 54.02,
+              "end": 54.16
+            },
+            {
+              "word": "verità",
+              "start": 54.16,
+              "end": 54.5
+            },
+            {
+              "word": "e",
+              "start": 54.5,
+              "end": 55.06
+            },
+            {
+              "word": "restituire",
+              "start": 55.06,
+              "end": 55.58
+            },
+            {
+              "word": "alla",
+              "start": 55.58,
+              "end": 55.74
+            },
+            {
+              "word": "gente",
+              "start": 55.74,
+              "end": 56
+            },
+            {
+              "word": "la",
+              "start": 56,
+              "end": 56.24
+            },
+            {
+              "word": "dell'unità",
+              "start": 56.1,
+              "end": 57.1
+            },
+            {
+              "word": "memoria",
+              "start": 56.24,
+              "end": 56.54
+            },
+            {
+              "word": "del",
+              "start": 57.1,
+              "end": 57.28
+            },
+            {
+              "word": "paese.",
+              "start": 57.28,
+              "end": 57.68
+            },
+            {
+              "word": "Allora",
+              "start": 57.68,
+              "end": 58.94
+            },
+            {
+              "word": "anche",
+              "start": 58.94,
+              "end": 59.18
+            },
+            {
+              "word": "il",
+              "start": 59.18,
+              "end": 59.34
+            },
+            {
+              "word": "nostro",
+              "start": 59.34,
+              "end": 59.6
+            },
+            {
+              "word": "matrimonio",
+              "start": 59.6,
+              "end": 60.2
+            },
+            {
+              "word": "diventerebbe",
+              "start": 60.2,
+              "end": 60.76
+            },
+            {
+              "word": "possibile,",
+              "start": 60.76,
+              "end": 61.28
+            },
+            {
+              "word": "non",
+              "start": 61.28,
+              "end": 62.08
+            },
+            {
+              "word": "come",
+              "start": 62.08,
+              "end": 62.28
+            },
+            {
+              "word": "di",
+              "start": 62.2,
+              "end": 62.86
+            },
+            {
+              "word": "causa",
+              "start": 62.28,
+              "end": 62.64
+            },
+            {
+              "word": "una",
+              "start": 62.86,
+              "end": 62.98
+            },
+            {
+              "word": "nuova",
+              "start": 62.98,
+              "end": 63.18
+            },
+            {
+              "word": "lite,",
+              "start": 63.18,
+              "end": 63.46
+            },
+            {
+              "word": "ma",
+              "start": 63.46,
+              "end": 64.08
+            },
+            {
+              "word": "come",
+              "start": 64.08,
+              "end": 64.28
+            },
+            {
+              "word": "simbolo",
+              "start": 64.28,
+              "end": 64.66
+            },
+            {
+              "word": "di",
+              "start": 64.66,
+              "end": 64.86
+            },
+            {
+              "word": "ricongiungimento",
+              "start": 64.86,
+              "end": 65.82
+            },
+            {
+              "word": "e di",
+              "start": 65.82,
+              "end": 66.28
+            },
+            {
+              "word": "fine",
+              "start": 66.28,
+              "end": 66.48
+            },
+            {
+              "word": "della",
+              "start": 66.48,
+              "end": 66.7
+            },
+            {
+              "word": "discordia.",
+              "start": 66.7,
+              "end": 67.32
+            },
+            {
+              "word": "E",
+              "start": 67.32,
+              "end": 68.42
+            },
+            {
+              "word": "ancora:",
+              "start": 68.42,
+              "end": 68.74
+            },
+            {
+              "word": "l'ultima",
+              "start": 68.74,
+              "end": 69.94
+            },
+            {
+              "word": "che",
+              "start": 69.72,
+              "end": 70.36
+            },
+            {
+              "word": "volta",
+              "start": 69.94,
+              "end": 70.16
+            },
+            {
+              "word": "l'ho",
+              "start": 70.36,
+              "end": 70.48
+            },
+            {
+              "word": "vista",
+              "start": 70.48,
+              "end": 70.76
+            },
+            {
+              "word": "è",
+              "start": 70.76,
+              "end": 70.94
+            },
+            {
+              "word": "riuscita",
+              "start": 70.94,
+              "end": 71.3
+            },
+            {
+              "word": "a",
+              "start": 71.3,
+              "end": 71.42
+            },
+            {
+              "word": "dirmi",
+              "start": 71.42,
+              "end": 71.7
+            },
+            {
+              "word": "che",
+              "start": 71.7,
+              "end": 71.88
+            },
+            {
+              "word": "aveva",
+              "start": 71.88,
+              "end": 72.12
+            },
+            {
+              "word": "nascosto",
+              "start": 72.12,
+              "end": 72.52
+            },
+            {
+              "word": "alcuni",
+              "start": 72.52,
+              "end": 72.86
+            },
+            {
+              "word": "documenti",
+              "start": 72.86,
+              "end": 73.38
+            },
+            {
+              "word": "vicino",
+              "start": 73.38,
+              "end": 73.74
+            },
+            {
+              "word": "alla",
+              "start": 73.74,
+              "end": 73.9
+            },
+            {
+              "word": "casa",
+              "start": 73.9,
+              "end": 74.1
+            },
+            {
+              "word": "della",
+              "start": 74.1,
+              "end": 74.36
+            },
+            {
+              "word": "strega.",
+              "start": 74.38,
+              "end": 74.78
+            },
+            {
+              "word": "Io",
+              "start": 74.78,
+              "end": 75.8
+            },
+            {
+              "word": "ora",
+              "start": 75.8,
+              "end": 76.04
+            },
+            {
+              "word": "mi",
+              "start": 76.04,
+              "end": 76.16
+            },
+            {
+              "word": "nascondo",
+              "start": 76.16,
+              "end": 76.58
+            },
+            {
+              "word": "in",
+              "start": 76.58,
+              "end": 76.74
+            },
+            {
+              "word": "una",
+              "start": 76.74,
+              "end": 76.86
+            },
+            {
+              "word": "grotta",
+              "start": 76.86,
+              "end": 77.16
+            },
+            {
+              "word": "carsica",
+              "start": 77.16,
+              "end": 77.64
+            },
+            {
+              "word": "poco",
+              "start": 77.64,
+              "end": 77.9
+            },
+            {
+              "word": "distante",
+              "start": 77.9,
+              "end": 78.36
+            },
+            {
+              "word": "dal",
+              "start": 78.36,
+              "end": 78.54
+            },
+            {
+              "word": "paese",
+              "start": 78.54,
+              "end": 78.92
+            },
+            {
+              "word": "qui",
+              "start": 78.92,
+              "end": 79.7
+            },
+            {
+              "word": "sembra",
+              "start": 79.7,
+              "end": 80.08
+            },
+            {
+              "word": "che",
+              "start": 80.08,
+              "end": 80.24
+            },
+            {
+              "word": "strane",
+              "start": 80.12,
+              "end": 81.08
+            },
+            {
+              "word": "ci",
+              "start": 80.24,
+              "end": 80.38
+            },
+            {
+              "word": "siano",
+              "start": 80.38,
+              "end": 80.62
+            },
+            {
+              "word": "anomalie",
+              "start": 81.08,
+              "end": 81.5
+            },
+            {
+              "word": "temporali.",
+              "start": 81.5,
+              "end": 82.14
+            },
+            {
+              "word": "Un",
+              "start": 82.14,
+              "end": 82.96
+            },
+            {
+              "word": "vecchio",
+              "start": 82.96,
+              "end": 83.22
+            },
+            {
+              "word": "medium",
+              "start": 83.22,
+              "end": 83.56
+            },
+            {
+              "word": "mi",
+              "start": 83.56,
+              "end": 83.88
+            },
+            {
+              "word": "ha",
+              "start": 83.88,
+              "end": 83.94
+            },
+            {
+              "word": "detto",
+              "start": 83.94,
+              "end": 84.16
+            },
+            {
+              "word": "che",
+              "start": 84.16,
+              "end": 84.36
+            },
+            {
+              "word": "potrei",
+              "start": 84.36,
+              "end": 84.68
+            },
+            {
+              "word": "restare",
+              "start": 84.68,
+              "end": 85.02
+            },
+            {
+              "word": "in",
+              "start": 85.02,
+              "end": 85.18
+            },
+            {
+              "word": "contatto",
+              "start": 85.18,
+              "end": 85.56
+            },
+            {
+              "word": "con",
+              "start": 85.56,
+              "end": 85.76
+            },
+            {
+              "word": "e",
+              "start": 85.6,
+              "end": 86.32
+            },
+            {
+              "word": "voi",
+              "start": 85.76,
+              "end": 86.02
+            },
+            {
+              "word": "aiutarvi",
+              "start": 86.32,
+              "end": 86.76
+            },
+            {
+              "word": "in",
+              "start": 86.76,
+              "end": 86.88
+            },
+            {
+              "word": "qualche",
+              "start": 86.88,
+              "end": 87.1
+            },
+            {
+              "word": "modo.",
+              "start": 87.1,
+              "end": 87.46
+            },
+            {
+              "word": "Proverò.",
+              "start": 87.46,
+              "end": 88.32
+            }
+          ],
+          "fullText": "Mi chiamo Pasqualin, amo una ragazza di nome Gitt e voglio sposarla, ma lei viene dall’altra parte del paese e, per i nostri genitori, per i vicini, per tutta Esino Lario, questo suona come una follia.\nIl paese è diviso da molto tempo in due parti che si odiano, e ognuna è convinta che la pace non sarà mai possibile.\n\nI genitori di Gitt vogliono darla in sposa a un uomo della sua parte, ma lei ama solo me.\nOggi l’hanno chiusa in casa e non la lasceranno uscire fino al matrimonio.\nE, ahimè, il matrimonio è domani.\n\nSe non ci aiutate, saremo separati per sempre.\nTutta la nostra speranza è in voi.\n\nOra la cosa più importante: Gitt ha trovato negli archivi antichi alcuni documenti che potrebbero dimostrare che la storia dell’eterna divisione di Esino Lario in due parti è stata inventata.\nSe fosse così, potremmo ristabilire la verità e restituire alla gente la memoria dell’unità del paese.\n\nAllora anche il nostro matrimonio diventerebbe possibile, non come causa di una nuova lite, ma come simbolo di ricongiungimento e di fine della discordia.\n\nE ancora: l’ultima volta che l’ho vista è riuscita a dirmi che aveva nascosto alcuni documenti vicino alla casa della strega.\nIo ora mi nascondo in una grotta carsica poco distante dal paese. Qui sembra che ci siano strane anomalie temporali.\n\nUn vecchio medium mi ha detto che potrei restare in contatto con voi e aiutarvi in qualche modo.\nProverò."
+        }
+      },
+      "outNodeIds": [
+        "tl_3af91ac6-3000-404a-941f-8d03085a51eb:tl_obj1__pasqualin_intro"
+      ]
+    },
+    "tl_3af91ac6-3000-404a-941f-8d03085a51eb:tl_obj1__pasqualin_intro": {
+      "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb",
+      "blocking": true,
+      "type": "chat",
+      "payload": {},
+      "outNodeIds": [
+        "tl_3af91ac6-3000-404a-941f-8d03085a51eb:c7866209-1e35-407e-a760-e55b6e68ffce"
+      ]
+    },
+    "tl_3af91ac6-3000-404a-941f-8d03085a51eb:c7866209-1e35-407e-a760-e55b6e68ffce": {
+      "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb",
+      "blocking": true,
+      "type": "puzzle",
+      "payload": {
+        "puzzleId": "puz-1cd67f1b"
+      },
+      "successOutNodeIds": [
+        "tl_3af91ac6-3000-404a-941f-8d03085a51eb:e1ea6801-a649-41c0-a469-bc5d045d8a42"
+      ],
+      "failureOutNodeIds": []
+    },
+    "tl_3af91ac6-3000-404a-941f-8d03085a51eb:e1ea6801-a649-41c0-a469-bc5d045d8a42": {
+      "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb",
+      "blocking": true,
+      "type": "video",
+      "payload": {
+        "videoUrl": "https://customer-yshabc4ttf2nlnnu.cloudflarestream.com/17c9896d35e17be879faf61c67cd29a0/downloads/default.mp4"
+      },
+      "outNodeIds": [
+        "tl_3af91ac6-3000-404a-941f-8d03085a51eb:36b60e64-7946-49ce-ab87-df14a6d7c327"
+      ]
+    },
+    "tl_3af91ac6-3000-404a-941f-8d03085a51eb:36b60e64-7946-49ce-ab87-df14a6d7c327": {
+      "objectId": "3af91ac6-3000-404a-941f-8d03085a51eb",
+      "blocking": true,
+      "type": "audio",
+      "payload": {
+        "audioUrl": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260123-014953-0a06e271.mp3",
+        "audioKind": "audio",
+        "role": "normal",
+        "loop": false
+      },
+      "outNodeIds": [
+        "tl_3af91ac6-3000-404a-941f-8d03085a51eb__end"
+      ]
+    },
+    "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c__start": {
+      "objectId": "faf6aa45-1fd8-4460-8bdb-556e2042005c",
       "type": "state",
       "stateKind": "start",
       "blocking": false,
-      "repeatPolicy": "always",
       "payload": {},
       "outNodeIds": [
-        "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__end"
+        "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c:fded1a86-93de-46bf-bef4-f4148c281b1a"
       ]
     },
-    "tl_ebd335c2-6d19-4391-bb3b-ead77291aed7__end": {
-      "objectId": "ebd335c2-6d19-4391-bb3b-ead77291aed7",
+    "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c__end": {
+      "objectId": "faf6aa45-1fd8-4460-8bdb-556e2042005c",
       "type": "state",
       "stateKind": "end",
       "blocking": false,
-      "repeatPolicy": "always",
+      "payload": {},
+      "outNodeIds": []
+    },
+    "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c:fded1a86-93de-46bf-bef4-f4148c281b1a": {
+      "objectId": "faf6aa45-1fd8-4460-8bdb-556e2042005c",
+      "blocking": false,
+      "type": "audio",
+      "payload": {
+        "audioUrl": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260123-014953-0a06e271.mp3",
+        "audioKind": "audio",
+        "role": "normal",
+        "loop": false
+      },
+      "outNodeIds": [
+        "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c:a1d945e4-487a-4597-8cc0-b762f239cd41"
+      ]
+    },
+    "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c:a1d945e4-487a-4597-8cc0-b762f239cd41": {
+      "objectId": "faf6aa45-1fd8-4460-8bdb-556e2042005c",
+      "blocking": false,
+      "type": "text",
+      "payload": {
+        "markdown": "Trova una vecchia porta, punta le tue strane macchine verso di essa e scatta una foto. Una strega ha intrecciato un nodo magico con il filo su questa porta. Cerca di rompere l'incantesimo."
+      },
+      "outNodeIds": [
+        "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c:45b8c10e-df8a-4271-9efd-a95c2f3f1b03"
+      ]
+    },
+    "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c:45b8c10e-df8a-4271-9efd-a95c2f3f1b03": {
+      "objectId": "faf6aa45-1fd8-4460-8bdb-556e2042005c",
+      "blocking": true,
+      "type": "puzzle",
+      "payload": {
+        "puzzleId": "puz-1cd67f1b"
+      },
+      "successOutNodeIds": [
+        "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c:d93ed9b9-4aa7-4962-98cf-5c56452fb4c5"
+      ],
+      "failureOutNodeIds": []
+    },
+    "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c:d93ed9b9-4aa7-4962-98cf-5c56452fb4c5": {
+      "objectId": "faf6aa45-1fd8-4460-8bdb-556e2042005c",
+      "blocking": false,
+      "type": "audio",
+      "payload": {
+        "audioUrl": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260123-014953-0a06e271.mp3",
+        "audioKind": "audio",
+        "role": "normal",
+        "loop": false
+      },
+      "outNodeIds": [
+        "tl_faf6aa45-1fd8-4460-8bdb-556e2042005c__end"
+      ]
+    },
+    "tl_1773f78d-7c8f-457d-9df0-f5ce0c1f9159__start": {
+      "objectId": "1773f78d-7c8f-457d-9df0-f5ce0c1f9159",
+      "type": "state",
+      "stateKind": "start",
+      "blocking": false,
+      "payload": {},
+      "outNodeIds": [
+        "tl_1773f78d-7c8f-457d-9df0-f5ce0c1f9159__end"
+      ]
+    },
+    "tl_1773f78d-7c8f-457d-9df0-f5ce0c1f9159__end": {
+      "objectId": "1773f78d-7c8f-457d-9df0-f5ce0c1f9159",
+      "type": "state",
+      "stateKind": "end",
+      "blocking": false,
       "payload": {},
       "outNodeIds": []
     }

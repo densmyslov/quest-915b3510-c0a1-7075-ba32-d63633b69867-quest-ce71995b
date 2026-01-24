@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
     try {
         const body: StartQuestRequest = await request.json();
         const { sessionId, questId, teamCode } = body;
+        const runtimeSessionId = (body as any).runtimeSessionId as string | undefined;
 
         // Validate required fields
         if (!sessionId || !questId) {
@@ -41,20 +42,20 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        const runtimeSessionId = teamCode ?? sessionId;
+        const resolvedRuntimeSessionId = runtimeSessionId ?? teamCode ?? sessionId;
         const playerId = sessionId;
         const playerName = `Player-${sessionId.substring(0, 8)}`;
         const questVersion = 'v1';
 
         // Proxy to AWS Runtime API: POST /runtime/session/start
         const response = await proxyToAwsRuntime('/runtime/session/start', 'POST', {
-            sessionId: runtimeSessionId,
+            sessionId: resolvedRuntimeSessionId,
             playerId,
             playerName,
             questId,
             questVersion,
-            eventId: `LegacyStart:${runtimeSessionId}:${playerId}:${Date.now()}`,
-            dedupeKey: `start:${runtimeSessionId}:${playerId}`
+            eventId: `LegacyStart:${resolvedRuntimeSessionId}:${playerId}:${Date.now()}`,
+            dedupeKey: `start:${resolvedRuntimeSessionId}:${playerId}`
         });
 
         const data = await response.json() as {

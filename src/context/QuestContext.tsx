@@ -8,6 +8,27 @@ import { useQuestRuntime } from '@/hooks/useQuestRuntime';
 import { useTeamSync } from '@/context/TeamSyncContext';
 import { getOrCreateDeviceId } from '@/utils/deviceId';
 
+function getRuntimeSessionId(params: {
+    teamCode: string | null;
+    runtimeSessionId: string | null;
+    persistedRuntimeSessionId: string | null;
+    persistedSessionId: string | null;
+}): string | null {
+    const { teamCode, runtimeSessionId, persistedRuntimeSessionId, persistedSessionId } = params;
+    // In team mode, runtime session should be explicitly provisioned (not derived from teamCode).
+    if (teamCode) return runtimeSessionId ?? persistedRuntimeSessionId;
+    // Solo mode: runtime session = local sessionId (or persisted runtimeSessionId if present).
+    return persistedRuntimeSessionId ?? persistedSessionId;
+}
+
+function getRuntimePlayerId(params: { teamCode: string | null; teamSessionId: string | null; deviceId: string }): string {
+    const { teamCode, teamSessionId, deviceId } = params;
+    // In team mode, treat the Worker sessionId as the Runtime playerId.
+    if (teamCode && teamSessionId) return teamSessionId;
+    // In solo mode, keep a stable per-device playerId.
+    return deviceId;
+}
+
 interface QuestContextType {
     data: QuestData | null;
     progress: QuestProgress;
@@ -49,11 +70,21 @@ interface QuestProviderProps {
 export function QuestProvider({ data, children }: QuestProviderProps) {
     const normalizedData = React.useMemo(() => normalizeQuestData(data), [data]);
     const teamSync = useTeamSync();
+    const deviceId = React.useMemo(() => getOrCreateDeviceId(), []);
 
     const persistedSessionId = React.useMemo(() => {
         if (typeof window === 'undefined') return null;
         try {
             return sessionStorage.getItem('quest_sessionId');
+        } catch {
+            return null;
+        }
+    }, []);
+
+    const persistedRuntimeSessionId = React.useMemo(() => {
+        if (typeof window === 'undefined') return null;
+        try {
+            return sessionStorage.getItem('quest_runtimeSessionId');
         } catch {
             return null;
         }
@@ -69,18 +100,44 @@ export function QuestProvider({ data, children }: QuestProviderProps) {
         }
     }, [teamSync.session?.sessionId]);
 
+    React.useEffect(() => {
+        const rsid = teamSync.session?.runtimeSessionId;
+        if (!rsid) return;
+        try {
+            sessionStorage.setItem('quest_runtimeSessionId', rsid);
+        } catch {
+            // ignore
+        }
+    }, [teamSync.session?.runtimeSessionId]);
+
     // Initialize Runtime globally so it persists across page navigations
 
 
     // Initialize Runtime globally so it persists across page navigations
+    const runtimeSessionId = React.useMemo(() => {
+        return getRuntimeSessionId({
+            teamCode: teamSync.teamCode,
+            runtimeSessionId: teamSync.session?.runtimeSessionId ?? teamSync.team?.runtimeSessionId ?? null,
+            persistedRuntimeSessionId,
+            persistedSessionId,
+        });
+    }, [persistedRuntimeSessionId, persistedSessionId, teamSync.session?.runtimeSessionId, teamSync.team?.runtimeSessionId, teamSync.teamCode]);
+
+    const runtimePlayerId = React.useMemo(() => {
+        return getRuntimePlayerId({
+            teamCode: teamSync.teamCode,
+            teamSessionId: teamSync.session?.sessionId ?? null,
+            deviceId,
+        });
+    }, [deviceId, teamSync.session?.sessionId, teamSync.teamCode]);
+
     const runtime = useQuestRuntime({
         questId: normalizedData.questId ?? normalizedData.quest.id,
         questVersion: normalizedData.questVersion ?? 'v1',
-        playerId: getOrCreateDeviceId(), // Use unique device ID
+        playerId: runtimePlayerId,
         teamCode: teamSync.teamCode,
-        // Prefer TeamSync sessionId, but fallback to persisted sessionId to avoid
-        // silently switching runtime sessions while TeamSync is still initializing.
-        sessionId: teamSync.session?.sessionId ?? persistedSessionId,
+        // Team runtime session is shared by teamCode; solo uses persisted sessionId.
+        sessionId: runtimeSessionId,
         autoStart: false,
         pollIntervalMs: teamSync.connectionStatus === 'connected' ? 0 : 10_000
     });

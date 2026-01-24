@@ -9,7 +9,15 @@ type UseTimelineLogicParams = {
     stepsMode: boolean;
 };
 
-export function useTimelineLogic({ questRuntime, stepsMode }: UseTimelineLogicParams) {
+import type { MutableRefObject } from 'react';
+
+export function useTimelineLogic({ questRuntime, stepsMode }: UseTimelineLogicParams): {
+    snapshotRef: MutableRefObject<any>;
+    completedPuzzlesRef: MutableRefObject<Set<string>>;
+    computeRuntimeTimelineProgress: (objectId: string, items: NormalizedMediaTimelineItem[], reset: boolean) => TimelineProgressState;
+    completeRuntimeNode: (objectId: string, itemKey: string) => Promise<boolean>;
+    retryObjectRef: MutableRefObject<string | null>;
+} {
     // Refs for volatile data to stabilize callbacks
     const snapshotRef = useRef(questRuntime.snapshot);
     const completedPuzzlesRef = useRef(questRuntime.completedPuzzles);
@@ -81,6 +89,8 @@ export function useTimelineLogic({ questRuntime, stepsMode }: UseTimelineLogicPa
         [stepsMode] // Removed currentSessionId dependency
     );
 
+    const retryObjectRef = useRef<string | null>(null);
+
     const completeRuntimeNode = useCallback(
         async (objectId: string, itemKey: string) => {
             if (!questRuntimeRef.current) return false;
@@ -103,6 +113,13 @@ export function useTimelineLogic({ questRuntime, stepsMode }: UseTimelineLogicPa
                         result = await questRuntimeRef.current.completeNode(nodeId);
                         if (result.success) break;
                     }
+                }
+
+                if (!result.success && result.error?.includes('blocked')) {
+                    console.warn('[useObjectTimeline] Node blocked by incomplete dependency. Forcing refresh to sync state.', { nodeId, error: result.error });
+                    retryObjectRef.current = objectId; // Mark for retry after refresh
+                    await questRuntimeRef.current.refresh();
+                    return false;
                 }
 
                 if (!result.success) {
@@ -151,6 +168,7 @@ export function useTimelineLogic({ questRuntime, stepsMode }: UseTimelineLogicPa
         snapshotRef,
         completedPuzzlesRef,
         computeRuntimeTimelineProgress,
-        completeRuntimeNode
+        completeRuntimeNode,
+        retryObjectRef
     };
 }

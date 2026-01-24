@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Map as LeafletMap, TileLayer, LayerGroup } from 'leaflet';
 import { OSM_TILE_URL, OSM_ATTRIBUTION, OSM_MAX_NATIVE_ZOOM, OSM_MAX_ZOOM } from '../components/MapAssets';
-import { MapFrame } from '../components/MapFrame';
-import { COLORS } from '../components/MapStyles';
 import { getValidCoordinates, isStartObject } from '../utils/mapUtils';
 
 type UseMapInitializationProps = {
@@ -35,33 +33,61 @@ export function useMapInitialization({
 
     // Map Initialization
     useEffect(() => {
-        if (!mapContainerRef.current || !data || mapInstanceRef.current) return;
+        if (!mapContainerRef.current || !data) return;
 
-        // Allow a bit more zoom for marker separation by scaling tiles beyond their native max.
-        const maxZoom = OSM_MAX_ZOOM;
+        // ✅ reset per-init state
+        initialZoomSet.current = false;
 
-        const map = new LeafletMap(mapContainerRef.current, {
-            zoomControl: false,
-            maxZoom,
-            zoomSnap: 0.5
-        }).setView([0, 0], 2);
+        // Clean up existing map instance if it exists
+        if (mapInstanceRef.current) {
+            try {
+                savedZoom.current = mapInstanceRef.current.getZoom();
+                const center = mapInstanceRef.current.getCenter();
+                savedCenter.current = [center.lat, center.lng];
+            } catch { }
+            try {
+                mapInstanceRef.current.remove();
+            } catch (e) {
+                console.warn('[useMapInitialization] Failed to remove existing map instance', e);
+            }
+            // Immediately set to null to prevent access during initialization
+            mapInstanceRef.current = null;
+        }
 
-        const layer = new TileLayer(OSM_TILE_URL, {
-            attribution: OSM_ATTRIBUTION,
-            maxNativeZoom: OSM_MAX_NATIVE_ZOOM,
-            maxZoom: OSM_MAX_ZOOM
-        });
-        layer.addTo(map);
-        baseLayerRef.current = layer;
+        // Small delay to ensure DOM is ready and prevent race conditions with timeline logic
+        const initTimer = window.setTimeout(() => {
+            if (!mapContainerRef.current) return;
 
-        mapInstanceRef.current = map;
-        setMapUniqueId(prev => prev + 1);
-        markersLayerRef.current = new LayerGroup().addTo(map);
+            // Allow a bit more zoom for marker separation by scaling tiles beyond their native max.
+            const maxZoom = OSM_MAX_ZOOM;
 
-        map.invalidateSize();
+            const map = new LeafletMap(mapContainerRef.current, {
+                zoomControl: false,
+                maxZoom,
+                zoomSnap: 0.5
+            }).setView([0, 0], 2);
+
+            const layer = new TileLayer(OSM_TILE_URL, {
+                attribution: OSM_ATTRIBUTION,
+                maxNativeZoom: OSM_MAX_NATIVE_ZOOM,
+                maxZoom: OSM_MAX_ZOOM
+            });
+            layer.addTo(map);
+            baseLayerRef.current = layer;
+
+            mapInstanceRef.current = map;
+            // ⚠️ IMPORTANT: internal setMapUniqueId removed to prevent infinite loop
+            // setMapUniqueId(prev => prev + 1);
+            markersLayerRef.current = new LayerGroup().addTo(map);
+
+            map.invalidateSize();
+        }, 0);
 
         return () => {
+            window.clearTimeout(initTimer);
             onCleanup();
+
+            initialZoomSet.current = false;
 
             if (mapInstanceRef.current) {
                 try {
@@ -77,7 +103,7 @@ export function useMapInitialization({
             baseLayerRef.current = null;
             markersLayerRef.current = null;
         };
-    }, [mapContainerRef, data]); // Minimal dependencies for init
+    }, [data, mapUniqueId]); // Minimal dependencies for init
 
     // Initial View Logic (separate effect or part of init)
     useEffect(() => {
@@ -90,7 +116,7 @@ export function useMapInitialization({
         let center: [number, number] | null = null;
         let zoom = 2;
 
-        if (savedCenter.current && savedZoom.current) {
+        if (savedCenter.current && savedZoom.current != null) {
             center = savedCenter.current;
             zoom = savedZoom.current;
         } else {
@@ -98,7 +124,7 @@ export function useMapInitialization({
             let startObjectCoords: [number, number] | null = null;
             if (startObjectIds.size > 0) {
                 // Try to find one of the start objects in visibleObjects
-                const startParams = visibleObjects.find(obj => startObjectIds.has(obj.id));
+                const startParams = visibleObjects.find(obj => startObjectIds.has(String(obj.id)));
                 if (startParams) {
                     startObjectCoords = getValidCoordinates(startParams);
                 }

@@ -180,25 +180,17 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
                 }
 
                 // 2. HTML5 Audio element unlock
-                let silentFormats = [
+                // Prioritize hosted file for reliability, with data URIs as fallback
+                const silentFormats = [
+                    '/audio/silence.mp3',
                     'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAADhAC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7v////////////////////////////////////////////////////////////////MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz/////////////////////////////////////////////////////////////////AAAAAExhdmM1OC4xMzQAAAAAAAAAAAAAAAAkAAAAAAAAA4T/88DE8AAAAGwAAAABpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//MwxMsAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/zMEAAAA=',
                     'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='
                 ];
 
                 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) ||
-                    /req_safari_ui_webview/i.test(navigator.userAgent); // Add support for specific webviews if needed
+                    /req_safari_ui_webview/i.test(navigator.userAgent);
 
                 console.log('[useMapAudio] UserAgent:', navigator.userAgent, 'isSafari:', isSafari);
-
-                // Always include hosted silence file as a robust fallback (or primary for Safari)
-                if (isSafari) {
-                    console.log('[useMapAudio] Safari detected, prioritizing hosted silence file');
-                    // Put hosted file first for Safari
-                    silentFormats = ['/audio/silence.mp3', ...silentFormats];
-                } else {
-                    // For others, try data URIs first (faster), but fallback to hosted
-                    silentFormats = [...silentFormats, '/audio/silence.mp3'];
-                }
 
                 let unlocked = false;
                 let unlockedSrc: string | null = null;
@@ -217,12 +209,15 @@ export const useMapAudio = ({ onNotification }: UseQuestAudioProps) => {
                         audioToUnlock.volume = 0.01;
                         (audioToUnlock as any).playsInline = true;
 
+                        console.log('[useMapAudio] Attempting unlock play on:', {
+                            src,
+                            audioRefExists: !!audioToUnlock
+                        });
+
+                        // Call play() immediately to preserve user gesture context.
+                        // The browser will queue playback if the audio isn't ready yet.
                         await Promise.race([
                             (async () => {
-                                console.log('[useMapAudio] Attempting unlock play on:', {
-                                    src,
-                                    audioRefExists: !!audioToUnlock
-                                });
                                 try {
                                     await audioToUnlock.play();
                                     console.log('[useMapAudio] Unlock play resolved');

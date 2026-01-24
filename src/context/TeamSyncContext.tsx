@@ -27,6 +27,7 @@ const TeamSyncContext = createContext<TeamSyncContextValue | null>(null);
 const STORAGE_KEYS = {
   teamCode: 'quest_teamCode',
   sessionId: 'quest_sessionId',
+  runtimeSessionId: 'quest_runtimeSessionId',
   playerName: 'quest_playerName',
   websocketUrl: 'quest_websocketUrl',
 };
@@ -37,6 +38,7 @@ function readTeamSyncFromStorage(): { teamCode: string | null; session: QuestSes
   const fromSession = {
     teamCode: sessionStorage.getItem(STORAGE_KEYS.teamCode),
     sessionId: sessionStorage.getItem(STORAGE_KEYS.sessionId),
+    runtimeSessionId: sessionStorage.getItem(STORAGE_KEYS.runtimeSessionId),
     playerName: sessionStorage.getItem(STORAGE_KEYS.playerName),
     websocketUrl: sessionStorage.getItem(STORAGE_KEYS.websocketUrl),
   };
@@ -44,6 +46,7 @@ function readTeamSyncFromStorage(): { teamCode: string | null; session: QuestSes
   const fromLocal = {
     teamCode: localStorage.getItem(STORAGE_KEYS.teamCode),
     sessionId: localStorage.getItem(STORAGE_KEYS.sessionId),
+    runtimeSessionId: localStorage.getItem(STORAGE_KEYS.runtimeSessionId),
     playerName: localStorage.getItem(STORAGE_KEYS.playerName),
     websocketUrl: localStorage.getItem(STORAGE_KEYS.websocketUrl),
   };
@@ -51,6 +54,7 @@ function readTeamSyncFromStorage(): { teamCode: string | null; session: QuestSes
   // Prefer sessionStorage to avoid cross-tab collisions; migrate legacy localStorage state if present.
   const teamCode = fromSession.teamCode ?? fromLocal.teamCode;
   const sessionId = fromSession.sessionId ?? fromLocal.sessionId;
+  const runtimeSessionId = fromSession.runtimeSessionId ?? fromLocal.runtimeSessionId;
   const playerName = fromSession.playerName ?? fromLocal.playerName;
   const websocketUrl = fromSession.websocketUrl ?? fromLocal.websocketUrl;
 
@@ -61,6 +65,10 @@ function readTeamSyncFromStorage(): { teamCode: string | null; session: QuestSes
   if (sessionId && !fromSession.sessionId) {
     sessionStorage.setItem(STORAGE_KEYS.sessionId, sessionId);
     localStorage.removeItem(STORAGE_KEYS.sessionId);
+  }
+  if (runtimeSessionId && !fromSession.runtimeSessionId) {
+    sessionStorage.setItem(STORAGE_KEYS.runtimeSessionId, runtimeSessionId);
+    localStorage.removeItem(STORAGE_KEYS.runtimeSessionId);
   }
   if (playerName && !fromSession.playerName) {
     sessionStorage.setItem(STORAGE_KEYS.playerName, playerName);
@@ -77,7 +85,7 @@ function readTeamSyncFromStorage(): { teamCode: string | null; session: QuestSes
 
   return {
     teamCode,
-    session: { sessionId, playerName, mode: 'team', teamCode },
+    session: { sessionId, playerName, mode: 'team', teamCode, runtimeSessionId: runtimeSessionId || null },
     websocketUrl: websocketUrl || null,
   };
 }

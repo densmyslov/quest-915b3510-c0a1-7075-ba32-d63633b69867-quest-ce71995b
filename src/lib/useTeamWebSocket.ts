@@ -27,6 +27,7 @@ export type TeamMember = {
 
 export type TeamState = {
   teamCode: string;
+  runtimeSessionId?: string;
   createdAt: string;
   expiresAt: string;
   leaderSessionId?: string;
@@ -42,6 +43,7 @@ export type QuestSession = {
   playerName: string;
   mode: 'solo' | 'team';
   teamCode?: string;
+  runtimeSessionId?: string | null;
   startedAt?: string;
   gameExpiresAt?: string;
 };
@@ -134,7 +136,11 @@ function normalizeToWsUrl(baseUrl: string, teamCode: string): string | null {
 
   if (url.protocol !== 'ws:' && url.protocol !== 'wss:') return null;
 
-  url.pathname = '/ws';
+  // Only set pathname to '/ws' if no pathname exists (for backward compatibility)
+  // Otherwise, preserve the existing pathname (e.g., '/dev' for AWS API Gateway stages)
+  if (!url.pathname || url.pathname === '/') {
+    url.pathname = '/ws';
+  }
   url.searchParams.set('teamCode', teamCode);
   return url.toString();
 }
@@ -693,10 +699,16 @@ export function useTeamWebSocket(teamCode: string | null, session: QuestSession 
       }
     });
 
-    ws.addEventListener('error', (event) => {
+    ws.addEventListener('error', () => {
       // Ignore stale socket events
       if (wsRef.current !== ws) return;
-      console.error('[useTeamWebSocket] WebSocket error', { event, url });
+      // Note: WebSocket error events don't contain detailed error info in browsers
+      // The actual error details will be in the subsequent 'close' event
+      console.error('[useTeamWebSocket] WebSocket error occurred', {
+        url,
+        wsId,
+        message: 'Check the subsequent close event for error details (code/reason)'
+      });
       setConnectionStatus('error');
     });
   }, [apiUrl, clearPingTimer, clearReconnectTimer, scheduleReconnect, sessionId, playerName, teamCode]);

@@ -22,6 +22,7 @@ const SOLO_TEAM_STORAGE = {
 };
 
 const WEBSOCKET_URL_KEY = 'quest_websocketUrl';
+const RUNTIME_SESSION_ID_KEY = 'quest_runtimeSessionId';
 
 /*
 function getOrCreateDeviceId(): string {
@@ -57,17 +58,20 @@ export function useQuestSession() {
                 const fromSession = {
                     sessionId: sessionStorage.getItem('quest_sessionId'),
                     teamCode: sessionStorage.getItem('quest_teamCode'),
+                    runtimeSessionId: sessionStorage.getItem(RUNTIME_SESSION_ID_KEY),
                     expiresAt: sessionStorage.getItem('quest_expiresAt')
                 };
 
                 const fromLocal = {
                     sessionId: localStorage.getItem('quest_sessionId'),
                     teamCode: localStorage.getItem('quest_teamCode'),
+                    runtimeSessionId: localStorage.getItem(RUNTIME_SESSION_ID_KEY),
                     expiresAt: localStorage.getItem('quest_expiresAt')
                 };
 
                 const storedSessionId = fromSession.sessionId ?? fromLocal.sessionId;
                 const storedTeamCode = fromSession.teamCode ?? fromLocal.teamCode;
+                const storedRuntimeSessionId = fromSession.runtimeSessionId ?? fromLocal.runtimeSessionId;
                 const storedExpiresAt = fromSession.expiresAt ?? fromLocal.expiresAt;
 
                 // Migrate legacy localStorage session state to sessionStorage to avoid cross-tab collisions.
@@ -78,6 +82,10 @@ export function useQuestSession() {
                 if (!fromSession.teamCode && fromLocal.teamCode) {
                     sessionStorage.setItem('quest_teamCode', fromLocal.teamCode);
                     localStorage.removeItem('quest_teamCode');
+                }
+                if (!fromSession.runtimeSessionId && fromLocal.runtimeSessionId) {
+                    sessionStorage.setItem(RUNTIME_SESSION_ID_KEY, fromLocal.runtimeSessionId);
+                    localStorage.removeItem(RUNTIME_SESSION_ID_KEY);
                 }
                 if (!fromSession.expiresAt && fromLocal.expiresAt) {
                     sessionStorage.setItem('quest_expiresAt', fromLocal.expiresAt);
@@ -100,6 +108,7 @@ export function useQuestSession() {
                         localStorage.removeItem('quest_sessionId');
                     }
                 }
+                void storedRuntimeSessionId;
 
                 if (storedTeamCode) {
                     setTeam({ teamCode: storedTeamCode });
@@ -139,6 +148,7 @@ export function useQuestSession() {
         sessionStorage.removeItem(WEBSOCKET_URL_KEY);
 
         sessionStorage.setItem('quest_sessionId', sessionId);
+        sessionStorage.setItem(RUNTIME_SESSION_ID_KEY, sessionId);
         sessionStorage.setItem('quest_expiresAt', String(expiresAt));
         sessionStorage.setItem('quest_playerName', name);
         notifySessionChanged();
@@ -158,6 +168,7 @@ export function useQuestSession() {
                 console.log('[useQuestSession] apiCreateTeam returned:', result);
                 const teamCode = result.teamCode;
                 const sessionId = result.session?.sessionId;
+                const runtimeSessionId = result.session?.runtimeSessionId ?? null;
                 if (!teamCode || !sessionId) throw new Error('Team creation succeeded but missing teamCode/sessionId');
 
                 const created: Session = { sessionId, mode: 'team', teamCode, status: 'ready' };
@@ -168,6 +179,7 @@ export function useQuestSession() {
 
                 sessionStorage.setItem('quest_teamCode', teamCode);
                 sessionStorage.setItem('quest_sessionId', sessionId);
+                if (runtimeSessionId) sessionStorage.setItem(RUNTIME_SESSION_ID_KEY, runtimeSessionId);
                 sessionStorage.removeItem('quest_expiresAt');
                 sessionStorage.setItem('quest_playerName', name);
                 sessionStorage.setItem(WEBSOCKET_URL_KEY, result.websocketUrl || '');
@@ -207,11 +219,13 @@ export function useQuestSession() {
             const created: Team = { teamCode };
 
             const sessionId = result.session.sessionId;
+            const runtimeSessionId = result.session.runtimeSessionId ?? null;
             setSession({ sessionId, mode: 'team', teamCode, status: 'ready' });
 
             setTeam(created);
             sessionStorage.setItem('quest_teamCode', teamCode);
             sessionStorage.setItem('quest_sessionId', sessionId);
+            if (runtimeSessionId) sessionStorage.setItem(RUNTIME_SESSION_ID_KEY, runtimeSessionId);
             sessionStorage.removeItem('quest_expiresAt');
             sessionStorage.setItem('quest_playerName', name);
             sessionStorage.setItem(WEBSOCKET_URL_KEY, result.websocketUrl || '');
@@ -237,11 +251,13 @@ export function useQuestSession() {
             const joined: Team = { teamCode };
 
             const sessionId = result.session.sessionId;
+            const runtimeSessionId = result.session.runtimeSessionId ?? null;
             setSession({ sessionId, mode: 'team', teamCode, status: 'ready' });
 
             setTeam(joined);
             sessionStorage.setItem('quest_teamCode', teamCode);
             sessionStorage.setItem('quest_sessionId', sessionId);
+            if (runtimeSessionId) sessionStorage.setItem(RUNTIME_SESSION_ID_KEY, runtimeSessionId);
             sessionStorage.removeItem('quest_expiresAt');
             sessionStorage.setItem('quest_playerName', name);
             sessionStorage.setItem(WEBSOCKET_URL_KEY, result.websocketUrl || '');

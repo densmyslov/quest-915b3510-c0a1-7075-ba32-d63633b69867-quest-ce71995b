@@ -23,6 +23,7 @@ type UseQuestTimelineLogicProps = {
     userLocationRef: React.MutableRefObject<[number, number] | null>;
     setNotification: (msg: string | null) => void;
     timelineGateRef: React.MutableRefObject<{ gestureBlessed: boolean; unlocking: boolean }>;
+    onStartObjectArrived?: () => boolean;
 };
 
 export function useQuestTimelineLogic({
@@ -39,7 +40,8 @@ export function useQuestTimelineLogic({
     mapInstanceRef,
     userLocationRef,
     setNotification,
-    timelineGateRef
+    timelineGateRef,
+    onStartObjectArrived
 }: UseQuestTimelineLogicProps) {
     const questAudio = useQuestAudio();
     const lastResumedObjectRef = useRef<string | null>(null);
@@ -200,6 +202,32 @@ export function useQuestTimelineLogic({
         if (!currentObj) return;
         if (isCurrentObjectCompleted) return;
 
+        const isStart = currentObj.id === data?.start?.objectId;
+
+        // In play mode, start objects should wait for MissionBrief to be dismissed first.
+        // The timeline will be triggered from handleMissionBriefExit instead.
+        if (isStart) {
+            const missionBriefWillShow = onStartObjectArrived?.() ?? false;
+
+            if (missionBriefWillShow) {
+                return;
+            }
+
+            // If we are in play mode and it's a start object, but MissionBrief WON'T show (already shown),
+            // implies we should run. But specifically for 'play' mode logic was to wait.
+            // If already shown, we proceed to run below.
+            if (mapMode === 'play') {
+                // Existing logic was to return if start object in play mode.
+                // But if MissionBrief already shown, we SHOULD run?
+                // Original code returned unconditionally.
+                // Let's assume if MissionBrief is already shown, we CAN run content if we want.
+                // However, original logic said: "waiting for MissionBrief to be dismissed first".
+                // If it's already dismissed (shown=true), then we can run?
+                // Actually, let's keep it safe: if onStartObjectArrived says "false" (already shown),
+                // then we proceed.
+            }
+        }
+
         console.log('[Timeline] Running object timeline in Play mode', {
             objectId: currentObjectId,
             hasDefinition: !!safeRuntime.definition,
@@ -275,14 +303,23 @@ export function useQuestTimelineLogic({
             if (mapMode === 'steps') {
                 void runObjectTimelineRef.current(obj, { reset: true });
             } else if (isStartObject(obj)) {
-                // For start objects, we want to complete them immediately upon arrival
-                // so the user doesn't have to interact with the timeline if it's just a "Go here" start.
-                const endNodeId = `tl_${sanitizeIdPart(obj.id)}__end`;
-                console.log('[Timeline] Auto-completing start object', { objectId: obj.id, endNodeId });
-                void safeRuntime.completeNode(endNodeId).then(async () => {
-                    // Force refresh to update visibility of next objects
-                    await safeRuntime.refresh();
-                });
+                console.log('[Timeline] Start object arrival detected', { objectId: obj.id, mapMode });
+                // Trigger MissionBrief modal for start object arrival in play mode
+                // If callback returns true, MissionBrief will be shown and timeline will be started later
+                const willShowMissionBrief = onStartObjectArrived?.() ?? false;
+                console.log('[Timeline] willShowMissionBrief:', willShowMissionBrief);
+
+                // Only auto-complete if MissionBrief won't be shown
+                if (!willShowMissionBrief) {
+                    // For start objects, we want to complete them immediately upon arrival
+                    // so the user doesn't have to interact with the timeline if it's just a "Go here" start.
+                    const endNodeId = `tl_${sanitizeIdPart(obj.id)}__end`;
+                    console.log('[Timeline] Auto-completing start object', { objectId: obj.id, endNodeId });
+                    void safeRuntime.completeNode(endNodeId).then(async () => {
+                        // Force refresh to update visibility of next objects
+                        await safeRuntime.refresh();
+                    });
+                }
             }
         }
     });
@@ -313,11 +350,13 @@ export function useQuestTimelineLogic({
                 const nodeId = makeTimelineItemNodeId(obj.id, item.key);
                 const node = safeRuntime.snapshot!.nodes[nodeId];
                 if (node?.status === 'completed') {
+                    const docMediaUrl = (item as any).media_url ?? (item as any).mediaUrl;
                     docs.push({
                         id: item.key,
                         title: (item as any).title ?? 'Documento',
-                        thumbnailUrl: (item as any).media_url ?? (item as any).mediaUrl,
-                        text: (item as any).text
+                        thumbnailUrl: docMediaUrl,
+                        imageUrl: docMediaUrl,
+                        body: (item as any).text
                     });
                 }
             });

@@ -1,0 +1,9 @@
+# Default to no-cache for everything (HTML, data, etc.) to ensure updates are seen
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Long cache for Next.js immutable static assets (hashed filenames)
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache valid static assets in public folder if needed (optional, keeping safe default 0 for now)

@@ -1,12 +1,13 @@
 'use client';
 
 import 'leaflet/dist/leaflet.css';
-import { useRef, useMemo, useCallback, useEffect } from 'react';
+import { useRef, useMemo, useCallback, useEffect, useState } from 'react';
 import { useQuest } from '@/context/QuestContext';
 import { useTeamSync } from '@/context/TeamSyncContext';
 import { useDebugLog } from '@/context/DebugLogContext';
 import { getSoloTeamStartedAt, isSoloTeamSession } from '@/lib/soloTeam';
 import { isQuestDebugEnabled } from '@/lib/debugFlags';
+import MissionBrief from '@/app/(home)/MissionBrief';
 
 import { MapFrame } from './components/MapFrame';
 import { COLORS } from './components/MapStyles';
@@ -72,6 +73,24 @@ export default function QuestMap() {
         setNotification
     } = useQuestMapState();
 
+    // MissionBrief modal state
+    const [showMissionBrief, setShowMissionBrief] = useState(false);
+
+
+
+    // SessionStorage helpers for MissionBrief tracking
+    const getMissionBriefShown = useCallback(() => {
+        if (typeof window === 'undefined' || !currentSessionId) return false;
+        const key = `quest_missionBrief_shown_${currentSessionId}`;
+        return sessionStorage.getItem(key) === 'true';
+    }, [currentSessionId]);
+
+    const setMissionBriefShown = useCallback(() => {
+        if (typeof window === 'undefined' || !currentSessionId) return;
+        const key = `quest_missionBrief_shown_${currentSessionId}`;
+        sessionStorage.setItem(key, 'true');
+    }, [currentSessionId]);
+
     const timelineGateRef = useRef({
         gestureBlessed: false,
         unlocking: false,
@@ -113,6 +132,20 @@ export default function QuestMap() {
         onCleanup: () => { }
     });
 
+    // Callback for when user arrives at start object
+    // Returns true if MissionBrief will be shown, false otherwise
+    const handleStartObjectArrived = useCallback(() => {
+        const alreadyShown = getMissionBriefShown();
+        const willShow = !alreadyShown && (mapMode === 'play' || mapMode === 'steps');
+
+        // Only show modal if not already shown and in play mode
+        if (willShow) {
+            setShowMissionBrief(true);
+            return true;
+        }
+        return false;
+    }, [getMissionBriefShown, mapMode]);
+
     const timelineLogic = useQuestTimelineLogic({
         data,
         safeRuntime,
@@ -127,8 +160,25 @@ export default function QuestMap() {
         mapInstanceRef: mapInit.mapInstanceRef,
         userLocationRef,
         setNotification,
-        timelineGateRef
+        timelineGateRef,
+        onStartObjectArrived: handleStartObjectArrived
     });
+
+    // MissionBrief onExit handler
+    const handleMissionBriefExit = useCallback(() => {
+        setShowMissionBrief(false);
+        setMissionBriefShown();
+
+        // ✅ Force Leaflet re-init after the map container remounts
+        setMapUniqueId(prev => prev + 1);
+
+        // Find the start object and trigger its timeline
+        const startObj = data?.objects?.find((obj: any) => isStartObject(obj));
+        if (startObj && !safeRuntime.completedObjects?.has(startObj.id)) {
+            timelineLogic.lastResumedObjectRef.current = startObj.id;
+            void timelineLogic.timelineHandlers.runObjectTimeline(startObj);
+        }
+    }, [setMissionBriefShown, setMapUniqueId, data?.objects, safeRuntime.completedObjects, timelineLogic]);
 
     useEffect(() => {
         // Show object-defined pulses only for currently visible objects
@@ -256,7 +306,16 @@ export default function QuestMap() {
 
                 // In Play mode, only start the timeline after GPS arrival (OBJECT_ARRIVE).
                 // Steps mode intentionally bypasses this.
-                if (currentObj && !isCurrentObjectCompleted && (mode === 'steps' || hasArrivedAtCurrentObject)) {
+                // Skip if this is the start object and MissionBrief hasn't been shown yet.
+                const isStartObj = currentObj && isStartObject(currentObj);
+                const shouldShowMissionBriefFirst = isStartObj && !getMissionBriefShown() && (mode === 'play' || mode === 'steps');
+
+                if (shouldShowMissionBriefFirst) {
+                    console.log('[QuestMap] Showing MissionBrief from selectMapMode');
+                    setShowMissionBrief(true);
+                }
+
+                if (currentObj && !isCurrentObjectCompleted && (mode === 'steps' || hasArrivedAtCurrentObject) && !shouldShowMissionBriefFirst) {
                     timelineLogic.lastResumedObjectRef.current = currentObj.id;
                     void timelineLogic.timelineHandlers.runObjectTimeline(currentObj);
                 }
@@ -271,7 +330,7 @@ export default function QuestMap() {
             setGpsEnabled(false);
             setCurrentItineraryStep(0);
         }
-    }, [timelineLogic, safeRuntime, currentSessionId, objectsById, runtime, setMapMode, setGpsEnabled, setCurrentItineraryStep, setNotification, setModeConfirmed, data, mapInit.mapInstanceRef]);
+    }, [timelineLogic, safeRuntime, currentSessionId, objectsById, runtime, setMapMode, setGpsEnabled, setCurrentItineraryStep, setNotification, setModeConfirmed, data, mapInit.mapInstanceRef, getMissionBriefShown]);
 
 
     // Distribution Ref for Popups
@@ -306,13 +365,21 @@ export default function QuestMap() {
     }, [data]);
 
     const currentScore = useMemo(() => {
+        const isTeamMode = !!teamSync.teamCode && !!teamSync.session;
+
+        if (isTeamMode && safeRuntime.snapshot?.players) {
+            const scores = Object.values(safeRuntime.snapshot.players as Record<string, { score?: unknown }>);
+            const sum = scores.reduce((acc, p: any) => acc + (typeof p?.score === 'number' ? p.score : 0), 0);
+            if (sum > 0) return sum;
+        }
+
         const playerScore = currentSessionId ? safeRuntime.scoreByPlayerId.get(currentSessionId) : null;
         if (typeof playerScore === 'number') return playerScore;
         if (teamSync.team?.members && teamSync.team.members.length > 0) {
             return teamSync.team.members.reduce((sum: number, member: any) => sum + (member.totalPoints || 0), 0);
         }
         return data?.quest?.votesFor || 0;
-    }, [currentSessionId, safeRuntime.scoreByPlayerId, teamSync.team?.members, data?.quest?.votesFor]);
+    }, [currentSessionId, safeRuntime.scoreByPlayerId, safeRuntime.snapshot?.players, teamSync.session, teamSync.team?.members, teamSync.teamCode, data?.quest?.votesFor]);
 
     const votesFor = currentScore;
     const votesAgainst = Math.max(0, totalPointsAvailable - votesFor);
@@ -364,36 +431,12 @@ export default function QuestMap() {
     }, [mapInit.mapInstanceRef.current, timelineLogic.audioControls, timelineLogic.audioUnlockedRef, mapUniqueId, setNotification]);
 
 
-    if (!data || !runtime) {
-        return (
-            <div style={{
-                position: 'fixed',
-                inset: 0,
-                background: 'radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a15 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                gap: '24px'
-            }}>
-                <div style={{
-                    width: '60px',
-                    height: '60px',
-                    border: `3px solid transparent`,
-                    borderTopColor: COLORS.gold,
-                    borderRightColor: COLORS.gold,
-                    borderRadius: '50%',
-                    animation: 'spin 1s linear infinite'
-                }}></div>
-                <p style={{
-                    fontFamily: "'Cinzel', serif",
-                    color: COLORS.gold,
-                    fontSize: '16px',
-                    letterSpacing: '2px'
-                }}>Aprendo il portale temporale...</p>
-                <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-            </div>
-        );
+    // Loading state - show spinner overlay but KEEP the map container rendered
+    // so mapContainerRef is attached from first render
+    const isLoading = !data || !runtime;
+
+    if (showMissionBrief) {
+        return <MissionBrief onExit={handleMissionBriefExit} />;
     }
 
     return (
@@ -403,66 +446,105 @@ export default function QuestMap() {
             height: '100%',
             fontFamily: "'Crimson Text', Georgia, serif"
         }}>
-            <MapFrame />
+            {/* Always render the map container so the ref is attached */}
             <div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
 
-            <QuestMarkersLayer
-                map={mapInit.mapInstanceRef.current}
-                markersLayer={mapInit.markersLayerRef.current}
-                data={data}
-                visibleObjects={visibleObjects}
-                safeRuntime={safeRuntime}
-                currentSessionId={currentSessionId}
-                stepsMode={stepsMode}
-                itineraryEntries={locationLogic.itineraryEntries}
-                itineraryRange={locationLogic.itineraryRange}
-                getItineraryNumber={getItineraryNumber}
-                isStartObject={isStartObject}
-                distributionRef={distributionRef}
-                addOrUpdatePulsatingCircle={timelineLogic.pulsating.addOrUpdatePulsatingCircle}
-                removeTimelinePulsatingCircle={timelineLogic.pulsating.removeTimelinePulsatingCircle}
-                getObjectPulseIds={timelineLogic.pulsating.getObjectPulseIds}
-                setPulsatingVisibility={timelineLogic.pulsating.setPulsatingVisibility}
-            />
+            {/* Loading overlay */}
+            {isLoading && (
+                <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a15 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    gap: '24px',
+                    zIndex: 1000
+                }}>
+                    <div style={{
+                        width: '60px',
+                        height: '60px',
+                        border: `3px solid transparent`,
+                        borderTopColor: COLORS.gold,
+                        borderRightColor: COLORS.gold,
+                        borderRadius: '50%',
+                        animation: 'spin 1s linear infinite'
+                    }}></div>
+                    <p style={{
+                        fontFamily: "'Cinzel', serif",
+                        color: COLORS.gold,
+                        fontSize: '16px',
+                        letterSpacing: '2px'
+                    }}>Aprendo il portale temporale...</p>
+                    <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+                </div>
+            )}
 
-            <UserLocationLayer
-                map={mapInit.mapInstanceRef.current}
-                userLocation={locationLogic.userLocation}
-            />
+            {/* Only render map UI when data is ready */}
+            {!isLoading && (
+                <>
+                    <MapFrame />
 
-            <QuestUIOverlays
-                mapMode={mapMode}
-                currentItineraryStep={currentItineraryStep}
-                itineraryRange={locationLogic.itineraryRange}
-                selectMapMode={selectMapMode}
-                nextStep={locationLogic.nextStep}
-                prevStep={locationLogic.prevStep}
-                totalPointsAvailable={totalPointsAvailable}
-                votesFor={votesFor}
-                votesAgainst={votesAgainst}
-                stepsTimelinePanel={timelineLogic.timelineState.stepsTimelinePanel}
-                data={data}
-                getItineraryNumber={getItineraryNumber}
-                audioPanelProps={audioPanelProps}
-                collectedDocuments={timelineLogic.timelineState.collectedDocuments}
-                notification={notification}
-                timelineState={timelineLogic.timelineState}
-                timelineHandlers={timelineLogic.timelineHandlers}
-                audioState={timelineLogic.audioState}
-                audioControls={timelineLogic.audioControls}
-                puzzleCloseConfirmation={puzzleCloseConfirmation}
-                setPuzzleCloseConfirmation={setPuzzleCloseConfirmation}
-                gpsEnabled={gpsEnabled}
-                toggleGPS={locationLogic.toggleGPS}
-                heading={locationLogic.heading}
-                isPlayMode={isPlayMode}
-                stepsMode={stepsMode}
-            />
+                    <QuestMarkersLayer
+                        map={mapInit.mapInstanceRef.current}
+                        markersLayer={mapInit.markersLayerRef.current}
+                        data={data}
+                        visibleObjects={visibleObjects}
+                        safeRuntime={safeRuntime}
+                        currentSessionId={currentSessionId}
+                        stepsMode={stepsMode}
+                        itineraryEntries={locationLogic.itineraryEntries}
+                        itineraryRange={locationLogic.itineraryRange}
+                        getItineraryNumber={getItineraryNumber}
+                        isStartObject={isStartObject}
+                        distributionRef={distributionRef}
+                        addOrUpdatePulsatingCircle={timelineLogic.pulsating.addOrUpdatePulsatingCircle}
+                        removeTimelinePulsatingCircle={timelineLogic.pulsating.removeTimelinePulsatingCircle}
+                        getObjectPulseIds={timelineLogic.pulsating.getObjectPulseIds}
+                        setPulsatingVisibility={timelineLogic.pulsating.setPulsatingVisibility}
+                    />
 
-            <audio ref={timelineLogic.audioRefs.audioRef} {...timelineLogic.audioHandlers} preload="auto" playsInline style={hiddenAudioStyle} />
-            <audio ref={timelineLogic.audioRefs.effectAudioRef} preload="auto" playsInline style={hiddenAudioStyle} />
+                    <UserLocationLayer
+                        map={mapInit.mapInstanceRef.current}
+                        userLocation={locationLogic.userLocation}
+                    />
 
-            <RuntimeDebugOverlay />
+                    <QuestUIOverlays
+                        mapMode={mapMode}
+                        currentItineraryStep={currentItineraryStep}
+                        itineraryRange={locationLogic.itineraryRange}
+                        selectMapMode={selectMapMode}
+                        nextStep={locationLogic.nextStep}
+                        prevStep={locationLogic.prevStep}
+                        totalPointsAvailable={totalPointsAvailable}
+                        votesFor={votesFor}
+                        votesAgainst={votesAgainst}
+                        stepsTimelinePanel={timelineLogic.timelineState.stepsTimelinePanel}
+                        data={data}
+                        getItineraryNumber={getItineraryNumber}
+                        audioPanelProps={audioPanelProps}
+                        collectedDocuments={timelineLogic.timelineState.collectedDocuments}
+                        notification={notification}
+                        timelineState={timelineLogic.timelineState}
+                        timelineHandlers={timelineLogic.timelineHandlers}
+                        audioState={timelineLogic.audioState}
+                        audioControls={timelineLogic.audioControls}
+                        puzzleCloseConfirmation={puzzleCloseConfirmation}
+                        setPuzzleCloseConfirmation={setPuzzleCloseConfirmation}
+                        gpsEnabled={gpsEnabled}
+                        toggleGPS={locationLogic.toggleGPS}
+                        heading={locationLogic.heading}
+                        isPlayMode={isPlayMode}
+                        stepsMode={stepsMode}
+                    />
+
+                    <audio ref={timelineLogic.audioRefs.audioRef} {...timelineLogic.audioHandlers} preload="auto" playsInline style={hiddenAudioStyle} />
+                    <audio ref={timelineLogic.audioRefs.effectAudioRef} preload="auto" playsInline style={hiddenAudioStyle} />
+
+                    <RuntimeDebugOverlay />
+                </>
+            )}
         </div>
     );
 }

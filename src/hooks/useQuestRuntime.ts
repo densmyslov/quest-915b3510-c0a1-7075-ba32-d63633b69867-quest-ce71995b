@@ -78,7 +78,7 @@ export type QuestRuntimeClient = {
   refresh: () => Promise<void>;
   startOrJoin: (options?: { reset?: boolean }) => Promise<void>;
   arriveAtObject: (objectId: ObjectId) => Promise<void>;
-  completeNode: (nodeId: NodeId) => Promise<{ success: boolean; error?: string }>;
+  completeNode: (nodeId: NodeId, options?: { force?: boolean }) => Promise<{ success: boolean; error?: string }>;
   submitPuzzleSuccess: (params: { puzzleId: string; objectId?: string; points?: number }) => Promise<void>;
   startActionAttempt: (nodeId: NodeId) => Promise<{ attemptId: string; attemptGroupId: string | null } | null>;
   submitAction: (params: {
@@ -315,8 +315,9 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
   );
 
   const completeNode = useCallback(
-    async (nodeId: NodeId): Promise<{ success: boolean; error?: string }> => {
+    async (nodeId: NodeId, options?: { force?: boolean }): Promise<{ success: boolean; error?: string }> => {
       if (!playerId || !runtimeSessionId) return { success: false, error: 'No session' };
+      const dedupeKey = `nodeComplete:${playerId}:${nodeId}${options?.force ? `:${Date.now()}` : ''}`;
       const res = await postJson<{ success: boolean; snapshot?: RuntimeSnapshot; deltas?: RuntimeDelta[]; error?: string }>(
         '/api/runtime/node/complete',
         {
@@ -324,7 +325,7 @@ export function useQuestRuntime(params: UseQuestRuntimeParams): QuestRuntimeClie
           playerId,
           nodeId,
           eventId: makeId(),
-          dedupeKey: `nodeComplete:${playerId}:${nodeId}`,
+          dedupeKey,
         },
       );
       if (!res.ok) {

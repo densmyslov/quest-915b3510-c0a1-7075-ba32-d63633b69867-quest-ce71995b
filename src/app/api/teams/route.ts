@@ -16,6 +16,7 @@ interface CreateTeamResponse {
         playerName: string;
         mode: 'team';
         teamCode: string;
+        runtimeSessionId?: string | null;
     };
     websocketUrl: string;
 }
@@ -88,19 +89,21 @@ export async function POST(request: NextRequest) {
         const team = await createTeam(playerName.trim());
         console.log('[/api/teams] Team created:', team);
         let websocketUrl = '';
+        const runtimeSessionId = crypto.randomUUID();
 
         // Initialize runtime session if questId is provided
         if (questId) {
             console.log('[/api/teams] questId provided, initializing runtime session');
             try {
                 const runtimePayload = {
-                    sessionId: team.leaderSessionId,
+                    // Shared runtime session for a team (separate from teamCode).
+                    sessionId: runtimeSessionId,
                     playerId: team.leaderSessionId,
                     playerName: team.leaderName,
                     questId,
                     questVersion: questVersion || 'v1',
                     eventId: makeId(),
-                    dedupeKey: `start:${team.teamCode}:${team.leaderSessionId}`,
+                    dedupeKey: `start:${runtimeSessionId}:${team.leaderSessionId}`,
                 };
                 console.log('[/api/teams] Calling proxyToAwsRuntime with:', runtimePayload);
                 const runtimeResponse = await proxyToAwsRuntime('/runtime/session/start', 'POST', runtimePayload);
@@ -146,7 +149,8 @@ export async function POST(request: NextRequest) {
                 sessionId: team.leaderSessionId,
                 playerName: team.leaderName,
                 mode: 'team',
-                teamCode: team.teamCode
+                teamCode: team.teamCode,
+                runtimeSessionId
             },
             websocketUrl
         };

@@ -97,12 +97,16 @@ function getTimelineVideoUrl(item: any): string | null {
 
 function getTimelineAudioTranscription(item: any): Transcription | null {
   if (!item || typeof item !== 'object') return null;
-  const words =
-    item.transcription_words ??
-    item.transcriptionWords ??
-    item.transcription?.words ??
-    item.transcription_data?.words ??
-    item.transcriptionData?.words;
+
+  let transcriptionData = item.transcription_data ?? item.transcriptionData;
+  if (typeof transcriptionData === 'string') {
+    try {
+      transcriptionData = JSON.parse(transcriptionData);
+    } catch {
+      // ignore
+    }
+  }
+
   const rawText =
     item.transcription_text ??
     item.transcriptionText ??
@@ -113,20 +117,78 @@ function getTimelineAudioTranscription(item: any): Transcription | null {
     (typeof item.transcription === 'object' && item.transcription !== null && 'fullText' in item.transcription
       ? (item.transcription as any).fullText
       : undefined) ??
-    (typeof item.transcription_data === 'object' && item.transcription_data !== null && 'fullText' in item.transcription_data
-      ? (item.transcription_data as any).fullText
+    (transcriptionData && typeof transcriptionData === 'object' && 'fullText' in transcriptionData
+      ? (transcriptionData as any).fullText
       : undefined) ??
-    item.transcription_data?.text ??
-    (typeof item.transcriptionData === 'object' && item.transcriptionData !== null && 'fullText' in item.transcriptionData
-      ? (item.transcriptionData as any).fullText
-      : undefined) ??
-    item.transcriptionData?.text;
+    transcriptionData?.text;
 
-  if (!words && !rawText) return null;
-  return normalizeTranscription({
-    words: Array.isArray(words) ? words : undefined,
-    fullText: typeof rawText === 'string' ? rawText : '',
-  });
+  const fullText = typeof rawText === 'string' ? rawText : '';
+
+  const wordCandidates: unknown[] = [
+    item.transcription_words,
+    item.transcriptionWords,
+    item.transcription?.words,
+    transcriptionData?.words,
+  ];
+
+  if (!wordCandidates.some(Array.isArray) && !fullText) return null;
+
+  const candidates = wordCandidates.map((words) =>
+    normalizeTranscription({
+      words: Array.isArray(words) ? words : undefined,
+      fullText,
+    })
+  );
+
+  function score(t: Transcription) {
+    const wordCount = t.words.length;
+    const maxEnd = wordCount ? Math.max(...t.words.map((w) => w.end)) : 0;
+    const timedCount = t.words.reduce((acc, w) => acc + (w.end - w.start > 0.01 ? 1 : 0), 0);
+    const hasUsableTimings = timedCount > 0 && maxEnd > 0.1;
+    return { wordCount, timedCount, maxEnd, hasUsableTimings };
+  }
+
+  // Prefer the candidate with usable word timestamps (editor timings), otherwise prefer
+  // the one with the most words (to enable interpolation as a last resort).
+  let best = candidates[0] ?? null;
+  let bestScore = best ? score(best) : null;
+  for (const c of candidates) {
+    if (!best || !bestScore) {
+      best = c;
+      bestScore = score(c);
+      continue;
+    }
+    const s = score(c);
+    const b = bestScore;
+    if (s.hasUsableTimings && !b.hasUsableTimings) {
+      best = c;
+      bestScore = s;
+      continue;
+    }
+    if (s.hasUsableTimings === b.hasUsableTimings) {
+      if (s.timedCount !== b.timedCount) {
+        if (s.timedCount > b.timedCount) {
+          best = c;
+          bestScore = s;
+        }
+        continue;
+      }
+      if (s.maxEnd !== b.maxEnd) {
+        if (s.maxEnd > b.maxEnd) {
+          best = c;
+          bestScore = s;
+        }
+        continue;
+      }
+      if (s.wordCount > b.wordCount) {
+        best = c;
+        bestScore = s;
+      }
+    }
+  }
+
+  if (!best) return null;
+  return { ...best, fullText };
 }
 
 function readPuzzleId(item: any): string | null {
