@@ -6,10 +6,10 @@
     "deployUrl": "https://quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b.pages.dev",
     "repoUrl": "https://github.com/densmyslov/quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b",
     "projectName": "quest-915b3510-c0a1-7075-ba32-d63633b69867-quest-ce71995b",
-    "contentHash": "3060c31156cdf52282e69234b2552c6b",
+    "contentHash": "9251f19d28038202cdff274d6b24bb31",
     "createdAt": "2025-12-07",
-    "deploymentId": "6c4a36a6-7cc7-46fb-9753-5656eac0053e",
-    "lastDeployed": "2026-01-22T05:01:47.261083",
+    "deploymentId": "00314149-0341-4149-a0d1-641c7d0f18a6",
+    "lastDeployed": "2026-01-24T13:19:25.204755",
     "description": "",
     "userId": "915b3510-c0a1-7075-ba32-d63633b69867",
     "questApiUrl": "https://esino-quest-api.denslov.workers.dev"
@@ -45,13 +45,12 @@
       "isEnd": false,
       "createdAt": "2025-12-14",
       "isCurrent": false,
-      "itineraryNumber": 0,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=7DII%2FRtvBKKNOH0pbdKLEr7iiqY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=qdqWrqi1lyVvkde8AGTyzQkSTxw%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
@@ -72,10 +71,10 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 1111211111111112111,
+        "version": 111121111111111211111,
         "items": [
           {
-            "delayMs": 0.0,
+            "delayMs": 4000.0,
             "repeatPolicy": "on_each_arrival",
             "role": "normal",
             "blocking": true,
@@ -4020,10 +4019,10 @@
             "delayMs": 5000.0,
             "role": "normal",
             "blocking": true,
-            "media_id": "20260111-132342-3e005cf8",
+            "media_id": "20260122-192412-dd95d224",
             "id": "0945c996-6e38-4319-99ed-ea3ad61d731f",
             "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-132342-3e005cf8.mp3",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260122-192412-dd95d224.mp3",
             "enabled": true,
             "order": 4.0
           }
@@ -4074,7 +4073,7 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 131111221111111120011111,
+        "version": 1311112211111111200111111,
         "items": [
           {
             "delayMs": 0.0,
@@ -4099,7 +4098,7 @@
               "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143604-dd800545.jpg/public"
             ],
             "id": "f91fa7c6-b333-402e-b84e-1d6547192600",
-            "text": "Amici, il portale funziona davvero. Vi aiuter\u00f2.\nProvate a trovare l\u2019antica porta. La strega ha intrecciato su quella porta un nodo magico fatto di filati. \nCercate di sciogliere il nodo e riuscirete forse a spezzare l\u2019incantesimo.",
+            "text": "Amici, il portale funziona davvero. Vi aiuter\u00f2.\nProvate a trovare l\u2019antica porta. La strega ha intrecciato su quella porta un nodo magico fatto di filati.\nCercate di sciogliere il nodo e riuscirete forse a spezzare l\u2019incantesimo.",
             "type": "text",
             "enabled": true,
             "displayMode": "until_close",
@@ -4152,7 +4151,7 @@
             "delayMs": 0.0,
             "blocking": true,
             "id": "c0305153-72b6-407c-885a-4fa2525a93f1",
-            "text": "Bravi, proviamo a portare dalla nostra parte la famiglia Dell\u2019Era che vive qui. Da tempo soffrono a causa di questa strega. Fate una foto alla porta con la vostra strana tavoletta diabolica e sorridete.",
+            "text": "Bravi, proviamo a portare dalla nostra parte la famiglia Dell\u2019Era che vive qui. Da tempo soffrono a causa di questa strega. Fate una foto alla porta con la vostra strana tavoletta magica e sorridete.",
             "type": "text",
             "enabled": true,
             "displayMode": "until_close",
@@ -4215,7 +4214,7 @@
               "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260105-143613-9ef86085.jpg/public"
             ],
             "id": "e65e1b27-7f10-4c24-898b-75976e30bb89",
-            "text": "Bravi, ora avete sicuramente i vostri primi amici in citt\u00e0.\nAdesso , presto: trovate la casa della strega di Deluiga  bussate forte tre volte alla porta.Ma tenete presente una cosa: dovete bussare tutti insieme, nello stesso momento.",
+            "text": "Bravi, ora avete sicuramente i vostri primi amici in citt\u00e0.\nAdesso, presto: trovate la casa della strega di Deluiga e bussate forte tre volte alla porta. Ma tenete presente una cosa: dovete bussare tutti insieme, nello stesso momento.",
             "type": "text",
             "enabled": true,
             "displayMode": "until_close",
@@ -4241,140 +4240,123 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133250-34c83c10/20251209-133250-34c83c10.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133315-64456715.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=ZmOlcWvsU8LzXLTEI22UMv96WRM%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "ee0a94a6-0067-44b9-8a4b-1948080c53e6",
-      "name": "Piazza Caprera",
-      "status": "active",
-      "number": 13,
-      "points": 0,
-      "coordinates": "45.996935, 9.334090",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isSpecial": false,
-      "isMain": true,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2025-12-14",
-      "isCurrent": false,
-      "itineraryNumber": 13,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-140727-09172331/20251209-140727-09172331.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-140903-933836eb.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=jZpXCFj9lj5SUhSuTeJU5DZECTk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "71fff430-183d-4bd9-b328-e378f544801f",
-      "name": "Door-2",
-      "status": "active",
-      "number": 0,
-      "points": 0,
-      "coordinates": "45.9964013, 9.3347776",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "mediaTimeline": {
-        "version": 11,
-        "items": [
-          {
-            "delayMs": 0.0,
-            "blocking": true,
-            "actionKind": "image_match",
-            "id": "a9dd6c90-0001-480b-b675-f10ec3c7dac0",
-            "type": "action",
-            "params": {
-              "successDurationMs": "3000",
-              "maxDistanceMeters": "10",
-              "targetLongitude": "9.3347776",
-              "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp",
-              "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
-              "targetLatitude": "45.9964013",
-              "maxScore": "0.6",
-              "successMessage": "you found it"
-            },
-            "enabled": true,
-            "order": 1.0
-          },
-          {
-            "delayMs": 0.0,
-            "blocking": false,
-            "media_id": "20260113-120733-5a2477b2",
-            "id": "1b604d1f-5843-41ce-83d7-aadde4f01e68",
-            "type": "video",
-            "media_url": "https://videodelivery.net/9fb4a2e7e1e3da05e62a55810a2dd089/manifest/video.m3u8",
-            "enabled": true,
-            "order": 2.0
-          }
-        ]
-      },
-      "isSpecial": false,
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2026-01-13",
-      "isCurrent": false,
-      "itineraryNumber": 0,
-      "images": [
-        {
-          "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
-          "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
-          "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134102-3e5374a6.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=7DII%2FRtvBKKNOH0pbdKLEr7iiqY%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133315-64456715.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=ICWGUsH0Zl7BSW5w662Iv6HIOH4%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
     },
     {
       "id": "f9e8eccf-4362-4a89-973b-c97ee255d53c",
-      "name": "love you door",
+      "name": "14. Nota di Pasquale",
       "status": "active",
-      "number": 15,
+      "number": 14,
       "points": 0,
-      "coordinates": "45.996372, 9.333841",
+      "coordinates": "45.996360, 9.333846",
       "image_keys": [
         "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-142742-b3113eeb/20251209-142742-b3113eeb.webp"
       ],
       "description": "",
-      "triggerRadius": 20.0,
+      "triggerRadius": 7.0,
       "quest_ids": [
         "quest-8371e45f"
       ],
+      "mediaTimeline": {
+        "version": 31,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260111-141546-8d042419",
+            "id": "d81d5072-48dd-4c0d-a0b3-1a28b2dd08fd",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
+            "enabled": true,
+            "order": 1.0
+          },
+          {
+            "delayMs": 0.0,
+            "displaySeconds": 5.0,
+            "blocking": true,
+            "id": "e165d5ff-a210-4b0d-9f31-4f6ad8200b06",
+            "text": " Amici, ho lasciato un messaggio per la Ghit, ma qualcuno l\u2019ha ricoperto di vernice.\nNon \u00e8 una cosa fondamentale, certo, ma mi piacerebbe che tutti sapessero cosa c\u2019era scritto.\nAiutatemi usando le vostre strane tavolette diaboliche",
+            "type": "text",
+            "enabled": true,
+            "displayMode": "seconds",
+            "order": 2.0
+          },
+          {
+            "delayMs": 0.0,
+            "ar": {
+              "replacement_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260124-110547-34a18d1b.png/public",
+              "overlay": "none",
+              "overlay_mode": "replacement",
+              "text_input": "\"garage door\"",
+              "task_prompt": "<REFERRING_EXPRESSION_SEGMENTATION>",
+              "origin": "top",
+              "match_target_image_key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-142742-b3113eeb/20251209-142742-b3113eeb.webp",
+              "match_target_image_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-142742-b3113eeb/20251209-142742-b3113eeb.webp/public"
+            },
+            "blocking": true,
+            "id": "330bdf21-b9c7-41df-a904-5c4d119021d3",
+            "type": "ar",
+            "enabled": true,
+            "order": 3.0
+          },
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260111-141546-8d042419",
+            "id": "a690097d-f569-4275-803e-d3c5c65faf31",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
+            "enabled": true,
+            "order": 4.0
+          },
+          {
+            "delayMs": 0.0,
+            "displaySeconds": 5.0,
+            "blocking": true,
+            "id": "10a5581f-56a6-46f8-b7dd-34bb21642d36",
+            "text": "Amici, sembra che la Ghit abbia sentito che siete vicini. Sento che sta cantando la mia canzone preferita. LA LEGGENDA DELLA GRIGNA",
+            "type": "text",
+            "enabled": true,
+            "displayMode": "seconds",
+            "order": 5.0
+          },
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260114-040548-5ee753af",
+            "id": "c97d04f3-239d-4af7-b953-93dcbb4983de",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260114-040548-5ee753af.ogg",
+            "enabled": true,
+            "order": 6.0
+          }
+        ]
+      },
       "isSpecial": false,
-      "isMain": false,
+      "isMain": true,
       "isStart": false,
       "isVisible": false,
       "isEnd": false,
       "createdAt": "2026-01-20",
       "isCurrent": false,
-      "itineraryNumber": 15,
+      "quest_configs": {
+        "quest-8371e45f": {
+          "number": 14.0
+        }
+      },
+      "itineraryNumber": 14,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-142742-b3113eeb/20251209-142742-b3113eeb.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-142742-b3113eeb/20251209-142742-b3113eeb.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-142915-b3d816eb.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=jJNYJr%2BdvXu3%2FQcLbfB%2BbnEf%2F14%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-142915-b3d816eb.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=Cao9bxnUM64XodrJKvcJ%2FXYmkTI%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
@@ -4385,17 +4367,17 @@
       "status": "active",
       "number": 4,
       "points": 10,
-      "coordinates": "45.996192, 9.335150",
+      "coordinates": "42.678359, 14.016441",
       "image_keys": [
         "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-141145-1655b8fb/20251208-141145-1655b8fb.webp"
       ],
       "description": "",
-      "triggerRadius": 20.0,
+      "triggerRadius": 10.0,
       "quest_ids": [
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 221111121,
+        "version": 2211111211,
         "items": [
           {
             "delayMs": 0.0,
@@ -4410,7 +4392,7 @@
           },
           {
             "delayMs": 0.0,
-            "firstMessage": "Amici, non c\u2019\u00e8 niente da fare: dovrete dimostrare di essere dei nostri. Solo gli abitanti del paese conoscono questo strano elemento architettonico.\nRispondete alla domanda: che cos\u2019\u00e8?\n(A. legnaia / B. guardaroba / C. laboratorio / D. toilette)",
+            "firstMessage": "Amici, se volete portare gli abitanti di Esino dalla vostra parte dovrete dimostrare di conoscere la storia e le abitudini del nostro paese . Solo gli abitanti del paese conoscono questo strano elemento architettonico.\nRispondete alla domanda: che cos\u2019\u00e8?\n(A. legnaia / B. guardaroba / C. laboratorio / D. toilette)",
             "blocking": true,
             "image_media_ids": [
               "20260105-143550-356010ee"
@@ -4422,7 +4404,7 @@
                 "mysterious"
               ],
               "success_criteria": [
-                "Player gives correct answer: \"bagno\" (toilet)"
+                "Player gives correct answer, which is D (player can use any synonym of the Italian \"gabineto\" or its equivalent in the language used by the player)"
               ],
               "constraints": [
                 "You can give hints, but do not exact correct answer. This is a puzzle that player needs to solve"
@@ -4512,21 +4494,21 @@
     },
     {
       "id": "a94efd34-5cf1-4846-8ddf-1b2e6838dd91",
-      "name": "7. San Antonio",
+      "name": "6. San Antonio",
       "status": "active",
-      "number": 7,
-      "points": 80,
+      "number": 6,
+      "points": 130,
       "coordinates": "45.996406, 9.334753",
       "image_keys": [
         "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp"
       ],
       "description": "",
-      "triggerRadius": 20.0,
+      "triggerRadius": 6.0,
       "quest_ids": [
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 113111111,
+        "version": 1131111112,
         "items": [
           {
             "delayMs": 0.0,
@@ -4544,7 +4526,7 @@
             "firstMessage": "Git ha detto che il rettore della chiesa sta conservando dei documenti che potrebbero dimostrare che il decreto di separazione \u00e8 stato falsificato. Aiutatelo e ve li dar\u00e0.\nOgni notte, sulla facciata appaiono elementi demoniaci. Rimuoveteli.",
             "blocking": true,
             "id": "4c07c755-93e1-4d02-8b2c-edc9dfe980c4",
-            "text": "Git ha detto che il parroco custodisce alcuni documenti che potrebbero dimostrare che il decreto di divisione \u00e8 stato falsificato.\nAiutatelo, e ve li consegner\u00e0.\nOgni notte sulla facciata compaiono strani elementi diabolici.\nEliminateli.\n",
+            "text": "Git ha detto che il parroco custodisce alcuni documenti che potrebbero dimostrare che il decreto di divisione \u00e8 stato falsificato.\nAiutatelo, e ve li consegner\u00e0.\nOgni notte sulla facciata compaiono strani elementi diabolici.\nEliminateli.\nEliminateli.\n",
             "type": "text",
             "puzzleId": "puz-1cd67f1b",
             "enabled": true,
@@ -4573,7 +4555,7 @@
           },
           {
             "delayMs": 0.0,
-            "blocking": false,
+            "blocking": true,
             "media_id": "20260117-054757-44f765ec",
             "id": "0b1fa372-8ff4-403b-a0e0-d170b1159f40",
             "type": "video",
@@ -4594,31 +4576,61 @@
           },
           {
             "delayMs": 0.0,
-            "firstMessage": "Esaminate attentamente questo foglio: potrebbe essere collegato al documento sulla divisione. Se notate qualcosa di sospetto, cliccate su quel punto nel decreto.",
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260111-141546-8d042419",
+            "id": "28b4fd1e-d246-494c-92ba-60c81d6b87e4",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
+            "enabled": true,
+            "order": 7.0
+          },
+          {
+            "delayMs": 0.0,
+            "chatDescription": "# Decreto di Separazione\nDecreto di separazione di Esino Lario (1340) \u2013 Riassunto breve\n\nNel 1340 le autorit\u00e0 decisero di dividere Esino Lario in due parti a causa di continui litigi e di una distribuzione ingiusta di tasse e obblighi.\n\nIl paese fu separato in Esino Superiore (parte alta) ed Esino Inferiore (parte bassa).\nOgni parte doveva gestire separatamente registri e tasse. Il confine tra le due zone fu segnato fisicamente e non poteva essere attraversato di notte. Furono vietati anche i matrimoni tra abitanti delle due parti.\n\nBoschi, pascoli e sorgenti restarono beni comuni, ma regolati dalle autorit\u00e0.\nChi violava le regole o falsificava i documenti veniva punito.\n\nIl decreto fu scritto, firmato e sigillato nel 1340.\nDato nell\u2019anno del Signore 1340, alla presenza:\nACQUISTAPACE CARLO\nFERRAROLI DIEGO\nVIGLIENGHI PIERO\nCARISSIMO LUIGI\n\n# Registro delle Anime (example of a record that proves that Decreto di Separazione is falsified):\n10. 14 aprile 1337\nMor\u00ec Carlo Acquistapace, di anni 42, piaghe da grave malanno.\nRicevette i sacramenti e fu sepolto cristianamente.\n\nCarlo Acquistapace could not have been witness to the Decreto di sepafrazione because he died in 1337 ! ",
+            "firstMessage": "Esaminate attentamente questo documento : potrebbe essere collegato al documento sulla divisione. Se notate qualcosa di sospetto, Scrivetemi qui. Proviamo a capirlo insieme.",
             "blocking": true,
             "image_media_ids": [
+              "20260121-084247-e99c3d29",
               "20260117-055031-1cc1b574"
             ],
             "goal_injection": {
-              "goal": "Players must figure out that the extract includes people listed in the decree who died 100 years ago.\n\n\nAfter player successfully achieved the goal, say \"Bravi! Sembra che abbiate trovato la prima prova che il decreto di separazione  della citt\u00e0 \u00e8 falso. \nBisogna assolutamente trovarne altri.\"\n",
+              "goal": "Player must figure out that one of the following persons mentioned as a witness in the document \"Decreto di Separazione\" had either died or not born at the time of the document signing (1340) according to the document \"Regitro anime\". The names of the corresponding persons: Acquistapace Carlo, Ferraroli Diego, Viglienghi Piero, Carissimo Luigi. There will be only one of such persons in the document. \n\nAfter a player gives correct answer, send message:\n\"Bravi! Sembra che abbiate trovato la prima prova che il decreto di separazione  del paese \u00e8 falso. \nBisogna assolutamente trovarne altri.\"\n\n\nAfter player successfully achieved the goal, say \"Bravi! Sembra che abbiate trovato la prima prova che il decreto di separazione  della citt\u00e0 \u00e8 falso. \nBisogna assolutamente trovarne altri.\"\n",
               "tone": [
                 "Mysterious"
               ],
               "success_criteria": [
-                "Players correctly pointed to the following names: Acquistapace  Carlo/ Ferraroli Lorenzo / Viglienghi Marco / Carissimo Filippo"
+                "Players correctly pointed to one of the following names: Acquistapace Carlo, Ferraroli Diego, Viglienghi Piero, Carissimo Luigi. "
               ],
               "constraints": [
-                "Do not reveal the names unless you see that a player has difficulty in solving the puzzle. You can give hints."
+                "Do not reveal the names unless you see that a player has difficulty in solving the puzzle. You can give hints: Primo indizio",
+                "Fate attenzione ai cognomi dei testimoni. Forse c\u2019\u00e8 qualcosa che non torna.",
+                "Secondo indizio",
+                "C\u2019\u00e8 qualcosa di strano nella data di morte di uno dei testimoni.",
+                "Terzo indizio",
+                "Sembra che uno dei testimoni, nel 1340, fosse gi\u00e0 passato nel regno dei morti."
               ],
               "failsafe_if_player_refuses": ""
             },
             "image_urls": [
+              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260121-084247-e99c3d29.png/public",
               "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260117-055031-1cc1b574.png/public"
             ],
             "id": "60e245a9-5623-4c7e-99a8-fec03986632a",
             "type": "chat",
             "enabled": true,
-            "order": 7.0
+            "order": 8.0
+          },
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260108-045218-cb6a0faf",
+            "id": "9cf3531f-0835-4545-a614-b0e1dd99ca60",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260108-045218-cb6a0faf.mp3",
+            "enabled": true,
+            "order": 9.0
           }
         ]
       },
@@ -4631,35 +4643,86 @@
       "isCurrent": false,
       "quest_configs": {
         "quest-8371e45f": {
-          "number": 7.0
+          "number": "6"
         }
       },
-      "itineraryNumber": 7,
+      "itineraryNumber": 6,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134141-cc05960b/20251209-134141-cc05960b.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134232-69496af8.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=sDNfdxPocj9C5pq4hfmasex%2FUdg%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134232-69496af8.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=ohiC1gQ9RlDfd1UyQc55vchEpQk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
     },
     {
       "id": "e0e1e118-f9ea-4d93-971b-245248ab4d72",
-      "name": "Museo delle Grigne",
+      "name": "17. Museo delle Grigne",
       "status": "active",
       "number": 17,
       "points": 0,
-      "coordinates": "45.995865, 9.331936",
+      "coordinates": "45.995879, 9.331904",
       "image_keys": [
         "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp"
       ],
       "description": "",
-      "triggerRadius": 20.0,
+      "triggerRadius": 10.0,
       "quest_ids": [
         "quest-8371e45f"
       ],
+      "mediaTimeline": {
+        "version": 2,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260111-141546-8d042419",
+            "id": "4946a89b-5786-4f1e-8c51-7b7d6ed92c8d",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
+            "enabled": true,
+            "order": 1.0
+          },
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "image_media_ids": [
+              "20260119-173136-92b37991"
+            ],
+            "image_urls": [
+              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260119-173136-92b37991.jpg/public"
+            ],
+            "id": "a34990cc-596a-453d-8086-0957faecf4f5",
+            "text": "Amici, manca davvero poco. Se riuscirete a decifrare l\u2019ultimo documento, avremo prove sufficienti.\nChiedete aiuto ai sette fratelli. Puntate la vostra tavoletta magica verso questa montagna: uno di loro vive l\u00ec, e questo sar\u00e0 il segnale per tutti e sette gli eremiti.",
+            "type": "text",
+            "enabled": true,
+            "displayMode": "until_close",
+            "order": 2.0
+          },
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "actionKind": "image_match",
+            "id": "ac07f1d3-4434-49ba-8573-6a6a4cb7acb3",
+            "type": "action",
+            "params": {
+              "successDurationMs": 3000.0,
+              "maxDistanceMeters": 10.0,
+              "targetLongitude": 9.331918,
+              "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-154053-1ab9844d/20251208-154053-1ab9844d.webp",
+              "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-154053-1ab9844d/20251208-154053-1ab9844d.webp/public",
+              "targetLatitude": 45.9958877,
+              "maxScore": 0.6,
+              "successMessage": "you found it"
+            },
+            "enabled": true,
+            "order": 3.0
+          }
+        ]
+      },
       "isSpecial": false,
       "isMain": true,
       "isStart": false,
@@ -4667,22 +4730,27 @@
       "isEnd": true,
       "createdAt": "2025-12-14",
       "isCurrent": false,
+      "quest_configs": {
+        "quest-8371e45f": {
+          "number": 17.0
+        }
+      },
       "itineraryNumber": 17,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-144834-c3d3b8ca/20251209-144834-c3d3b8ca.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-144859-62241687.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=DyF2lJOUup61HJ1hrwmlLF%2ByMkk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-144859-62241687.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=ixmr%2FBQH2Eg9%2F22uHJ7u9VC3X9k%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
     },
     {
       "id": "34bc1725-b682-4dac-88ec-0a16990f5ecb",
-      "name": "Fontana di Polt",
+      "name": "10. Fontana di Polt",
       "status": "active",
-      "number": 11,
+      "number": 10,
       "points": 100,
       "coordinates": "45.997487, 9.334272",
       "image_keys": [
@@ -4694,7 +4762,7 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 112,
+        "version": 1121,
         "items": [
           {
             "delayMs": 0.0,
@@ -4712,7 +4780,7 @@
             "displaySeconds": 5.0,
             "blocking": true,
             "id": "9377f7d1-3cd3-4392-918b-d941dd7d7c2e",
-            "text": "Amici, Git mi diceva che questa fontana custodisce un segreto, ma solo chi sa ascoltare davvero con attenzione riuscir\u00e0 a svelarlo.",
+            "text": "Amici, Ghit mi diceva che questa fontana custodisce un segreto, ma solo chi sa ascoltare davvero con attenzione riuscir\u00e0 a svelarlo.",
             "type": "text",
             "enabled": true,
             "displayMode": "seconds",
@@ -4750,7 +4818,7 @@
           },
           {
             "delayMs": 0.0,
-            "firstMessage": "Allora, bravi! Se viveste ai nostri tempi, sicuramente suonereste nel nostro Orchestra San Vittore.\nSiete riusciti ad aprire il nascondiglio della fontana\u2026 Git diceva di avervi lasciato alcune mappe, nelle quali non era riuscita a orientarsi.\nForse riuscirete a trovare qualcosa che dimostri che il documento sulla divisione della citt\u00e0 \u00e8 stato falsificato.",
+            "firstMessage": "Allora, bravi!  Se viveste ai nostri tempi, sicuramente suonereste nella nostra Banda San Vittore!\nSiete riusciti ad aprire il nascondiglio della fontana\u2026\n Ghit diceva di avervi lasciato alcune mappe, che non era riuscita a decifrare\nForse riuscirete a trovare qualche altro indizio che dimostri che il documento sulla divisione del paese \u00e8 stato falsificato.",
             "blocking": true,
             "goal_injection": {
               "goal": "",
@@ -4767,19 +4835,24 @@
         ]
       },
       "isSpecial": false,
-      "isMain": false,
+      "isMain": true,
       "isStart": false,
       "isVisible": false,
       "isEnd": false,
       "createdAt": "2025-12-14",
       "isCurrent": false,
-      "itineraryNumber": 11,
+      "quest_configs": {
+        "quest-8371e45f": {
+          "number": "10"
+        }
+      },
+      "itineraryNumber": 10,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135542-a1b26698/20251209-135542-a1b26698.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135937-a1453844.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=9LkW%2FZi35CZ9VCUW4LauipmtgnA%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135937-a1453844.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=ukf6kzteg7lPR5OVauSO%2F%2F1V8q8%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
@@ -4789,7 +4862,7 @@
       "name": "5. Fontana la Fesa",
       "status": "active",
       "number": 5,
-      "points": 80,
+      "points": 88,
       "coordinates": "45.996406, 9.334753",
       "image_keys": [
         "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251208-142356-aa143d28/20251208-142356-aa143d28.webp"
@@ -4800,7 +4873,7 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 1111111,
+        "version": 111111121,
         "items": [
           {
             "delayMs": 0.0,
@@ -4859,11 +4932,61 @@
             "displaySeconds": 5.0,
             "blocking": true,
             "id": "41dd6320-b564-4586-af9e-6a606d55ea04",
-            "text": "Git ritiene che il documento sia falsificato; bisogner\u00e0 capire come dimostrarlo.",
+            "text": "Amici, siete stati bravissimi. Avete trovato un documento molto importante.\n\u00c8 proprio questo quello che Ghit ritiene sia falsificato. Dobbiamo assolutamente trovare le prove.\nMa prima, visto che siete qui, proviamo a portare dalla nostra parte un\u2019altra famiglia.\nTrovate in piazza la casa numero XXV e fotografate la porta.\nSolo gli abitanti del posto conoscono  cosa significa  XXV.\nForse anche gli abitanti di questa casa saranno dalla nostra parte.",
             "type": "text",
             "enabled": true,
             "displayMode": "seconds",
             "order": 6.0
+          },
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "actionKind": "image_match",
+            "id": "ad20e425-d8e0-4d41-824d-c8170f43e28f",
+            "type": "action",
+            "params": {
+              "successDurationMs": "3000",
+              "maxDistanceMeters": "10",
+              "targetLongitude": "9.3347776",
+              "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp",
+              "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
+              "targetLatitude": "45.9964013",
+              "maxScore": "0.6",
+              "successMessage": "you found it"
+            },
+            "enabled": true,
+            "order": 7.0
+          },
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "media_id": "20260120-192612-413c97ff",
+            "id": "79e90be0-1e8b-40e2-95dc-48f036472f50",
+            "type": "video",
+            "media_url": "https://customer-yshabc4ttf2nlnnu.cloudflarestream.com/ab5dfdcf42fe8f6675b2e08531b2255c/watch",
+            "enabled": true,
+            "order": 8.0
+          },
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260122-192412-dd95d224",
+            "id": "580d4df5-b756-4489-b069-00b2fa1627f9",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260122-192412-dd95d224.mp3",
+            "enabled": true,
+            "order": 9.0
+          },
+          {
+            "delayMs": 0.0,
+            "blocking": true,
+            "media_id": "20260123-115419-30dcd936",
+            "id": "87169ffd-a769-4c75-a252-b444650616aa",
+            "type": "video",
+            "media_url": "https://customer-yshabc4ttf2nlnnu.cloudflarestream.com/c7c9a6c2e595eaf4578f9d4500549b38/watch",
+            "enabled": true,
+            "order": 10.0
           }
         ]
       },
@@ -4890,75 +5013,99 @@
     },
     {
       "id": "0420ff18-8c69-4110-a3ad-15b535615f7d",
-      "name": "Model-T ball facade",
+      "name": "11. Model-T ball facade",
       "status": "active",
-      "number": 12,
+      "number": 11,
       "points": 100,
-      "coordinates": "45.997015, 9.334141",
+      "coordinates": "45.997007, 9.334120",
       "image_keys": [
         "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp"
       ],
       "description": "",
-      "triggerRadius": 20.0,
+      "triggerRadius": 7.0,
       "quest_ids": [
         "quest-8371e45f"
       ],
+      "mediaTimeline": {
+        "version": 1,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260111-141546-8d042419",
+            "id": "613e9902-4505-4751-ac3d-176b65b7087c",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
+            "enabled": true,
+            "order": 1.0
+          },
+          {
+            "delayMs": 0.0,
+            "firstMessage": "Amici, ora guardate la parete di questa casa e provate a rispondere alla domanda.\nCos\u00ec conquisteremo ancora qualche voto.\nDomanda:\nDove si pu\u00f2 trovare lo stesso ornamento che vedete sul muro di questa casa?\n\n\nA. Sul prato del campo da calcio dell\u2019Uruguai\nB. Sulla testa di Jos\u00e9 Nasazzi\nC. Sul pallone dell\u2019Uruguai\nD. Sulla maglia dell\u2019Uruguai ",
+            "blocking": true,
+            "image_media_ids": [
+              "20260123-194132-3306594a"
+            ],
+            "goal_injection": {
+              "goal": "Player shall giev correct answer: C. Sul pallone dell\u2019Uruguai. He can answer with a single letter C or as a text or both.",
+              "tone": [],
+              "success_criteria": [
+                "Player answered correctly"
+              ],
+              "constraints": [],
+              "failsafe_if_player_refuses": ""
+            },
+            "image_urls": [
+              "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260123-194132-3306594a.jpg/public"
+            ],
+            "id": "4d30cc8e-ca9c-4348-910c-68090e22bb30",
+            "type": "chat",
+            "enabled": true,
+            "order": 2.0
+          }
+        ]
+      },
       "isSpecial": false,
-      "isMain": false,
+      "isMain": true,
       "isStart": false,
       "isVisible": false,
       "isEnd": false,
       "createdAt": "2025-12-14",
       "isCurrent": false,
-      "itineraryNumber": 12,
+      "quest_configs": {
+        "quest-8371e45f": {
+          "number": "11"
+        }
+      },
+      "itineraryNumber": 11,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-141431-5213def7/20251209-141431-5213def7.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-141509-1839bbd8.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=vATfLyfJDaQko1qVbzGf1xTfJ6U%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-141509-1839bbd8.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=4UV9aNegqIu1g%2B1ccdpixHUPIBE%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
     },
     {
-      "id": "d5da3582-c4b6-4ebb-a848-28e578bf0b81",
-      "name": "Porta con Palloncini",
-      "status": "active",
-      "number": 8,
-      "points": 0,
-      "image_keys": [],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isSpecial": false,
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2026-01-20",
-      "isCurrent": false,
-      "itineraryNumber": 8
-    },
-    {
       "id": "a84d2948-4801-4dd0-8ef0-9a8d5d795c97",
-      "name": "La porta a campanella",
+      "name": "7. La porta a campanella",
       "status": "active",
-      "number": 9,
+      "number": 7,
       "points": 100,
       "coordinates": "45.996721, 9.334828",
       "image_keys": [
         "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp"
       ],
       "description": "",
-      "triggerRadius": 20.0,
+      "triggerRadius": 7.0,
       "quest_ids": [
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 1121,
+        "version": 112111,
         "items": [
           {
             "delayMs": 0.0,
@@ -4973,16 +5120,16 @@
           },
           {
             "delayMs": 0.0,
-            "firstMessage": "Cerca di conquistare la simpatia di altri residenti della citt\u00e0. Rispondi alla domanda: Di chi \u00e8 il santo patrono Sant'Antonio, in onore del quale \u00e8 stata costruita questa chiesa?\nDomande\nBambini/donne incinte/animali e veicoli/pastori",
+            "firstMessage": "Provate a conquistare la simpatia di altri abitanti della citt\u00e0.\nRispondete alla domanda: di chi \u00e8 patrono Sant\u2019Antonio, in onore del quale \u00e8 stata costruita questa chiesa?\nDomande:\nA. Dei bambini\nB. Degli innamorati\nC. Degli animali\nE. Dei pastori",
             "blocking": true,
             "goal_injection": {
-              "goal": "Player shall reply correctly (it's animali e veicoli). \n\nAfter correct reply, say \"Bravi, e ora trovate la porta che solo i residenti sanno condurre al campanile e fotografatela.\"",
+              "goal": "Player shall reply correctly (it's C. animali ). Player can respond either with a single letter or the whole word or both. Player can answer in his language.\n\nAfter correct reply, say \"Bravi, e ora trovate la porta che conduce al campanile e producete un\u2019immagine.\"",
               "tone": [],
               "success_criteria": [
                 "Player replied correctly"
               ],
               "constraints": [
-                "Do not reveal the correct answer; player shall do it himself"
+                "Do not reveal the correct answer; player shall do it himself. But you can make hints if you see that the player is having difficulties answering. Be humorous but polite."
               ],
               "failsafe_if_player_refuses": ""
             },
@@ -5045,45 +5192,120 @@
         ]
       },
       "isSpecial": false,
-      "isMain": false,
+      "isMain": true,
       "isStart": false,
       "isVisible": false,
       "isEnd": false,
       "createdAt": "2025-12-14",
       "isCurrent": false,
-      "itineraryNumber": 9,
+      "quest_configs": {
+        "quest-8371e45f": {
+          "number": "7"
+        }
+      },
+      "itineraryNumber": 7,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134603-748ae316/20251209-134603-748ae316.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134808-9333a9f4.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=bB8b%2BhtQ9hHiHQnEmqTe2FDN5kA%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-134808-9333a9f4.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=WG9YI2dtRJ7OCRwF8V9ky70EBGg%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
     },
     {
       "id": "e7e39724-62f4-4a2b-addf-63da8b80387b",
-      "name": "Roman Tower",
+      "name": "16. Roman Tower",
       "status": "active",
       "number": 16,
-      "points": 0,
-      "coordinates": "45.9960095, 9.3318251",
+      "points": 30,
+      "coordinates": "45.996117, 9.331998",
       "image_keys": [
         "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp"
       ],
       "description": "",
-      "triggerRadius": 20.0,
+      "triggerRadius": 10.0,
       "quest_ids": [
         "quest-8371e45f"
       ],
+      "mediaTimeline": {
+        "version": 1,
+        "items": [
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260111-141546-8d042419",
+            "id": "3c6f4014-f61f-4c0c-bc0b-baf77f385e86",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
+            "enabled": true,
+            "order": 1.0
+          },
+          {
+            "delayMs": 0.0,
+            "displaySeconds": 5.0,
+            "blocking": true,
+            "id": "abbdc408-1f71-4424-89c6-b475a0d88956",
+            "text": "Amici, sono nella torre di guardia, provate a darmi un segnale .",
+            "type": "text",
+            "enabled": true,
+            "displayMode": "seconds",
+            "order": 2.0
+          },
+          {
+            "delayMs": 0.0,
+            "ar": {
+              "overlay": "flashlight",
+              "text_input": "clock",
+              "task_prompt": "<REFERRING_EXPRESSION_SEGMENTATION>",
+              "origin": "center",
+              "match_target_image_key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp",
+              "match_target_image_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/query-images/20251209-144354-e00d1c14/20251209-144354-e00d1c14.webp/public"
+            },
+            "blocking": true,
+            "id": "47c7cbe1-ae1d-422d-8540-0e6c8dc76a74",
+            "type": "ar",
+            "enabled": true,
+            "order": 3.0
+          },
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260111-141546-8d042419",
+            "id": "cfcff25e-09ee-4d66-8985-a64aa1789f24",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
+            "enabled": true,
+            "order": 4.0
+          },
+          {
+            "delayMs": 0.0,
+            "displaySeconds": 5.0,
+            "blocking": true,
+            "id": "2bf926ff-8e18-4313-896c-03437127dc7c",
+            "text": "Urr\u00e0, vi vedo! Siete vicino alla casa della Ghit.\nDatele un segnale usando la vostra tavoletta magica.",
+            "type": "text",
+            "enabled": true,
+            "displayMode": "seconds",
+            "order": 5.0
+          }
+        ]
+      },
       "isSpecial": false,
-      "isMain": false,
+      "isMain": true,
       "isStart": false,
       "isVisible": false,
       "isEnd": false,
       "createdAt": "2025-12-18",
       "isCurrent": false,
+      "quest_configs": {
+        "quest-8371e45f": {
+          "number": "16"
+        }
+      },
       "itineraryNumber": 16,
       "images": [
         {
@@ -5094,27 +5316,29 @@
       ]
     },
     {
-      "id": "af27ee4d-157f-45d0-8faf-9cad222ca871",
-      "name": "6. Porta n 25",
+      "id": "df784f1b-e7d4-4d24-ab0e-5f9f882ab12b",
+      "name": "15. Grigne",
       "status": "active",
-      "number": 6,
-      "points": 8,
-      "coordinates": "45.996353, 9.334801",
-      "image_keys": [],
+      "number": 15,
+      "points": 0,
+      "coordinates": "45.996285, 9.332376",
+      "image_keys": [
+        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp"
+      ],
       "description": "",
-      "triggerRadius": 6.0,
+      "triggerRadius": 10.0,
       "quest_ids": [
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 1111,
+        "version": 1,
         "items": [
           {
             "delayMs": 0.0,
             "role": "normal",
             "blocking": true,
             "media_id": "20260111-141546-8d042419",
-            "id": "1c068d91-7e4e-4b47-9117-42254f5fee1f",
+            "id": "1f90afa6-7a09-4fde-b414-0609fcaa37f9",
             "type": "audio",
             "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
             "enabled": true,
@@ -5124,8 +5348,8 @@
             "delayMs": 0.0,
             "displaySeconds": 5.0,
             "blocking": true,
-            "id": "3bad5b0b-0cc0-44dc-aada-e6846feb2208",
-            "text": "Amici, trovate in piazza la casa numero XXV e fotografate la porta.\nSolo gli abitanti del posto conoscono il significato di questi simboli, XXV.\nForse anche gli abitanti di questa casa saranno dalla nostra parte.",
+            "id": "7b952999-d2a8-49f5-ad83-b97f4c15e27d",
+            "text": "Amici, fermatevi un attimo. Da qui potete vedere il Monte Grigna, nel quale secondo la leggenda Dio trasformo\u2019 la bella guerriera  senza cuore di cui cantava la Ghit.",
             "type": "text",
             "enabled": true,
             "displayMode": "seconds",
@@ -5133,93 +5357,30 @@
           },
           {
             "delayMs": 0.0,
+            "role": "normal",
             "blocking": true,
-            "actionKind": "image_match",
-            "id": "0e6cc33a-641a-4a38-8b51-d7b459d54c68",
-            "type": "action",
-            "params": {
-              "successDurationMs": "3000",
-              "maxDistanceMeters": "10",
-              "targetLongitude": "9.3347776",
-              "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp",
-              "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-134037-14129c69/20251209-134037-14129c69.webp/public",
-              "targetLatitude": "45.9964013",
-              "maxScore": "0.6",
-              "successMessage": "you found it"
-            },
+            "media_id": "20260110-034228-0c461c25",
+            "id": "45507bf7-bee7-418b-bae6-656d09fd091b",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260110-034228-0c461c25.mp3",
             "enabled": true,
             "order": 3.0
-          },
-          {
-            "delayMs": 0.0,
-            "blocking": true,
-            "media_id": "20260120-192612-413c97ff",
-            "id": "54468ef5-6eea-406f-8784-b8ab2e141ce7",
-            "type": "video",
-            "media_url": "https://customer-yshabc4ttf2nlnnu.cloudflarestream.com/ab5dfdcf42fe8f6675b2e08531b2255c/watch",
-            "enabled": true,
-            "order": 4.0
           }
         ]
       },
       "isSpecial": false,
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2026-01-20",
-      "isCurrent": false,
-      "quest_configs": {
-        "quest-8371e45f": {
-          "number": "6"
-        }
-      },
-      "itineraryNumber": 6
-    },
-    {
-      "id": "c2a17da3-fb79-415e-ac00-971d393d1dad",
-      "name": "Porta",
-      "status": "active",
-      "number": 14,
-      "points": 0,
-      "image_keys": [],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isSpecial": false,
-      "isMain": false,
-      "isStart": false,
-      "isVisible": false,
-      "isEnd": false,
-      "createdAt": "2026-01-20",
-      "isCurrent": false,
-      "itineraryNumber": 14
-    },
-    {
-      "id": "df784f1b-e7d4-4d24-ab0e-5f9f882ab12b",
-      "name": "Grigne",
-      "status": "active",
-      "number": 0,
-      "points": 0,
-      "coordinates": "45.9957697, 9.333699",
-      "image_keys": [
-        "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp"
-      ],
-      "description": "",
-      "triggerRadius": 20.0,
-      "quest_ids": [
-        "quest-8371e45f"
-      ],
-      "isSpecial": false,
-      "isMain": false,
+      "isMain": true,
       "isStart": false,
       "isVisible": false,
       "isEnd": false,
       "createdAt": "2025-12-18",
       "isCurrent": false,
-      "itineraryNumber": 0,
+      "quest_configs": {
+        "quest-8371e45f": {
+          "number": 15.0
+        }
+      },
+      "itineraryNumber": 15,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251208-152741-33b0fdb0/20251208-152741-33b0fdb0.webp/public",
@@ -5244,20 +5405,8 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 111,
-        "items": [
-          {
-            "delayMs": 0.0,
-            "role": "normal",
-            "blocking": true,
-            "media_id": "20251219-075237-f8dda15b",
-            "id": "a786d69b-d138-46aa-bcd2-e56237a19c6b",
-            "type": "audio",
-            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20251219-075237-f8dda15b.mp3",
-            "enabled": true,
-            "order": 1.0
-          }
-        ]
+        "version": 1111,
+        "items": []
       },
       "isSpecial": false,
       "isMain": true,
@@ -5277,7 +5426,7 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133051-3d6317a5/20251209-133051-3d6317a5.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133122-acd205c9.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=sILUqKiiBx8LswdGnbSRezRqAWs%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133122-acd205c9.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=lcAWxT2fTJwB05W0plPS3coUzJc%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
@@ -5298,7 +5447,7 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 1111111111,
+        "version": 11111111111,
         "items": [
           {
             "delayMs": 0.0,
@@ -5318,7 +5467,7 @@
           {
             "delayMs": 0.0,
             "role": "normal",
-            "blocking": false,
+            "blocking": true,
             "media_id": "20260120-091340-8ec50767",
             "id": "d593c1f1-227c-472c-a5c6-8868e3a12c59",
             "type": "audio",
@@ -5358,16 +5507,16 @@
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133402-2f84d641/20251209-133402-2f84d641.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-133402-2f84d641/20251209-133402-2f84d641.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133442-e3b3dd95.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=MZEakrzpzdj2SQbQnbpU8%2Biseig%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-133442-e3b3dd95.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=W5AKY2Wi5KK6xWJ8d9SCErUxY2g%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
     },
     {
       "id": "a9e7400b-e146-4a56-a443-584adae2c357",
-      "name": "Nido",
+      "name": "9. Ornamento Rotondo",
       "status": "active",
-      "number": 10,
+      "number": 9,
       "points": 0,
       "coordinates": "45.997345, 9.334490",
       "image_keys": [
@@ -5379,8 +5528,19 @@
         "quest-8371e45f"
       ],
       "mediaTimeline": {
-        "version": 12,
+        "version": 122,
         "items": [
+          {
+            "delayMs": 0.0,
+            "role": "normal",
+            "blocking": true,
+            "media_id": "20260111-141546-8d042419",
+            "id": "00619556-176f-4b5a-9a41-dbba75ac3b80",
+            "type": "audio",
+            "media_url": "https://pub-877f23628132452cb9b12cf3cf618c69.r2.dev/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260111-141546-8d042419.mp3",
+            "enabled": true,
+            "order": 1.0
+          },
           {
             "delayMs": 0.0,
             "blocking": true,
@@ -5391,18 +5551,37 @@
               "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/app-media/20260119-173123-099d00d9.jpg/public"
             ],
             "id": "69df49a5-5a56-4a14-82a3-6acd9b1d1e72",
-            "text": "Fotografate questo ornamento: forse riuscirete a portare dalla vostra parte anche qualcun altro tra gli abitanti.",
+            "text": "Trovate una casa con questo stemma e scatta una foto di questo elemento.",
             "type": "text",
             "enabled": true,
             "displayMode": "until_close",
-            "order": 1.0
+            "order": 2.0
           },
           {
             "delayMs": 0.0,
-            "firstMessage": "Scrivete quale di questi ingredienti non \u00e8 presente nel piatto locale chiamato \u201cPatole\u201d.\n\n\npatate / farina / cetrioli / uova / carne / amaretti",
+            "blocking": true,
+            "actionKind": "image_match",
+            "id": "c47da7c7-5b85-4ef3-a190-d5ccf0a20cd8",
+            "type": "action",
+            "params": {
+              "successDurationMs": 3000.0,
+              "maxDistanceMeters": 10.0,
+              "targetLongitude": 9.3347264,
+              "targetImageKey": "clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135305-ef503a32/20251209-135305-ef503a32.webp",
+              "targetImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135305-ef503a32/20251209-135305-ef503a32.webp/public",
+              "targetLatitude": 45.996402,
+              "maxScore": 0.6,
+              "successMessage": "you found it"
+            },
+            "enabled": true,
+            "order": 3.0
+          },
+          {
+            "delayMs": 0.0,
+            "firstMessage": "Qui si preparano delle Patole meravigliose. Forse riuscirete a portare dalla vostra parte anche qualcun altro tra gli abitanti.\nScrivete quale di questi ingredienti non \u00e8 presente nel piatto locale tipico della festa di Sant\u2019Antonio del 17 Gennaio, chiamato \u201cPatole\u201d.\n\n(Ogni giocatore riceve un set di domande diverso.)\npatate / farina / cetrioli / uova / carne / amaretti",
             "blocking": true,
             "goal_injection": {
-              "goal": "Player should give correct answer to the question. \nAfter correct answer, say: \"Ebbene, bravi! Avete dimostrato alla famiglia [COGNOME] di sapere che questi ravioli fatti in casa vengono serviti a pranzo dopo la Santa Messa nella chiesa di Sant\u2019Antonio.\nOra anche loro sono dalla nostra parte!\"",
+              "goal": "Player should give correct answer to the question. Cetrioli is the correct answer.\nAfter correct answer, say: \"Ebbene, bravi!   Ora anche la famiglia Pensa adesso sono dalla nostra parte!\"",
               "tone": [],
               "success_criteria": [
                 "Player answered correctly."
@@ -5413,24 +5592,29 @@
             "id": "4fdad3fb-f04e-478c-9f8e-701cc78c60c6",
             "type": "chat",
             "enabled": true,
-            "order": 2.0
+            "order": 4.0
           }
         ]
       },
       "isSpecial": false,
-      "isMain": false,
+      "isMain": true,
       "isStart": false,
       "isVisible": false,
       "isEnd": false,
       "createdAt": "2026-01-19",
       "isCurrent": false,
-      "itineraryNumber": 10,
+      "quest_configs": {
+        "quest-8371e45f": {
+          "number": "9"
+        }
+      },
+      "itineraryNumber": 9,
       "images": [
         {
           "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135305-ef503a32/20251209-135305-ef503a32.webp/public",
           "thumbnailUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/quest-test-001/images/base-images/20251209-135305-ef503a32/20251209-135305-ef503a32.webp/public",
           "audioUrls": [
-            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135447-69b31ddc.webm?AWSAccessKeyId=ASIAQZSZZFTKPJ3MTYK2&Signature=dwzmVpmHTSoESEdbmdEFOM67BWI%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEA0aCXVzLWVhc3QtMSJHMEUCIQDznlpTdGXP9JY6p9bFq7yis2yavkYp9q4ScNWGzveoUQIgPZLqbGNy9TD7tiGfBErF%2F06ECqTvsIng9fzNj0tkT9gquAMI1v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgwwNTQ5NDkxMjk0MjgiDKNMr9xxSm9TLV0emCqMA62X3hbwYQG43k3imCy%2BLX1Pw%2F8BQEmLrtadfwwEZjmGSkFyfPfS6iSIN8WUTIfCqTd3wfz3X%2BwNefTrmuOTJ7Wz%2FgY0caVJxMthvZvv2hPoYVCfY6BbNN0cFhrM5WHQexzKfOed2zXi6Dff7wNu7qN5VvQzpOy0KLeV9rW4rDyzbNYORGjIqa8Zrk0nTDMLhiCB0LNDjdiF19CoBbj2o40E39zQ01gN564%2F39PmwVwkZ9Bn%2F7zQNlEFDMhoi689GqUu%2B8%2BIgVuL1B2havgiIniAE60vAE52xLj56IWck60mXCZ8l74eOLnBtj7EwiEuRZcS1qORXzHJujOoek69EEuqqr1wzhO16ZB3t%2Bk0H4b6R8pmGoBPWGkDWxWPOxfdndF23MhG9JrAfkO1D1EqHA3wknXlcXuIj%2FH1fBudM%2BQXmnZE8D3R5g5slQIokAXrM6g2zABWPFPJltA72KlIOEguPRX0zlE2%2F49UknpDdQ9ZGqK5dC5D9jzQW4tiOhHws%2FeEjbo8j73zbAsMlTC83sbLBjqdAXmrXuSfInHo1xliXG%2B92RTVLiOga0Pweemxu0jMH%2BbdzNsJo5v8NS4lJdIKO%2BOmnszSv56E8jijw2CmJKzttswmnWcocMi%2B9dmaMYHRsMf8U9y99TtIEw58XkhVJrXJ4oCgc%2FTYq%2BN10mmalF5%2BY83vEBBDtGVq4V6qJgynXjPfz1tukD3et%2FTiFLR9OMngfK8UVeDR6Hww7ztUm2A%3D&Expires=1769662911"
+            "https://quest-platform-images-prod-us-east-1.s3.amazonaws.com/clients/915b3510-c0a1-7075-ba32-d63633b69867/general/audio/20251209-135447-69b31ddc.webm?AWSAccessKeyId=ASIAQZSZZFTKKT5BUFAO&Signature=f1LQc4tMs6rN8b4eSpR5I1WgmtI%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEEYaCXVzLWVhc3QtMSJHMEUCIQC8dzTObgj0LJ24RJv7%2Bqk9INmLVwNKOPZuWHlc8lGtHwIgXOUyWw4RegL95NiGTR1uleYszJX8YsksDeCaCGnV6NgqrwMIDhABGgwwNTQ5NDkxMjk0MjgiDOmgsWjnZwfcVv%2FCdiqMAw0WRlW8fAH9JzMF00h4PkY%2FisoToIkmxQk6JYjCv3h7vhAf0KKYjiBsndHSqKaQqJBpSjz3uFrEL%2BwOXvmCDcK6FceQkrQ%2BUA1T1NqTm8BD0OJCb6x6glLZTG%2BBl0sxmCatMSMaQsfyOIc6oFWgy6NkeD21jjaEg3tZJvpaJl1wkqMKPvjUMgRRQVrqWloGgfdlcJD7GXEmfXeR1m7vUDhMnprVQ%2BJIigxZ6NCLzpoaDNETeRlp9xBcU9HdndFfP%2FgsDIx6MHDKwiMxnSmxg1R%2BD6dktSuc082ijRPJInQHcrbDjenCq2CV30uTI7A5NhPrCqYxBAqxuZbqir6SVsH%2FHaCaVEC2CwYfYx9cPGZ%2B%2B7i5MnuDLw1Y%2BOG2oVVaSL4hz%2Bt%2FjFpZYgs1it5yTmMlJRNDrnz8OZPHTk5chu0KSQhxdvwZpDHyx5BBd%2FDsUdyija%2FMxa0YRC3sl5ndx01kAcKsDLOdECTc329UBUHXEX%2BpcQqUwfml2NuS67qSGblJhuO3EYtRbad3CDDdjdPLBjqdASfmrwc%2FfR4oqInbqGX%2FQKwLMkFXLyMqgnxvs2wPxQ%2FVkBMFo5kLMMY%2F2OSrU6IFnATDFzPvqvYJoJp1Rp%2F%2BiGOorIxXUIME8z%2BABTWLOwwoyQzZ6q1Q1HJ86bU6sqAuMwQO4yXloZsgkQMJod9%2FD7DGpUSxEapwoxdG4fTedBGQphVzPpeaw2RygxRKFv%2F%2FPj2OW98NUk4NBVrnuuc%3D&Expires=1769865567"
           ]
         }
       ]
@@ -18018,1865 +18202,6 @@
         "isNormalized": true,
         "boardImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-d655b1d0/board.png/public",
         "updatedAt": "2025-12-28T10:32:01.469Z"
-      }
-    },
-    {
-      "id": "puz-075cef18",
-      "name": "Fontan inferno 1",
-      "status": "active",
-      "photo_url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251226-204627-29ef4549/20251226-204627-29ef4549.jpg/public",
-      "linked_objects": [
-        "ee0a94a6-0067-44b9-8a4b-1948080c53e6"
-      ],
-      "quest_id": "platform-library",
-      "interaction_data": {
-        "type": "fabric_custom",
-        "puzzle_data_url": "https://quest-image-manager.denslov.workers.dev/image/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-075cef18/data.json",
-        "linked_objects": [
-          "ee0a94a6-0067-44b9-8a4b-1948080c53e6"
-        ],
-        "puzzle_data": {
-          "pieces": [
-            {
-              "correctRotation": 0.0,
-              "shapeData": {
-                "type": "polygon",
-                "points": [
-                  {
-                    "x": 292.81983001850256,
-                    "y": 49.58980500088819
-                  },
-                  {
-                    "x": 301.47525164764215,
-                    "y": 49.88826781568611
-                  },
-                  {
-                    "x": 301.47525164764215,
-                    "y": 43.62054870492984
-                  },
-                  {
-                    "x": 305.952193869611,
-                    "y": 43.62054870492984
-                  },
-                  {
-                    "x": 305.952193869611,
-                    "y": 38.54668085336523
-                  },
-                  {
-                    "x": 312.81683860996304,
-                    "y": 37.9497552237694
-                  },
-                  {
-                    "x": 312.81683860996304,
-                    "y": 31.68203611301312
-                  },
-                  {
-                    "x": 303.2660285364297,
-                    "y": 32.27896174260895
-                  },
-                  {
-                    "x": 303.2660285364297,
-                    "y": 29.294333594629773
-                  },
-                  {
-                    "x": 290.43212750011924,
-                    "y": 31.980498927811034
-                  },
-                  {
-                    "x": 290.43212750011924,
-                    "y": 30.189722039023525
-                  },
-                  {
-                    "x": 285.0597968337567,
-                    "y": 30.786647668619366
-                  },
-                  {
-                    "x": 285.3582596485546,
-                    "y": 35.263589890588136
-                  },
-                  {
-                    "x": 277.0013008342129,
-                    "y": 36.457441149779804
-                  },
-                  {
-                    "x": 277.0013008342129,
-                    "y": 41.232846186546496
-                  },
-                  {
-                    "x": 272.8228214270421,
-                    "y": 41.232846186546496
-                  },
-                  {
-                    "x": 272.52435861224416,
-                    "y": 50.48519344528195
-                  },
-                  {
-                    "x": 278.19515209340454,
-                    "y": 50.48519344528195
-                  },
-                  {
-                    "x": 277.8966892786067,
-                    "y": 60.33446633361325
-                  },
-                  {
-                    "x": 279.9859289821921,
-                    "y": 60.63292914841117
-                  },
-                  {
-                    "x": 279.6874661673942,
-                    "y": 66.0052598147737
-                  },
-                  {
-                    "x": 287.1490365373421,
-                    "y": 66.0052598147737
-                  },
-                  {
-                    "x": 286.85057372254414,
-                    "y": 67.19911107396535
-                  },
-                  {
-                    "x": 288.3428877965338,
-                    "y": 67.19911107396535
-                  },
-                  {
-                    "x": 288.0444249817359,
-                    "y": 73.46683018472166
-                  },
-                  {
-                    "x": 279.6874661673942,
-                    "y": 73.46683018472166
-                  },
-                  {
-                    "x": 279.6874661673942,
-                    "y": 79.43608648068
-                  },
-                  {
-                    "x": 278.49361490820246,
-                    "y": 79.13762366588209
-                  },
-                  {
-                    "x": 278.49361490820246,
-                    "y": 86.30073122103211
-                  },
-                  {
-                    "x": 272.22589579744624,
-                    "y": 86.0022684062342
-                  },
-                  {
-                    "x": 273.12128424183993,
-                    "y": 92.8669131465863
-                  },
-                  {
-                    "x": 282.6720943153734,
-                    "y": 92.56845033178838
-                  },
-                  {
-                    "x": 282.3736315005754,
-                    "y": 98.23924381294884
-                  },
-                  {
-                    "x": 290.43212750011924,
-                    "y": 98.23924381294884
-                  },
-                  {
-                    "x": 290.43212750011924,
-                    "y": 91.97152470219255
-                  },
-                  {
-                    "x": 297.2967722404713,
-                    "y": 92.26998751699047
-                  },
-                  {
-                    "x": 297.2967722404713,
-                    "y": 98.23924381294884
-                  },
-                  {
-                    "x": 308.3398963879943,
-                    "y": 97.64231818335298
-                  },
-                  {
-                    "x": 307.4445079436005,
-                    "y": 91.97152470219255
-                  },
-                  {
-                    "x": 314.3091526839527,
-                    "y": 92.56845033178838
-                  },
-                  {
-                    "x": 314.3091526839527,
-                    "y": 86.30073122103211
-                  },
-                  {
-                    "x": 308.0414335731964,
-                    "y": 86.59919403583002
-                  },
-                  {
-                    "x": 308.6383592027922,
-                    "y": 79.73454929547792
-                  },
-                  {
-                    "x": 300.2814003884505,
-                    "y": 80.33147492507376
-                  },
-                  {
-                    "x": 300.8783260180464,
-                    "y": 73.76529299951957
-                  },
-                  {
-                    "x": 296.99830942567337,
-                    "y": 73.76529299951957
-                  },
-                  {
-                    "x": 297.2967722404713,
-                    "y": 67.49757388876328
-                  },
-                  {
-                    "x": 294.61060690729005,
-                    "y": 66.90064825916744
-                  },
-                  {
-                    "x": 294.90906972208796,
-                    "y": 64.81140855558203
-                  }
-                ]
-              },
-              "correctPosition": {
-                "x": 213.71590309217663,
-                "y": 46.3716167631797
-              },
-              "id": "3e05e1eb-12af-4b38-b664-4b53bd98a3dc",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 31.18570814641089,
-                "top": 40.98545157941754,
-                "left": 388.1230490189712,
-                "height": 50.77233036752432
-              }
-            },
-            {
-              "correctRotation": 0.0,
-              "shapeData": {
-                "type": "polygon",
-                "points": [
-                  {
-                    "x": 133.55218844023682,
-                    "y": 334.92955683702667
-                  },
-                  {
-                    "x": 129.88531623058762,
-                    "y": 330.0403938908278
-                  },
-                  {
-                    "x": 135.99676991333624,
-                    "y": 326.3735216811786
-                  },
-                  {
-                    "x": 130.70017672162083,
-                    "y": 319.03977726188026
-                  },
-                  {
-                    "x": 126.6258742664551,
-                    "y": 321.4843587349797
-                  },
-                  {
-                    "x": 122.95900205680591,
-                    "y": 317.0026260342974
-                  },
-                  {
-                    "x": 127.03330451197165,
-                    "y": 314.55804456119796
-                  },
-                  {
-                    "x": 131.10760696713737,
-                    "y": 313.7431840701648
-                  },
-                  {
-                    "x": 129.88531623058762,
-                    "y": 306.0020094053499
-                  },
-                  {
-                    "x": 127.44073475748822,
-                    "y": 305.5945791598333
-                  },
-                  {
-                    "x": 125.8110137754219,
-                    "y": 299.8905557226012
-                  },
-                  {
-                    "x": 118.47726935612354,
-                    "y": 299.8905557226012
-                  },
-                  {
-                    "x": 113.99553665544119,
-                    "y": 302.3351371957007
-                  },
-                  {
-                    "x": 104.62464100856003,
-                    "y": 301.9277069501841
-                  },
-                  {
-                    "x": 104.62464100856003,
-                    "y": 306.0020094053499
-                  },
-                  {
-                    "x": 99.32804781684456,
-                    "y": 305.1871489143167
-                  },
-                  {
-                    "x": 93.62402437961251,
-                    "y": 306.0020094053499
-                  },
-                  {
-                    "x": 87.10514045134728,
-                    "y": 302.3351371957007
-                  },
-                  {
-                    "x": 85.06798922376441,
-                    "y": 306.0020094053499
-                  },
-                  {
-                    "x": 81.40111701411523,
-                    "y": 306.0020094053499
-                  },
-                  {
-                    "x": 80.17882627756552,
-                    "y": 300.7054162136344
-                  },
-                  {
-                    "x": 73.65994234930032,
-                    "y": 301.9277069501841
-                  },
-                  {
-                    "x": 73.65994234930032,
-                    "y": 307.22430014189956
-                  },
-                  {
-                    "x": 67.95591891206828,
-                    "y": 310.0763118605156
-                  },
-                  {
-                    "x": 64.69647694793566,
-                    "y": 304.7797186688001
-                  },
-                  {
-                    "x": 64.28904670241911,
-                    "y": 302.74256744121726
-                  },
-                  {
-                    "x": 57.77016277415391,
-                    "y": 304.7797186688001
-                  },
-                  {
-                    "x": 56.1404417920876,
-                    "y": 299.8905557226012
-                  },
-                  {
-                    "x": 48.39926712727265,
-                    "y": 302.3351371957007
-                  },
-                  {
-                    "x": 50.843848600372155,
-                    "y": 308.03916063293275
-                  },
-                  {
-                    "x": 48.39926712727265,
-                    "y": 309.2614513694825
-                  },
-                  {
-                    "x": 52.47356958243843,
-                    "y": 312.92832357913164
-                  },
-                  {
-                    "x": 51.65870909140527,
-                    "y": 316.5951957887808
-                  },
-                  {
-                    "x": 57.77016277415391,
-                    "y": 321.0769284894631
-                  },
-                  {
-                    "x": 52.06613933692183,
-                    "y": 326.7809519266952
-                  },
-                  {
-                    "x": 59.39988375622018,
-                    "y": 328.4106729087615
-                  },
-                  {
-                    "x": 58.58502326518707,
-                    "y": 337.37413831012617
-                  },
-                  {
-                    "x": 65.51133743896882,
-                    "y": 337.7815685556427
-                  },
-                  {
-                    "x": 65.10390719345223,
-                    "y": 330.44782413634437
-                  },
-                  {
-                    "x": 73.25251210378377,
-                    "y": 330.0403938908278
-                  },
-                  {
-                    "x": 72.43765161275057,
-                    "y": 322.29921922601284
-                  },
-                  {
-                    "x": 76.51195406791635,
-                    "y": 321.8917889804963
-                  },
-                  {
-                    "x": 79.77139603204893,
-                    "y": 328.0032426632449
-                  },
-                  {
-                    "x": 83.8456984872147,
-                    "y": 324.33637045359575
-                  },
-                  {
-                    "x": 87.92000094238043,
-                    "y": 325.1512309446289
-                  },
-                  {
-                    "x": 89.54972192444674,
-                    "y": 328.0032426632449
-                  },
-                  {
-                    "x": 100.55033855339423,
-                    "y": 324.33637045359575
-                  },
-                  {
-                    "x": 101.77262928994398,
-                    "y": 326.7809519266952
-                  },
-                  {
-                    "x": 104.2172107630434,
-                    "y": 330.0403938908278
-                  },
-                  {
-                    "x": 109.51380395475888,
-                    "y": 327.59581241772827
-                  },
-                  {
-                    "x": 114.81039714647437,
-                    "y": 331.2626846273775
-                  },
-                  {
-                    "x": 109.51380395475888,
-                    "y": 338.18899880115924
-                  },
-                  {
-                    "x": 113.99553665544119,
-                    "y": 342.263301256325
-                  },
-                  {
-                    "x": 118.88469960164011,
-                    "y": 336.5592778190929
-                  }
-                ]
-              },
-              "correctPosition": {
-                "x": 67.10272183772202,
-                "y": 233.99359369023352
-              },
-              "id": "fc2cb172-5f4a-492e-b687-888e071b259a",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 64.373179114838,
-                "top": 238.29519688106342,
-                "left": 224.916132280303,
-                "height": 31.39679361834021
-              }
-            },
-            {
-              "correctRotation": 0.0,
-              "shapeData": {
-                "type": "polygon",
-                "points": [
-                  {
-                    "x": 393.47899874673544,
-                    "y": 309.2596906138778
-                  },
-                  {
-                    "x": 387.66040982342463,
-                    "y": 318.11406506239416
-                  },
-                  {
-                    "x": 394.2379451280368,
-                    "y": 322.9207254773031
-                  },
-                  {
-                    "x": 389.68426684022836,
-                    "y": 326.20949312960914
-                  },
-                  {
-                    "x": 394.99689150933824,
-                    "y": 330.7631714174176
-                  },
-                  {
-                    "x": 387.66040982342463,
-                    "y": 338.6056173575321
-                  },
-                  {
-                    "x": 395.5028557635391,
-                    "y": 341.3884207556372
-                  },
-                  {
-                    "x": 395.5028557635391,
-                    "y": 345.6891169163452
-                  },
-                  {
-                    "x": 400.815480432649,
-                    "y": 347.96595606024937
-                  },
-                  {
-                    "x": 404.1042480849551,
-                    "y": 343.15929564534053
-                  },
-                  {
-                    "x": 410.9347655166677,
-                    "y": 346.44806329764657
-                  },
-                  {
-                    "x": 412.95862253347144,
-                    "y": 340.88245650143625
-                  },
-                  {
-                    "x": 422.3189612361887,
-                    "y": 342.4003492640391
-                  },
-                  {
-                    "x": 423.58387187169114,
-                    "y": 337.3407067220298
-                  },
-                  {
-                    "x": 432.69122844730794,
-                    "y": 338.8585994846326
-                  },
-                  {
-                    "x": 430.41438930340377,
-                    "y": 342.90631351824004
-                  },
-                  {
-                    "x": 434.9680675912121,
-                    "y": 344.1712241537424
-                  },
-                  {
-                    "x": 437.2449067351164,
-                    "y": 340.1235101201349
-                  },
-                  {
-                    "x": 442.8105135313266,
-                    "y": 340.3764922472353
-                  },
-                  {
-                    "x": 443.56945991262813,
-                    "y": 342.90631351824004
-                  },
-                  {
-                    "x": 448.376120327537,
-                    "y": 343.9182420266419
-                  },
-                  {
-                    "x": 448.6291024546375,
-                    "y": 337.0877245949293
-                  },
-                  {
-                    "x": 451.664887979843,
-                    "y": 336.58176034072835
-                  },
-                  {
-                    "x": 453.9417271237472,
-                    "y": 339.87052799303444
-                  },
-                  {
-                    "x": 457.2304947760534,
-                    "y": 339.61754586593395
-                  },
-                  {
-                    "x": 464.061012207766,
-                    "y": 340.6294743743358
-                  },
-                  {
-                    "x": 464.81995858906737,
-                    "y": 332.7870284342213
-                  },
-                  {
-                    "x": 457.4834769031537,
-                    "y": 332.53404630712083
-                  },
-                  {
-                    "x": 456.7245305218524,
-                    "y": 318.62002931659515
-                  },
-                  {
-                    "x": 448.88208458173784,
-                    "y": 318.36704718949466
-                  },
-                  {
-                    "x": 448.88208458173784,
-                    "y": 313.05442252038483
-                  },
-                  {
-                    "x": 454.4476913779483,
-                    "y": 311.28354763068154
-                  },
-                  {
-                    "x": 454.4476913779483,
-                    "y": 312.8014403932844
-                  },
-                  {
-                    "x": 460.266280301259,
-                    "y": 314.57231528298763
-                  },
-                  {
-                    "x": 460.266280301259,
-                    "y": 307.4888157241745
-                  },
-                  {
-                    "x": 447.3641918191351,
-                    "y": 305.9709229615717
-                  },
-                  {
-                    "x": 442.3045492771258,
-                    "y": 309.00670848677737
-                  },
-                  {
-                    "x": 445.34033480233137,
-                    "y": 311.28354763068154
-                  },
-                  {
-                    "x": 440.5336743874224,
-                    "y": 314.57231528298763
-                  },
-                  {
-                    "x": 434.46210333701123,
-                    "y": 309.00670848677737
-                  },
-                  {
-                    "x": 432.69122844730794,
-                    "y": 311.28354763068154
-                  },
-                  {
-                    "x": 427.3786037781981,
-                    "y": 308.24776210547594
-                  },
-                  {
-                    "x": 424.595800380093,
-                    "y": 315.07827953718856
-                  },
-                  {
-                    "x": 415.4884438044761,
-                    "y": 315.5842437913895
-                  },
-                  {
-                    "x": 415.4884438044761,
-                    "y": 307.99477997837545
-                  },
-                  {
-                    "x": 409.6698548811654,
-                    "y": 310.52460124938017
-                  },
-                  {
-                    "x": 409.1638906269645,
-                    "y": 306.72986934287314
-                  }
-                ]
-              },
-              "correctPosition": {
-                "x": 310.67513431705436,
-                "y": 238.2894871433723
-              },
-              "id": "b1ba8b14-3bf0-42e4-b819-eca85de24cc0",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 56.76217097494782,
-                "top": 242.72879799281273,
-                "left": 472.29404882958045,
-                "height": 31.121378301119165
-              }
-            },
-            {
-              "correctRotation": 0.0,
-              "shapeData": {
-                "type": "polygon",
-                "points": [
-                  {
-                    "x": 284.69668409353415,
-                    "y": 681.902363832867
-                  },
-                  {
-                    "x": 293.80404066915105,
-                    "y": 682.408328087068
-                  },
-                  {
-                    "x": 293.55105854205055,
-                    "y": 675.8307927824559
-                  },
-                  {
-                    "x": 300.12859384666274,
-                    "y": 676.3367570366568
-                  },
-                  {
-                    "x": 304.1763078802702,
-                    "y": 675.3248285282549
-                  },
-                  {
-                    "x": 311.2598074390834,
-                    "y": 676.5897391637573
-                  },
-                  {
-                    "x": 312.5247180745857,
-                    "y": 669.7592217320446
-                  },
-                  {
-                    "x": 305.1882363886721,
-                    "y": 669.7592217320446
-                  },
-                  {
-                    "x": 305.1882363886721,
-                    "y": 664.4465970629348
-                  },
-                  {
-                    "x": 313.78962871008804,
-                    "y": 664.9525613171356
-                  },
-                  {
-                    "x": 314.8015572184899,
-                    "y": 659.3869545209253
-                  },
-                  {
-                    "x": 309.48893254938,
-                    "y": 658.8809902667246
-                  },
-                  {
-                    "x": 309.48893254938,
-                    "y": 652.3034549621123
-                  },
-                  {
-                    "x": 301.3935044821651,
-                    "y": 652.5564370892127
-                  },
-                  {
-                    "x": 300.12859384666274,
-                    "y": 643.9550447677968
-                  },
-                  {
-                    "x": 304.9352542615717,
-                    "y": 644.2080268948973
-                  },
-                  {
-                    "x": 308.72998616807865,
-                    "y": 638.642420098687
-                  },
-                  {
-                    "x": 303.92332575316976,
-                    "y": 635.6066345734814
-                  },
-                  {
-                    "x": 303.92332575316976,
-                    "y": 628.5231350146684
-                  },
-                  {
-                    "x": 312.27173594748524,
-                    "y": 624.4754209810608
-                  },
-                  {
-                    "x": 308.9829682951791,
-                    "y": 621.1866533287548
-                  },
-                  {
-                    "x": 309.7419146764805,
-                    "y": 614.6091180241426
-                  },
-                  {
-                    "x": 312.0187538203847,
-                    "y": 614.8621001512431
-                  },
-                  {
-                    "x": 311.7657716932843,
-                    "y": 609.2964933550328
-                  },
-                  {
-                    "x": 303.67034362606927,
-                    "y": 607.5256184653296
-                  },
-                  {
-                    "x": 292.2861479065482,
-                    "y": 605.7547435756262
-                  },
-                  {
-                    "x": 288.4914160000412,
-                    "y": 610.8143861176355
-                  },
-                  {
-                    "x": 280.1430058057258,
-                    "y": 606.7666720840281
-                  },
-                  {
-                    "x": 276.85423815341966,
-                    "y": 614.1031537699416
-                  },
-                  {
-                    "x": 282.67282707673047,
-                    "y": 616.8859571680468
-                  },
-                  {
-                    "x": 280.39598793282624,
-                    "y": 622.957528218458
-                  },
-                  {
-                    "x": 285.45563047483563,
-                    "y": 625.9933137436636
-                  },
-                  {
-                    "x": 287.7324696187398,
-                    "y": 619.9217426932523
-                  },
-                  {
-                    "x": 292.53913003364875,
-                    "y": 621.1866533287548
-                  },
-                  {
-                    "x": 293.2980764149501,
-                    "y": 614.1031537699416
-                  },
-                  {
-                    "x": 301.1405223550646,
-                    "y": 614.8621001512431
-                  },
-                  {
-                    "x": 301.1405223550646,
-                    "y": 620.6806890745538
-                  },
-                  {
-                    "x": 296.83982619435665,
-                    "y": 620.4277069474533
-                  },
-                  {
-                    "x": 295.32193343175385,
-                    "y": 628.0171707604674
-                  },
-                  {
-                    "x": 299.8756117195623,
-                    "y": 628.5231350146684
-                  },
-                  {
-                    "x": 296.58684406725615,
-                    "y": 634.84768819218
-                  },
-                  {
-                    "x": 289.75632663554353,
-                    "y": 632.3178669211753
-                  },
-                  {
-                    "x": 288.74439812714166,
-                    "y": 637.8834737173856
-                  },
-                  {
-                    "x": 283.43177345803184,
-                    "y": 636.8715452089838
-                  },
-                  {
-                    "x": 282.41984494963,
-                    "y": 643.7020626406963
-                  },
-                  {
-                    "x": 289.5033445084431,
-                    "y": 643.9550447677968
-                  },
-                  {
-                    "x": 289.5033445084431,
-                    "y": 649.7736336911076
-                  },
-                  {
-                    "x": 283.6847555851323,
-                    "y": 649.5206515640072
-                  },
-                  {
-                    "x": 283.43177345803184,
-                    "y": 654.5802941060165
-                  },
-                  {
-                    "x": 291.5272015252469,
-                    "y": 654.833276233117
-                  },
-                  {
-                    "x": 290.009308762644,
-                    "y": 660.3988830293272
-                  },
-                  {
-                    "x": 297.8517547027585,
-                    "y": 660.1459009022268
-                  },
-                  {
-                    "x": 297.3457904485576,
-                    "y": 665.4585255713366
-                  },
-                  {
-                    "x": 286.9735232374384,
-                    "y": 665.2055434442361
-                  },
-                  {
-                    "x": 279.3840594244243,
-                    "y": 666.4704540797385
-                  }
-                ]
-              },
-              "correctPosition": {
-                "x": 215.58284206267535,
-                "y": 469.5177865436906
-              },
-              "id": "5e9d2496-eb5d-4fc5-8dbf-6b8302779220",
-              "isFlipped": false,
-              "boundingRect": {
-                "width": 28.169920151613724,
-                "top": 461.3211671905608,
-                "left": 391.4978819868685,
-                "height": 56.39323870625958
-              }
-            }
-          ],
-          "totalPieces": 4.0,
-          "originalImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251226-204627-29ef4549/20251226-204627-29ef4549.jpg/public",
-          "createdAt": "2025-12-26T21:16:03.799Z",
-          "imageDimensions": {
-            "width": 420.0,
-            "height": 560.0
-          },
-          "puzzleId": "9d81e429-c11a-48da-b125-b5d66620a79e",
-          "isNormalized": true,
-          "boardImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-075cef18/board.png/public",
-          "updatedAt": "2025-12-26T21:16:03.800Z"
-        },
-        "asset_sources": {
-          "board": {
-            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-075cef18/board.png/public",
-            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-075cef18/board.png"
-          },
-          "original": {
-            "url": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251226-204627-29ef4549/20251226-204627-29ef4549.jpg/public",
-            "key": "clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251226-204627-29ef4549/20251226-204627-29ef4549.jpg"
-          }
-        }
-      },
-      "createdAt": "2025-12-26",
-      "updatedAt": "2025-12-27T08:16:39.299128",
-      "data": {
-        "pieces": [
-          {
-            "correctRotation": 0.0,
-            "shapeData": {
-              "type": "polygon",
-              "points": [
-                {
-                  "x": 292.81983001850256,
-                  "y": 49.58980500088819
-                },
-                {
-                  "x": 301.47525164764215,
-                  "y": 49.88826781568611
-                },
-                {
-                  "x": 301.47525164764215,
-                  "y": 43.62054870492984
-                },
-                {
-                  "x": 305.952193869611,
-                  "y": 43.62054870492984
-                },
-                {
-                  "x": 305.952193869611,
-                  "y": 38.54668085336523
-                },
-                {
-                  "x": 312.81683860996304,
-                  "y": 37.9497552237694
-                },
-                {
-                  "x": 312.81683860996304,
-                  "y": 31.68203611301312
-                },
-                {
-                  "x": 303.2660285364297,
-                  "y": 32.27896174260895
-                },
-                {
-                  "x": 303.2660285364297,
-                  "y": 29.294333594629773
-                },
-                {
-                  "x": 290.43212750011924,
-                  "y": 31.980498927811034
-                },
-                {
-                  "x": 290.43212750011924,
-                  "y": 30.189722039023525
-                },
-                {
-                  "x": 285.0597968337567,
-                  "y": 30.786647668619366
-                },
-                {
-                  "x": 285.3582596485546,
-                  "y": 35.263589890588136
-                },
-                {
-                  "x": 277.0013008342129,
-                  "y": 36.457441149779804
-                },
-                {
-                  "x": 277.0013008342129,
-                  "y": 41.232846186546496
-                },
-                {
-                  "x": 272.8228214270421,
-                  "y": 41.232846186546496
-                },
-                {
-                  "x": 272.52435861224416,
-                  "y": 50.48519344528195
-                },
-                {
-                  "x": 278.19515209340454,
-                  "y": 50.48519344528195
-                },
-                {
-                  "x": 277.8966892786067,
-                  "y": 60.33446633361325
-                },
-                {
-                  "x": 279.9859289821921,
-                  "y": 60.63292914841117
-                },
-                {
-                  "x": 279.6874661673942,
-                  "y": 66.0052598147737
-                },
-                {
-                  "x": 287.1490365373421,
-                  "y": 66.0052598147737
-                },
-                {
-                  "x": 286.85057372254414,
-                  "y": 67.19911107396535
-                },
-                {
-                  "x": 288.3428877965338,
-                  "y": 67.19911107396535
-                },
-                {
-                  "x": 288.0444249817359,
-                  "y": 73.46683018472166
-                },
-                {
-                  "x": 279.6874661673942,
-                  "y": 73.46683018472166
-                },
-                {
-                  "x": 279.6874661673942,
-                  "y": 79.43608648068
-                },
-                {
-                  "x": 278.49361490820246,
-                  "y": 79.13762366588209
-                },
-                {
-                  "x": 278.49361490820246,
-                  "y": 86.30073122103211
-                },
-                {
-                  "x": 272.22589579744624,
-                  "y": 86.0022684062342
-                },
-                {
-                  "x": 273.12128424183993,
-                  "y": 92.8669131465863
-                },
-                {
-                  "x": 282.6720943153734,
-                  "y": 92.56845033178838
-                },
-                {
-                  "x": 282.3736315005754,
-                  "y": 98.23924381294884
-                },
-                {
-                  "x": 290.43212750011924,
-                  "y": 98.23924381294884
-                },
-                {
-                  "x": 290.43212750011924,
-                  "y": 91.97152470219255
-                },
-                {
-                  "x": 297.2967722404713,
-                  "y": 92.26998751699047
-                },
-                {
-                  "x": 297.2967722404713,
-                  "y": 98.23924381294884
-                },
-                {
-                  "x": 308.3398963879943,
-                  "y": 97.64231818335298
-                },
-                {
-                  "x": 307.4445079436005,
-                  "y": 91.97152470219255
-                },
-                {
-                  "x": 314.3091526839527,
-                  "y": 92.56845033178838
-                },
-                {
-                  "x": 314.3091526839527,
-                  "y": 86.30073122103211
-                },
-                {
-                  "x": 308.0414335731964,
-                  "y": 86.59919403583002
-                },
-                {
-                  "x": 308.6383592027922,
-                  "y": 79.73454929547792
-                },
-                {
-                  "x": 300.2814003884505,
-                  "y": 80.33147492507376
-                },
-                {
-                  "x": 300.8783260180464,
-                  "y": 73.76529299951957
-                },
-                {
-                  "x": 296.99830942567337,
-                  "y": 73.76529299951957
-                },
-                {
-                  "x": 297.2967722404713,
-                  "y": 67.49757388876328
-                },
-                {
-                  "x": 294.61060690729005,
-                  "y": 66.90064825916744
-                },
-                {
-                  "x": 294.90906972208796,
-                  "y": 64.81140855558203
-                }
-              ]
-            },
-            "correctPosition": {
-              "x": 213.71590309217663,
-              "y": 46.3716167631797
-            },
-            "id": "3e05e1eb-12af-4b38-b664-4b53bd98a3dc",
-            "isFlipped": false,
-            "boundingRect": {
-              "width": 31.18570814641089,
-              "top": 40.98545157941754,
-              "left": 388.1230490189712,
-              "height": 50.77233036752432
-            }
-          },
-          {
-            "correctRotation": 0.0,
-            "shapeData": {
-              "type": "polygon",
-              "points": [
-                {
-                  "x": 133.55218844023682,
-                  "y": 334.92955683702667
-                },
-                {
-                  "x": 129.88531623058762,
-                  "y": 330.0403938908278
-                },
-                {
-                  "x": 135.99676991333624,
-                  "y": 326.3735216811786
-                },
-                {
-                  "x": 130.70017672162083,
-                  "y": 319.03977726188026
-                },
-                {
-                  "x": 126.6258742664551,
-                  "y": 321.4843587349797
-                },
-                {
-                  "x": 122.95900205680591,
-                  "y": 317.0026260342974
-                },
-                {
-                  "x": 127.03330451197165,
-                  "y": 314.55804456119796
-                },
-                {
-                  "x": 131.10760696713737,
-                  "y": 313.7431840701648
-                },
-                {
-                  "x": 129.88531623058762,
-                  "y": 306.0020094053499
-                },
-                {
-                  "x": 127.44073475748822,
-                  "y": 305.5945791598333
-                },
-                {
-                  "x": 125.8110137754219,
-                  "y": 299.8905557226012
-                },
-                {
-                  "x": 118.47726935612354,
-                  "y": 299.8905557226012
-                },
-                {
-                  "x": 113.99553665544119,
-                  "y": 302.3351371957007
-                },
-                {
-                  "x": 104.62464100856003,
-                  "y": 301.9277069501841
-                },
-                {
-                  "x": 104.62464100856003,
-                  "y": 306.0020094053499
-                },
-                {
-                  "x": 99.32804781684456,
-                  "y": 305.1871489143167
-                },
-                {
-                  "x": 93.62402437961251,
-                  "y": 306.0020094053499
-                },
-                {
-                  "x": 87.10514045134728,
-                  "y": 302.3351371957007
-                },
-                {
-                  "x": 85.06798922376441,
-                  "y": 306.0020094053499
-                },
-                {
-                  "x": 81.40111701411523,
-                  "y": 306.0020094053499
-                },
-                {
-                  "x": 80.17882627756552,
-                  "y": 300.7054162136344
-                },
-                {
-                  "x": 73.65994234930032,
-                  "y": 301.9277069501841
-                },
-                {
-                  "x": 73.65994234930032,
-                  "y": 307.22430014189956
-                },
-                {
-                  "x": 67.95591891206828,
-                  "y": 310.0763118605156
-                },
-                {
-                  "x": 64.69647694793566,
-                  "y": 304.7797186688001
-                },
-                {
-                  "x": 64.28904670241911,
-                  "y": 302.74256744121726
-                },
-                {
-                  "x": 57.77016277415391,
-                  "y": 304.7797186688001
-                },
-                {
-                  "x": 56.1404417920876,
-                  "y": 299.8905557226012
-                },
-                {
-                  "x": 48.39926712727265,
-                  "y": 302.3351371957007
-                },
-                {
-                  "x": 50.843848600372155,
-                  "y": 308.03916063293275
-                },
-                {
-                  "x": 48.39926712727265,
-                  "y": 309.2614513694825
-                },
-                {
-                  "x": 52.47356958243843,
-                  "y": 312.92832357913164
-                },
-                {
-                  "x": 51.65870909140527,
-                  "y": 316.5951957887808
-                },
-                {
-                  "x": 57.77016277415391,
-                  "y": 321.0769284894631
-                },
-                {
-                  "x": 52.06613933692183,
-                  "y": 326.7809519266952
-                },
-                {
-                  "x": 59.39988375622018,
-                  "y": 328.4106729087615
-                },
-                {
-                  "x": 58.58502326518707,
-                  "y": 337.37413831012617
-                },
-                {
-                  "x": 65.51133743896882,
-                  "y": 337.7815685556427
-                },
-                {
-                  "x": 65.10390719345223,
-                  "y": 330.44782413634437
-                },
-                {
-                  "x": 73.25251210378377,
-                  "y": 330.0403938908278
-                },
-                {
-                  "x": 72.43765161275057,
-                  "y": 322.29921922601284
-                },
-                {
-                  "x": 76.51195406791635,
-                  "y": 321.8917889804963
-                },
-                {
-                  "x": 79.77139603204893,
-                  "y": 328.0032426632449
-                },
-                {
-                  "x": 83.8456984872147,
-                  "y": 324.33637045359575
-                },
-                {
-                  "x": 87.92000094238043,
-                  "y": 325.1512309446289
-                },
-                {
-                  "x": 89.54972192444674,
-                  "y": 328.0032426632449
-                },
-                {
-                  "x": 100.55033855339423,
-                  "y": 324.33637045359575
-                },
-                {
-                  "x": 101.77262928994398,
-                  "y": 326.7809519266952
-                },
-                {
-                  "x": 104.2172107630434,
-                  "y": 330.0403938908278
-                },
-                {
-                  "x": 109.51380395475888,
-                  "y": 327.59581241772827
-                },
-                {
-                  "x": 114.81039714647437,
-                  "y": 331.2626846273775
-                },
-                {
-                  "x": 109.51380395475888,
-                  "y": 338.18899880115924
-                },
-                {
-                  "x": 113.99553665544119,
-                  "y": 342.263301256325
-                },
-                {
-                  "x": 118.88469960164011,
-                  "y": 336.5592778190929
-                }
-              ]
-            },
-            "correctPosition": {
-              "x": 67.10272183772202,
-              "y": 233.99359369023352
-            },
-            "id": "fc2cb172-5f4a-492e-b687-888e071b259a",
-            "isFlipped": false,
-            "boundingRect": {
-              "width": 64.373179114838,
-              "top": 238.29519688106342,
-              "left": 224.916132280303,
-              "height": 31.39679361834021
-            }
-          },
-          {
-            "correctRotation": 0.0,
-            "shapeData": {
-              "type": "polygon",
-              "points": [
-                {
-                  "x": 393.47899874673544,
-                  "y": 309.2596906138778
-                },
-                {
-                  "x": 387.66040982342463,
-                  "y": 318.11406506239416
-                },
-                {
-                  "x": 394.2379451280368,
-                  "y": 322.9207254773031
-                },
-                {
-                  "x": 389.68426684022836,
-                  "y": 326.20949312960914
-                },
-                {
-                  "x": 394.99689150933824,
-                  "y": 330.7631714174176
-                },
-                {
-                  "x": 387.66040982342463,
-                  "y": 338.6056173575321
-                },
-                {
-                  "x": 395.5028557635391,
-                  "y": 341.3884207556372
-                },
-                {
-                  "x": 395.5028557635391,
-                  "y": 345.6891169163452
-                },
-                {
-                  "x": 400.815480432649,
-                  "y": 347.96595606024937
-                },
-                {
-                  "x": 404.1042480849551,
-                  "y": 343.15929564534053
-                },
-                {
-                  "x": 410.9347655166677,
-                  "y": 346.44806329764657
-                },
-                {
-                  "x": 412.95862253347144,
-                  "y": 340.88245650143625
-                },
-                {
-                  "x": 422.3189612361887,
-                  "y": 342.4003492640391
-                },
-                {
-                  "x": 423.58387187169114,
-                  "y": 337.3407067220298
-                },
-                {
-                  "x": 432.69122844730794,
-                  "y": 338.8585994846326
-                },
-                {
-                  "x": 430.41438930340377,
-                  "y": 342.90631351824004
-                },
-                {
-                  "x": 434.9680675912121,
-                  "y": 344.1712241537424
-                },
-                {
-                  "x": 437.2449067351164,
-                  "y": 340.1235101201349
-                },
-                {
-                  "x": 442.8105135313266,
-                  "y": 340.3764922472353
-                },
-                {
-                  "x": 443.56945991262813,
-                  "y": 342.90631351824004
-                },
-                {
-                  "x": 448.376120327537,
-                  "y": 343.9182420266419
-                },
-                {
-                  "x": 448.6291024546375,
-                  "y": 337.0877245949293
-                },
-                {
-                  "x": 451.664887979843,
-                  "y": 336.58176034072835
-                },
-                {
-                  "x": 453.9417271237472,
-                  "y": 339.87052799303444
-                },
-                {
-                  "x": 457.2304947760534,
-                  "y": 339.61754586593395
-                },
-                {
-                  "x": 464.061012207766,
-                  "y": 340.6294743743358
-                },
-                {
-                  "x": 464.81995858906737,
-                  "y": 332.7870284342213
-                },
-                {
-                  "x": 457.4834769031537,
-                  "y": 332.53404630712083
-                },
-                {
-                  "x": 456.7245305218524,
-                  "y": 318.62002931659515
-                },
-                {
-                  "x": 448.88208458173784,
-                  "y": 318.36704718949466
-                },
-                {
-                  "x": 448.88208458173784,
-                  "y": 313.05442252038483
-                },
-                {
-                  "x": 454.4476913779483,
-                  "y": 311.28354763068154
-                },
-                {
-                  "x": 454.4476913779483,
-                  "y": 312.8014403932844
-                },
-                {
-                  "x": 460.266280301259,
-                  "y": 314.57231528298763
-                },
-                {
-                  "x": 460.266280301259,
-                  "y": 307.4888157241745
-                },
-                {
-                  "x": 447.3641918191351,
-                  "y": 305.9709229615717
-                },
-                {
-                  "x": 442.3045492771258,
-                  "y": 309.00670848677737
-                },
-                {
-                  "x": 445.34033480233137,
-                  "y": 311.28354763068154
-                },
-                {
-                  "x": 440.5336743874224,
-                  "y": 314.57231528298763
-                },
-                {
-                  "x": 434.46210333701123,
-                  "y": 309.00670848677737
-                },
-                {
-                  "x": 432.69122844730794,
-                  "y": 311.28354763068154
-                },
-                {
-                  "x": 427.3786037781981,
-                  "y": 308.24776210547594
-                },
-                {
-                  "x": 424.595800380093,
-                  "y": 315.07827953718856
-                },
-                {
-                  "x": 415.4884438044761,
-                  "y": 315.5842437913895
-                },
-                {
-                  "x": 415.4884438044761,
-                  "y": 307.99477997837545
-                },
-                {
-                  "x": 409.6698548811654,
-                  "y": 310.52460124938017
-                },
-                {
-                  "x": 409.1638906269645,
-                  "y": 306.72986934287314
-                }
-              ]
-            },
-            "correctPosition": {
-              "x": 310.67513431705436,
-              "y": 238.2894871433723
-            },
-            "id": "b1ba8b14-3bf0-42e4-b819-eca85de24cc0",
-            "isFlipped": false,
-            "boundingRect": {
-              "width": 56.76217097494782,
-              "top": 242.72879799281273,
-              "left": 472.29404882958045,
-              "height": 31.121378301119165
-            }
-          },
-          {
-            "correctRotation": 0.0,
-            "shapeData": {
-              "type": "polygon",
-              "points": [
-                {
-                  "x": 284.69668409353415,
-                  "y": 681.902363832867
-                },
-                {
-                  "x": 293.80404066915105,
-                  "y": 682.408328087068
-                },
-                {
-                  "x": 293.55105854205055,
-                  "y": 675.8307927824559
-                },
-                {
-                  "x": 300.12859384666274,
-                  "y": 676.3367570366568
-                },
-                {
-                  "x": 304.1763078802702,
-                  "y": 675.3248285282549
-                },
-                {
-                  "x": 311.2598074390834,
-                  "y": 676.5897391637573
-                },
-                {
-                  "x": 312.5247180745857,
-                  "y": 669.7592217320446
-                },
-                {
-                  "x": 305.1882363886721,
-                  "y": 669.7592217320446
-                },
-                {
-                  "x": 305.1882363886721,
-                  "y": 664.4465970629348
-                },
-                {
-                  "x": 313.78962871008804,
-                  "y": 664.9525613171356
-                },
-                {
-                  "x": 314.8015572184899,
-                  "y": 659.3869545209253
-                },
-                {
-                  "x": 309.48893254938,
-                  "y": 658.8809902667246
-                },
-                {
-                  "x": 309.48893254938,
-                  "y": 652.3034549621123
-                },
-                {
-                  "x": 301.3935044821651,
-                  "y": 652.5564370892127
-                },
-                {
-                  "x": 300.12859384666274,
-                  "y": 643.9550447677968
-                },
-                {
-                  "x": 304.9352542615717,
-                  "y": 644.2080268948973
-                },
-                {
-                  "x": 308.72998616807865,
-                  "y": 638.642420098687
-                },
-                {
-                  "x": 303.92332575316976,
-                  "y": 635.6066345734814
-                },
-                {
-                  "x": 303.92332575316976,
-                  "y": 628.5231350146684
-                },
-                {
-                  "x": 312.27173594748524,
-                  "y": 624.4754209810608
-                },
-                {
-                  "x": 308.9829682951791,
-                  "y": 621.1866533287548
-                },
-                {
-                  "x": 309.7419146764805,
-                  "y": 614.6091180241426
-                },
-                {
-                  "x": 312.0187538203847,
-                  "y": 614.8621001512431
-                },
-                {
-                  "x": 311.7657716932843,
-                  "y": 609.2964933550328
-                },
-                {
-                  "x": 303.67034362606927,
-                  "y": 607.5256184653296
-                },
-                {
-                  "x": 292.2861479065482,
-                  "y": 605.7547435756262
-                },
-                {
-                  "x": 288.4914160000412,
-                  "y": 610.8143861176355
-                },
-                {
-                  "x": 280.1430058057258,
-                  "y": 606.7666720840281
-                },
-                {
-                  "x": 276.85423815341966,
-                  "y": 614.1031537699416
-                },
-                {
-                  "x": 282.67282707673047,
-                  "y": 616.8859571680468
-                },
-                {
-                  "x": 280.39598793282624,
-                  "y": 622.957528218458
-                },
-                {
-                  "x": 285.45563047483563,
-                  "y": 625.9933137436636
-                },
-                {
-                  "x": 287.7324696187398,
-                  "y": 619.9217426932523
-                },
-                {
-                  "x": 292.53913003364875,
-                  "y": 621.1866533287548
-                },
-                {
-                  "x": 293.2980764149501,
-                  "y": 614.1031537699416
-                },
-                {
-                  "x": 301.1405223550646,
-                  "y": 614.8621001512431
-                },
-                {
-                  "x": 301.1405223550646,
-                  "y": 620.6806890745538
-                },
-                {
-                  "x": 296.83982619435665,
-                  "y": 620.4277069474533
-                },
-                {
-                  "x": 295.32193343175385,
-                  "y": 628.0171707604674
-                },
-                {
-                  "x": 299.8756117195623,
-                  "y": 628.5231350146684
-                },
-                {
-                  "x": 296.58684406725615,
-                  "y": 634.84768819218
-                },
-                {
-                  "x": 289.75632663554353,
-                  "y": 632.3178669211753
-                },
-                {
-                  "x": 288.74439812714166,
-                  "y": 637.8834737173856
-                },
-                {
-                  "x": 283.43177345803184,
-                  "y": 636.8715452089838
-                },
-                {
-                  "x": 282.41984494963,
-                  "y": 643.7020626406963
-                },
-                {
-                  "x": 289.5033445084431,
-                  "y": 643.9550447677968
-                },
-                {
-                  "x": 289.5033445084431,
-                  "y": 649.7736336911076
-                },
-                {
-                  "x": 283.6847555851323,
-                  "y": 649.5206515640072
-                },
-                {
-                  "x": 283.43177345803184,
-                  "y": 654.5802941060165
-                },
-                {
-                  "x": 291.5272015252469,
-                  "y": 654.833276233117
-                },
-                {
-                  "x": 290.009308762644,
-                  "y": 660.3988830293272
-                },
-                {
-                  "x": 297.8517547027585,
-                  "y": 660.1459009022268
-                },
-                {
-                  "x": 297.3457904485576,
-                  "y": 665.4585255713366
-                },
-                {
-                  "x": 286.9735232374384,
-                  "y": 665.2055434442361
-                },
-                {
-                  "x": 279.3840594244243,
-                  "y": 666.4704540797385
-                }
-              ]
-            },
-            "correctPosition": {
-              "x": 215.58284206267535,
-              "y": 469.5177865436906
-            },
-            "id": "5e9d2496-eb5d-4fc5-8dbf-6b8302779220",
-            "isFlipped": false,
-            "boundingRect": {
-              "width": 28.169920151613724,
-              "top": 461.3211671905608,
-              "left": 391.4978819868685,
-              "height": 56.39323870625958
-            }
-          }
-        ],
-        "totalPieces": 4.0,
-        "originalImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/images/base-images/20251226-204627-29ef4549/20251226-204627-29ef4549.jpg/public",
-        "createdAt": "2025-12-26T21:16:03.799Z",
-        "imageDimensions": {
-          "width": 420.0,
-          "height": 560.0
-        },
-        "puzzleId": "9d81e429-c11a-48da-b125-b5d66620a79e",
-        "isNormalized": true,
-        "boardImageUrl": "https://imagedelivery.net/PLjImLTp3_--j_ey0SPDBA/clients/915b3510-c0a1-7075-ba32-d63633b69867/platform-library/puz-075cef18/board.png/public",
-        "updatedAt": "2025-12-26T21:16:03.800Z"
       }
     },
     {
